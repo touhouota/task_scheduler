@@ -1,0 +1,16 @@
+h1 タスクの一覧
+ul
+  = @tasks.each do |task|
+    li
+      p.task_name
+        | タスク名：
+        span
+          = task.name
+      p.user
+        | 登録者：
+        span
+          = task.user_id
+      p.memo
+        | メモ
+        span
+          = task.memo

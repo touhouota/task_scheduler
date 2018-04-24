@@ -1,0 +1,16 @@
+// Place all the styles related to the MainPage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "./_reset";
+
+.container {
+    // background-color: skyblue;
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    position: relative;
+    @import "main_page/header";
+    @import "main_page/main_buttons";
+    @import "main_page/main_task_list";
+    @import "main_page/main_scheduler_side";
+}

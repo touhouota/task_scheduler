@@ -1,0 +1,16 @@
+.timeline_container {
+    position: relative;
+    width: 100%;
+    // height: 100%;
+    .timeline {
+        height: 100%;
+        width: 100%;
+
+        tbody {
+            overflow-y: auto;
+            height: 100%;
+        }
+        @import './times.scss'; // 時間の要素1つのCSS
+    }
+    @import './plan_container.scss'; // 予定が入る部分のCSS
+}

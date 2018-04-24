@@ -1,0 +1,11 @@
+h1 ユーザ名を変更するよ
+= form_for(@user, url: user_path(@user)) do |f|
+  p
+    | 名前を「
+    = @user.name
+    | 」から変更する
+  br
+  = f.text_field :name
+  br
+  button type='submit'
+    | 更新

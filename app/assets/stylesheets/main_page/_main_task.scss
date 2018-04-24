@@ -1,0 +1,18 @@
+.task_container {
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 5px;
+
+    .tasks {
+        display: flex;
+        flex-wrap: wrap;
+
+        .task_element {
+            box-sizing: border-box;
+            margin: 5px;
+            padding: 5px;
+            background-color: rgb(170, 203, 242);
+            width: 300px;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.times {
+    height: 30px;
+
+    &.hour {
+        background-color: #ccc;
+        font-size: 16px;
+    }
+
+    &.half {
+        background-color: #ddd;
+    }
+
+    .left {
+        width: 25px;
+    }
+
+    .right {
+        width: 200px;
+    }
+}
