@@ -32,3 +32,6 @@ bundle/
 
 # OS関連の要らないモノ
 .DS_Store
+
+# cacheは保持しなくてもいいよね
+/tmp/cache/
