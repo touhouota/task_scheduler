@@ -95,6 +95,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
+/***/ "./client/lib/buttons_events.js":
+/*!**************************************!*\
+  !*** ./client/lib/buttons_events.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar Buttons = {\n  github: function github() {\n    var URL = 'https://github.com/touhouota/task_scheduler/issues';\n    window.open(URL, '_blank');\n  }\n};\n\nexports.default = Buttons;\n\n//# sourceURL=webpack:///./client/lib/buttons_events.js?");
+
+/***/ }),
+
 /***/ "./client/lib/main_page_plan.js":
 /*!**************************************!*\
   !*** ./client/lib/main_page_plan.js ***!
@@ -115,7 +127,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _TaskList = __webpack_require__(/*! ./components/TaskList */ \"./client/components/TaskList.jsx\");\n\nvar _TaskList2 = _interopRequireDefault(_TaskList);\n\nvar _main_page_plan = __webpack_require__(/*! ./lib/main_page_plan */ \"./client/lib/main_page_plan.js\");\n\nvar _main_page_plan2 = _interopRequireDefault(_main_page_plan);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// タスク部分のコンポーネント\nwindow.onload = function () {\n  _main_page_plan2.default.currentTimeLine();\n  _reactDom2.default.render(_react2.default.createElement(_TaskList2.default, null), document.getElementById('task_list'));\n};\n// 計画に関する処理まとめ\n\n//# sourceURL=webpack:///./client/main_page.jsx?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _TaskList = __webpack_require__(/*! ./components/TaskList */ \"./client/components/TaskList.jsx\");\n\nvar _TaskList2 = _interopRequireDefault(_TaskList);\n\nvar _main_page_plan = __webpack_require__(/*! ./lib/main_page_plan */ \"./client/lib/main_page_plan.js\");\n\nvar _main_page_plan2 = _interopRequireDefault(_main_page_plan);\n\nvar _buttons_events = __webpack_require__(/*! ./lib/buttons_events */ \"./client/lib/buttons_events.js\");\n\nvar _buttons_events2 = _interopRequireDefault(_buttons_events);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 計画に関する処理まとめ\nwindow.onload = function () {\n  // 現在時刻に線を引く\n  _main_page_plan2.default.currentTimeLine();\n\n  // buttonsにイベントを定義//\n  document.getElementById('github').addEventListener('click', _buttons_events2.default.github);\n\n  // タスク一覧部分を描画\n  _reactDom2.default.render(_react2.default.createElement(_TaskList2.default, null), document.getElementById('task_list'));\n};\n// ボタンのイベント処理まとめ\n\n\n// タスク部分のコンポーネント\n\n//# sourceURL=webpack:///./client/main_page.jsx?");
 
 /***/ }),
 
