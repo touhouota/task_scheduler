@@ -1,4 +1,4 @@
-import ModalProcess from './modal';
+import ModalProcess from './modal_process';
 
 const Buttons = {
   github: () => {
