@@ -1,21 +1,22 @@
 import React from 'react';
 
 
-const TaskForm = () => {
-  if (this.props.type === 'textarea') {
+const TaskForm = (props) => {
+  console.log(props);
+  if (props.type === 'textarea') {
     return (
       <input
-        type={this.props.type}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
+        type={props.type}
+        name={props.name}
+        placeholder={props.placeholder}
         value=""
       />
     );
   }
   return (
     <textarea
-      name={this.props.name}
-      placeholder={this.props.placeholder}
+      name={props.name}
+      placeholder={props.placeholder}
     >
         hoge
     </textarea>
