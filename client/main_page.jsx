@@ -14,6 +14,8 @@ window.onload = function () {
 
   // buttonsにイベントを定義//
   document.getElementById('github').addEventListener('click', Buttons.github);
+  // タスク追加ボタンのイベントを定義
+  document.getElementById('append_task').addEventListener('click', Buttons.append_task);
 
   // タスク一覧部分を描画
   ReactDOM.render(<TaskList />, document.getElementById('task_list'));
