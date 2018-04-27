@@ -29,7 +29,7 @@ class Modal extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className="modal">
         <label>
           タスク名：
           <TaskForm
