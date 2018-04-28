@@ -1,11 +1,10 @@
 import React from 'react';
 
 import TaskForm from './TaskForm';
-import ModalProcess from '../lib/modal_process';
 
 class Modal extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.options = [{
       value: 'survay',
       label: '文献・調査',
@@ -30,7 +29,7 @@ class Modal extends React.Component {
 
   render() {
     return (
-      <form className="modal">
+      <form className="modal hide" id="modal_area">
         <h2>タスクを登録</h2>
         <label>
           タスク名：
@@ -61,7 +60,7 @@ class Modal extends React.Component {
           />
         </label>
 
-        <button type="button" onClick={ModalProcess.send}>
+        <button type="button" onClick={this.props.reRender}>
           送信
         </button>
       </form>
