@@ -9,8 +9,18 @@
     width: 90%;
     height: 100%;
     position: relative;
+    // ヘッダー
     @import "main_page/header";
+    // ボタン関連
     @import "main_page/main_buttons";
+    // タスクリストの場所
     @import "main_page/main_task_list";
+    // スケジュール部分
     @import "main_page/main_scheduler_side";
+    // modal関連
+    @import "./main_page/modal";
+}
+
+.hide {
+    display: none;
 }

@@ -14,10 +14,10 @@ html lang="ja" charset="UTF-8"
             span class="button_text"
               | タスク追加
 
-          button type="button" class="button" id="member"
-            = image_tag "/image/tasks.png"
-            span class="button_text"
-              | 仲間の様子
+          / button type="button" class="button" id="member"
+          /   = image_tag "/image/tasks.png"
+          /   span class="button_text"
+          /     | 仲間の様子
 
           button type="button" class="button" id="github"
             = image_tag "/image/github.png"
@@ -34,6 +34,7 @@ html lang="ja" charset="UTF-8"
           | タスクリスト
         div.after_plan
           | 計画
+        div#modal_area.hide
       div.scheduler_side
         div.timeline_container
           table.timeline data-date=(Time.new.strftime("%F"))
@@ -52,6 +53,7 @@ html lang="ja" charset="UTF-8"
           // 置き方は、時間を判定してその近くに置く
           div#plan_container
             div#current_line
+
 
     template id="plan_template"
       div.plan_element
