@@ -25,27 +25,6 @@ const ModalProcess = {
     formdata.append('authenticity_token', Base.get_token());
     return formdata;
   },
-
-  send: () => {
-    console.log('send form information');
-    const formData = ModalProcess.getModalData();
-    console.log(formData);
-    const header = {
-      Accept: 'application/json',
-      'X-CSRF-Token': Base.get_token(),
-    };
-    fetch('/api/tasks/create/', {
-      method: 'POST',
-      credentials: 'same-origin',
-      header,
-      body: formData,
-    }).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
-    });
-    ModalProcess.close();
-  },
 };
 
 export default ModalProcess;
