@@ -15,7 +15,6 @@ const TaskForm = (props) => {
       type={props.type}
       name={props.name}
       placeholder={props.placeholder}
-      value=""
     />
   );
 };

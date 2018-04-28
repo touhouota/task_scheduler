@@ -13,6 +13,7 @@ const ModalProcess = {
     document.body.removeChild(modalBack);
     // modalを非表示
     document.getElementById('modal_area').classList.add('hide');
+    document.querySelector('.modal').reset();
   },
 
   send: () => {
