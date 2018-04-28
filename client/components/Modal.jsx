@@ -31,6 +31,7 @@ class Modal extends React.Component {
   render() {
     return (
       <form className="modal">
+        <h2>タスクを登録</h2>
         <label>
           タスク名：
           <TaskForm
@@ -44,7 +45,7 @@ class Modal extends React.Component {
           タスク属性：
           <select defaultValue="survay">
             {this.options.map(d => (
-              <option value={d.value}>
+              <option value={d.value} key={d.value}>
                 {d.label}
               </option>
             ))}
@@ -59,7 +60,10 @@ class Modal extends React.Component {
             placeholder="タスク実行時に気をつけることなどをメモしておこう。"
           />
         </label>
-        <button type="button" onClick={ModalProcess.send} />
+
+        <button type="button" onClick={ModalProcess.send}>
+          送信
+        </button>
       </form>
     );
   }
