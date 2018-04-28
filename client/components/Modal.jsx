@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TaskForm from './TaskForm';
 
@@ -67,5 +68,9 @@ class Modal extends React.Component {
     );
   }
 }
+
+Modal.propTypes = {
+  reRender: PropTypes.func.isRequired,
+};
 
 export default Modal;
