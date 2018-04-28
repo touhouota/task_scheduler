@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const TaskForm = (props) => {
   if (props.type === 'textarea') {
     return (
