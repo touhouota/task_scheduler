@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// 基本的なおぶじぇくと
+import Base from './lib/base_object';
 // Modalコンポーネント
 import Modal from './components/Modal';
 // タスク部分のコンポーネント
@@ -11,6 +13,7 @@ import Plan from './lib/main_page_plan';
 import Buttons from './lib/buttons_events';
 
 window.onload = function () {
+  console.log(Base.get_cookie('user_id'));
   // 現在時刻に線を引く
   Plan.currentTimeLine();
 

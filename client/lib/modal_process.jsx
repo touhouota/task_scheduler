@@ -1,3 +1,5 @@
+import Base from './base_object';
+
 const ModalProcess = {
   init: () => {
     const background = document.createElement('div');
@@ -18,21 +20,29 @@ const ModalProcess = {
 
   getModalData: () => {
     const form = document.querySelector('.modal');
-    return new FormData(form);
+    const formdata = new FormData(form);
+    formdata.append('user_id', Base.get_cookie('user_id'));
+    formdata.append('authenticity_token', Base.get_token());
+    return formdata;
   },
 
   send: () => {
     console.log('send form information');
     const formData = ModalProcess.getModalData();
+    console.log(formData);
     const header = {
       Accept: 'application/json',
+      'X-CSRF-Token': Base.get_token(),
     };
-    fetch('/api/task', {
+    fetch('/api/tasks/create/', {
       method: 'POST',
+      credentials: 'same-origin',
       header,
       body: formData,
     }).then((response) => {
-      console.log(response.json());
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
     });
     ModalProcess.close();
   },
