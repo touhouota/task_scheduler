@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Modalコンポーネント
+import Modal from './components/Modal';
 // タスク部分のコンポーネント
 import TaskList from './components/TaskList';
 // 計画に関する処理まとめ
@@ -19,4 +21,5 @@ window.onload = function () {
 
   // タスク一覧部分を描画
   ReactDOM.render(<TaskList />, document.getElementById('task_list'));
+  ReactDOM.render(<Modal />, document.getElementById('modal_area'));
 };
