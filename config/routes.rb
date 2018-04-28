@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   # API用のルート
   get '/api/tasks', to: 'api#tasks'
+  post '/api/tasks/create/', to: 'api#insert_task'
 end
