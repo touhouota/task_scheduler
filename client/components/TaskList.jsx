@@ -1,38 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Task from './Task';
 
-
-class TaskList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tasks: [],
-    };
-    this.getTask();
+const TaskList = (props) => {
+  let tasks;
+  if (props.taskList.length !== 0) {
+    tasks = props.taskList.map(task => <Task taskData={task} key={task.id} />);
+  } else {
+    tasks = (<div>タスクはないよ</div>);
   }
-
-  getTask() {
-    fetch('/api/tasks')
-      .then(response => response.json())
-      .then((json) => {
-        this.setState({
-          tasks: json,
-        });
-      });
-  }
-
-  render() {
-    const tasks = this.state.tasks.map(task => <Task taskData={task} key={task.id} />);
-    return (
-      <div className="task_container">
-        <p>タスク一覧</p>
-        <div className="tasks">
-          {tasks}
-        </div>
+  return (
+    <div className="task_container">
+      <p>タスク一覧</p>
+      <div className="tasks">
+        {tasks}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+// DBの構造をpropTypeとして定義
+TaskList.propTypes = {
+  taskList: PropTypes.arrayOf(PropTypes.shape({
+    actual_sec: PropTypes.number,
+    created_at: PropTypes.string,
+    deleted: PropTypes.number,
+    expect_minute: PropTypes.number,
+    id: PropTypes.number,
+    label: PropTypes.string,
+    memo: PropTypes.string,
+    name: PropTypes.string,
+    reflection: PropTypes.string,
+    status: PropTypes.number,
+    updated_at: PropTypes.string,
+    user_id: PropTypes.string,
+  })).isRequired,
+};
 
 export default TaskList;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Task extends React.Component {
   constructor(props) {
@@ -23,6 +24,23 @@ class Task extends React.Component {
       </div>);
   }
 }
+
+Task.propTypes = {
+  taskData: PropTypes.shape({
+    actual_sec: PropTypes.number,
+    created_at: PropTypes.string,
+    deleted: PropTypes.number,
+    expect_minute: PropTypes.number,
+    id: PropTypes.number,
+    label: PropTypes.string,
+    memo: PropTypes.string,
+    name: PropTypes.string,
+    reflection: PropTypes.string,
+    status: PropTypes.number,
+    updated_at: PropTypes.string,
+    user_id: PropTypes.string,
+  }).isRequired,
+};
 
 
 export default Task;

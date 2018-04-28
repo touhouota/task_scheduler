@@ -25,6 +25,7 @@ end
     user_id: 'test1',
     name: 'タスクのテスト1',
     status: 0,
+    label: 'survay',
     expect_minute: 30,
     memo: 'タスクをとりあえず入れてみて、どうなるかのテスト'
   },
@@ -32,6 +33,7 @@ end
     user_id: 'test2',
     name: 'test2のテスト1',
     status: 0,
+    label: 'survay',
     expect_minute: 20,
     memo: 'タスクの例'
   },
@@ -39,6 +41,7 @@ end
     user_id: 'test1',
     name: 'タスクのテスト2',
     status: 0,
+    label: 'survay',
     expect_minute: 40,
     memo: 'タスクー'
   }
