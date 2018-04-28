@@ -34,6 +34,7 @@ html lang="ja" charset="UTF-8"
           | タスクリスト
         div.after_plan
           | 計画
+        div#modal_area.hide
       div.scheduler_side
         div.timeline_container
           table.timeline data-date=(Time.new.strftime("%F"))
@@ -53,7 +54,6 @@ html lang="ja" charset="UTF-8"
           div#plan_container
             div#current_line
 
-      div#modal_area.hide
 
     template id="plan_template"
       div.plan_element
