@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TaskForm from './TaskForm';
+import ModalProcess from '../lib/modal_process';
 
 class Modal extends React.Component {
   constructor() {
@@ -58,6 +59,7 @@ class Modal extends React.Component {
             placeholder="タスク実行時に気をつけることなどをメモしておこう。"
           />
         </label>
+        <button type="button" onClick={ModalProcess.send} />
       </form>
     );
   }

@@ -5,21 +5,21 @@ const TaskForm = (props) => {
   console.log(props);
   if (props.type === 'textarea') {
     return (
-      <input
-        type={props.type}
+      <textarea
         name={props.name}
         placeholder={props.placeholder}
-        value=""
-      />
+      >
+          hoge
+      </textarea>
     );
   }
   return (
-    <textarea
+    <input
+      type={props.type}
       name={props.name}
       placeholder={props.placeholder}
-    >
-        hoge
-    </textarea>
+      value=""
+    />
   );
 };
 
