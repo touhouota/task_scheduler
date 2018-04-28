@@ -71,6 +71,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/components/Modal.jsx":
+/*!*************************************!*\
+  !*** ./client/components/Modal.jsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _TaskForm = __webpack_require__(/*! ./TaskForm */ \"./client/components/TaskForm.jsx\");\n\nvar _TaskForm2 = _interopRequireDefault(_TaskForm);\n\nvar _modal_process = __webpack_require__(/*! ../lib/modal_process */ \"./client/lib/modal_process.jsx\");\n\nvar _modal_process2 = _interopRequireDefault(_modal_process);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Modal = function (_React$Component) {\n  _inherits(Modal, _React$Component);\n\n  function Modal() {\n    _classCallCheck(this, Modal);\n\n    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this));\n\n    _this.options = [{\n      value: 'survay',\n      label: '文献・調査'\n    }, {\n      value: 'develop',\n      label: '提案・実装'\n    }, {\n      value: 'experiment',\n      label: '実験関係'\n    }, {\n      value: 'write',\n      label: '論文執筆'\n    }, {\n      value: 'everyday',\n      label: '生活'\n    }];\n    return _this;\n  }\n\n  _createClass(Modal, [{\n    key: 'render',\n    value: function render() {\n      return _react2.default.createElement(\n        'form',\n        { className: 'modal' },\n        _react2.default.createElement(\n          'label',\n          null,\n          '\\u30BF\\u30B9\\u30AF\\u540D\\uFF1A',\n          _react2.default.createElement(_TaskForm2.default, {\n            type: 'text',\n            name: 'task_name',\n            placeholder: '\\u4F8B\\uFF1A\\u8A08\\u753B\\u3092\\u7ACB\\u3066\\u308B\\u3002'\n          })\n        ),\n        _react2.default.createElement(\n          'label',\n          null,\n          '\\u30BF\\u30B9\\u30AF\\u5C5E\\u6027\\uFF1A',\n          _react2.default.createElement(\n            'select',\n            { defaultValue: 'survay' },\n            this.options.map(function (d) {\n              return _react2.default.createElement(\n                'option',\n                { value: d.value },\n                d.label\n              );\n            })\n          )\n        ),\n        _react2.default.createElement(\n          'label',\n          null,\n          '\\u30E1\\u30E2\\uFF1A',\n          _react2.default.createElement(_TaskForm2.default, {\n            type: 'textarea',\n            name: 'task_memo',\n            placeholder: '\\u30BF\\u30B9\\u30AF\\u5B9F\\u884C\\u6642\\u306B\\u6C17\\u3092\\u3064\\u3051\\u308B\\u3053\\u3068\\u306A\\u3069\\u3092\\u30E1\\u30E2\\u3057\\u3066\\u304A\\u3053\\u3046\\u3002'\n          })\n        ),\n        _react2.default.createElement('button', { type: 'button', onClick: _modal_process2.default.send })\n      );\n    }\n  }]);\n\n  return Modal;\n}(_react2.default.Component);\n\nexports.default = Modal;\n\n//# sourceURL=webpack:///./client/components/Modal.jsx?");
+
+/***/ }),
+
 /***/ "./client/components/Task.jsx":
 /*!************************************!*\
   !*** ./client/components/Task.jsx ***!
@@ -80,6 +92,18 @@
 
 "use strict";
 eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Task = function (_React$Component) {\n  _inherits(Task, _React$Component);\n\n  function Task(props) {\n    _classCallCheck(this, Task);\n\n    var _this = _possibleConstructorReturn(this, (Task.__proto__ || Object.getPrototypeOf(Task)).call(this, props));\n\n    _this.state = {\n      task: props.taskData\n    };\n    return _this;\n  }\n\n  _createClass(Task, [{\n    key: \"render\",\n    value: function render() {\n      return _react2.default.createElement(\n        \"div\",\n        { className: \"task_element\" },\n        _react2.default.createElement(\n          \"p\",\n          { className: \"task_name\" },\n          \"\\u30BF\\u30B9\\u30AF\\u540D\\uFF1A\",\n          this.state.task.name\n        ),\n        _react2.default.createElement(\n          \"p\",\n          { className: \"user\" },\n          \"\\u30E6\\u30FC\\u30B6\\uFF1A\",\n          this.state.task.user_id\n        ),\n        _react2.default.createElement(\n          \"p\",\n          { className: \"memo\" },\n          \"\\u30E1\\u30E2\\uFF1A\",\n          this.state.task.memo\n        )\n      );\n    }\n  }]);\n\n  return Task;\n}(_react2.default.Component);\n\nexports.default = Task;\n\n//# sourceURL=webpack:///./client/components/Task.jsx?");
+
+/***/ }),
+
+/***/ "./client/components/TaskForm.jsx":
+/*!****************************************!*\
+  !*** ./client/components/TaskForm.jsx ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar TaskForm = function TaskForm(props) {\n  console.log(props);\n  if (props.type === 'textarea') {\n    return _react2.default.createElement(\n      'textarea',\n      {\n        name: props.name,\n        placeholder: props.placeholder\n      },\n      'hoge'\n    );\n  }\n  return _react2.default.createElement('input', {\n    type: props.type,\n    name: props.name,\n    placeholder: props.placeholder,\n    value: ''\n  });\n};\n\nexports.default = TaskForm;\n\n//# sourceURL=webpack:///./client/components/TaskForm.jsx?");
 
 /***/ }),
 
@@ -103,7 +127,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _modal = __webpack_require__(/*! ./modal */ \"./client/lib/modal.js\");\n\nvar _modal2 = _interopRequireDefault(_modal);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Buttons = {\n  github: function github() {\n    var URL = 'https://github.com/touhouota/task_scheduler/issues';\n    window.open(URL, '_blank');\n  },\n\n  append_task: function append_task() {\n    _modal2.default.init();\n  }\n};\n\nexports.default = Buttons;\n\n//# sourceURL=webpack:///./client/lib/buttons_events.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _modal_process = __webpack_require__(/*! ./modal_process */ \"./client/lib/modal_process.jsx\");\n\nvar _modal_process2 = _interopRequireDefault(_modal_process);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Buttons = {\n  github: function github() {\n    var URL = 'https://github.com/touhouota/task_scheduler/issues';\n    window.open(URL, '_blank');\n  },\n\n  append_task: function append_task() {\n    _modal_process2.default.init();\n  }\n};\n\nexports.default = Buttons;\n\n//# sourceURL=webpack:///./client/lib/buttons_events.js?");
 
 /***/ }),
 
@@ -119,15 +143,15 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
-/***/ "./client/lib/modal.js":
-/*!*****************************!*\
-  !*** ./client/lib/modal.js ***!
-  \*****************************/
+/***/ "./client/lib/modal_process.jsx":
+/*!**************************************!*\
+  !*** ./client/lib/modal_process.jsx ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar ModalProcess = {\n  init: function init() {\n    console.log('hoge');\n    var background = document.createElement('div');\n    background.classList.add('bodal_back');\n    document.body.appendChild(background);\n  }\n};\n\nexports.default = ModalProcess;\n\n//# sourceURL=webpack:///./client/lib/modal.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _Modal = __webpack_require__(/*! ../components/Modal */ \"./client/components/Modal.jsx\");\n\nvar _Modal2 = _interopRequireDefault(_Modal);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar ModalProcess = {\n  init: function init() {\n    var background = document.createElement('div');\n    background.addEventListener('click', ModalProcess.close);\n    background.classList.add('modal_back');\n    document.body.appendChild(background);\n    _reactDom2.default.render(_react2.default.createElement(_Modal2.default, null), background);\n  },\n\n  close: function close() {\n    var modalBack = document.querySelector('.modal_back');\n    document.body.removeChild(modalBack);\n  },\n\n  send: function send() {\n    console.log('send form information');\n  }\n};\n\nexports.default = ModalProcess;\n\n//# sourceURL=webpack:///./client/lib/modal_process.jsx?");
 
 /***/ }),
 
