@@ -5,11 +5,20 @@ import Modal from '../components/Modal';
 
 const ModalProcess = {
   init: () => {
-    console.log('hoge');
     const background = document.createElement('div');
-    background.classList.add('bodal_back');
+    background.addEventListener('click', ModalProcess.close);
+    background.classList.add('modal_back');
     document.body.appendChild(background);
     ReactDOM.render(<Modal />, background);
+  },
+
+  close: () => {
+    const modalBack = document.querySelector('.modal_back');
+    document.body.removeChild(modalBack);
+  },
+
+  send: () => {
+    console.log('send form information');
   },
 };
 
