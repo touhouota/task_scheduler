@@ -43,7 +43,7 @@ class Modal extends React.Component {
 
         <label>
           タスク属性：
-          <select defaultValue="survay">
+          <select defaultValue="survay" name="task_label">
             {this.options.map(d => (
               <option value={d.value} key={d.value}>
                 {d.label}

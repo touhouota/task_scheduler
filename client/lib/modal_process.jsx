@@ -16,8 +16,24 @@ const ModalProcess = {
     document.querySelector('.modal').reset();
   },
 
+  getModalData: () => {
+    const form = document.querySelector('.modal');
+    return new FormData(form);
+  },
+
   send: () => {
     console.log('send form information');
+    const formData = ModalProcess.getModalData();
+    const header = {
+      Accept: 'application/json',
+    };
+    fetch('/api/task', {
+      method: 'POST',
+      header,
+      body: formData,
+    }).then((response) => {
+      console.log(response.json());
+    });
     ModalProcess.close();
   },
 };
