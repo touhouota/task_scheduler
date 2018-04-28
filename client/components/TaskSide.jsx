@@ -12,7 +12,6 @@ class TaskSide extends React.Component {
     this.state = {
       tasks: [],
     };
-    // this.updateTaskList = this.updateTaskList.bind(this);
     this.sendForm = this.sendForm.bind(this);
     this.getTask();
   }
