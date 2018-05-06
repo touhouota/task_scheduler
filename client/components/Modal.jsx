@@ -7,12 +7,15 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.options = [{
+      value: 'thema',
+      label: 'テーマ探し',
+    }, {
       value: 'survay',
-      label: '文献・調査',
+      label: '文献調査',
     },
     {
       value: 'develop',
-      label: '提案・実装',
+      label: '実装関連',
     },
     {
       value: 'experiment',
@@ -23,7 +26,7 @@ class Modal extends React.Component {
     },
     {
       value: 'everyday',
-      label: '生活',
+      label: 'その他',
     },
     ];
   }
@@ -43,7 +46,7 @@ class Modal extends React.Component {
 
         <label>
           タスク属性：
-          <select defaultValue="survay" name="task_label">
+          <select defaultValue="thema" name="task_label">
             {this.options.map(d => (
               <option value={d.value} key={d.value}>
                 {d.label}
