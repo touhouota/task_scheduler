@@ -9,12 +9,13 @@ class ApiController < ApplicationController
   def insert_task
     task_info = {
       user_id: params[:user_id],
-      name: params[:task_name],
+      t_name: params[:task_name],
       status: 0,
       memo: params[:task_memo],
       label: params[:task_label]
     }
-    @task = Task.new(task_info)
+    user = User.find_by(user_id: params[:user_id])
+    @task = user.tasks.build(task_info)
     puts "insert: #{@task}"
     if @task.save
       render json: Task.all

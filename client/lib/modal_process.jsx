@@ -18,9 +18,9 @@ const ModalProcess = {
     document.querySelector('.modal').reset();
   },
 
-  getModalData: () => {
-    const form = document.querySelector('.modal');
-    const formdata = new FormData(form);
+  getModalData: (formElement) => {
+    // const form = document.querySelector('.modal');
+    const formdata = new FormData(formElement);
     formdata.append('user_id', Base.get_cookie('user_id'));
     formdata.append('authenticity_token', Base.get_token());
     return formdata;

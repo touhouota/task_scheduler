@@ -32,7 +32,8 @@ class TaskSide extends React.Component {
 
   sendForm() {
     console.log('send form information');
-    const formData = ModalProcess.getModalData();
+    const form = document.getElementById('modal_area');
+    const formData = ModalProcess.getModalData(form);
     console.log(formData);
     fetch('/api/tasks/create/', {
       method: 'POST',
