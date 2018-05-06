@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // TaskSideコンポーネント
-import TaskSide from './components/TaskSide';
+import MainPage from './components/MainPage';
 
 // 計画に関する処理まとめ
 import Plan from './lib/main_page_plan';
@@ -19,5 +19,5 @@ window.onload = () => {
   document.getElementById('append_task').addEventListener('click', Buttons.append_task);
 
   // タスク一覧部分を描画
-  ReactDOM.render(<TaskSide />, document.querySelector('.task_side'));
+  ReactDOM.render(<MainPage />, document.querySelector('.task_side'));
 };

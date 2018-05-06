@@ -1,10 +1,10 @@
 import React from 'react';
 
-import TaskList from './MainPage/TaskList';
-import Modal from './MainPage/Modal';
+import TaskList from './TaskSide';
+import Modal from './Modal';
 
-import Base from '../lib/base_object';
-import ModalProcess from '../lib/modal_process';
+import Base from '../../lib/base_object';
+import ModalProcess from '../../lib/modal_process';
 
 class TaskSide extends React.Component {
   constructor() {
@@ -36,14 +36,14 @@ class TaskSide extends React.Component {
     const formData = ModalProcess.getModalData(form);
     console.log(formData);
     fetch('/api/tasks/create/', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        Accept: 'application/json',
-        'X-CSRF-Token': Base.get_token(),
-      },
-      body: formData,
-    })
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+          'X-CSRF-Token': Base.get_token(),
+        },
+        body: formData,
+      })
       .then(response => response.json())
       .then((json) => {
         this.updateTaskList(json);
