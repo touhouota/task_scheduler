@@ -8,13 +8,13 @@
 
 # 初期のユーザデータの定義
 [
-  { user_id: 'test1', name: 'テスト1', group: nil },
-  { user_id: 'test2', name: 'テスト2', group: nil },
-  { user_id: 'test3', name: 'テスト3', group: nil },
-  { user_id: 'test4', name: 'テスト4', group: nil },
-  { user_id: 'test5', name: 'テスト5', group: nil },
-  { user_id: 'test6', name: 'テスト6', group: nil },
-  { user_id: 'test7', name: 'テスト7', group: nil }
+  { user_id: 'user1', name: 'ユーザ1' },
+  { user_id: 'user2', name: 'ユーザ2' },
+  { user_id: 'user3', name: 'ユーザ3' },
+  { user_id: 'user4', name: 'ユーザ4' },
+  { user_id: 'user5', name: 'ユーザ5' },
+  { user_id: 'user6', name: 'ユーザ6' },
+  { user_id: 'user7', name: 'ユーザ7' }
 ].each do |user|
   User.create(user)
 end
@@ -22,7 +22,7 @@ end
 # タスクのデータ
 [
   {
-    user_id: 'test1',
+    user_id: 'user1',
     name: 'タスクのテスト1',
     status: 0,
     label: 'survay',
@@ -30,15 +30,15 @@ end
     memo: 'タスクをとりあえず入れてみて、どうなるかのテスト'
   },
   {
-    user_id: 'test2',
-    name: 'test2のテスト1',
+    user_id: 'user2',
+    name: 'user2のテスト1',
     status: 0,
     label: 'survay',
     expect_minute: 20,
     memo: 'タスクの例'
   },
   {
-    user_id: 'test1',
+    user_id: 'user1',
     name: 'タスクのテスト2',
     status: 0,
     label: 'survay',
@@ -46,5 +46,7 @@ end
     memo: 'タスクー'
   }
 ].each do |task|
-  Task.create(task)
+  # user = User.find_by(user_id: task[:user_id])
+  # task = Task.new(task)
+  # user.tasks.save
 end
