@@ -8,6 +8,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.integer :actual_sec     # 作業時間
       t.text :memo          # 作業メモ
       t.text :reflection    # 振り返りメモ
+      t.string :label
       t.integer :deleted
 
       t.timestamps
