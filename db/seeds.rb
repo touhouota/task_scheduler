@@ -23,7 +23,7 @@ end
 [
   {
     user_id: 'user1',
-    name: 'タスクのテスト1',
+    t_name: 'タスクのテスト1',
     status: 0,
     label: 'survay',
     expect_minute: 30,
@@ -31,7 +31,7 @@ end
   },
   {
     user_id: 'user2',
-    name: 'user2のテスト1',
+    t_name: 'user2のテスト1',
     status: 0,
     label: 'survay',
     expect_minute: 20,
@@ -39,14 +39,12 @@ end
   },
   {
     user_id: 'user1',
-    name: 'タスクのテスト2',
+    t_name: 'タスクのテスト2',
     status: 0,
     label: 'survay',
     expect_minute: 40,
     memo: 'タスクー'
   }
 ].each do |task|
-  # user = User.find_by(user_id: task[:user_id])
-  # task = Task.new(task)
-  # user.tasks.save
+  Task.create(task)
 end
