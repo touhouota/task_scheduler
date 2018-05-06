@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TaskList from './TaskList';
-import Modal from './Modal';
+import TaskList from './MainPage/TaskList';
+import Modal from './MainPage/Modal';
 
 import Base from '../lib/base_object';
 import ModalProcess from '../lib/modal_process';

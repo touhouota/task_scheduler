@@ -13,7 +13,7 @@ class Task extends React.Component {
     return (
       <div className="task_element">
         <p className="task_name">
-          タスク名：{this.state.task.name}
+          タスク名：{this.state.task.t_name}
         </p>
         <p className="user">
           ユーザ：{this.state.task.user_id}
