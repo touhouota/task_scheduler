@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :user_id
       t.string :name
-      t.integer :group
+      t.index :user_id, unique: true
 
       t.timestamps
     end
