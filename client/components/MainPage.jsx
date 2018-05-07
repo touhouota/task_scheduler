@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TaskSide from './MainPage/TaskSide';
+import OutlineSide from './MainPage/OutlineSide';
 
 import Base from '../lib/base_object';
 import ModalProcess from '../lib/modal_process';

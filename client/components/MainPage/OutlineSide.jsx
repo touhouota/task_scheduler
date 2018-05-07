@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 class OutlineSide extends React.Component {
   render() {
-    <div>
-
-    </div>
+    <div className="OutlineSide">
+      outline
+    </div>;
   }
 }
+
+export default OutlineSide;
