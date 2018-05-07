@@ -2,4 +2,8 @@
     width: 40%;
     box-sizing: border-box;
     padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @import "./structure";
 }
