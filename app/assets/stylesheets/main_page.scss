@@ -17,10 +17,8 @@
     .main_container {
         // タスクリストの場所
         @import "./main_page/task_side";
-        // modal関連
-        @import "./main_page/modal";
         // アウトラインの場所
-        @import "./main_page/outline_side.scss";
+        @import "./main_page/outline_side";
     }
 }
 
