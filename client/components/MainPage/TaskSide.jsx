@@ -1,67 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import TaskList from './TaskSide';
+import TaskList from './TaskList';
 import Modal from './Modal';
 
-import Base from '../../lib/base_object';
-import ModalProcess from '../../lib/modal_process';
+const TaskSide = props => (
+  <div className="TaskSide">
+    <TaskList taskList={props.taskList} />
+    <div className="after_plan">
+        計画
+    </div>
+    <Modal reRender={props.reRender} />
+  </div>
+);
 
-class TaskSide extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      tasks: [],
-    };
-    this.sendForm = this.sendForm.bind(this);
-    this.getTask();
-  }
-
-  getTask() {
-    fetch('/api/tasks')
-      .then(response => response.json())
-      .then((json) => {
-        this.updateTaskList(json);
-      });
-  }
-
-  updateTaskList(tasklist) {
-    this.setState({
-      tasks: tasklist,
-    });
-  }
-
-  sendForm() {
-    console.log('send form information');
-    const form = document.getElementById('modal_area');
-    const formData = ModalProcess.getModalData(form);
-    console.log(formData);
-    fetch('/api/tasks/create/', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          Accept: 'application/json',
-          'X-CSRF-Token': Base.get_token(),
-        },
-        body: formData,
-      })
-      .then(response => response.json())
-      .then((json) => {
-        this.updateTaskList(json);
-      });
-    ModalProcess.close();
-  }
-
-  render() {
-    return (
-      <div>
-        <TaskList taskList={this.state.tasks} />
-        <div className="after_plan">
-          計画
-        </div>
-        <Modal reRender={this.sendForm} />
-      </div>
-    );
-  }
-}
+TaskSide.propTypes = {
+  taskList: PropTypes.arrayOf(PropTypes.shape({
+    actual_sec: PropTypes.number,
+    created_at: PropTypes.string,
+    deleted: PropTypes.number,
+    expect_minute: PropTypes.number,
+    id: PropTypes.number,
+    label: PropTypes.string,
+    memo: PropTypes.string,
+    name: PropTypes.string,
+    reflection: PropTypes.string,
+    status: PropTypes.number,
+    updated_at: PropTypes.string,
+    user_id: PropTypes.string,
+  })).isRequired,
+  reRender: PropTypes.func.isRequired,
+};
 
 export default TaskSide;
