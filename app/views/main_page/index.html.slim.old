@@ -1,0 +1,65 @@
+doctype html
+html lang="ja" charset="UTF-8"
+  head
+    title Main Page | Prototype v0
+    / link href="./css/main_page.css" rel="stylesheet"
+
+  body
+    div.container
+      header
+        h1 タスク管理したいよー
+        div.buttons
+          button type="button" class="button" id="append_task"
+            = image_tag('/image/add.png')
+            span class="button_text"
+              | タスク追加
+
+          / button type="button" class="button" id="member"
+          /   = image_tag "/image/tasks.png"
+          /   span class="button_text"
+          /     | 仲間の様子
+
+          button type="button" class="button" id="github"
+            = image_tag "/image/github.png"
+            span class="button_text"
+              | ご要望はこちら
+
+          button type="button" class="button" id="logout"
+            = image_tag "/image/logout.png"
+            span class="button_text"
+              | ログアウト
+
+      / div.task_side
+      /   div#task_list
+      /     | タスクリスト
+      /   div.after_plan
+      /     | 計画
+      /   div#modal_area.hide
+      / div.scheduler_side
+      /   div.timeline_container
+      /     table.timeline data-date=(Time.new.strftime("%F"))
+      /       - time = Time.new(0)
+      /       - (24 * 2).times do |i|
+      /         tr.times [
+      /             class=( (i % 2).zero? ? "hour at_#{i / 2}" : "half at_#{i / 2}")
+      /             data-time=time.strftime('%H:%M')
+      /             ]
+      /           td.left
+      /             = "At #{i / 2}" if (i % 2).zero?
+      /           td.right
+      /           - time += (30 * 60)
+      /
+      /     // 予定を置く場所
+      /     // 置き方は、時間を判定してその近くに置く
+      /     div#plan_container
+      /       div#current_line
+      div.main_container
+
+    template id="plan_template"
+      div.plan_element
+        p.plan_name
+        span.start
+        | ~
+        span.finish
+
+    script src="/js/main_page.js"
