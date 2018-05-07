@@ -16,9 +16,7 @@
     // ページのコンテナを置く場所を
     .main_container {
         // タスクリストの場所
-        @import "./main_page/main_task_list";
-        // スケジュール部分
-        @import "./main_page/main_scheduler_side";
+        @import "./main_page/task_side";
         // modal関連
         @import "./main_page/modal";
         // アウトラインの場所
