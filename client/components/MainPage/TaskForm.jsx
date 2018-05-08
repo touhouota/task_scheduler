@@ -13,7 +13,6 @@ class TaskForm extends React.Component {
     for (i = 5; i <= 60; i += 5) {
       list.push(i);
     }
-    console.log(list);
     return list;
   }
 
@@ -35,7 +34,6 @@ class TaskForm extends React.Component {
 
   createList(list, defaultValue) {
     return list.map((item) => {
-      console.log(defaultValue, item, defaultValue === item);
       if (item === defaultValue) {
         return (<option value={item} selected>{item}</option>);
       }
