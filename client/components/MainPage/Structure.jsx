@@ -9,7 +9,10 @@ class Structure extends React.Component {
   render() {
     return (
       <div className="Structure">
-        {this.props.structureName}
+        <p>{this.props.structureName}</p>
+        <div className="StructureElements">
+          要素置き場
+        </div>
       </div>
     );
   }
