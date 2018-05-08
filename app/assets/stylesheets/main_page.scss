@@ -1,7 +1,7 @@
 // Place all the styles related to the MainPage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import;
+@import 'reset';
 
 .container {
     // background-color: skyblue;
@@ -16,11 +16,9 @@
     // ページのコンテナを置く場所を
     .main_container {
         // タスクリストの場所
-        @import "main_page/main_task_list";
-        // スケジュール部分
-        @import "main_page/main_scheduler_side";
-        // modal関連
-        @import "./main_page/modal";
+        @import "./main_page/task_side";
+        // アウトラインの場所
+        @import "./main_page/outline_side";
     }
 }
 

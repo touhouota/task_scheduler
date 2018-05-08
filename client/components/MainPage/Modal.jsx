@@ -36,7 +36,7 @@ class Modal extends React.Component {
       <form className="modal hide" id="modal_area">
         <h2>タスクを登録</h2>
         <label>
-          タスク名：
+          タスク名 *：
           <TaskForm
             type="text"
             name="task_name"
@@ -45,7 +45,7 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          タスク属性：
+          タスク属性 *：
           <select defaultValue="thema" name="task_label">
             {this.options.map(d => (
               <option value={d.value} key={d.value}>
@@ -56,7 +56,28 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          メモ：
+          予定時間 *：
+          <TaskForm
+            type="date"
+            name="date"
+          />
+          <TaskForm
+            type="time"
+            name="time"
+          />
+        </label>
+
+        <label>
+          予想作業時間(分) *：
+          <TaskForm
+            type="number"
+            name="expect_minute"
+            placeholder="入力するか選んで▼"
+          />
+        </label>
+
+        <label>
+          メモ ：
           <TaskForm
             type="textarea"
             name="task_memo"

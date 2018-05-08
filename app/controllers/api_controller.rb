@@ -10,9 +10,9 @@ class ApiController < ApplicationController
     task_info = {
       user_id: params[:user_id],
       t_name: params[:task_name],
-      status: 0,
       memo: params[:task_memo],
-      label: params[:task_label]
+      label: params[:task_label],
+      expect_minute: params[:expect_minute]
     }
     user = User.find_by(user_id: params[:user_id])
     @task = user.tasks.build(task_info)
