@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_082803) do
+ActiveRecord::Schema.define(version: 2018_05_08_063318) do
 
   create_table "schedules", force: :cascade do |t|
     t.integer "task_id"
@@ -26,13 +26,13 @@ ActiveRecord::Schema.define(version: 2018_05_06_082803) do
   create_table "tasks", force: :cascade do |t|
     t.string "user_id"
     t.string "t_name"
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "expect_minute"
     t.integer "actual_sec"
     t.text "memo"
     t.text "reflection"
     t.string "label"
-    t.integer "deleted"
+    t.integer "deleted", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_082803) do
     t.text "content"
     t.integer "task_id"
     t.text "user_id"
-    t.integer "auto", limit: 1
+    t.integer "auto", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
