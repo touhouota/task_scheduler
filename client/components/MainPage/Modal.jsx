@@ -68,6 +68,15 @@ class Modal extends React.Component {
         </label>
 
         <label>
+          予想作業時間(分) *：
+          <TaskForm
+            type="number"
+            name="expect_minute"
+            placeholder="入力するか選んで▼"
+          />
+        </label>
+
+        <label>
           メモ ：
           <TaskForm
             type="textarea"

@@ -6,6 +6,17 @@ class TaskForm extends React.Component {
     console.log(props);
   }
 
+  createMinuteList() {
+    const minute = 0;
+    const list = [];
+    let i = 0;
+    for (i = 5; i <= 60; i += 5) {
+      list.push(i);
+    }
+    console.log(list);
+    return list;
+  }
+
   createTimeList() {
     let hour = 0;
     let minute = 0;
@@ -22,9 +33,9 @@ class TaskForm extends React.Component {
     return list;
   }
 
-  createList(defaultValue) {
-    const list = this.createTimeList();
+  createList(list, defaultValue) {
     return list.map((item) => {
+      console.log(defaultValue, item, defaultValue === item);
       if (item === defaultValue) {
         return (<option value={item} selected>{item}</option>);
       }
@@ -49,7 +60,21 @@ class TaskForm extends React.Component {
             list="timeList"
           />
           <datalist id="timeList">
-            {this.createList(null)}
+            {this.createList(this.createTimeList())}
+          </datalist>
+        </span>
+      );
+    } else if (this.props.type === 'number') {
+      return (
+        <span>
+          <input
+            type={this.props.type}
+            name={this.props.name}
+            placeholder={this.props.placeholder}
+            list="minuteList"
+          />
+          <datalist id="minuteList">
+            {this.createList(this.createMinuteList(), 25)}
           </datalist>
         </span>
       );
