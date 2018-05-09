@@ -1,9 +1,18 @@
 import React from 'react';
 
+import StructureElement from './StructureElement';
+
 class Structure extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
+  }
+
+  createElements(taskList, thisLabel) {
+    // タスク一覧から、このコンポーネントに置くべきものを選ぶ
+    tasks = taskList.filter(task => (task.label === thisLabel));
+    // ここに表示するタスクをElementコンポーネントに変換する
+    return tasks.map(task => (<StructureElement task={task} />));
   }
 
   render() {
@@ -11,7 +20,7 @@ class Structure extends React.Component {
       <div className="Structure">
         <p>{this.props.structureName}</p>
         <div className="StructureElements">
-          要素置き場
+          {this.createElements(this.props.tasks, this.props.structureName)}
         </div>
       </div>
     );
