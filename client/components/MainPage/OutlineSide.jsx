@@ -25,9 +25,9 @@ class OutlineSide extends React.Component {
 
   createElements() {
     const labels = this.filterLabel();
-    return this.labelOder.map((label) => {
+    return this.labelOder.map((label, index) => {
       console.log(label);
-      return (<Structure name={label} taskList={this.props.taskList} />);
+      return (<Structure name={label} taskList={this.props.taskList} key={index} />);
     });
   }
 
