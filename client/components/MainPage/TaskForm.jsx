@@ -33,11 +33,11 @@ class TaskForm extends React.Component {
   }
 
   createList(list, defaultValue) {
-    return list.map((item) => {
+    return list.map((item, index) => {
       if (item === defaultValue) {
-        return (<option value={item} selected>{item}</option>);
+        return (<option value={item} key={`optId:${index}`} selected>{item}</option>);
       }
-      return (<option value={item}>{item}</option>);
+      return (<option value={item} key={`optId:${index}`}>{item}</option>);
     });
   }
 
