@@ -59,7 +59,7 @@ class MainPage extends React.Component {
           taskList={this.state.tasks}
           reRender={this.sendForm}
         />
-        <OutlineSide />
+        <OutlineSide taskList={this.state.tasks} />
       </div>
     );
   }
