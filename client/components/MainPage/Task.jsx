@@ -7,17 +7,38 @@ class Task extends React.Component {
     this.state = {
       task: props.taskData,
     };
+    this.statusNo = [
+      'タスク実行',
+      '一時停止',
+    ];
+  }
+
+  getStatusImagePath(status) {
+    return `/image/${this.statusNo[status]}`;
+  }
+
+  // 見積もり時間があれば、それを置く
+  displayExpectedTime() {
+    if (this.state.task.expect_minute) {
+      return (
+        <p>
+          時間見積り：{this.state.task.expect_minute}分
+        </p>
+      );
+    }
+    return null;
   }
 
   render() {
     return (
       <div className="task_element">
+        <button type="button">
+          {this.statusNo[this.state.task.status]}
+        </button>
         <p className="task_name">
           タスク名：{this.state.task.t_name}
         </p>
-        <p className="user">
-          ユーザ：{this.state.task.user_id}
-        </p>
+        {this.displayExpectedTime()}
         <p className="memo">
           メモ：{this.state.task.memo}
         </p>
