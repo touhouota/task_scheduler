@@ -37,4 +37,4 @@ bundle/
 
 # cacheは保持しなくてもいいよね
 /tmp/cache/
-public/js/*.js
+public/js
