@@ -14,13 +14,9 @@ class StructureElement extends React.Component {
 
   render() {
     return (
-      <div className="StructureElement">
-        <img
-          src={`/public/image/${this.status[this.props.task.status]}`}
-          alt="タスクの状態"
-        />
-        <p className="StructureElementName">{props.task.t_name}</p>
-        <p className="StructureElementMemo">{props.task.memo}</p>
+      <div className="StructureElement" key={this.props.task.id}>
+        <p className="StructureElementName">{this.props.task.t_name}</p>
+        <p className="StructureElementMemo">{this.props.task.memo}</p>
       </div>
     );
   }
