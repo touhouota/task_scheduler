@@ -23,4 +23,11 @@ class ApiController < ApplicationController
       render json: @task.errors
     end
   end
+
+  def statusChange
+    @task = Task.find(params[:id])
+    @task.status = params[:status]
+    @task.save
+    render json: @task
+  end
 end
