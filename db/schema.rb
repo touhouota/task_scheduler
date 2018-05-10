@@ -10,46 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_416_151_931) do
-  create_table 'schedules', force: :cascade do |t|
-    t.integer 'task_id'
-    t.string 'user_id'
-    t.date 'start_date'
-    t.date 'deadline'
-    t.date 'finish_date'
-    t.integer 'deleted'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+ActiveRecord::Schema.define(version: 2018_05_08_063318) do
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "task_id"
+    t.string "user_id"
+    t.date "start_date"
+    t.date "deadline"
+    t.date "finish_date"
+    t.integer "deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'tasks', force: :cascade do |t|
-    t.string 'user_id'
-    t.string 'name'
-    t.integer 'status'
-    t.string 'label'
-    t.integer 'expect_minute'
-    t.integer 'actual_sec'
-    t.text 'memo'
-    t.text 'reflection'
-    t.integer 'deleted'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "tasks", force: :cascade do |t|
+    t.string "user_id"
+    t.string "t_name"
+    t.integer "status", default: 0
+    t.integer "expect_minute"
+    t.integer "actual_sec"
+    t.text "memo"
+    t.text "reflection"
+    t.string "label"
+    t.integer "deleted", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'timelines', force: :cascade do |t|
-    t.text 'content'
-    t.integer 'task_id'
-    t.text 'user_id'
-    t.integer 'auto', limit: 1
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "timelines", force: :cascade do |t|
+    t.text "content"
+    t.integer "task_id"
+    t.text "user_id"
+    t.integer "auto", limit: 1, default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'user_id'
-    t.string 'name'
-    t.integer 'group'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "users", force: :cascade do |t|
+    t.string "user_id"
+    t.string "u_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
+
 end

@@ -5,6 +5,7 @@ import Task from './Task';
 
 const TaskList = (props) => {
   let tasks;
+  console.log('TaskList:', props.taskList);
   if (props.taskList.length !== 0) {
     tasks = props.taskList.map(task => <Task taskData={task} key={task.id} />);
   } else {

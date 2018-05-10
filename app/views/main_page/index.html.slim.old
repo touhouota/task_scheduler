@@ -29,6 +29,30 @@ html lang="ja" charset="UTF-8"
             span class="button_text"
               | ログアウト
 
+      / div.task_side
+      /   div#task_list
+      /     | タスクリスト
+      /   div.after_plan
+      /     | 計画
+      /   div#modal_area.hide
+      / div.scheduler_side
+      /   div.timeline_container
+      /     table.timeline data-date=(Time.new.strftime("%F"))
+      /       - time = Time.new(0)
+      /       - (24 * 2).times do |i|
+      /         tr.times [
+      /             class=( (i % 2).zero? ? "hour at_#{i / 2}" : "half at_#{i / 2}")
+      /             data-time=time.strftime('%H:%M')
+      /             ]
+      /           td.left
+      /             = "At #{i / 2}" if (i % 2).zero?
+      /           td.right
+      /           - time += (30 * 60)
+      /
+      /     // 予定を置く場所
+      /     // 置き方は、時間を判定してその近くに置く
+      /     div#plan_container
+      /       div#current_line
       div.main_container
 
     template id="plan_template"

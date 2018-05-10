@@ -1,19 +1,20 @@
 import React from 'react';
 
-import TaskList from './TaskList';
-import Modal from './Modal';
+import TaskSide from './MainPage/TaskSide';
+import OutlineSide from './MainPage/OutlineSide';
 
 import Base from '../lib/base_object';
 import ModalProcess from '../lib/modal_process';
 
-class TaskSide extends React.Component {
+class MainPage extends React.Component {
   constructor() {
     super();
     this.state = {
       tasks: [],
     };
-    this.sendForm = this.sendForm.bind(this);
     this.getTask();
+    this.sendForm = this.sendForm.bind(this);
+    this.updateTaskList = this.updateTaskList.bind(this);
   }
 
   getTask() {
@@ -32,7 +33,8 @@ class TaskSide extends React.Component {
 
   sendForm() {
     console.log('send form information');
-    const formData = ModalProcess.getModalData();
+    const form = document.getElementById('modal_area');
+    const formData = ModalProcess.getModalData(form);
     console.log(formData);
     fetch('/api/tasks/create/', {
       method: 'POST',
@@ -52,15 +54,15 @@ class TaskSide extends React.Component {
 
   render() {
     return (
-      <div>
-        <TaskList taskList={this.state.tasks} />
-        <div className="after_plan">
-          計画
-        </div>
-        <Modal reRender={this.sendForm} />
+      <div className="MainPage">
+        <TaskSide
+          taskList={this.state.tasks}
+          reRender={this.sendForm}
+        />
+        <OutlineSide taskList={this.state.tasks} />
       </div>
     );
   }
 }
 
-export default TaskSide;
+export default MainPage;

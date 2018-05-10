@@ -2,22 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // TaskSideコンポーネント
-import TaskSide from './components/TaskSide';
-
-// 計画に関する処理まとめ
-import Plan from './lib/main_page_plan';
+import MainPage from './components/MainPage';
 // ボタンのイベント処理まとめ
 import Buttons from './lib/buttons_events';
 
 window.onload = () => {
-  // 現在時刻に線を引く
-  Plan.currentTimeLine();
-
   // buttonsにイベントを定義//
   document.getElementById('github').addEventListener('click', Buttons.github);
   // タスク追加ボタンのイベントを定義
   document.getElementById('append_task').addEventListener('click', Buttons.append_task);
 
   // タスク一覧部分を描画
-  ReactDOM.render(<TaskSide />, document.querySelector('.task_side'));
+  ReactDOM.render(<MainPage />, document.querySelector('.main_container'));
 };
