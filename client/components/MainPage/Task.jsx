@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Base from '../../lib/base_object';
+
 class Task extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ class Task extends React.Component {
       'タスク実行',
       '一時停止',
     ];
+    this.updateStatus = this.updateStatus.bind(this);
   }
 
   getStatusImagePath(status) {
@@ -29,10 +32,43 @@ class Task extends React.Component {
     return null;
   }
 
+  updateStatus(task) {
+    this.setState({
+      task,
+    });
+  }
+
+  statusChange(event) {
+    const formData = new FormData();
+    formData.append('id', event.target.value);
+    formData.append('status', 1);
+
+    fetch('/api/task/statusChange/', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'X-CSRF-Token': Base.get_token(),
+      },
+      body: formData,
+    })
+      .then(response => response.json())
+      .then((json) => {
+        // Task要素の変更をstateにしなければいけない。
+        console.table(json);
+        this.updateStatus(json);
+        // console.log('statusChange:', this);
+      });
+  }
+
   render() {
     return (
       <div className="task_element">
-        <button type="button">
+        <button
+          type="button"
+          onClick={(event) => { this.statusChange(event); }}
+          value={this.state.task.id}
+        >
           {this.statusNo[this.state.task.status]}
         </button>
         <p className="task_name">
