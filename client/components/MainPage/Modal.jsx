@@ -85,7 +85,7 @@ class Modal extends React.Component {
           />
         </label>
 
-        <button type="button" onClick={this.props.reRender}>
+        <button type="button" onClick={() => { this.props.reRender(); }}>
           送信
         </button>
       </form>
