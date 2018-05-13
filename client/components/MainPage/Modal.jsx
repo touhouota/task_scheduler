@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import TaskForm from './TaskForm';
 
+import Base from '../../lib/base_object';
+import ModalProcess from '../../lib/modal_process';
+
 class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +32,31 @@ class Modal extends React.Component {
       label: 'その他',
     },
     ];
+  }
+
+  updateTaskList(task) {
+    this.props.updateTaskList(task);
+  }
+
+  sendForm() {
+    console.log('send form information');
+    const form = document.getElementById('modal_area');
+    const formData = ModalProcess.getModalData(form);
+    console.log(formData);
+    fetch('/api/tasks/create/', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'X-CSRF-Token': Base.get_token(),
+      },
+      body: formData,
+    })
+      .then(response => response.json())
+      .then((json) => {
+        this.updateTaskList(json);
+      });
+    ModalProcess.close();
   }
 
   render() {
@@ -85,7 +113,7 @@ class Modal extends React.Component {
           />
         </label>
 
-        <button type="button" onClick={this.props.reRender}>
+        <button type="button" onClick={() => { this.sendForm(); }}>
           送信
         </button>
       </form>
@@ -94,7 +122,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  reRender: PropTypes.func.isRequired,
+  updateTaskList: PropTypes.func.isRequired,
 };
 
 export default Modal;

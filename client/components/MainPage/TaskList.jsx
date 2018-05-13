@@ -7,7 +7,12 @@ const TaskList = (props) => {
   let tasks;
   console.log('TaskList:', props.taskList);
   if (props.taskList.length !== 0) {
-    tasks = props.taskList.map(task => <Task taskData={task} key={task.id} />);
+    tasks = props.taskList.map(task =>
+      (<Task
+        taskData={task}
+        updateTaskList={props.updateTaskList}
+        key={task.id}
+      />));
   } else {
     tasks = (<div>タスクはないよ</div>);
   }

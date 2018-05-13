@@ -18,9 +18,16 @@ class ApiController < ApplicationController
     @task = user.tasks.build(task_info)
     puts "insert: #{@task}"
     if @task.save
-      render json: Task.all
+      render json: @task
     else
       render json: @task.errors
     end
+  end
+
+  def statusChange
+    @task = Task.find(params[:id])
+    @task.status = params[:status]
+    @task.save
+    render json: @task
   end
 end

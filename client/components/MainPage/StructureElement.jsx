@@ -3,13 +3,7 @@ import React from 'react';
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
-    this.status = [
-      'stop.png',
-      'start.png',
-      'succ.png',
-      'nosucc.png',
-      'pause.png',
-    ];
+    console.log('StructureElement', props);
   }
 
   render() {

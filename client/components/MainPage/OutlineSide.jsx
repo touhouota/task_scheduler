@@ -6,8 +6,8 @@ import Structure from './Structure';
 class OutlineSide extends React.Component {
   constructor(props) {
     super(props);
-    console.log('OutlineSide:', props);
-    this.labelOder = [
+    console.log('OutlineSide:', props.taskList);
+    this.labelOrder = [
       'thema',
       'survay',
       'develop',
@@ -24,11 +24,10 @@ class OutlineSide extends React.Component {
   }
 
   createElements() {
-    const labels = this.filterLabel();
-    return this.labelOder.map((label, index) => {
-      console.log(label);
-      return (<Structure name={label} taskList={this.props.taskList} key={index} />);
-    });
+    // const labels = this.filterLabel();
+    return this.labelOrder.map(label => (
+      <Structure name={label} taskList={this.props.taskList} key={label} />
+    ));
   }
 
   render() {

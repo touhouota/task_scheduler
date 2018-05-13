@@ -9,6 +9,7 @@ class Structure extends React.Component {
   }
 
   createElements(taskList, thisLabel) {
+    console.log('createElement in Structure:', taskList);
     const tasks = taskList.filter(task => (task.label === thisLabel));
     return tasks.map(task => (<StructureElement task={task} key={task.id} />));
   }
