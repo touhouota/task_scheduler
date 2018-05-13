@@ -17,12 +17,22 @@ class MainPage extends React.Component {
     fetch('/api/tasks')
       .then(response => response.json())
       .then((json) => {
-        this.updateTaskList(json);
+        // this.updateTaskList(json);
+        json.forEach((item) => {
+          this.updateTaskList(item);
+        });
       });
   }
 
-  updateTaskList(taskList) {
-    console.table(taskList);
+  updateTaskList(taskData) {
+    const taskList = this.state.tasks;
+    console.log('updateTaskList:', taskList);
+    const index = taskList.findIndex(task => task.id === taskData.id);
+    if (index !== -1) {
+      taskList[index] = taskData;
+    } else {
+      taskList.push(taskData);
+    }
     this.setState({
       tasks: taskList,
     });

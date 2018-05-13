@@ -10,7 +10,7 @@ const TaskList = (props) => {
     tasks = props.taskList.map(task =>
       (<Task
         taskData={task}
-        reRender={props.reRender}
+        updateTaskList={props.updateTaskList}
         key={task.id}
       />));
   } else {

@@ -6,8 +6,8 @@ import Modal from './Modal';
 
 const TaskSide = props => (
   <div className="TaskSide">
-    <TaskList taskList={props.taskList} reRender={props.reRender} />
-    <Modal reRender={props.reRender} />
+    <TaskList taskList={props.taskList} updateTaskList={props.updateTaskList} />
+    <Modal updateTaskList={props.updateTaskList} />
   </div>
 );
 
@@ -26,7 +26,7 @@ TaskSide.propTypes = {
     updated_at: PropTypes.string,
     user_id: PropTypes.string,
   })).isRequired,
-  reRender: PropTypes.func.isRequired,
+  updateTaskList: PropTypes.func.isRequired,
 };
 
 export default TaskSide;

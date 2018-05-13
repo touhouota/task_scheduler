@@ -122,7 +122,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  reRender: PropTypes.func.isRequired,
+  updateTaskList: PropTypes.func.isRequired,
 };
 
 export default Modal;

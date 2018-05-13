@@ -13,7 +13,6 @@ class Task extends React.Component {
       'タスク実行',
       '一時停止',
     ];
-    this.updateStatus = this.updateStatus.bind(this);
   }
 
   getStatusImagePath(status) {
@@ -33,9 +32,7 @@ class Task extends React.Component {
   }
 
   updateStatus(task) {
-    this.setState({
-      task,
-    });
+    this.props.updateTaskList(task);
   }
 
   statusChange(event) {
