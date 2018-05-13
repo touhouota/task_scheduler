@@ -11,8 +11,12 @@ class Task extends React.Component {
     };
     this.statusNo = [
       'タスク実行',
+      '実行中',
+      '完了',
+      '未完了',
       '一時停止',
     ];
+    console.log('Task', props);
   }
 
   getStatusImagePath(status) {
@@ -32,6 +36,10 @@ class Task extends React.Component {
   }
 
   updateStatus(task) {
+    console.log('updateStatus from Task:', task, this.state.task);
+    this.setState({
+      task,
+    });
     this.props.updateTaskList(task);
   }
 
