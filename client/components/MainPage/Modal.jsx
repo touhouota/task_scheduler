@@ -32,13 +32,78 @@ class Modal extends React.Component {
       label: 'その他',
     },
     ];
+
+    this.state = {
+      status: {
+        task_name: false,
+        expect_minute: null,
+      },
+      message: {
+        task_name: false,
+        expect_minute: null,
+      },
+    };
+    this.chechValidate = this.chechValidate.bind(this);
   }
 
+  chechValidate(formName, event) {
+    const nowState = this.state;
+    console.log('checkValidation:', formName);
+    switch (formName) {
+      case 'task_name':
+        if (event.target.validationMessage) {
+          nowState.status.task_name = false;
+          nowState.message.task_name = event.target.validationMessage;
+        } else {
+          nowState.status.task_name = true;
+          nowState.message.task_name = null;
+        }
+        break;
+      case 'expect_minute':
+        if (event.target.validationMessage) {
+          nowState.status.expect_minute = false;
+          nowState.message.expect_minute = event.target.validationMessage;
+        } else {
+          nowState.status.expect_minute = true;
+          nowState.message.expect_minute = null;
+        }
+        break;
+      default:
+    }
+
+    this.setState({
+      status: nowState.status,
+      message: nowState.message,
+    });
+    console.log('checkValidation finished:', this.state.status.task_name === false || this.state.status.expect_minute === false);
+  }
+
+  // データの更新をMainPageへ依頼する
   updateTaskList(task) {
     this.props.updateTaskList(task);
   }
 
-  sendForm() {
+  // 送信できる状態か確認する
+  checkSendable() {
+    console.log('checkSendable');
+    console.log(this.state.status.task_name === false, this.state.status.expect_minute === false);
+    const values = Object.values(this.state.status);
+    // 必須項目の数を数える
+    const counts = values.length;
+    // trueになっている項目を残す
+    const checked = values.filter(item => item);
+    // 同じ個数の場合は、送信できる
+    return counts === checked.length;
+  }
+
+  // Formのデータをサーバへ送る
+  sendForm(event) {
+    // デフォルトの動きを止める
+    event.preventDefault();
+    if (!this.checkSendable()) {
+      alert('フォームに不備があります');
+      return null;
+    }
     console.log('send form information');
     const form = document.getElementById('modal_area');
     const formData = ModalProcess.getModalData(form);
@@ -69,6 +134,8 @@ class Modal extends React.Component {
             type="text"
             name="task_name"
             placeholder="例：計画を立てる。"
+            required="true"
+            checkValidation={this.chechValidate}
           />
         </label>
 
@@ -84,7 +151,18 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          予定時間 *：
+          予想作業時間(分) *：
+          <TaskForm
+            type="number"
+            name="expect_minute"
+            placeholder="入力するか選んで▼"
+            required="true"
+            checkValidation={this.chechValidate}
+          />
+        </label>
+
+        <label>
+          予定時間：
           <TaskForm
             type="date"
             name="date"
@@ -92,15 +170,6 @@ class Modal extends React.Component {
           <TaskForm
             type="time"
             name="time"
-          />
-        </label>
-
-        <label>
-          予想作業時間(分) *：
-          <TaskForm
-            type="number"
-            name="expect_minute"
-            placeholder="入力するか選んで▼"
           />
         </label>
 
@@ -113,7 +182,11 @@ class Modal extends React.Component {
           />
         </label>
 
-        <button type="button" onClick={() => { this.sendForm(); }}>
+        <button
+          type="button"
+          onClick={(event) => { this.sendForm(event); }}
+          disabled={this.state.status.task_name === false || this.state.status.expect_minute === false}
+        >
           送信
         </button>
       </form>
