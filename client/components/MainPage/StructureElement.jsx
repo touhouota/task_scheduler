@@ -3,7 +3,7 @@ import React from 'react';
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
-    console.log('StructureElement', props);
+    // console.log('StructureElement', props);
   }
 
   render() {

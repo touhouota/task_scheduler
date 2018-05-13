@@ -70,6 +70,11 @@ class TaskForm extends React.Component {
             name={this.props.name}
             placeholder={this.props.placeholder}
             list="minuteList"
+            min={0}
+            step={5}
+            required={this.props.required}
+            onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
+            onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
           />
           <datalist id="minuteList">
             {this.createList(this.createMinuteList(), 25)}
@@ -82,6 +87,9 @@ class TaskForm extends React.Component {
         type={this.props.type}
         name={this.props.name}
         placeholder={this.props.placeholder}
+        required={this.props.required}
+        onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
+        onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
       />
     );
   }
