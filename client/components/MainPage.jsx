@@ -25,9 +25,10 @@ class MainPage extends React.Component {
       });
   }
 
-  updateTaskList(tasklist) {
+  updateTaskList(taskList) {
+    console.table(taskList);
     this.setState({
-      tasks: tasklist,
+      tasks: taskList,
     });
   }
 
@@ -57,7 +58,8 @@ class MainPage extends React.Component {
       <div className="MainPage">
         <TaskSide
           taskList={this.state.tasks}
-          reRender={this.sendForm}
+          sendForm={this.sendForm}
+          updateTaskList={this.updateTaskList}
         />
         <OutlineSide taskList={this.state.tasks} />
       </div>

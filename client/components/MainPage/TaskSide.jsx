@@ -6,7 +6,7 @@ import Modal from './Modal';
 
 const TaskSide = props => (
   <div className="TaskSide">
-    <TaskList taskList={props.taskList} />
+    <TaskList taskList={props.taskList} reRender={props.reRender} />
     <Modal reRender={props.reRender} />
   </div>
 );
