@@ -69,6 +69,8 @@ class TaskForm extends React.Component {
             type={this.props.type}
             name={this.props.name}
             placeholder={this.props.placeholder}
+            min={0}
+            step={5}
             list="minuteList"
           />
           <datalist id="minuteList">
