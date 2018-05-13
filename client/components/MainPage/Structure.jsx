@@ -5,7 +5,7 @@ import StructureElement from './StructureElement';
 class Structure extends React.Component {
   constructor(props) {
     super(props);
-    console.log('Structure', props);
+    // console.log('Structure', props);
   }
 
   createElements(taskList, thisLabel) {
