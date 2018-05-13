@@ -1,0 +1,9 @@
+.TaskSide {
+    width: 60%;
+    // タスクが入る場所
+    @import "./task_container.scss";
+    // modal関連
+    @import "./main_page/modal";
+
+    .after_plan {}
+}
