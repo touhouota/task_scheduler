@@ -72,6 +72,7 @@ class TaskForm extends React.Component {
             list="minuteList"
             min={0}
             step={5}
+            required={this.props.required}
             onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
             onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
           />
