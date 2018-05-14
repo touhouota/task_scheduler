@@ -6,8 +6,8 @@ import Task from './Task';
 const TaskList = (props) => {
   let tasks;
   // console.log('TaskList:', props.taskList);
-  if (props.taskList.length !== 0) {
-    const todoTasks = props.taskList.filter(task => [0, 1, 4].includes(task.status));
+  const todoTasks = props.taskList.filter(task => [0, 1, 4].includes(task.status));
+  if (todoTasks.length !== 0) {
     tasks = todoTasks.map(task =>
       (<Task
         taskData={task}
@@ -15,7 +15,7 @@ const TaskList = (props) => {
         key={task.id}
       />));
   } else {
-    tasks = (<div>タスクはないよ</div>);
+    tasks = (<div>タスクがありません。やり遂げました。</div>);
   }
   return (
     <div className="task_container">
