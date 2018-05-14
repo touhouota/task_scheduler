@@ -16,7 +16,12 @@ class Task extends React.Component {
       '未完了',
       '一時停止',
     ];
-    // console.log('Task', props);
+    // タスク実行
+    this.Doing = 1;
+    // タスク完了
+    this.Finish = 2;
+    // タスクが途中だったり未完了だったり
+    this.Incomplete = 3;
   }
 
   getStatusImagePath(status) {
@@ -35,6 +40,31 @@ class Task extends React.Component {
     return null;
   }
 
+  // タスク実行時に表示する
+  displayTaskFinishButton() {
+    if (this.state.task.status === 1) {
+      return (
+        <div>
+          <button
+            type="button"
+            onClick={(event) => { this.statusChange(event, this.Finish); }}
+            value={this.state.task.id}
+          >
+            終了
+          </button>
+          <button
+            type="button"
+            onClick={(event) => { this.statusChange(event, this.Incomplete); }}
+            value={this.state.task.id}
+          >
+            未完了
+          </button>
+        </div>
+      );
+    }
+    return null;
+  }
+
   updateStatus(task) {
     // console.log('updateStatus from Task:', task, this.state.task);
     this.setState({
@@ -43,10 +73,10 @@ class Task extends React.Component {
     this.props.updateTaskList(task);
   }
 
-  statusChange(event) {
+  statusChange(event, nextStatus) {
     const formData = new FormData();
     formData.append('id', event.target.value);
-    formData.append('status', 1);
+    formData.append('status', nextStatus);
     formData.append('user_id', Base.get_cookie('user_id'));
 
     fetch('/api/task/statusChange/', {
@@ -72,7 +102,7 @@ class Task extends React.Component {
       <div className="task_element">
         <button
           type="button"
-          onClick={(event) => { this.statusChange(event); }}
+          onClick={(event) => { this.statusChange(event, this.Doing); }}
           value={this.state.task.id}
         >
           {this.statusNo[this.state.task.status]}
@@ -84,6 +114,7 @@ class Task extends React.Component {
         <p className="memo">
           メモ：{this.state.task.memo}
         </p>
+        {this.displayTaskFinishButton()}
       </div>);
   }
 }
