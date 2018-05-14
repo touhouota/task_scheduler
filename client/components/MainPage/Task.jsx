@@ -32,8 +32,20 @@ class Task extends React.Component {
   displayExpectedTime() {
     if (this.state.task.expect_minute) {
       return (
-        <p>
-          時間見積り：{this.state.task.expect_minute}分
+        <p className="expect_minute">
+          見積り：{this.state.task.expect_minute}分
+        </p>
+      );
+    }
+    return null;
+  }
+
+  // メモがあれば表示する
+  displayMemo() {
+    if (this.state.task.memo) {
+      return (
+        <p className="memo">
+        メモ：{this.state.task.memo}
         </p>
       );
     }
@@ -107,13 +119,11 @@ class Task extends React.Component {
         >
           {this.statusNo[this.state.task.status]}
         </button>
-        <p className="task_name">
-          タスク名：{this.state.task.t_name}
-        </p>
+        <span className="task_name">
+          {this.state.task.t_name}
+        </span>
         {this.displayExpectedTime()}
-        <p className="memo">
-          メモ：{this.state.task.memo}
-        </p>
+        {this.displayMemo()}
         {this.displayTaskFinishButton()}
       </div>);
   }

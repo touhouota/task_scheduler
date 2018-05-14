@@ -14,6 +14,14 @@
             padding: 5px;
             background-color: rgb(170, 203, 242);
             width: 300px;
+
+            .task_name {
+                margin-left: 5px;
+            }
+
+            .expect_minute {
+                margin: 2px;
+            }
         }
     }
 }
