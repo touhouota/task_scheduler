@@ -6,6 +6,17 @@ class ApiController < ApplicationController
     render json: @tasks
   end
 
+  # 特定のユーザ
+  def user_tasks
+    @tasks = Task.where(user_id: params[:user_id], deleted: 0)
+
+    # タイムラインを追加
+    tl_insert
+
+    # クライアント側にデータを返す
+    render json: @tasks
+  end
+
   def insert_task
     task_info = {
       user_id: params[:user_id],
@@ -16,8 +27,9 @@ class ApiController < ApplicationController
     }
     user = User.find_by(user_id: params[:user_id])
     @task = user.tasks.build(task_info)
-    puts "insert: #{@task}"
     if @task.save
+      # TLを追加
+      tl_insert(task_id: @task.id)
       render json: @task
     else
       render json: @task.errors
@@ -27,7 +39,29 @@ class ApiController < ApplicationController
   def statusChange
     @task = Task.find(params[:id])
     @task.status = params[:status]
-    @task.save
-    render json: @task
+
+    if @task.save
+      # TLを追加
+      tl_insert({ task_id: @task.id }, @task.status)
+
+      render json: @task
+    else
+      render json: @task.errors
+    end
+  end
+
+  private
+
+  # 引数で受け取ったものをマージしてTLを作る
+  def tl_insert(hash = {}, status = nil)
+    tl_content = "#{params[:controller]}\##{params[:action]}"
+    tl_content += ",status:#{status}" if status
+
+    tl_item = hash.merge(
+      user_id: params[:user_id],
+      auto: 1,
+      content: tl_content
+    )
+    insert_timeline(tl_item)
   end
 end

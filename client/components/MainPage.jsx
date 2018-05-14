@@ -3,6 +3,8 @@ import React from 'react';
 import TaskSide from './MainPage/TaskSide';
 import OutlineSide from './MainPage/OutlineSide';
 
+import Base from '../lib/base_object';
+
 class MainPage extends React.Component {
   constructor() {
     super();
@@ -14,7 +16,9 @@ class MainPage extends React.Component {
   }
 
   getTask() {
-    fetch('/api/tasks')
+    const formData = new FormData();
+    formData.append('user_id', Base.get_cookie('user_id'));
+    fetch(`/api/tasks/${Base.get_cookie('user_id')}`)
       .then(response => response.json())
       .then((json) => {
         // this.updateTaskList(json);
