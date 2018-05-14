@@ -7,7 +7,7 @@ html lang="ja" charset="UTF-8"
   body
     div.container
       header
-        h1 タスク管理したいよー
+        h1 タスク管理マン
         div.buttons
           button type="button" class="button" id="append_task"
             = image_tag('/image/add.png')
@@ -30,12 +30,5 @@ html lang="ja" charset="UTF-8"
               | ログアウト
 
       div.main_container
-
-    template id="plan_template"
-      div.plan_element
-        p.plan_name
-        span.start
-        | ~
-        span.finish
 
     script src="/js/main_page.js"
