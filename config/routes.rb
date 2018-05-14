@@ -5,8 +5,14 @@ Rails.application.routes.draw do
   # ユーザ一覧
   # get '/users/', to: 'users#index'
   resources :users, param: :user_id
+
   # ユーザの情報
   # get '/users/:id', to: 'users#show', as: 'user_info'
+
+  # ログイン画面
+  get '/login', to: 'login#index'
+  # ログイン処理
+  post '/api/login/', to: 'api#login'
 
   # メイン画面
   get '/main/:user_id/', to: 'main_page#index'
