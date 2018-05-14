@@ -30,7 +30,7 @@ class MainPage extends React.Component {
 
   updateTaskList(taskData) {
     const taskList = this.state.tasks;
-    console.log('updateTaskList:', taskList);
+    // console.log('updateTaskList:', taskList);
     const index = taskList.findIndex(task => task.id === taskData.id);
     if (index !== -1) {
       taskList[index] = taskData;
