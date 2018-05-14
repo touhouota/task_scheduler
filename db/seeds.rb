@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 初期のユーザデータの定義
+
 [
   { user_id: 'user1', u_name: 'ユーザ1' },
   { user_id: 'user2', u_name: 'ユーザ2' },
@@ -20,31 +21,6 @@
 end
 
 # タスクのデータ
-[
-  {
-    user_id: 'user1',
-    t_name: 'タスクのテスト1',
-    status: 0,
-    label: 'survay',
-    expect_minute: 30,
-    memo: 'タスクをとりあえず入れてみて、どうなるかのテスト'
-  },
-  {
-    user_id: 'user2',
-    t_name: 'user2のテスト1',
-    status: 0,
-    label: 'survay',
-    expect_minute: 20,
-    memo: 'タスクの例'
-  },
-  {
-    user_id: 'user1',
-    t_name: 'タスクのテスト2',
-    status: 0,
-    label: 'survay',
-    expect_minute: 40,
-    memo: 'タスクー'
-  }
-].each do |task|
-  Task.create(task)
-end
+# [].each do |task|
+#   Task.create(task)
+# end
