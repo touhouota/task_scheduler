@@ -32,7 +32,7 @@ class Task extends React.Component {
   displayExpectedTime() {
     if (this.state.task.expect_minute) {
       return (
-        <p>
+        <p className="expect_minute">
           見積り：{this.state.task.expect_minute}分
         </p>
       );
