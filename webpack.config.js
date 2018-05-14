@@ -4,12 +4,15 @@ const path = require('path');
 module.exports = [{
   mode: 'development',
 
-  entry: path.resolve(crntDir, 'client/main_page.jsx'),
+  entry: {
+    main_page: path.resolve(crntDir, 'client/main_page.jsx'),
+    login: path.resolve(crntDir, 'client/login.jsx'),
+  },
 
   output: {
     path: path.resolve(crntDir, 'public/js'),
     publicPath: path.resolve(crntDir, 'public/js'),
-    filename: 'main_page.js',
+    filename: '[name].js',
   },
 
   module: {
