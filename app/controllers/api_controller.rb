@@ -6,6 +6,13 @@ class ApiController < ApplicationController
     render json: @tasks
   end
 
+  # 特定のユーザ
+  def user_tasks
+    @tasks = Task.where(user_id: params[:user_id])
+    puts "user_tasks: #{params[:user_id]}, #{@tasks.to_a}"
+    render json: @tasks
+  end
+
   def insert_task
     task_info = {
       user_id: params[:user_id],
