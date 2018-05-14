@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   # ログイン画面
   get '/login', to: 'login#index'
+  # ログイン処理
+  post '/api/login/', to: 'api#login'
 
   # メイン画面
   get '/main/:user_id/', to: 'main_page#index'
