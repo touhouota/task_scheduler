@@ -20,9 +20,19 @@ class Login extends React.Component {
       },
       body: userInfo,
     })
-      .then(response => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+
+        return response.json();
+      })
       .then((json) => {
         console.log(json);
+        if (json.user_id === undefined) {
+          return alert('ユーザ名が見つかりません。\n見直してください。');
+        }
+        window.location.href = `/main/${json.user_id}`;
       });
   }
 
@@ -31,7 +41,7 @@ class Login extends React.Component {
       <form id="loginForm">
         <label>
             ユーザID:
-          <input type="text" />
+          <input type="text" name="user_id" />
             @fun.ac.jp
         </label>
         <br />
