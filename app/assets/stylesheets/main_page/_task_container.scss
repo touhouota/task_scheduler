@@ -6,6 +6,7 @@
     .tasks {
         display: flex;
         flex-wrap: wrap;
+        align-items: flex-start;
 
         .task_element {
             box-sizing: border-box;
