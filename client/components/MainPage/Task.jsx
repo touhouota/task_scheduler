@@ -16,7 +16,12 @@ class Task extends React.Component {
       '未完了',
       '一時停止',
     ];
-    // console.log('Task', props);
+    // タスク実行
+    this.Doing = 1;
+    // タスク完了
+    this.Finish = 2;
+    // タスクが途中だったり未完了だったり
+    this.Incomplete = 3;
   }
 
   getStatusImagePath(status) {
@@ -27,9 +32,46 @@ class Task extends React.Component {
   displayExpectedTime() {
     if (this.state.task.expect_minute) {
       return (
-        <p>
-          時間見積り：{this.state.task.expect_minute}分
+        <p className="expect_minute">
+          見積り：{this.state.task.expect_minute}分
         </p>
+      );
+    }
+    return null;
+  }
+
+  // メモがあれば表示する
+  displayMemo() {
+    if (this.state.task.memo) {
+      return (
+        <p className="memo">
+        メモ：{this.state.task.memo}
+        </p>
+      );
+    }
+    return null;
+  }
+
+  // タスク実行時に表示する
+  displayTaskFinishButton() {
+    if (this.state.task.status === 1) {
+      return (
+        <div>
+          <button
+            type="button"
+            onClick={(event) => { this.statusChange(event, this.Finish); }}
+            value={this.state.task.id}
+          >
+            終了
+          </button>
+          <button
+            type="button"
+            onClick={(event) => { this.statusChange(event, this.Incomplete); }}
+            value={this.state.task.id}
+          >
+            未完了
+          </button>
+        </div>
       );
     }
     return null;
@@ -43,10 +85,10 @@ class Task extends React.Component {
     this.props.updateTaskList(task);
   }
 
-  statusChange(event) {
+  statusChange(event, nextStatus) {
     const formData = new FormData();
     formData.append('id', event.target.value);
-    formData.append('status', 1);
+    formData.append('status', nextStatus);
     formData.append('user_id', Base.get_cookie('user_id'));
 
     fetch('/api/task/statusChange/', {
@@ -72,18 +114,17 @@ class Task extends React.Component {
       <div className="task_element">
         <button
           type="button"
-          onClick={(event) => { this.statusChange(event); }}
+          onClick={(event) => { this.statusChange(event, this.Doing); }}
           value={this.state.task.id}
         >
           {this.statusNo[this.state.task.status]}
         </button>
-        <p className="task_name">
-          タスク名：{this.state.task.t_name}
-        </p>
+        <span className="task_name">
+          {this.state.task.t_name}
+        </span>
         {this.displayExpectedTime()}
-        <p className="memo">
-          メモ：{this.state.task.memo}
-        </p>
+        {this.displayMemo()}
+        {this.displayTaskFinishButton()}
       </div>);
   }
 }

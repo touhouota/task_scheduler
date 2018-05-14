@@ -7,7 +7,8 @@ const TaskList = (props) => {
   let tasks;
   // console.log('TaskList:', props.taskList);
   if (props.taskList.length !== 0) {
-    tasks = props.taskList.map(task =>
+    const todoTasks = props.taskList.filter(task => [0, 1, 4].includes(task.status));
+    tasks = todoTasks.map(task =>
       (<Task
         taskData={task}
         updateTaskList={props.updateTaskList}
