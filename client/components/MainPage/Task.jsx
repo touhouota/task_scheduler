@@ -47,6 +47,7 @@ class Task extends React.Component {
     const formData = new FormData();
     formData.append('id', event.target.value);
     formData.append('status', 1);
+    formData.append('user_id', Base.get_cookie('user_id'));
 
     fetch('/api/task/statusChange/', {
       method: 'POST',
