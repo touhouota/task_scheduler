@@ -10,7 +10,7 @@ set :stage, 'production'
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/socket', 'public/system', 'public/upload', 'vendor/bundle'
 
-append :linked_files, 'config/database.yml'
+append :linked_files, 'config/databases.yml'
 
 set :puma_threads, [4, 16]
 set :puma_workers, 0
