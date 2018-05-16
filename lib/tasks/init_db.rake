@@ -1,6 +1,7 @@
 namespace :init_db do
   desc '初期のユーザを追加'
-  task :user do
-    puts 'Hello Task in Rake!!'
+  task user: :environment do
+    load File.join(Rails.root, 'db', 'initialize_data.rb')
+    init_user
   end
 end
