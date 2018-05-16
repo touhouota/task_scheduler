@@ -64,6 +64,8 @@ group :development do
 
   # デプロイ関連のものを追加
   gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
 end
 
 group :development, :test do
