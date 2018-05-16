@@ -5,6 +5,7 @@ set :application, 'task_scheduler'
 set :repo_url, 'https://github.com/touhouota/task_scheduler.git'
 set :branch, 'deploy_preparation'
 set :user, 'b1013179'
+set :deploy_to, '/home/b1013179/task_scheduler'
 set :stage, 'production'
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/socket', 'public/system', 'public/upload', 'vendor/bundle'
