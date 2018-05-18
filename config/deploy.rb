@@ -15,6 +15,7 @@ append :linked_files, 'config/database.yml', 'config/master.key'
 
 set :puma_threads, [4, 16]
 set :puma_workers, 0
+# pumaが口を明けていてほしいところを指定する
 # set :puma_bind, "#{shared_path}/tmp/sockets/puma.sock"
 set :puma_bind, 'tcp://localhost:3000'
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
