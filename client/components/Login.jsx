@@ -11,15 +11,15 @@ class Login extends React.Component {
   sendUserInfo(event) {
     const loginForm = document.getElementById('loginForm');
     const userInfo = new FormData(loginForm);
+    userInfo.append('X-CSRF-Token', Base.get_token());
     fetch('/api/login/', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        Accept: 'application/json',
-        'X-CSRF-Token': Base.get_token(),
-      },
-      body: userInfo,
-    })
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          Accept: 'application/json',
+        },
+        body: userInfo,
+      })
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
