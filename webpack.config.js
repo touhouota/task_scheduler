@@ -10,8 +10,8 @@ module.exports = [{
   },
 
   output: {
-    path: path.resolve(crntDir, 'public/js'),
-    publicPath: path.resolve(crntDir, 'public/js'),
+    path: path.resolve(crntDir, 'app/assets/javascripts'),
+    publicPath: path.resolve(crntDir, 'app/assets/javascripts'),
     filename: '[name].js',
   },
 
