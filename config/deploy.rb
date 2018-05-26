@@ -3,7 +3,7 @@ lock '~> 3.10.2'
 
 set :application, 'task_scheduler'
 set :repo_url, 'https://github.com/touhouota/task_scheduler.git'
-set :branch, 'deploy_preparation'
+set :branch, 'subdirectory_modify'
 set :user, 'b1013179'
 set :deploy_to, '/home/b1013179/task_scheduler'
 set :stage, 'production'
