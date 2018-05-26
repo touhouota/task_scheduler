@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  protect_from_forgery with: :null_session
+
   # ログイン処理
   def login
     user_id = params[:user_id]
