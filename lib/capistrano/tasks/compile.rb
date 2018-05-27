@@ -3,6 +3,5 @@ namespace :compile do
   task :webpack do
     `./node_modules/.bin/webpack --config ./webpack.config.production.js`
   end
-
-  before 'deploy:assets:precompile', 'compile:webpack'
 end
+before 'deploy:assets:precompile', 'compile:webpack'
