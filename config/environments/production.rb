@@ -93,6 +93,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # サブディレクトリのパスを追加
-  # config.relative_url_root = '/b1013179/task_scheduler'
-  # ENV['RAILS_RELATIVE_URL_ROOT'] = '/b1013179/task_scheduler'
+  config.relative_url_root = '/b1013179/task_scheduler'
+  ENV['RAILS_RELATIVE_URL_ROOT'] = '/b1013179/task_scheduler'
 end
