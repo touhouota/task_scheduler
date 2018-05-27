@@ -6,8 +6,8 @@ class ApiController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
-      # render json: @user
-      redirect_to controller: :main_page, action: :index
+      cookies[:user_id] = @user[:user_id]
+      render json: @user
     else
       render json: {
         u_name: 'ないよ'
