@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get 'tasks/', to: 'tasks#index'
+  # scope 'b1013179' do
+  #   scope 'task_scheduler' do
+  get '/', to: 'login#index'
+  get '/tasks/', to: 'tasks#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # ユーザ一覧
@@ -22,4 +25,6 @@ Rails.application.routes.draw do
   get '/api/tasks/:user_id', to: 'api#user_tasks'
   post '/api/tasks/create/', to: 'api#insert_task'
   post '/api/task/statusChange/', to: 'api#statusChange'
+  #   end
+  # end
 end

@@ -10,7 +10,7 @@ html lang="ja" charset="UTF-8"
         h1 タスク管理マン
         div.buttons
           button type="button" class="button" id="append_task"
-            = image_tag('/image/add.png')
+            = image_tag 'add.png'
             span class="button_text"
               | タスク追加
 
@@ -20,15 +20,16 @@ html lang="ja" charset="UTF-8"
           /     | 仲間の様子
 
           button type="button" class="button" id="github"
-            = image_tag "/image/github.png"
+            = image_tag "github.png"
             span class="button_text"
               | ご要望はこちら
 
           button type="button" class="button" id="logout"
-            = image_tag "/image/logout.png"
+            = image_tag "logout.png"
             span class="button_text"
               | ログアウト
 
       div.main_container
 
-    script src="/js/main_page.js"
+    / script src="/js/main_page.js"
+    = javascript_include_tag 'main_page'
