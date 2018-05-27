@@ -1,25 +1,30 @@
 Rails.application.routes.draw do
-  get 'tasks/', to: 'tasks#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope 'b1013179' do
+    scope 'task_scheduler' do
+      get '/', to: 'login#index'
+      get 'tasks/', to: 'tasks#index'
+      # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # ユーザ一覧
-  # get '/users/', to: 'users#index'
-  resources :users, param: :user_id
+      # ユーザ一覧
+      # get '/users/', to: 'users#index'
+      resources :users, param: :user_id
 
-  # ユーザの情報
-  # get '/users/:id', to: 'users#show', as: 'user_info'
+      # ユーザの情報
+      # get '/users/:id', to: 'users#show', as: 'user_info'
 
-  # ログイン画面
-  get '/login', to: 'login#index'
-  # ログイン処理
-  post '/api/login/', to: 'api#login'
+      # ログイン画面
+      get '/login', to: 'login#index'
+      # ログイン処理
+      post '/api/login/', to: 'api#login'
 
-  # メイン画面
-  get '/main/:user_id/', to: 'main_page#index'
+      # メイン画面
+      get '/main/:user_id/', to: 'main_page#index'
 
-  # API用のルート
-  get '/api/tasks/', to: 'api#tasks'
-  get '/api/tasks/:user_id', to: 'api#user_tasks'
-  post '/api/tasks/create/', to: 'api#insert_task'
-  post '/api/task/statusChange/', to: 'api#statusChange'
+      # API用のルート
+      get '/api/tasks/', to: 'api#tasks'
+      get '/api/tasks/:user_id', to: 'api#user_tasks'
+      post '/api/tasks/create/', to: 'api#insert_task'
+      post '/api/task/statusChange/', to: 'api#statusChange'
+    end
+  end
 end
