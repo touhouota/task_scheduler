@@ -1,8 +1,9 @@
 const crntDir = __dirname;
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = [{
-  mode: 'development',
+  mode: 'production',
 
   entry: {
     main_page: path.resolve(crntDir, 'client/main_page.jsx'),
@@ -24,6 +25,7 @@ module.exports = [{
       },
     }],
   },
+
   resolve: {
     extensions: ['.js', '.jsx'],
   },
