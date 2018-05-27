@@ -18,7 +18,8 @@ class MainPage extends React.Component {
   getTask() {
     const formData = new FormData();
     formData.append('user_id', Base.get_cookie('user_id'));
-    fetch(`/api/tasks/${Base.get_cookie('user_id')}`)
+    const path = Base.get_path();
+    fetch(`${path}/api/tasks/${Base.get_cookie('user_id')}`)
       .then(response => response.json())
       .then((json) => {
         // this.updateTaskList(json);
