@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope 'b1013179' do
     scope 'task_scheduler' do
       get '/', to: 'login#index'
-      get 'tasks/', to: 'tasks#index'
+      get '/tasks/', to: 'tasks#index'
       # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
       # ユーザ一覧
