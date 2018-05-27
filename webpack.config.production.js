@@ -2,7 +2,7 @@ const crntDir = __dirname;
 const path = require('path');
 
 module.exports = [{
-  mode: 'development',
+  mode: 'production',
 
   entry: {
     main_page: path.resolve(crntDir, 'client/main_page.jsx'),

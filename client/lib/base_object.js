@@ -14,6 +14,16 @@ const Base = {
     return formdata;
   },
 
+  // subディレクトリで動かすので、pathに関してsubディレクトリを返す
+  get_path: () => {
+    const path = location.pathname.split('/');
+    while (path.length > 3) {
+      path.pop();
+    }
+
+    return path.join('/');
+  },
+
   get_token: () => document.querySelector('[name=csrf-token]').content,
 
   // クッキーをオブジェクトに直すもの

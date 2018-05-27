@@ -11,16 +11,17 @@ class Login extends React.Component {
   sendUserInfo(event) {
     const loginForm = document.getElementById('loginForm');
     const userInfo = new FormData(loginForm);
-    fetch('/api/login/', {
+    userInfo.append('X-CSRF-Token', Base.get_token());
+    fetch('/b1013179/task_scheduler/api/login/', {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
-        'X-CSRF-Token': Base.get_token(),
       },
       body: userInfo,
     })
       .then((response) => {
+        console.log(response);
         if (!response.ok) {
           throw Error(response.statusText);
         }
@@ -32,7 +33,8 @@ class Login extends React.Component {
         if (json.user_id === undefined) {
           return alert('ユーザ名が見つかりません。\n見直してください。');
         }
-        window.location.href = `/main/${json.user_id}`;
+        const path = Base.get_path();
+        window.location.href = `${path}/main/${json.user_id}`;
       });
   }
 

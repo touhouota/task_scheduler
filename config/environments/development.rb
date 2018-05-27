@@ -58,4 +58,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # サブディレクトリのパスを追加
+  config.relative_url_root = '/b1013179/task_scheduler'
+  ENV['RAILS_RELATIVE_URL_ROOT'] = '/b1013179/task_scheduler'
 end
