@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # メイン画面
   get '/main/:user_id/', to: 'main_page#index'
 
+  # タスクの構造を可視化するページ
+  get '/structure/main/:user_id', to: 'task_structure#index'
+
   # API用のルート
   get '/api/tasks/', to: 'api#tasks'
   get '/api/tasks/:user_id', to: 'api#user_tasks'

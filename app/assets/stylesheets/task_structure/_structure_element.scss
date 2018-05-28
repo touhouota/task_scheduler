@@ -1,0 +1,9 @@
+.Structure {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .StructureElement {
+        flex-grow: 1;
+    }
+}
