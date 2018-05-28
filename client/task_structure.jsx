@@ -5,10 +5,9 @@ import Structure from './components/TaskStructure/Structure';
 
 window.onload = () => {
   ReactDOM.render(
-    <div className="structure_container">
-      hello TaskStructure
+    <div className="Structure_Component">
       <Structure label="ラベル名" />
     </div>,
-    document.querySelector('.container'),
+    document.querySelector('.structure_container'),
   );
 };
