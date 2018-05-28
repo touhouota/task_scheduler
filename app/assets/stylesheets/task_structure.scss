@@ -1,0 +1,25 @@
+// Place all the styles related to the task_structure controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$header_height: 30px;
+
+.task_structure .container {
+    width: 90%;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+
+    header {
+        height: $header_height;
+    }
+
+    .structure_container {
+        height: calc(100% - #{$header_height});
+
+        .Structure_Component {
+            height: 100%;
+            // StructureElementに対するスタイル
+            @import "./task_structure/structure_element";
+        }
+    }
+}
