@@ -5,7 +5,7 @@ import Structure from './components/TaskStructure/Structure';
 
 window.onload = () => {
   ReactDOM.render(
-    <div>
+    <div className="structure_container">
       hello TaskStructure
       <Structure label="ラベル名" />
     </div>,
