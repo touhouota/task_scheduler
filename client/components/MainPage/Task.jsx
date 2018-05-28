@@ -24,10 +24,6 @@ class Task extends React.Component {
     this.Incomplete = 3;
   }
 
-  getStatusImagePath(status) {
-    return `/image/${this.statusNo[status]}`;
-  }
-
   // 見積もり時間があれば、それを置く
   displayExpectedTime() {
     if (this.state.task.expect_minute) {
@@ -91,7 +87,8 @@ class Task extends React.Component {
     formData.append('status', nextStatus);
     formData.append('user_id', Base.get_cookie('user_id'));
 
-    fetch('/api/task/statusChange/', {
+    const path = Base.get_path();
+    fetch(`${path}/api/task/statusChange/`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
