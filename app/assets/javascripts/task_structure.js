@@ -71,6 +71,30 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/components/TaskStructure/Structure.jsx":
+/*!*******************************************************!*\
+  !*** ./client/components/TaskStructure/Structure.jsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _StructureElement = __webpack_require__(/*! ./StructureElement */ \"./client/components/TaskStructure/StructureElement.jsx\");\n\nvar _StructureElement2 = _interopRequireDefault(_StructureElement);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar labels = {\n  survay: '文献調査',\n  develop: '提案実装',\n  experiment: '実験・準備',\n  write: '論文執筆',\n  everyday: '普段のあれこれ'\n};\n\nvar Structure = function (_React$Component) {\n  _inherits(Structure, _React$Component);\n\n  function Structure(props) {\n    _classCallCheck(this, Structure);\n\n    var _this = _possibleConstructorReturn(this, (Structure.__proto__ || Object.getPrototypeOf(Structure)).call(this, props));\n\n    _this.createStructureElements = _this.createStructureElements.bind(_this);\n    return _this;\n  }\n\n  _createClass(Structure, [{\n    key: 'createStructureElements',\n    value: function createStructureElements() {\n      return Object.keys(labels).map(function (label) {\n        console.log(label);\n\n        return _react2.default.createElement(_StructureElement2.default, {\n          key: label,\n          name: labels[label],\n          label: label\n        });\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      return _react2.default.createElement(\n        'div',\n        { className: 'Structure' },\n        this.createStructureElements()\n      );\n    }\n  }]);\n\n  return Structure;\n}(_react2.default.Component);\n\nexports.default = Structure;\n\n//# sourceURL=webpack:///./client/components/TaskStructure/Structure.jsx?");
+
+/***/ }),
+
+/***/ "./client/components/TaskStructure/StructureElement.jsx":
+/*!**************************************************************!*\
+  !*** ./client/components/TaskStructure/StructureElement.jsx ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar StructureElement = function StructureElement(props) {\n  return _react2.default.createElement(\n    'div',\n    { className: 'StructureElement ' + props.label },\n    _react2.default.createElement(\n      'p',\n      null,\n      props.name\n    )\n  );\n};\n\nexports.default = StructureElement;\n\n//# sourceURL=webpack:///./client/components/TaskStructure/StructureElement.jsx?");
+
+/***/ }),
+
 /***/ "./client/task_structure.jsx":
 /*!***********************************!*\
   !*** ./client/task_structure.jsx ***!
@@ -79,7 +103,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nwindow.onload = function () {\n  _reactDom2.default.render(_react2.default.createElement(\n    'div',\n    null,\n    'hello TaskStructure'\n  ), document.querySelector('.container'));\n};\n\n//# sourceURL=webpack:///./client/task_structure.jsx?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nvar _Structure = __webpack_require__(/*! ./components/TaskStructure/Structure */ \"./client/components/TaskStructure/Structure.jsx\");\n\nvar _Structure2 = _interopRequireDefault(_Structure);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nwindow.onload = function () {\n  _reactDom2.default.render(_react2.default.createElement(\n    'div',\n    null,\n    'hello TaskStructure',\n    _react2.default.createElement(_Structure2.default, { label: '\\u30E9\\u30D9\\u30EB\\u540D' })\n  ), document.querySelector('.container'));\n};\n\n//# sourceURL=webpack:///./client/task_structure.jsx?");
 
 /***/ }),
 
