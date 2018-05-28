@@ -1,0 +1,2 @@
+class TaskStructureController < ApplicationController
+end
