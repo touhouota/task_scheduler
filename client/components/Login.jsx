@@ -12,7 +12,8 @@ class Login extends React.Component {
     const loginForm = document.getElementById('loginForm');
     const userInfo = new FormData(loginForm);
     userInfo.append('X-CSRF-Token', Base.get_token());
-    fetch('/b1013179/task_scheduler/api/login/', {
+    const path = Base.get_path();
+    fetch(`${path}/api/login/`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
