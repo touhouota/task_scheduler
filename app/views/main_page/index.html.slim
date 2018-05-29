@@ -1,35 +1,28 @@
-doctype html
-html lang="ja" charset="UTF-8"
-  head
-    title Main Page | Prototype v0
-    / link href="./css/main_page.css" rel="stylesheet"
+div.container
+  header
+    h1 タスク管理マン
+    div.buttons
+      button type="button" class="button" id="append_task"
+        = image_tag 'add.png'
+        span class="button_text"
+          | タスク追加
 
-  body
-    div.container
-      header
-        h1 タスク管理マン
-        div.buttons
-          button type="button" class="button" id="append_task"
-            = image_tag 'add.png'
-            span class="button_text"
-              | タスク追加
+      / button type="button" class="button" id="member"
+      /   = image_tag "/image/tasks.png"
+      /   span class="button_text"
+      /     | 仲間の様子
 
-          / button type="button" class="button" id="member"
-          /   = image_tag "/image/tasks.png"
-          /   span class="button_text"
-          /     | 仲間の様子
+      button type="button" class="button" id="github"
+        = image_tag "github.png"
+        span class="button_text"
+          | ご要望はこちら
 
-          button type="button" class="button" id="github"
-            = image_tag "github.png"
-            span class="button_text"
-              | ご要望はこちら
+      button type="button" class="button" id="logout"
+        = image_tag "logout.png"
+        span class="button_text"
+          | ログアウト
 
-          button type="button" class="button" id="logout"
-            = image_tag "logout.png"
-            span class="button_text"
-              | ログアウト
+  div.main_container
 
-      div.main_container
-
-    / script src="/js/main_page.js"
-    = javascript_include_tag 'main_page'
+/ script src="/js/main_page.js"
+= javascript_include_tag 'main_page'
