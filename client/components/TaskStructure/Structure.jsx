@@ -1,6 +1,7 @@
 import React from 'react';
 
 import StructureElement from './StructureElement';
+import Modal from '../MainPage/Modal';
 
 const labels = {
   survay: '文献調査',
@@ -14,6 +15,11 @@ class Structure extends React.Component {
   constructor(props) {
     super(props);
     this.createStructureElements = this.createStructureElements.bind(this);
+    this.updateTaskList = this.updateTaskList.bind(this);
+
+    this.state = {
+      tasks: [],
+    };
   }
 
   createStructureElements() {
@@ -30,10 +36,19 @@ class Structure extends React.Component {
     });
   }
 
+  updateTaskList(taskData) {
+    this.setState({
+      tasks: taskData,
+    });
+  }
+
   render() {
     return (
       <div className="Structure">
         {this.createStructureElements()}
+        <Modal
+          updateTaskList={this.updateTaskList}
+        />
       </div>
     );
   }
