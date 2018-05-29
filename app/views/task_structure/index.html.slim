@@ -1,6 +1,15 @@
 div.container
   header
-    | タスクの全体
+    div.buttons
+      button type="button" id="append_task" class="button"
+        = image_tag 'add.png'
+        span
+          | タスク追加
+
+      button type="button" class="button" id="github"
+        = image_tag "github.png"
+        span class="button_text"
+          | ご要望はこちら
 
   div.structure_container
 

@@ -1,7 +1,8 @@
 const crntDir = __dirname;
 const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = [{
+module.exports = {
   mode: 'production',
 
   entry: {
@@ -29,4 +30,16 @@ module.exports = [{
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-}];
+
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        uglifyOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
+  },
+};
