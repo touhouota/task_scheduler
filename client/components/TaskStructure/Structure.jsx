@@ -26,15 +26,18 @@ class Structure extends React.Component {
     };
   }
 
-  createStructureElements() {
+  createStructureElements(tasks) {
     return Object.keys(labels).map((label) => {
-      console.log(label);
+      console.log('createStructureElements:', label);
+
+      const taskList = tasks.filter(task => task.label === label);
 
       return (
         <StructureElement
           key={label}
           name={labels[label]}
           label={label}
+          tasks={taskList}
         />
       );
     });
@@ -71,7 +74,7 @@ class Structure extends React.Component {
   render() {
     return (
       <div className="Structure">
-        {this.createStructureElements()}
+        {this.createStructureElements(this.state.tasks)}
         <Modal
           updateTaskList={this.updateTaskList}
         />
