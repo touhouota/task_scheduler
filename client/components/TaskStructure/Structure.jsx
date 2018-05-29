@@ -3,6 +3,8 @@ import React from 'react';
 import StructureElement from './StructureElement';
 import Modal from '../MainPage/Modal';
 
+import Base from '../../lib/base_object';
+
 const labels = {
   survay: '文献調査',
   develop: '提案実装',
@@ -16,6 +18,8 @@ class Structure extends React.Component {
     super(props);
     this.createStructureElements = this.createStructureElements.bind(this);
     this.updateTaskList = this.updateTaskList.bind(this);
+
+    this.getTask();
 
     this.state = {
       tasks: [],
@@ -36,9 +40,31 @@ class Structure extends React.Component {
     });
   }
 
+  getTask() {
+    const formData = new FormData();
+    formData.append('user_id', Base.get_cookie('user_id'));
+    const path = Base.get_path();
+    fetch(`${path}/api/tasks/${Base.get_cookie('user_id')}`)
+      .then(response => response.json())
+      .then((json) => {
+        // this.updateTaskList(json);
+        json.forEach((item) => {
+          this.updateTaskList(item);
+        });
+      });
+  }
+
   updateTaskList(taskData) {
+    const taskList = this.state.tasks;
+    // console.log('updateTaskList:', taskList);
+    const index = taskList.findIndex(task => task.id === taskData.id);
+    if (index !== -1) {
+      taskList[index] = taskData;
+    } else {
+      taskList.push(taskData);
+    }
     this.setState({
-      tasks: taskData,
+      tasks: taskList,
     });
   }
 
