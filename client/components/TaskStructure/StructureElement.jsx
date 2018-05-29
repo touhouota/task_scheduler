@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Task from '../MainPage/Task';
+import Task from './Task';
 
 class StructureElement extends React.Component {
   constructor(props) {
