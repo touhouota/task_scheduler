@@ -23,7 +23,7 @@ class Task extends React.Component {
     // タスクが途中だったり未完了だったり
     this.Incomplete = 3;
     // 一時停止
-    this.suspend = 4;
+    this.Suspend = 4;
   }
 
   // 見積もり時間があれば、それを置く
@@ -120,7 +120,7 @@ class Task extends React.Component {
           onClick={(event) => {
             let nextState = null;
             if (this.state.task.status === this.Doing) {
-              nextState = this.suspend;
+              nextState = this.Suspend;
             } else {
               nextState = this.Doing;
             }
