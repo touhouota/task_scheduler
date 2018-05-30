@@ -121,16 +121,21 @@ class Task extends React.Component {
     return null;
   }
 
-  setTaskInformation() {
+  setTaskInformation(nextStatus) {
     const formData = new FormData();
-    Object(this.props.taskData).keys();
+    formData.append('id', this.props.taskData.id);
+    formData.set('status', nextStatus);
+    const taskId = this.props.taskData.id;
+    const actualSec = document.getElementById(taskId).querySelector('.actual_sec');
+    formData.set('actual_sec', parseInt(actualSec.textContent || 0, 10));
+
+    return formData;
   }
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
-    const formData = new FormData();
-    formData.append('id', taskId);
-    formData.append('status', nextStatus);
+    const formData = this.setTaskInformation(nextStatus);
+
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange/`, {
