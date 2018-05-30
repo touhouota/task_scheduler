@@ -6,9 +6,9 @@ import Base from '../../lib/base_object';
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      task: props.taskData,
-    };
+    // this.state = {
+    //   task: props.taskData,
+    // };
     this.statusNo = [
       'タスク実行',
       '実行中',
@@ -31,10 +31,10 @@ class Task extends React.Component {
 
   // 見積もり時間があれば、それを置く
   displayExpectedTime() {
-    if (this.state.task.expect_minute) {
+    if (this.props.taskData.expect_minute) {
       return (
         <p className="expect_minute">
-          見積り：{this.state.task.expect_minute}分
+          見積り：{this.props.taskData.expect_minute}分
         </p>
       );
     }
@@ -43,16 +43,16 @@ class Task extends React.Component {
 
   displayActualTime() {
     return (
-      <span className="actual_sec">{this.state.task.actual_sec}</span>
+      <span className="actual_sec">{this.props.taskData.actual_sec}</span>
     );
   }
 
   // メモがあれば表示する
   displayMemo() {
-    if (this.state.task.memo) {
+    if (this.props.taskData.memo) {
       return (
         <p className="memo">
-        メモ：{this.state.task.memo}
+        メモ：{this.props.taskData.memo}
         </p>
       );
     }
@@ -61,7 +61,7 @@ class Task extends React.Component {
 
   // タスク実行時に表示する
   displayTaskFinishButton() {
-    if (this.state.task.status === 1) {
+    if (this.props.taskData.status === 1) {
       return (
         <div>
           <button
@@ -70,7 +70,7 @@ class Task extends React.Component {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Finish);
             }}
-            value={this.state.task.id}
+            value={this.props.taskData.id}
           >
             終了
           </button>
@@ -80,7 +80,7 @@ class Task extends React.Component {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Incomplete);
             }}
-            value={this.state.task.id}
+            value={this.props.taskData.id}
           >
             未完了
           </button>
@@ -91,10 +91,12 @@ class Task extends React.Component {
   }
 
   updateStatus(task) {
-    // console.log('updateStatus from Task:', task, this.state.task);
-    this.setState({
-      task,
-    });
+    // console.log('updateStatus from Task:', task, this.props.taskData);
+    // if (task.id === this.props.taskData.id) {
+    //   this.setState({
+    //     task,
+    //   });
+    // }
     this.props.updateTaskList(task);
   }
 
@@ -121,7 +123,7 @@ class Task extends React.Component {
 
   setTaskInformation() {
     const formData = new FormData();
-    Object(this.state.task).keys();
+    Object(this.props.taskData).keys();
   }
 
   // 状態変更だけをする
@@ -153,29 +155,29 @@ class Task extends React.Component {
     return (
       <div
         className="task_element"
-        id={this.state.task.id}
-        data-status={this.state.task.status}
-        data-start_date={this.state.task.updated_at}
-        data-progress={this.state.task.actual_sec}
+        id={this.props.taskData.id}
+        data-status={this.props.taskData.status}
+        data-start_date={this.props.taskData.updated_at}
+        data-progress={this.props.taskData.actual_sec}
       >
         <button
           type="button"
           onClick={(event) => {
             const task = Base.parents(event.target, 'task_element');
             let nextStatus = null;
-            if (this.state.task.status === this.Doing) {
+            if (this.props.taskData.status === this.Doing) {
               nextStatus = this.Suspend;
             } else {
               nextStatus = this.Doing;
             }
             this.taskStart(task.id, nextStatus);
           }}
-          value={this.state.task.id}
+          value={this.props.taskData.id}
         >
-          {this.statusNo[this.state.task.status]}
+          {this.statusNo[this.props.taskData.status]}
         </button>
         <span className="task_name">
-          {this.state.task.t_name}
+          {this.props.taskData.t_name}
         </span>
         {this.displayExpectedTime()}
         <p>作業時間：{this.displayActualTime()}分</p>

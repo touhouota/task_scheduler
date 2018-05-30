@@ -58,6 +58,7 @@ class Structure extends React.Component {
           label={label}
           tasks={taskList}
           TimerManager={this.props.TimerManager}
+          updateTaskList={this.updateTaskList}
         />
       );
     });
