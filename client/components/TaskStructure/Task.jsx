@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Base from '../../lib/base_object';
+import TimerManager from '../../lib/time_manager';
 
 class Task extends React.Component {
   constructor(props) {
@@ -94,6 +95,12 @@ class Task extends React.Component {
     formData.append('id', event.target.value);
     formData.append('status', nextStatus);
     formData.append('user_id', Base.get_cookie('user_id'));
+    if (nextStatus === this.Doing) {
+      // 実行するタスクIDを保持
+      TimerManager.set(event.target.value);
+    } else {
+      TimerManager.clear();
+    }
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange/`, {
@@ -120,6 +127,8 @@ class Task extends React.Component {
         className="task_element"
         id={this.state.task.id}
         data-status={this.state.task.status}
+        data-start_date={this.state.task.updated_at}
+        data-progress={this.state.task.actual_sec}
       >
         <button
           type="button"
