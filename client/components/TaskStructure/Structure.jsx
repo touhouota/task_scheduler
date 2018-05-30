@@ -26,23 +26,6 @@ class Structure extends React.Component {
     };
   }
 
-  createStructureElements(tasks) {
-    return Object.keys(labels).map((label) => {
-      console.log('createStructureElements:', label);
-
-      const taskList = tasks.filter(task => task.label === label);
-
-      return (
-        <StructureElement
-          key={label}
-          name={labels[label]}
-          label={label}
-          tasks={taskList}
-        />
-      );
-    });
-  }
-
   getTask() {
     const formData = new FormData();
     formData.append('user_id', Base.get_cookie('user_id'));
@@ -55,6 +38,24 @@ class Structure extends React.Component {
           this.updateTaskList(item);
         });
       });
+  }
+
+  createStructureElements(tasks) {
+    return Object.keys(labels).map((label) => {
+      console.log('createStructureElements:', label);
+
+      const taskList = tasks.filter(task => task.label === label);
+
+      return (
+        <StructureElement
+          key={label}
+          name={labels[label]}
+          label={label}
+          tasks={taskList}
+          TimerManager={this.props.TimerManager}
+        />
+      );
+    });
   }
 
   updateTaskList(taskData) {
