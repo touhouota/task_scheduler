@@ -10,6 +10,10 @@ const TimerManager = {
     TimerManager.taskId = null;
   },
 
+  isDoing: () => Boolean(TimerManager.taskId),
+
+  getDoingTaskId: () => TimerManager.taskId,
+
   displayTimer: (taskDom) => {
     // すでにある時間に加算
     console.log(taskDom.dataset.start_date);
