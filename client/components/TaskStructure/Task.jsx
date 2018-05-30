@@ -39,7 +39,9 @@ class Task extends React.Component {
   }
 
   displayActualTime() {
-
+    return (
+      <span className="actual_sec">{this.state.task.actual_sec}</span>
+    );
   }
 
   // メモがあれば表示する
@@ -114,7 +116,11 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div className="task_element">
+      <div
+        className="task_element"
+        id={this.state.task.id}
+        data-status={this.state.task.status}
+      >
         <button
           type="button"
           onClick={(event) => {
@@ -134,7 +140,7 @@ class Task extends React.Component {
           {this.state.task.t_name}
         </span>
         {this.displayExpectedTime()}
-        <p>作業時間：{this.displayActualTime()}</p>
+        <p>作業時間：{this.displayActualTime()}分</p>
         {this.displayMemo()}
         {this.displayTaskFinishButton()}
       </div>);
