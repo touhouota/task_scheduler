@@ -3,7 +3,7 @@ class ApiController < ApplicationController
 
   # ログイン処理
   def login
-    user_id = cookies.signed[:user_id]
+    user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
       cookies.signed[:user_id] = @user[:user_id]
