@@ -55,6 +55,7 @@ class ApiController < ApplicationController
   def statusChange
     @task = Task.find(params[:id])
     @task.status = params[:status]
+    @task.actual_sec = params[:actual_sec]
 
     if @task.save
       # TLを追加
