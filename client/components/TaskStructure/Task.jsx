@@ -119,13 +119,16 @@ class Task extends React.Component {
     return null;
   }
 
+  setTaskInformation() {
+    const formData = new FormData();
+    Object(this.state.task).keys();
+  }
+
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
     const formData = new FormData();
     formData.append('id', taskId);
-    formData.set('id', 'hoge');
     formData.append('status', nextStatus);
-    formData.append('user_id', Base.get_cookie('user_id'));
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange/`, {
