@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Base from '../../lib/base_object';
-import TimerManager from '../../lib/time_manager';
 
 class Task extends React.Component {
   constructor(props) {
@@ -25,6 +24,9 @@ class Task extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
+    this.taskStart = this.taskStart.bind(this);
+    this.statusChange = this.statusChange.bind(this);
+    this.TimerManager = props.TimerManager;
   }
 
   // 見積もり時間があれば、それを置く
@@ -64,14 +66,20 @@ class Task extends React.Component {
         <div>
           <button
             type="button"
-            onClick={(event) => { this.statusChange(event, this.Finish); }}
+            onClick={(event) => {
+              const task = Base.parents(event.target, 'task_element');
+              this.taskStart(task.id, this.Finish);
+            }}
             value={this.state.task.id}
           >
             終了
           </button>
           <button
             type="button"
-            onClick={(event) => { this.statusChange(event, this.Incomplete); }}
+            onClick={(event) => {
+              const task = Base.parents(event.target, 'task_element');
+              this.taskStart(task.id, this.Incomplete);
+            }}
             value={this.state.task.id}
           >
             未完了
@@ -90,17 +98,34 @@ class Task extends React.Component {
     this.props.updateTaskList(task);
   }
 
-  statusChange(event, nextStatus) {
+  // 実行できるかを確認する
+  taskStart(taskId, nextStatus) {
+    // 次の状態が実行でないとき => タスクが動いているのを止めるだけで良い
+    if (nextStatus !== this.Doing) {
+      this.TimerManager.clear();
+      this.statusChange(taskId, nextStatus);
+      return null;
+    }
+
+    // ここまで来たときは、タスクを実行するとき
+    // 他のタスクが動いていないかを確認
+    if (this.TimerManager.isDoing()) {
+      // 動いている場合は、一旦止める
+      this.statusChange(this.TimerManager.getDoingTaskId(), this.Suspend);
+      this.TimerManager.clear();
+    }
+    this.statusChange(taskId, nextStatus);
+    this.TimerManager.set(taskId);
+    return null;
+  }
+
+  // 状態変更だけをする
+  statusChange(taskId, nextStatus) {
     const formData = new FormData();
-    formData.append('id', event.target.value);
+    formData.append('id', taskId);
+    formData.set('id', 'hoge');
     formData.append('status', nextStatus);
     formData.append('user_id', Base.get_cookie('user_id'));
-    if (nextStatus === this.Doing) {
-      // 実行するタスクIDを保持
-      TimerManager.set(event.target.value);
-    } else {
-      TimerManager.clear();
-    }
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange/`, {
@@ -133,13 +158,14 @@ class Task extends React.Component {
         <button
           type="button"
           onClick={(event) => {
-            let nextState = null;
+            const task = Base.parents(event.target, 'task_element');
+            let nextStatus = null;
             if (this.state.task.status === this.Doing) {
-              nextState = this.Suspend;
+              nextStatus = this.Suspend;
             } else {
-              nextState = this.Doing;
+              nextStatus = this.Doing;
             }
-            this.statusChange(event, nextState);
+            this.taskStart(task.id, nextStatus);
           }}
           value={this.state.task.id}
         >

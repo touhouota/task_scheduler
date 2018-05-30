@@ -13,7 +13,9 @@ window.onload = () => {
 
   ReactDOM.render(
     <div className="Structure_Component">
-      <Structure label="ラベル名" />
+      <Structure
+        TimerManager={TimerManager}
+      />
     </div>,
     document.querySelector('.structure_container'),
   );

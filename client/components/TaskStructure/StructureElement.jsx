@@ -14,6 +14,7 @@ class StructureElement extends React.Component {
         key={task.id}
         taskData={task}
         updateTaskList={() => { console.log('hoge'); }}
+        TimerManager={this.props.TimerManager}
       />
     ));
   }
