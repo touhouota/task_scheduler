@@ -1,29 +1,36 @@
 // modalの背景となる部分
 
 .modal_back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(#000000, 0.7);
-    z-index: 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(#000000, 0.7);
+  z-index: 9;
 }
 // modalの要素
 
 .modal {
-    width: 400px;
-    height: 380px;
-    padding: 10px;
-    position: absolute;
-    top: calc(50% - 150px);
-    left: calc(50% - 200px);
-    background-color: #fff;
-    z-index: 99;
+  min-width: 350px;
+  min-height: 360px;
+  padding: 10px;
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 200px);
+  background-color: #fff;
+  z-index: 99;
 
-    label {
-        display: block;
-        margin: 5px;
-        padding: 10px 5px;
-    }
+  label {
+    display: block;
+    margin: 5px;
+    padding: 10px 5px;
+  }
+
+  textarea {
+    min-width: 280px;
+    min-height: 60px;
+    max-height: 120px;
+    resize: vertical;
+  }
 }
