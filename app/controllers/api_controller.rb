@@ -6,7 +6,7 @@ class ApiController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
-      cookies[:user_id] = @user[:user_id]
+      # cookies[:user_id] = @user.user_id
       render json: @user
     else
       render json: {
@@ -24,7 +24,7 @@ class ApiController < ApplicationController
 
   # 特定のユーザ
   def user_tasks
-    @tasks = Task.where(user_id: params[:user_id], deleted: 0)
+    @tasks = Task.where(user_id: cookies[:user_id], deleted: 0)
 
     # タイムラインを追加
     tl_insert
@@ -35,13 +35,13 @@ class ApiController < ApplicationController
 
   def insert_task
     task_info = {
-      user_id: params[:user_id],
+      user_id: cookies[:user_id],
       t_name: params[:task_name],
       memo: params[:task_memo],
       label: params[:task_label],
       expect_minute: params[:expect_minute]
     }
-    user = User.find_by(user_id: params[:user_id])
+    user = User.find_by(user_id: cookies[:user_id])
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
@@ -55,6 +55,7 @@ class ApiController < ApplicationController
   def statusChange
     @task = Task.find(params[:id])
     @task.status = params[:status]
+    @task.actual_sec = params[:actual_sec]
 
     if @task.save
       # TLを追加
@@ -74,7 +75,7 @@ class ApiController < ApplicationController
     tl_content += ",status:#{status}" if status
 
     tl_item = hash.merge(
-      user_id: params[:user_id],
+      user_id: cookies[:user_id],
       auto: 1,
       content: tl_content
     )

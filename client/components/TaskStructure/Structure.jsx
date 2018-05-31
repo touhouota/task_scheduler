@@ -26,6 +26,25 @@ class Structure extends React.Component {
     };
   }
 
+  getTask() {
+    const formData = new FormData();
+    const path = Base.get_path();
+    fetch(`${path}/api/tasks/self`, {
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'X-CSRF-Token': Base.get_token(),
+      },
+    })
+      .then(response => response.json())
+      .then((json) => {
+        // this.updateTaskList(json);
+        json.forEach((item) => {
+          this.updateTaskList(item);
+        });
+      });
+  }
+
   createStructureElements(tasks) {
     return Object.keys(labels).map((label) => {
       console.log('createStructureElements:', label);
@@ -38,23 +57,11 @@ class Structure extends React.Component {
           name={labels[label]}
           label={label}
           tasks={taskList}
+          TimerManager={this.props.TimerManager}
+          updateTaskList={this.updateTaskList}
         />
       );
     });
-  }
-
-  getTask() {
-    const formData = new FormData();
-    formData.append('user_id', Base.get_cookie('user_id'));
-    const path = Base.get_path();
-    fetch(`${path}/api/tasks/${Base.get_cookie('user_id')}`)
-      .then(response => response.json())
-      .then((json) => {
-        // this.updateTaskList(json);
-        json.forEach((item) => {
-          this.updateTaskList(item);
-        });
-      });
   }
 
   updateTaskList(taskData) {
