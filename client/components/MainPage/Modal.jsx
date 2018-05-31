@@ -10,23 +10,26 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.options = [{
+      value: 'thema',
+      label: 'テーマ探し',
+    }, {
       value: 'survay',
       label: '文献調査',
     },
     {
       value: 'develop',
-      label: '提案実装',
+      label: '実装関連',
     },
     {
       value: 'experiment',
-      label: '実験・準備',
+      label: '実験関係',
     }, {
       value: 'write',
       label: '論文執筆',
     },
     {
       value: 'everyday',
-      label: '普段のあれこれ',
+      label: 'その他',
     },
     ];
 
@@ -156,6 +159,18 @@ class Modal extends React.Component {
             placeholder="入力するか選んで▼"
             required="true"
             checkValidation={this.chechValidate}
+          />
+        </label>
+
+        <label>
+          予定時間：
+          <TaskForm
+            type="date"
+            name="date"
+          />
+          <TaskForm
+            type="time"
+            name="time"
           />
         </label>
 
