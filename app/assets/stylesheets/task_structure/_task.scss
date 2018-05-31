@@ -1,22 +1,24 @@
+@import '../variable/variables.scss';
+
 .tasks {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 
-    .task_element {
-        box-sizing: border-box;
-        margin: 5px;
-        padding: 5px;
-        background-color: rgb(170, 203, 242);
-        min-width: 150px;
-        max-width: 300px;
+  .task_element {
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 5px;
+    // background-color: rgb(170, 203, 242);
+    // min-width: 150px;
+    width: $flex_base_size;
 
-        .task_name {
-            margin-left: 5px;
-        }
-
-        .expect_minute {
-            margin: 2px;
-        }
+    .task_name {
+      margin-left: 5px;
     }
+
+    .expect_minute {
+      margin: 2px;
+    }
+  }
 }
