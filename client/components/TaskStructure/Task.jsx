@@ -27,6 +27,11 @@ class Task extends React.Component {
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
     this.TimerManager = props.TimerManager;
+
+    // このタスクが実行状態の場合、実行してくれ
+    if (this.props.taskData.status === this.Doing) {
+      this.TimerManager.set(this.props.taskData.id);
+    }
   }
 
   // 見積もり時間があれば、それを置く
@@ -43,7 +48,9 @@ class Task extends React.Component {
 
   displayActualTime() {
     return (
-      <span className="actual_sec">{this.props.taskData.actual_sec}</span>
+      <span className="actual_sec">
+        {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+      </span>
     );
   }
 
@@ -104,16 +111,19 @@ class Task extends React.Component {
   taskStart(taskId, nextStatus) {
     // 次の状態が実行でないとき => タスクが動いているのを止めるだけで良い
     if (nextStatus !== this.Doing) {
-      this.TimerManager.clear();
+      console.log('taskStart: このタスクを止める=>', taskId);
       this.statusChange(taskId, nextStatus);
+      this.TimerManager.clear();
       return null;
     }
 
     // ここまで来たときは、タスクを実行するとき
     // 他のタスクが動いていないかを確認
     if (this.TimerManager.isDoing()) {
+      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       // 動いている場合は、一旦止める
       this.statusChange(this.TimerManager.getDoingTaskId(), this.Suspend);
+      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       this.TimerManager.clear();
     }
     this.statusChange(taskId, nextStatus);
@@ -121,21 +131,20 @@ class Task extends React.Component {
     return null;
   }
 
-  setTaskInformation(nextStatus) {
+  setTaskInformation(taskId, nextStatus) {
+    const task = this.props.taskData;
     const formData = new FormData();
-    formData.append('id', this.props.taskData.id);
+    formData.append('id', taskId);
     formData.set('status', nextStatus);
-    const taskId = this.props.taskData.id;
-    const actualSec = document.getElementById(taskId).querySelector('.actual_sec');
-    formData.set('actual_sec', parseInt(actualSec.textContent || 0, 10));
+    const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+    formData.set('actual_sec', parseInt(actualSec || 0, 10));
 
     return formData;
   }
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
-    const formData = this.setTaskInformation(nextStatus);
-
+    const formData = this.setTaskInformation(taskId, nextStatus);
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange/`, {
@@ -185,7 +194,7 @@ class Task extends React.Component {
           {this.props.taskData.t_name}
         </span>
         {this.displayExpectedTime()}
-        <p>作業時間：{this.displayActualTime()}分</p>
+        <p>作業時間：{this.displayActualTime()}</p>
         {this.displayMemo()}
         {this.displayTaskFinishButton()}
       </div>);
