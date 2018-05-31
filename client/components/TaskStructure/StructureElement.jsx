@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Task from '../MainPage/Task';
+import Task from './Task';
 
 class StructureElement extends React.Component {
   constructor(props) {
@@ -13,7 +13,8 @@ class StructureElement extends React.Component {
       <Task
         key={task.id}
         taskData={task}
-        updateTaskList={() => { console.log('hoge'); }}
+        updateTaskList={this.props.updateTaskList}
+        TimerManager={this.props.TimerManager}
       />
     ));
   }

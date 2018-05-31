@@ -34,8 +34,9 @@ class Login extends React.Component {
         if (json.user_id === undefined) {
           return alert('ユーザ名が見つかりません。\n見直してください。');
         }
+        document.cookie = `user_id=${json.user_id}`;
         const path = Base.get_path();
-        window.location.href = `${path}/main/${json.user_id}`;
+        window.location.href = `${path}/structure/main/${json.user_id}`;
       });
   }
 
