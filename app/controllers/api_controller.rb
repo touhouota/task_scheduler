@@ -40,6 +40,8 @@ class ApiController < ApplicationController
       label: params[:task_label],
       expect_minute: params[:expect_minute]
     }
+    # テスト用
+    render json: cookies
     user = User.find_by(user_id: cookies[:user_id])
     @task = user.tasks.build(task_info)
     if @task.save
