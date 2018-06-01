@@ -147,7 +147,7 @@ class Task extends React.Component {
     const formData = this.setTaskInformation(taskId, nextStatus);
 
     const path = Base.get_path();
-    fetch(`${path}/api/task/statusChange/`, {
+    fetch(`${path}/api/task/statusChange`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
