@@ -51,7 +51,8 @@ const TimerManager = {
     const start = new Date(startDate || Date());
     const now = new Date();
 
-    const diffMilliSeconds = now.getTime() - start;
+    const diffMilliSeconds = now.getTime() - start.getTime();
+    console.log('calcActualTime:', start, diffMilliSeconds / 1000);
     return diffMilliSeconds / 1000;
   },
 
