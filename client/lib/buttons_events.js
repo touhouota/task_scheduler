@@ -1,4 +1,5 @@
 import ModalProcess from './modal_process';
+import Base from './base_object';
 
 const Buttons = {
   github: () => {
@@ -8,6 +9,11 @@ const Buttons = {
 
   append_task: () => {
     ModalProcess.init();
+  },
+
+  logout: () => {
+    const path = Base.get_path();
+    fetch(`${path}/api/logout`);
   },
 };
 
