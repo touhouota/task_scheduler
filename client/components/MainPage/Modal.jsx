@@ -10,9 +10,6 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.options = [{
-      value: 'thema',
-      label: 'テーマ探し',
-    }, {
       value: 'survay',
       label: '文献調査',
     },
