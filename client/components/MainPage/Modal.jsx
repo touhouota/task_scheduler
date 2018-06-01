@@ -163,18 +163,6 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          予定時間：
-          <TaskForm
-            type="date"
-            name="date"
-          />
-          <TaskForm
-            type="time"
-            name="time"
-          />
-        </label>
-
-        <label>
           メモ ：
           <TaskForm
             type="textarea"
