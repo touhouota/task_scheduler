@@ -108,11 +108,11 @@ class Modal extends React.Component {
     const path = Base.get_path();
     fetch(`${path}/api/tasks/create`, {
       method: 'POST',
-      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'X-CSRF-Token': Base.get_token(),
       },
+      credentials: 'same-origin',
       body: formData,
     })
       .then(response => response.json())
