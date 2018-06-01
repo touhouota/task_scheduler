@@ -13,7 +13,7 @@ class Login extends React.Component {
     const userInfo = new FormData(loginForm);
     userInfo.append('X-CSRF-Token', Base.get_token());
     const path = Base.get_path();
-    fetch(`${path}/api/login/`, {
+    fetch(`${path}/api/login`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {

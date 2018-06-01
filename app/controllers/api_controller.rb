@@ -35,7 +35,6 @@ class ApiController < ApplicationController
 
   def insert_task
     task_info = {
-      user_id: cookies[:user_id],
       t_name: params[:task_name],
       memo: params[:task_memo],
       label: params[:task_label],

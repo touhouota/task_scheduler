@@ -109,7 +109,7 @@ class Modal extends React.Component {
     const formData = ModalProcess.getModalData(form);
     console.log(formData);
     const path = Base.get_path();
-    fetch(`${path}/api/tasks/create/`, {
+    fetch(`${path}/api/tasks/create`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
