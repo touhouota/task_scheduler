@@ -6,7 +6,7 @@ class ApiController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
-      # cookies[:user_id] = @user.user_id
+      cookies.signed[:user_id] = @user.user_id
       render json: @user
     else
       render json: {
@@ -41,7 +41,7 @@ class ApiController < ApplicationController
       expect_minute: params[:expect_minute]
     }
     # テスト用
-    render json: [cookies['user_id'], cookies[:user_id], cookies.signed, cookies.permanent]
+    render json: [cookies.signed[:user_id]]
     # user = User.find_by(user_id: cookies[:user_id])
     # @task = user.tasks.build(task_info)
     # if @task.save
