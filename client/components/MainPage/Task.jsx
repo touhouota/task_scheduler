@@ -88,7 +88,7 @@ class Task extends React.Component {
     formData.append('user_id', Base.get_cookie('user_id'));
 
     const path = Base.get_path();
-    fetch(`${path}/api/task/statusChange/`, {
+    fetch(`${path}/api/task/statusChange`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
