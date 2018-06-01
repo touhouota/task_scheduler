@@ -42,15 +42,15 @@ class ApiController < ApplicationController
     }
     # テスト用
     render json: cookies
-    user = User.find_by(user_id: cookies[:user_id])
-    @task = user.tasks.build(task_info)
-    if @task.save
-      # TLを追加
-      tl_insert(task_id: @task.id)
-      render json: @task
-    else
-      render json: @task.errors
-    end
+    # user = User.find_by(user_id: cookies[:user_id])
+    # @task = user.tasks.build(task_info)
+    # if @task.save
+    #   # TLを追加
+    #   tl_insert(task_id: @task.id)
+    #   render json: @task
+    # else
+    #   render json: @task.errors
+    # end
   end
 
   def statusChange
