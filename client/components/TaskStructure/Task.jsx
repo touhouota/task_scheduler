@@ -6,9 +6,7 @@ import Base from '../../lib/base_object';
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   task: props.taskData,
-    // };
+    // タスクの状態とindexを合わせる
     this.statusNo = [
       'タスク実行',
       '実行中',
@@ -24,11 +22,12 @@ class Task extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
+    // 関数たちをthisで使えるようにバインド
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
     this.TimerManager = props.TimerManager;
 
-    // このタスクが実行状態の場合、実行してくれ
+    // このタスクが実行状態の場合、実行する
     if (this.props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
@@ -98,12 +97,6 @@ class Task extends React.Component {
   }
 
   updateStatus(task) {
-    // console.log('updateStatus from Task:', task, this.props.taskData);
-    // if (task.id === this.props.taskData.id) {
-    //   this.setState({
-    //     task,
-    //   });
-    // }
     this.props.updateTaskList(task);
   }
 
@@ -126,6 +119,8 @@ class Task extends React.Component {
       console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       this.TimerManager.clear();
     }
+
+    // タスクの更新を送信する
     this.statusChange(taskId, nextStatus);
     this.TimerManager.set(taskId);
     return null;
@@ -136,8 +131,14 @@ class Task extends React.Component {
     const formData = new FormData();
     formData.append('id', taskId);
     formData.set('status', nextStatus);
-    const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
-    formData.set('actual_sec', parseInt(actualSec || 0, 10));
+    if (nextStatus === this.Doing) {
+      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
+      formData.set('actual_sec', task.actual_sec);
+    } else {
+      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
+      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+      formData.set('actual_sec', parseInt(actualSec || 0, 10));
+    }
 
     return formData;
   }
@@ -147,7 +148,7 @@ class Task extends React.Component {
     const formData = this.setTaskInformation(taskId, nextStatus);
 
     const path = Base.get_path();
-    fetch(`${path}/api/task/statusChange/`, {
+    fetch(`${path}/api/task/statusChange`, {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
@@ -203,17 +204,29 @@ class Task extends React.Component {
 
 Task.propTypes = {
   taskData: PropTypes.shape({
-    actual_sec: PropTypes.number,
-    created_at: PropTypes.string,
-    deleted: PropTypes.number,
-    expect_minute: PropTypes.number,
+    // タスクID
     id: PropTypes.number,
-    label: PropTypes.string,
-    memo: PropTypes.string,
+    // タスク名
     name: PropTypes.string,
+    // 作業時間(秒)
+    actual_sec: PropTypes.number,
+    // 作成日時
+    created_at: PropTypes.string,
+    // 削除されたかのフラグ
+    deleted: PropTypes.number,
+    // 予想時間(分)
+    expect_minute: PropTypes.number,
+    // タスクのラベル
+    label: PropTypes.string,
+    // 作業につけたメモ
+    memo: PropTypes.string,
+    // 振り返り時のメモ
     reflection: PropTypes.string,
+    // タスクの状態
     status: PropTypes.number,
+    // 更新日時
     updated_at: PropTypes.string,
+    // タスクのユーザ
     user_id: PropTypes.string,
   }).isRequired,
 };
