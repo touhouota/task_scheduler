@@ -81,7 +81,6 @@ class Structure extends React.Component {
   render() {
     return (
       <div className="Structure">
-        />
         {this.createStructureElements(this.state.tasks)}
         <Modal
           updateTaskList={this.updateTaskList}
