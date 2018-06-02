@@ -81,18 +81,6 @@ class Structure extends React.Component {
   render() {
     return (
       <div className="Structure">
-        <button onClick={() => {
-          const path = Base.get_path();
-          fetch(`${path}/api/tasks/create`, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-              Accept: 'application/json',
-              'X-CSRF-Token': Base.get_token(),
-            },
-            body: new FormData(),
-          });
-        }}
         />
         {this.createStructureElements(this.state.tasks)}
         <Modal
