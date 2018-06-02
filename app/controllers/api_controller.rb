@@ -16,6 +16,11 @@ class ApiController < ApplicationController
     end
   end
 
+  def logout
+    cookies.delete(:user_id)
+    session.delete(:user_id)
+  end
+
   # タスクの一覧を取得する
   def tasks
     @tasks = Task.all
@@ -25,7 +30,7 @@ class ApiController < ApplicationController
 
   # 特定のユーザ
   def user_tasks
-    @tasks = Task.where(user_id: cookies[:user_id], deleted: 0)
+    @tasks = Task.where(user_id: cookies.signed[:user_id], deleted: 0)
 
     # タイムラインを追加
     tl_insert
