@@ -10,10 +10,10 @@ window.onload = () => {
   if (userId) {
     const path = Base.get_path();
     window.location.href = `${path}/structure/main/${userId}`;
+  } else {
+    ReactDOM.render(
+      <Login />,
+      document.getElementById('login'),
+    );
   }
-  console.log('user_idがないよ => ', userId);
-  ReactDOM.render(
-    <Login />,
-    document.getElementById('login'),
-  );
 };
