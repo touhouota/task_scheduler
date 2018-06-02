@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   # API用のルート
   get '/api/tasks', to: 'api#tasks'
-  get '/api/tasks/self', to: 'api#user_tasks'
+  get '/api/tasks/:user_id', to: 'api#user_tasks'
   post '/api/tasks/create', to: 'api#insert_task'
   post '/api/task/statusChange', to: 'api#statusChange'
   #   end
