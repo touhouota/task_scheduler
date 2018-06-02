@@ -5,19 +5,33 @@ import Structure from './components/TaskStructure/Structure';
 
 import Buttons from './lib/buttons_events';
 import TimerManager from './lib/time_manager';
+import Base from './lib/base_object';
 
 window.onload = () => {
-  document.getElementById('append_task').addEventListener('click', Buttons.append_task);
-  document.getElementById('github').addEventListener('click', Buttons.github);
-  TimerManager.watch();
-  document.getElementById('logout').addEventListener('click', Buttons.logout);
+  if (!Base.get_cookie('user_id')) {
+    /*
+     * IDが無いときの処理
+     */
+    console.log('cookieがないよ！/ ログインページへ =>');
+    const path = Base.get_path();
+    window.location.href = `${path}`;
+  } else {
+    /*
+     * IDがあるときは、普通にreactのあれこれを描画
+     *
+     */
+    document.getElementById('append_task').addEventListener('click', Buttons.append_task);
+    document.getElementById('github').addEventListener('click', Buttons.github);
+    TimerManager.watch();
+    document.getElementById('logout').addEventListener('click', Buttons.logout);
 
-  ReactDOM.render(
-    <div className="Structure_Component">
-      <Structure
-        TimerManager={TimerManager}
-      />
-    </div>,
-    document.querySelector('.structure_container'),
-  );
+    ReactDOM.render(
+      <div className="Structure_Component">
+        <Structure
+          TimerManager={TimerManager}
+        />
+      </div>,
+      document.querySelector('.structure_container'),
+    );
+  }
 };
