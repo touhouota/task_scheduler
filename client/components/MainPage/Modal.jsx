@@ -104,6 +104,7 @@ class Modal extends React.Component {
     console.log('send form information');
     const form = document.getElementById('modal_area');
     const formData = ModalProcess.getModalData(form);
+    formData.append('user_id', Base.get_cookie('user_id'));
     console.log(formData);
     const path = Base.get_path();
     fetch(`${path}/api/tasks/create`, {
