@@ -3,9 +3,17 @@ import ReactDOM from 'react-dom';
 
 import Login from './components/Login';
 
+import Base from './lib/base_object';
+
 window.onload = () => {
-  ReactDOM.render(
-    <Login />,
-    document.getElementById('login'),
-  );
+  const userId = Base.get_cookie('user_id');
+  if (userId) {
+    const path = Base.get_path();
+    window.location.href = `${path}/structure/main/${userId}`;
+  } else {
+    ReactDOM.render(
+      <Login />,
+      document.getElementById('login'),
+    );
+  }
 };
