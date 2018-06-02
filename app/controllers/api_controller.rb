@@ -30,7 +30,8 @@ class ApiController < ApplicationController
 
   # 特定のユーザ
   def user_tasks
-    @tasks = Task.where(user_id: cookies.signed[:user_id], deleted: 0)
+    user_id = session[:user_id] || cookies.signed[:user_id]
+    @tasks = Task.where(user_id: user_id, deleted: 0)
 
     # タイムラインを追加
     tl_insert
