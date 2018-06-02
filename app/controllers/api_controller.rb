@@ -6,7 +6,6 @@ class ApiController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
-      # cookies[:user_id] = @user.user_id
       render json: @user
     else
       render json: {
@@ -14,6 +13,8 @@ class ApiController < ApplicationController
       }
     end
   end
+
+  def logout; end
 
   # タスクの一覧を取得する
   def tasks
@@ -24,7 +25,8 @@ class ApiController < ApplicationController
 
   # 特定のユーザ
   def user_tasks
-    @tasks = Task.where(user_id: cookies[:user_id], deleted: 0)
+    user_id = params[:user_id]
+    @tasks = Task.where(user_id: user_id, deleted: 0)
 
     # タイムラインを追加
     tl_insert
@@ -40,11 +42,11 @@ class ApiController < ApplicationController
       label: params[:task_label],
       expect_minute: params[:expect_minute]
     }
-    user = User.find_by(user_id: cookies[:user_id])
+    user = User.find_by(user_id: params[:user_id])
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
-      tl_insert(task_id: @task.id)
+      # tl_insert(task_id: @task.id)
       render json: @task
     else
       render json: @task.errors

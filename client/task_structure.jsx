@@ -10,6 +10,7 @@ window.onload = () => {
   document.getElementById('append_task').addEventListener('click', Buttons.append_task);
   document.getElementById('github').addEventListener('click', Buttons.github);
   TimerManager.watch();
+  document.getElementById('logout').addEventListener('click', Buttons.logout);
 
   ReactDOM.render(
     <div className="Structure_Component">
