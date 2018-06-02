@@ -9,21 +9,29 @@ import Base from './lib/base_object';
 
 window.onload = () => {
   if (!Base.get_cookie('user_id')) {
+    /*
+     * IDが無いときの処理
+     */
     console.log('cookieがないよ！/ ログインページへ =>');
     const path = Base.get_path();
     window.location.href = `${path}`;
-  }
-  document.getElementById('append_task').addEventListener('click', Buttons.append_task);
-  document.getElementById('github').addEventListener('click', Buttons.github);
-  TimerManager.watch();
-  document.getElementById('logout').addEventListener('click', Buttons.logout);
+  } else {
+    /*
+     * IDがあるときは、普通にreactのあれこれを描画
+     *
+     */
+    document.getElementById('append_task').addEventListener('click', Buttons.append_task);
+    document.getElementById('github').addEventListener('click', Buttons.github);
+    TimerManager.watch();
+    document.getElementById('logout').addEventListener('click', Buttons.logout);
 
-  ReactDOM.render(
-    <div className="Structure_Component">
-      <Structure
-        TimerManager={TimerManager}
-      />
-    </div>,
-    document.querySelector('.structure_container'),
-  );
+    ReactDOM.render(
+      <div className="Structure_Component">
+        <Structure
+          TimerManager={TimerManager}
+        />
+      </div>,
+      document.querySelector('.structure_container'),
+    );
+  }
 };
