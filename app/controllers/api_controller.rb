@@ -48,7 +48,8 @@ class ApiController < ApplicationController
       expect_minute: params[:expect_minute]
     }
     # テスト用
-    render json: [cookies.signed[:user_id], session[:user_id]]
+    user_id = session[:user_id] || cookies.signed[:user_id]
+    render json: [user_id]
     # user = User.find_by(user_id: cookies[:user_id])
     # @task = user.tasks.build(task_info)
     # if @task.save
