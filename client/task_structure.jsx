@@ -5,8 +5,14 @@ import Structure from './components/TaskStructure/Structure';
 
 import Buttons from './lib/buttons_events';
 import TimerManager from './lib/time_manager';
+import Base from './lib/base_object';
 
 window.onload = () => {
+  if (!Base.get_cookie('user_id')) {
+    console.log('cookieがないよ！/ ログインページへ =>');
+    const path = Base.get_path();
+    window.location.href = `${path}`;
+  }
   document.getElementById('append_task').addEventListener('click', Buttons.append_task);
   document.getElementById('github').addEventListener('click', Buttons.github);
   TimerManager.watch();
