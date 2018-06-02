@@ -27,9 +27,9 @@ class Structure extends React.Component {
   }
 
   getTask() {
-    const formData = new FormData();
     const path = Base.get_path();
-    fetch(`${path}/api/tasks/self`, {
+    const userId = Base.get_cookie('user_id');
+    fetch(`${path}/api/tasks/${userId}`, {
       credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
