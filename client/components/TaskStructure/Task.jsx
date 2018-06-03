@@ -128,7 +128,9 @@ class Task extends React.Component {
 
   setTaskInformation(taskId, nextStatus) {
     const task = this.props.taskData;
-    const formData = new FormData();
+    // const formData = new FormData();
+    const formData = Base.createFormData();
+    // formData.append('user_id', Base.get_cookie('user_id'));
     formData.append('id', taskId);
     formData.set('status', nextStatus);
     if (nextStatus === this.Doing) {
