@@ -26,17 +26,30 @@ class Login extends React.Component {
         if (!response.ok) {
           throw Error(response.statusText);
         }
-
         return response.json();
       })
       .then((json) => {
-        console.log(json);
         if (json.user_id === undefined) {
+          /*
+           * user_idがないときは、入力ミス
+           */
           return alert('ユーザ名が見つかりません。\n見直してください。');
         }
-        document.cookie = `user_id=${json.user_id}`;
+
+        /*
+         * IDが含まれているときは、ユーザが存在するので、そのユーザとしてログインする
+         */
+        const expires = new Date();
+        expires.setMonth(expires.getMonth() + 1);　 // 有効期限: １ヶ月間
+        const cookieString = [
+          `user_id=${json.user_id}`,
+          `expires=${expires.toUTCString()}`, // 有効期限: １ヶ月間
+          `path=${Base.get_path()}`,
+        ];
+        document.cookie = cookieString.join(';');
         const path = Base.get_path();
         window.location.href = `${path}/structure/main/${json.user_id}`;
+        return null;
       });
   }
 
