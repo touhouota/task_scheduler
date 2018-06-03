@@ -14,8 +14,6 @@ class ApiController < ApplicationController
     end
   end
 
-  def logout; end
-
   # タスクの一覧を取得する
   def tasks
     @tasks = Task.all
