@@ -14,6 +14,18 @@ const Base = {
     return formdata;
   },
 
+  createFormData: (formElement) => {
+    let formData;
+    if (formElement) {
+      formData = new FormData(formElement);
+    } else {
+      formData = new FormData();
+    }
+
+    formData.append('user_id', Base.get_cookie('user_id'));
+    return formData;
+  },
+
   // subディレクトリで動かすので、pathに関してsubディレクトリを返す
   get_path: () => {
     const path = location.pathname.split('/');
@@ -95,7 +107,7 @@ const Base = {
   },
 
   format_hms: date =>
-  // toTimeString: 14:39:07 GMT-0600 (PDT)という形式
+    // toTimeString: 14:39:07 GMT-0600 (PDT)という形式
     date.toTimeString().split(' ').shift(),
 
 };
