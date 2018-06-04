@@ -13,6 +13,8 @@
     // background-color: rgb(170, 203, 242);
     // min-width: 150px;
     width: $flex_base_size;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
 
     .task_name {
       margin-left: 5px;
@@ -21,6 +23,10 @@
 
     .expect_minute {
       margin: 2px;
+    }
+
+    &[data-status='1'] {
+      background-color: rgb(252, 134, 130);
     }
   }
 }
