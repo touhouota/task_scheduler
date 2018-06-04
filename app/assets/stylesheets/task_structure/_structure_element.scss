@@ -23,7 +23,7 @@
       $index: index($label_list, $label);
 
       &.#{$label} .task_element {
-        background-color: hsla($scale * $index, 49%, 67%, 65%);
+        background-color: hsla($scale * $index, 75%, 80%, 0.4);
       };
     }
   }
