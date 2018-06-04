@@ -24,7 +24,7 @@ class ApiController < ApplicationController
   # 特定のユーザ
   def user_tasks
     user_id = params[:user_id]
-    @tasks = Task.where(user_id: user_id, deleted: 0)
+    @tasks = Task.where(user_id: user_id, deleted: 0, status: [0, 1, 4])
 
     # タイムラインを追加
     tl_insert
