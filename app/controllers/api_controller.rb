@@ -44,7 +44,7 @@ class ApiController < ApplicationController
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
-      # tl_insert(task_id: @task.id)
+      tl_insert(task_id: @task.id)
       render json: @task
     else
       render json: @task.errors
@@ -74,7 +74,7 @@ class ApiController < ApplicationController
     tl_content += ",status:#{status}" if status
 
     tl_item = hash.merge(
-      user_id: cookies[:user_id],
+      user_id: params[:user_id],
       auto: 1,
       content: tl_content
     )
