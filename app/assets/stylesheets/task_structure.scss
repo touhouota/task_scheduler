@@ -4,13 +4,14 @@
 @import './variable/variables';
 
 .task_structure .container {
-  width: 90%;
+  width: 95%;
   height: 100%;
   position: relative;
   margin: 0 auto;
 
   header {
     height: $header_height;
+    @import "./task_structure/buttons.scss";
   }
 
   .structure_container {
