@@ -5,12 +5,110 @@ import Modal from '../MainPage/Modal';
 
 import Base from '../../lib/base_object';
 
-const labels = {
-  survay: '文献調査',
-  develop: '提案実装',
-  experiment: '実験・準備',
-  write: '論文執筆',
-  everyday: '普段のあれこれ',
+// ラベルの名前と配置場所
+const labelList = {
+  // 調査関連
+  survay: {
+    place: 'survay',
+    name: '文献調査',
+    subLabel: {
+      precedent: {
+        place: 'survay',
+        name: 'ツールの事例・参考',
+      },
+      reinforce: {
+        place: 'survay',
+        name: '提案の補強',
+      },
+      interest: {
+        place: 'survay',
+        name: '興味',
+      },
+    },
+  },
+
+  // 実装関連
+  develop: {
+    place: 'develop',
+    name: '提案実装',
+    subLabel: {
+      study: {
+        place: 'develop',
+        name: '技術の勉強・調査',
+      },
+      specification: {
+        place: 'develop',
+        name: 'ツール設計',
+      },
+      prototypes: {
+        place: 'develop',
+        name: 'プロトタイプ作成',
+      },
+      implement: {
+        place: 'develop',
+        name: '本実装',
+      },
+    },
+  },
+
+
+  // 実験関連
+  experiment: {
+    place: 'experiment',
+    name: '実験・準備',
+    subLabel: {
+      gather: {
+        place: 'experiment',
+        name: '被験者集め',
+      },
+      pilot_study: {
+        place: 'experiment',
+        name: '予備実験',
+      },
+      production_test: {
+        place: 'experiment',
+        name: '本実験',
+      },
+      analysis: {
+        place: 'experiment',
+        name: 'データ分析',
+      },
+      graph: {
+        place: 'experiment',
+        name: 'グラフ作成',
+      },
+    },
+  },
+
+  // 論文関連
+  write: {
+    place: 'write',
+    name: '論文執筆',
+    subLabel: {
+      organization: {
+        place: 'write',
+        name: '構成決め',
+      },
+      outline: {
+        place: 'write',
+        name: '内容の列挙',
+      },
+      sentence: {
+        place: '',
+        name: '文章作成',
+      },
+      revision: {
+        place: 'write',
+        name: 'レビュー・修正',
+      },
+    },
+  },
+
+  everyday: {
+    place: 'everyday',
+    name: '普段のあれこれ',
+    subLabel: {},
+  },
 };
 
 class Structure extends React.Component {
@@ -46,16 +144,30 @@ class Structure extends React.Component {
   }
 
   createStructureElements(tasks) {
+    let labels;
+    const path = window.location.pathname.split('/');
+    // path[4]は現在見ている階層を表す
+    // /b1013179/task_scheduler/structure/:directory/:user_id
+    if (Object.keys(labelList).includes(path[4])) {
+      labels = labelList[path[4]];
+    } else {
+      labels = labelList;
+    }
     return Object.keys(labels).map((label) => {
-      console.log('createStructureElements:', label);
+      // labelに紐づくsubLabelのリストを取得
+      const subLabels = Object.keys(labels[label].subLabel);
+      // 今見ているlabelも追加
+      subLabels.push(label);
 
-      const taskList = tasks.filter(task => task.label === label);
+      // label, subLabelを持つタスクを取得
+      const taskList = tasks.filter(task => subLabels.includes(task.label));
 
       return (
         <StructureElement
           key={label}
-          name={labels[label]}
+          name={labels[label].name}
           label={label}
+          subLabel={labels[label].subLabel}
           tasks={taskList}
           TimerManager={this.props.TimerManager}
           updateTaskList={this.updateTaskList}
