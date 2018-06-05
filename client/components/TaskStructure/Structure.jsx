@@ -15,14 +15,17 @@ const labelList = {
       precedent: {
         place: 'survay',
         name: 'ツールの事例・参考',
+        subLabel: {},
       },
       reinforce: {
         place: 'survay',
         name: '提案の補強',
+        subLabel: {},
       },
       interest: {
         place: 'survay',
         name: '興味',
+        subLabel: {},
       },
     },
   },
@@ -35,18 +38,22 @@ const labelList = {
       study: {
         place: 'develop',
         name: '技術の勉強・調査',
+        subLabel: {},
       },
       specification: {
         place: 'develop',
         name: 'ツール設計',
+        subLabel: {},
       },
       prototypes: {
         place: 'develop',
         name: 'プロトタイプ作成',
+        subLabel: {},
       },
       implement: {
         place: 'develop',
         name: '本実装',
+        subLabel: {},
       },
     },
   },
@@ -60,22 +67,27 @@ const labelList = {
       gather: {
         place: 'experiment',
         name: '被験者集め',
+        subLabel: {},
       },
       pilot_study: {
         place: 'experiment',
         name: '予備実験',
+        subLabel: {},
       },
       production_test: {
         place: 'experiment',
         name: '本実験',
+        subLabel: {},
       },
       analysis: {
         place: 'experiment',
         name: 'データ分析',
+        subLabel: {},
       },
       graph: {
         place: 'experiment',
         name: 'グラフ作成',
+        subLabel: {},
       },
     },
   },
@@ -88,18 +100,22 @@ const labelList = {
       organization: {
         place: 'write',
         name: '構成決め',
+        subLabel: {},
       },
       outline: {
         place: 'write',
         name: '内容の列挙',
+        subLabel: {},
       },
       sentence: {
         place: '',
         name: '文章作成',
+        subLabel: {},
       },
       revision: {
         place: 'write',
         name: 'レビュー・修正',
+        subLabel: {},
       },
     },
   },
@@ -167,7 +183,6 @@ class Structure extends React.Component {
           key={label}
           name={labels[label].name}
           label={label}
-          subLabel={labels[label].subLabel}
           tasks={taskList}
           TimerManager={this.props.TimerManager}
           updateTaskList={this.updateTaskList}
