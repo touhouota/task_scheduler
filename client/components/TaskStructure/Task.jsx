@@ -33,17 +33,6 @@ class Task extends React.Component {
     }
   }
 
-  // 見積もり時間があれば、それを置く
-  displayExpectedTime() {
-    if (this.props.taskData.expect_minute) {
-      return (
-        <p className="expect_minute">
-          見積り：{this.props.taskData.expect_minute}分
-        </p>
-      );
-    }
-    return null;
-  }
 
   displayActualTime() {
     return (
@@ -113,10 +102,8 @@ class Task extends React.Component {
     // ここまで来たときは、タスクを実行するとき
     // 他のタスクが動いていないかを確認
     if (this.TimerManager.isDoing()) {
-      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       // 動いている場合は、一旦止める
       this.statusChange(this.TimerManager.getDoingTaskId(), this.Suspend);
-      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       this.TimerManager.clear();
     }
 
@@ -144,6 +131,18 @@ class Task extends React.Component {
 
     return formData;
   }
+
+  clickButtonEvent(event) {
+    const task = Base.parents(event.target, 'task_element');
+    let nextStatus = null;
+    if (this.props.taskData.status === this.Doing) {
+      nextStatus = this.Suspend;
+    } else {
+      nextStatus = this.Doing;
+    }
+    this.taskStart(task.id, nextStatus);
+  }
+
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
@@ -179,25 +178,20 @@ class Task extends React.Component {
       >
         <button
           type="button"
-          onClick={(event) => {
-            const task = Base.parents(event.target, 'task_element');
-            let nextStatus = null;
-            if (this.props.taskData.status === this.Doing) {
-              nextStatus = this.Suspend;
-            } else {
-              nextStatus = this.Doing;
-            }
-            this.taskStart(task.id, nextStatus);
-          }}
-          value={this.props.taskData.id}
+          onClick={(event) => { this.clickButtonEvent(event); }}
         >
           {this.statusNo[this.props.taskData.status]}
         </button>
         <span className="task_name">
           {this.props.taskData.t_name}
         </span>
-        {this.displayExpectedTime()}
-        <p>作業時間：{this.displayActualTime()}</p>
+        <span className="expect_minute">
+          ({this.props.taskData.expect_minute}分)
+        </span>
+        <p>
+          作業時間：
+          {this.displayActualTime()}
+        </p>
         {this.displayMemo()}
         {this.displayTaskFinishButton()}
       </div>);
