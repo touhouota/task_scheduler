@@ -213,10 +213,8 @@ class Structure extends React.Component {
   }
 
   createStructureElements(tasks, labels) {
-    console.log('createStructureElements', labels);
     const structureElement = [];
     labels.forEach((content, label) => {
-      console.log('forEach', content, label);
       const taskList = tasks.filter(task => label === task.label);
 
       structureElement.push(<StructureElement
@@ -251,7 +249,6 @@ class Structure extends React.Component {
     } else {
       labels = this.labelList;
     }
-    console.log('labels:', labels);
     return (
       <div className="Structure">
         {this.createStructureElements(this.state.tasks, labels)}

@@ -78,15 +78,16 @@ class Modal extends React.Component {
   }
 
   createLabelList() {
-    console.log('createLabelList:', this.options);
-    return Object.keys(this.options).map((label) => {
-      console.log(label);
-      return (
-        <option value={label.value} key={label.value}>
-          {label.label}
-        </option>
-      );
+    const labelElement = [];
+    this.options.forEach((map, label) => {
+      labelElement.push(<option
+        value={label}
+        key={label}
+      >
+        {map.get('name')}
+      </option>);
     });
+    return labelElement;
   }
 
   // データの更新をMainPageへ依頼する
