@@ -20,6 +20,7 @@ class Modal extends React.Component {
         task_name: false,
         expect_minute: null,
       },
+      labelDepth: [],
     };
     this.chechValidate = this.chechValidate.bind(this);
     this.createLabelList = this.createLabelList.bind(this);
@@ -60,7 +61,7 @@ class Modal extends React.Component {
   createLabelList() {
     const labelElement = [];
     this.options.forEach((map, label) => {
-      console.log('createLabelList', map, label);
+      // console.log('createLabelList', map, label);
       labelElement.push(<option
         value={label}
         key={label}
@@ -97,10 +98,11 @@ class Modal extends React.Component {
       alert('フォームに不備があります');
       return null;
     }
+
     console.log('send form information');
     const form = document.querySelector(`.${this.props.label}_modal`);
     const formData = ModalProcess.getModalData(form);
-    console.log(formData);
+    // console.log(formData);
     const path = Base.get_path();
     fetch(`${path}/api/tasks/create`, {
       method: 'POST',
