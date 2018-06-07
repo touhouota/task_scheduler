@@ -1,111 +1,8 @@
 import React from 'react';
 
 import StructureElement from './StructureElement';
-import Modal from './Modal';
 
 import Base from '../../lib/base_object';
-
-// ラベルの名前と配置場所
-// const labelList = {
-//   // 調査関連
-//   survay: {
-//     name: '文献調査',
-//     subLabel: {
-//       precedent: {
-//         name: 'ツールの事例・参考',
-//         subLabel: {},
-//       },
-//       reinforce: {
-//         name: '提案の補強',
-//         subLabel: {},
-//       },
-//       interest: {
-//         name: '興味',
-//         subLabel: {},
-//       },
-//     },
-//   },
-//
-//   // 実装関連
-//   develop: {
-//     name: '提案実装',
-//     subLabel: {
-//       study: {
-//         name: '技術の勉強・調査',
-//         subLabel: {},
-//       },
-//       specification: {
-//         name: 'ツール設計',
-//         subLabel: {},
-//       },
-//       prototypes: {
-//         name: 'プロトタイプ作成',
-//         subLabel: {},
-//       },
-//       implement: {
-//         name: '本実装',
-//         subLabel: {},
-//       },
-//     },
-//   },
-//
-//
-//   // 実験関連
-//   experiment: {
-//     name: '実験・準備',
-//     subLabel: {
-//       gather: {
-//         name: '被験者集め',
-//         subLabel: {},
-//       },
-//       pilot_study: {
-//         name: '予備実験',
-//         subLabel: {},
-//       },
-//       production_test: {
-//         name: '本実験',
-//         subLabel: {},
-//       },
-//       analysis: {
-//         name: 'データ分析',
-//         subLabel: {},
-//       },
-//       graph: {
-//         name: 'グラフ作成',
-//         subLabel: {},
-//       },
-//     },
-//   },
-//
-//   // 論文関連
-//   write: {
-//     name: '論文執筆',
-//     subLabel: {
-//       organization: {
-//         name: '構成決め',
-//         subLabel: {},
-//       },
-//       outline: {
-//         name: '内容の列挙',
-//         subLabel: {},
-//       },
-//       sentence: {
-//         name: '文章作成',
-//         subLabel: {},
-//       },
-//       revision: {
-//         name: 'レビュー・修正',
-//         subLabel: {},
-//       },
-//     },
-//   },
-//
-//   everyday: {
-//     name: '普段のあれこれ',
-//     subLabel: {},
-//   },
-// };
-
 
 class Structure extends React.Component {
   constructor(props) {
@@ -252,10 +149,6 @@ class Structure extends React.Component {
     return (
       <div className="Structure">
         {this.createStructureElements(this.state.tasks, labels)}
-        <Modal
-          updateTaskList={this.updateTaskList}
-          labelList={labels}
-        />
       </div>
     );
   }
