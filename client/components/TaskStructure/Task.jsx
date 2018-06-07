@@ -133,6 +133,8 @@ class Task extends React.Component {
   }
 
   clickButtonEvent(event) {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
     const task = Base.parents(event.target, 'task_element');
     let nextStatus = null;
     if (this.props.taskData.status === this.Doing) {
