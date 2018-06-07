@@ -213,37 +213,11 @@ class Structure extends React.Component {
   }
 
   createStructureElements(tasks, labels) {
-    // return Object.keys(labels).map((label) => {
-    //   console.log(label);
-    //   // labelに紐づくsubLabelのリストを取得
-    //   const subLabels = Object.keys(labels[label].subLabel);
-    //   // 今見ているlabelも追加
-    //   subLabels.push(label);
-    //
-    //   // label, subLabelを持つタスクを取得
-    //   const taskList = tasks.filter(task => subLabels.includes(task.label));
-    //
-    //   return (
-    //     <StructureElement
-    //       key={label}
-    //       name={labels[label].name}
-    //       label={label}
-    //       tasks={taskList}
-    //       TimerManager={this.props.TimerManager}
-    //       updateTaskList={this.updateTaskList}
-    //     />
-    //   );
-    // });
     console.log('createStructureElements', labels);
     const structureElement = [];
     labels.forEach((content, label) => {
       console.log('forEach', content, label);
-      const taskList = tasks.filter((task) => {
-        console.log('filter:', task.label, content, label);
-        return label === task.label;
-      });
-
-      console.log('forEach_taskList:', taskList);
+      const taskList = tasks.filter(task => label === task.label);
 
       structureElement.push(<StructureElement
         key={label}
