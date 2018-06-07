@@ -3,20 +3,13 @@ import React from 'react';
 import Task from './Task';
 import Modal from './Modal';
 
+import ModalProcess from '../../lib/modal_process';
+
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
     // this.taskList = this.sortOrderByTaskStatus(props.tasks);
-    this.renderModal = this.renderModal.bind(this);
-  }
-
-  renderModal() {
-    return (
-      <Modal
-        updateTaskList={this.props.updateTaskList}
-        labelList={labels}
-      />
-    );
+    console.log('structureElement', props);
   }
 
   /*
@@ -55,15 +48,18 @@ class StructureElement extends React.Component {
       <div className={`StructureElement ${this.props.label}`}>
         <p>
           {this.props.name}
-          <button
-            onClick={() => this.renderModal()}
-          >
+          <button onClick={() => ModalProcess.init(this.props.label)} >
             タスク追加
           </button>
         </p>
         <div className="tasks">
           {this.createTaskElements(this.props.tasks)}
         </div>
+        <Modal
+          updateTaskList={this.props.updateTaskList}
+          labelList={this.props.labelList.get(this.props.label).get('subLabel')}
+          label={this.props.label}
+        />
       </div>
     );
   }

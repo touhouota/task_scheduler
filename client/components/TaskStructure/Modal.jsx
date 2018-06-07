@@ -9,26 +9,6 @@ import ModalProcess from '../../lib/modal_process';
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    // this.options = [{
-    //   value: 'survay',
-    //   label: '文献調査',
-    // },
-    // {
-    //   value: 'develop',
-    //   label: '実装関連',
-    // },
-    // {
-    //   value: 'experiment',
-    //   label: '実験関係',
-    // }, {
-    //   value: 'write',
-    //   label: '論文執筆',
-    // },
-    // {
-    //   value: 'everyday',
-    //   label: 'その他',
-    // },
-    // ];
     this.options = props.labelList;
 
     this.state = {
@@ -80,6 +60,7 @@ class Modal extends React.Component {
   createLabelList() {
     const labelElement = [];
     this.options.forEach((map, label) => {
+      console.log('createLabelList', map, label);
       labelElement.push(<option
         value={label}
         key={label}
@@ -117,9 +98,8 @@ class Modal extends React.Component {
       return null;
     }
     console.log('send form information');
-    const form = document.getElementById('modal_area');
+    const form = document.querySelector(`.${this.props.label}_modal`);
     const formData = ModalProcess.getModalData(form);
-    formData.append('user_id', Base.get_cookie('user_id'));
     console.log(formData);
     const path = Base.get_path();
     fetch(`${path}/api/tasks/create`, {
@@ -135,12 +115,12 @@ class Modal extends React.Component {
       .then((json) => {
         this.updateTaskList(json);
       });
-    ModalProcess.close();
+    ModalProcess.close(this.props.label);
   }
 
   render() {
     return (
-      <form className="modal hide" id="modal_area">
+      <form className={`modal hide ${this.props.label}_modal`}>
         <h2>タスクを登録</h2>
         <label>
           タスク名 *：

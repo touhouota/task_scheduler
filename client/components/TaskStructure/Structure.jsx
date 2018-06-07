@@ -118,6 +118,7 @@ class Structure extends React.Component {
         key={label}
         name={content.get('name')}
         label={label}
+        labelList={labels}
         tasks={taskList}
         TimerManager={this.props.TimerManager}
         updateTaskList={this.updateTaskList}
