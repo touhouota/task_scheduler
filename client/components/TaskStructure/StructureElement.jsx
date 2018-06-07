@@ -3,6 +3,7 @@ import React from 'react';
 import Task from './Task';
 import Modal from './Modal';
 
+import Base from '../../lib/base_object';
 import ModalProcess from '../../lib/modal_process';
 
 class StructureElement extends React.Component {
@@ -52,7 +53,16 @@ class StructureElement extends React.Component {
 
   moveClickedDirectory(e) {
     e.stopPropagation();
-    console.log('moveClickedDirectory');
+    const target = Base.parents(e.target, 'modal');
+    console.log('moveClickedDirectory target:', e.currentTarget, target);
+    if (target instanceof Array) {
+      console.log('if');
+      return false;
+    }
+    console.log('else');
+    return false;
+
+    console.log('moveClickedDirectory end');
   }
 
   render() {
