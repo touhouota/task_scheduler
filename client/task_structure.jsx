@@ -25,10 +25,12 @@ window.onload = () => {
     TimerManager.watch();
     document.getElementById('logout').addEventListener('click', Buttons.logout);
 
+    const path = window.location.pathname.split('/');
     ReactDOM.render(
       <div className="Structure_Component">
         <Structure
           TimerManager={TimerManager}
+          Directory={path[4]}
         />
       </div>,
       document.querySelector('.structure_container'),
