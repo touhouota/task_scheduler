@@ -233,7 +233,6 @@ class Structure extends React.Component {
 
   updateTaskList(taskData) {
     const taskList = this.state.tasks;
-    // console.log('updateTaskList:', taskList);
     const index = taskList.findIndex(task => task.id === taskData.id);
     if (index !== -1) {
       taskList[index] = taskData;
@@ -247,12 +246,6 @@ class Structure extends React.Component {
 
   render() {
     let labels;
-    // console.log(this.props.Directory);
-    // if (Object.keys(labelList).includes(this.props.Directory)) {
-    //   labels = labelList[this.props.Directory].subLabel;
-    // } else {
-    //   labels = labelList;
-    // }
     if (this.labelList.has(this.props.Directory)) {
       labels = this.labelList.get(this.props.Directory).get('subLabel');
     } else {
