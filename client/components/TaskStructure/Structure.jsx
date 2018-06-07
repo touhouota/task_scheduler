@@ -22,7 +22,7 @@ class Structure extends React.Component {
         .set('subLabel', new Map()))
       .set('outline', new Map()
         .set('name', 'アウトライン・草案')
-        .set('subLabl', new Map()))
+        .set('subLabel', new Map()))
       .set('sentence', new Map()
         .set('name', '文章作成')
         .set('subLabel', new Map()))
@@ -109,24 +109,6 @@ class Structure extends React.Component {
       });
   }
 
-  createStructureElements(tasks, labels) {
-    const structureElement = [];
-    labels.forEach((content, label) => {
-      const taskList = tasks.filter(task => label === task.label);
-
-      structureElement.push(<StructureElement
-        key={label}
-        name={content.get('name')}
-        label={label}
-        labelList={labels}
-        tasks={taskList}
-        TimerManager={this.props.TimerManager}
-        updateTaskList={this.updateTaskList}
-      />);
-    });
-    return structureElement;
-  }
-
   updateTaskList(taskData) {
     const taskList = this.state.tasks;
     const index = taskList.findIndex(task => task.id === taskData.id);
@@ -140,16 +122,79 @@ class Structure extends React.Component {
     });
   }
 
+  /*
+   * 現在注目している階層のタスクを取得する
+   */
+  createStructureElements(tasks, labelMap) {
+    console.log('createStructureElements labelMap:', labelMap);
+
+    // 現在の見ているラベルを取得
+    const nowLabel = this.props.Directory;
+    // デフォルトは、すべてのラベル
+    let labels = labelMap;
+    if (nowLabel !== 'main') {
+      /*
+       * 今mainで無いとき、サブラベルを見に行く
+       */
+      const searchLabel = [];
+      if (labels.has(nowLabel)) {
+        // 今見ているラベルがあれば、そのサブリストを取得
+        labels = labels.get(nowLabel).get('subLabel');
+      } else {
+        //
+        while (!labels.has(nowLabel)) {
+          /*
+           * 一旦Labelの
+           */
+          // console.log('createStructureElements forEach1:', searchLabel);
+          labels.forEach((Map, __) => {
+            searchLabel.push(Map.get('subLabel'));
+          });
+          labels = searchLabel.shift();
+          // console.log('createStructureElements forEach2:', searchLabel);
+        }
+      }
+      // labels = labels.get('subLabel');
+    } // if(!labels.has(nowLabel))
+    const structureElements = [];
+
+    // Labelにあうタスクを取得
+    labels.forEach((content, label) => {
+      // console.log('createStructureElements => forEach:', content, label);
+      // 下位タスクのラベルを保持
+      const labelFilter = [label];
+      // サブラベルの中にあるサブラベルを保持
+      let tmpLabel = content;
+      const contents = [];
+      // サブラベルのラベルと、さらにサブラベルを回していく
+      while (tmpLabel.get('subLabel').size !== 0) {
+        tmpLabel.get('subLabel').forEach((value, key) => {
+          // 現在見ているラベルの下位ラベルを取得
+          contents.push(value);
+          labelFilter.push(key);
+        });
+        tmpLabel = contents.shift();
+      }
+      console.log(labelFilter);
+      const taskList = tasks.filter(task => labelFilter.includes(task.label));
+
+      structureElements.push(<StructureElement
+        key={label}
+        name={content.get('name')}
+        label={label}
+        labelList={labels}
+        tasks={taskList}
+        TimerManager={this.props.TimerManager}
+        updateTaskList={this.updateTaskList}
+      />);
+    });
+    return structureElements;
+  }
+
   render() {
-    let labels;
-    if (this.labelList.has(this.props.Directory)) {
-      labels = this.labelList.get(this.props.Directory).get('subLabel');
-    } else {
-      labels = this.labelList;
-    }
     return (
       <div className="Structure">
-        {this.createStructureElements(this.state.tasks, labels)}
+        {this.createStructureElements(this.state.tasks, this.labelList)}
       </div>
     );
   }
