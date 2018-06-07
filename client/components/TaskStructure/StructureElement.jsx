@@ -8,8 +8,10 @@ import ModalProcess from '../../lib/modal_process';
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
-    // this.taskList = this.sortOrderByTaskStatus(props.tasks);
     console.log('structureElement', props);
+    // this.taskList = this.sortOrderByTaskStatus(props.tasks);
+    this.appendTaskEvent = this.appendTaskEvent.bind(this);
+    this.moveClickedDirectory = this.moveClickedDirectory.bind(this);
   }
 
   /*
@@ -43,12 +45,25 @@ class StructureElement extends React.Component {
     ));
   }
 
+  appendTaskEvent(e) {
+    e.stopPropagation();
+    ModalProcess.init(this.props.label);
+  }
+
+  moveClickedDirectory(e) {
+    e.stopPropagation();
+    console.log('moveClickedDirectory');
+  }
+
   render() {
     return (
-      <div className={`StructureElement ${this.props.label}`}>
+      <div
+        className={`StructureElement ${this.props.label}`}
+        onClick={this.moveClickedDirectory}
+      >
         <p>
           {this.props.name}
-          <button onClick={() => ModalProcess.init(this.props.label)} >
+          <button onClick={this.appendTaskEvent}>
             タスク追加
           </button>
         </p>
@@ -57,7 +72,7 @@ class StructureElement extends React.Component {
         </div>
         <Modal
           updateTaskList={this.props.updateTaskList}
-          labelList={this.props.labelList.get(this.props.label).get('subLabel')}
+          labelList={this.props.labelList}
           label={this.props.label}
         />
       </div>
