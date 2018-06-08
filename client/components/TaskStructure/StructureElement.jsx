@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Task from './Task';
-import Modal from './Modal';
+// import Modal from './Modal';
 
 import Base from '../../lib/base_object';
 import ModalProcess from '../../lib/modal_process';
@@ -80,11 +80,6 @@ class StructureElement extends React.Component {
         <div className="tasks">
           {this.createTaskElements(this.props.tasks)}
         </div>
-        <Modal
-          updateTaskList={this.props.updateTaskList}
-          labelList={this.props.labelList}
-          label={this.props.label}
-        />
       </div>
     );
   }
