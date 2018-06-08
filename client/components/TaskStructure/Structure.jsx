@@ -1,6 +1,7 @@
 import React from 'react';
 
 import StructureElement from './StructureElement';
+import Modal from './Modal';
 
 import Base from '../../lib/base_object';
 
@@ -195,6 +196,11 @@ class Structure extends React.Component {
     return (
       <div className="Structure">
         {this.createStructureElements(this.state.tasks, this.labelList)}
+        <Modal
+          updateTaskList={this.updateTaskList}
+          labelList={this.props.labelList}
+          label={this.props.label}
+        />
       </div>
     );
   }

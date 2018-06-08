@@ -20,10 +20,10 @@ class Modal extends React.Component {
         task_name: false,
         expect_minute: null,
       },
-      labelDepth: [],
+      labelDepth: [props.label],
     };
     this.chechValidate = this.chechValidate.bind(this);
-    this.createLabelList = this.createLabelList.bind(this);
+    // this.createLabelList = this.createLabelList.bind(this);
   }
 
   chechValidate(formName, event) {
@@ -58,18 +58,29 @@ class Modal extends React.Component {
     console.log('checkValidation finished:', this.state.status.task_name === false || this.state.status.expect_minute === false);
   }
 
+  // createLabelList(labelMap, label) {
+  //   const labelList = [];
+  //   const checkedList = [];
+  //   const searchList = [labelMap];
+  //   let currentList;
+  //   while (currentList = searchLabel.shift()) {
+  //     if (currentList.has(label)) {
+  //       labelList.push([label, labelMap.get(label).get('name')]);
+  //       break;
+  //     } else {
+  //       currentList.get('subLabel').forEach((mapObject, label) => {
+  //         checkedList.push(label);
+  //         searchList.push(mapObject);
+  //       });
+  //     }
+  //   }
+  // }
   createLabelList() {
-    const labelElement = [];
-    this.options.forEach((map, label) => {
-      // console.log('createLabelList', map, label);
-      labelElement.push(<option
-        value={label}
-        key={label}
-      >
-        {map.get('name')}
-      </option>);
-    });
-    return labelElement;
+    return (
+      <TaskForm
+        type="radio"
+      />
+    );
   }
 
   // データの更新をMainPageへ依頼する
@@ -79,8 +90,8 @@ class Modal extends React.Component {
 
   // 送信できる状態か確認する
   checkSendable() {
-    console.log('checkSendable');
-    console.log(this.state.status.task_name === false, this.state.status.expect_minute === false);
+    // console.log('checkSendable');
+    // console.log(this.state.status.task_name === false, this.state.status.expect_minute === false);
     const values = Object.values(this.state.status);
     // 必須項目の数を数える
     const counts = values.length;
@@ -122,7 +133,7 @@ class Modal extends React.Component {
 
   render() {
     return (
-      <form className={`modal hide ${this.props.label}_modal`}>
+      <form className={`modal hide ${this.props.label}_modal`} id="modal_area">
         <h2>タスクを登録</h2>
         <label>
           タスク名 *：
@@ -137,9 +148,8 @@ class Modal extends React.Component {
 
         <label>
           タスク属性 *：
-          <select defaultValue="thema" name="task_label">
-            {this.createLabelList()}
-          </select>
+          {this.state.labelDepth.join(' > ')}
+          {this.createLabelList()}
         </label>
 
         <label>
