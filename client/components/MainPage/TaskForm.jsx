@@ -81,6 +81,12 @@ class TaskForm extends React.Component {
           </datalist>
         </span>
       );
+    } else if (this.props.type === 'radio') {
+      return (
+        <span>
+          hoge
+        </span>
+      );
     }
     return (
       <input
