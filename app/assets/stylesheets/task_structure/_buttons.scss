@@ -1,5 +1,8 @@
+@import "../parts/button_parts.scss";
+
 .buttons {
   .button {
+    @extend .ButtonBase;
     width: 140px;
     padding: 3px;
 
