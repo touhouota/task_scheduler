@@ -58,9 +58,9 @@ class Task extends React.Component {
   displayTaskFinishButton() {
     if (this.props.taskData.status === 1) {
       return (
-        <div>
-          <button
-            type="button"
+        <div className="finish_button">
+          <div
+            className="button"
             onClick={(event) => {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Finish);
@@ -68,9 +68,9 @@ class Task extends React.Component {
             value={this.props.taskData.id}
           >
             終了
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
+            className="button"
             onClick={(event) => {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Incomplete);
@@ -78,7 +78,7 @@ class Task extends React.Component {
             value={this.props.taskData.id}
           >
             未完了
-          </button>
+          </div>
         </div>
       );
     }
@@ -180,27 +180,29 @@ class Task extends React.Component {
       >
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
-          <button
-            type="button"
-            onClick={(event) => { this.clickButtonEvent(event); }}
-          >
-            {this.statusNo[this.props.taskData.status]}
-          </button>
-          <span className="task_name">
-            {this.props.taskData.t_name}
-          </span>
-          <span className="expect_minute">
-            ({this.props.taskData.expect_minute}分)
-          </span>
+          <div className="task_button">
+            <div
+              className="button"
+              onClick={(event) => { this.clickButtonEvent(event); }}
+            >
+              {this.statusNo[this.props.taskData.status]}
+            </div>
+            <p className="expect_minute">
+              ({this.props.taskData.expect_minute}分)
+            </p>
+          </div>
+          <div className="title">
+            <span className="task_name">
+              {this.props.taskData.t_name}
+            </span>
+          </div>
         </div>
 
         {/* 作業時間 */}
-        <div className="actual_sec">
-          <p>
-            作業時間：
-            {this.displayActualTime()}
-          </p>
-        </div>
+        <p className="times">
+          作業時間：
+          {this.displayActualTime()}
+        </p>
         {this.displayTaskFinishButton()}
       </div>);
   }
