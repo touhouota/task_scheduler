@@ -1,10 +1,11 @@
 @import '../variable/variables.scss';
+@import '../parts/button_parts.scss';
 
 .tasks {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+  font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', 'メイリオ', 'Osaka', 'MS PGothic', arial, helvetica, sans-serif;
 
   .task_element {
     box-sizing: border-box;
@@ -12,21 +13,52 @@
     padding: 5px;
     // background-color: rgb(170, 203, 242);
     // min-width: 150px;
-    width: $flex_base_size;
     transition-duration: 0.5s;
     transition-timing-function: ease;
-
-    .task_name {
-      margin-left: 5px;
-      font-size: large;
-    }
-
-    .expect_minute {
-      margin: 2px;
-    }
+    width: $flex_base_size;
 
     &[data-status='1'] {
       background-color: rgb(252, 134, 130);
+    }
+
+    .task_top {
+      $task_top_width: 80px;
+      display: flex;
+      flex-direction: row;
+
+      .task_button {
+        width: $task_top_width;
+        text-align: center;
+
+        .button {
+          @extend .ButtonBase;
+          width: 85%;
+        }
+
+        .expect_minute {
+          font-size: small;
+          margin: 2px;
+          width: 100%;
+        }
+      }
+
+      .title {
+        width: calc(100% - #{$task_top_width} - 10px);
+        margin-left: 10px;
+
+        .task_name {
+          font-size: large;
+        }
+      }
+    }
+
+    .finish_button {
+      .button {
+        @extend .ButtonBase;
+        width: 50px;
+        margin-right: 10px;
+        text-align: center;
+      }
     }
   }
 }

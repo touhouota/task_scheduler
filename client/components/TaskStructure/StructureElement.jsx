@@ -1,12 +1,15 @@
 import React from 'react';
 
 import Task from './Task';
+// import Modal from './Modal';
+
+// import Base from '../../lib/base_object';
+// import ModalProcess from '../../lib/modal_process';
 
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
-    // this.taskList = this.sortOrderByTaskStatus(props.tasks);
-    console.log('StructureElement:');
+    console.log('structureElement', props);
   }
 
   /*
@@ -43,7 +46,9 @@ class StructureElement extends React.Component {
   render() {
     return (
       <div className={`StructureElement ${this.props.label}`}>
-        <p>{this.props.name}</p>
+        <p>
+          {this.props.name}
+        </p>
         <div className="tasks">
           {this.createTaskElements(this.props.tasks)}
         </div>

@@ -33,17 +33,6 @@ class Task extends React.Component {
     }
   }
 
-  // 見積もり時間があれば、それを置く
-  displayExpectedTime() {
-    if (this.props.taskData.expect_minute) {
-      return (
-        <p className="expect_minute">
-          見積り：{this.props.taskData.expect_minute}分
-        </p>
-      );
-    }
-    return null;
-  }
 
   displayActualTime() {
     return (
@@ -69,9 +58,9 @@ class Task extends React.Component {
   displayTaskFinishButton() {
     if (this.props.taskData.status === 1) {
       return (
-        <div>
-          <button
-            type="button"
+        <div className="finish_button">
+          <div
+            className="button"
             onClick={(event) => {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Finish);
@@ -79,9 +68,9 @@ class Task extends React.Component {
             value={this.props.taskData.id}
           >
             終了
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
+            className="button"
             onClick={(event) => {
               const task = Base.parents(event.target, 'task_element');
               this.taskStart(task.id, this.Incomplete);
@@ -89,7 +78,7 @@ class Task extends React.Component {
             value={this.props.taskData.id}
           >
             未完了
-          </button>
+          </div>
         </div>
       );
     }
@@ -113,10 +102,8 @@ class Task extends React.Component {
     // ここまで来たときは、タスクを実行するとき
     // 他のタスクが動いていないかを確認
     if (this.TimerManager.isDoing()) {
-      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       // 動いている場合は、一旦止める
       this.statusChange(this.TimerManager.getDoingTaskId(), this.Suspend);
-      console.log('taskStart: 他に動いている =>', this.TimerManager.getDoingTaskId());
       this.TimerManager.clear();
     }
 
@@ -144,6 +131,20 @@ class Task extends React.Component {
 
     return formData;
   }
+
+  clickButtonEvent(event) {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    const task = Base.parents(event.target, 'task_element');
+    let nextStatus = null;
+    if (this.props.taskData.status === this.Doing) {
+      nextStatus = this.Suspend;
+    } else {
+      nextStatus = this.Doing;
+    }
+    this.taskStart(task.id, nextStatus);
+  }
+
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
@@ -177,28 +178,31 @@ class Task extends React.Component {
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
       >
-        <button
-          type="button"
-          onClick={(event) => {
-            const task = Base.parents(event.target, 'task_element');
-            let nextStatus = null;
-            if (this.props.taskData.status === this.Doing) {
-              nextStatus = this.Suspend;
-            } else {
-              nextStatus = this.Doing;
-            }
-            this.taskStart(task.id, nextStatus);
-          }}
-          value={this.props.taskData.id}
-        >
-          {this.statusNo[this.props.taskData.status]}
-        </button>
-        <span className="task_name">
-          {this.props.taskData.t_name}
-        </span>
-        {this.displayExpectedTime()}
-        <p>作業時間：{this.displayActualTime()}</p>
-        {this.displayMemo()}
+        <div className="task_top">
+          {/* タスク名, 実行ボタン, 予想時間 */}
+          <div className="task_button">
+            <div
+              className="button"
+              onClick={(event) => { this.clickButtonEvent(event); }}
+            >
+              {this.statusNo[this.props.taskData.status]}
+            </div>
+            <p className="expect_minute">
+              ({this.props.taskData.expect_minute}分)
+            </p>
+          </div>
+          <div className="title">
+            <span className="task_name">
+              {this.props.taskData.t_name}
+            </span>
+          </div>
+        </div>
+
+        {/* 作業時間 */}
+        <p className="times">
+          作業時間：
+          {this.displayActualTime()}
+        </p>
         {this.displayTaskFinishButton()}
       </div>);
   }
