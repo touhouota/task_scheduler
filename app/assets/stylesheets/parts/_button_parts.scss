@@ -1,0 +1,28 @@
+.ButtonBase {
+  display: inline-block;
+  width: 80px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 0 #8f9080;
+  box-shadow: 0 2px 0 #8f9080;
+  border: 1px solid #666;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  // margin-right: 10px;
+  background-color: #fff;
+  font-size: small;
+
+  &:hover {
+    background-color: #e8e8e8;
+  }
+
+  &:active {
+    top: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  & > * {
+    vertical-align: middle;
+  }
+}
