@@ -14,7 +14,7 @@
 .modal {
   width: 400px;
   // height: 380px;
-  padding: 10px;
+  padding: 10px 10px 20px;
   position: absolute;
   top: calc(50% - 150px);
   left: calc(50% - 200px);
@@ -26,8 +26,12 @@
     margin: 5px;
     padding: 10px 5px;
 
+    input[type="text"] {
+      width: 250px;
+    }
+
     textarea {
-      width: 340px;
+      width: 350px;
       height: 100px;
       resize: vertical;
     }
