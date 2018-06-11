@@ -139,7 +139,9 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          タスク属性 *：
+          <span className="modal_label">
+            タスク属性 *：
+          </span>
           <select defaultValue="thema" name="task_label">
             {this.options.map(d => (
               <option value={d.value} key={d.value}>
@@ -150,7 +152,9 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          予想作業時間(分) *：
+          <span className="modal_label">
+            予想作業時間(分) *：
+          </span>
           <TaskForm
             type="number"
             name="expect_minute"
@@ -161,7 +165,9 @@ class Modal extends React.Component {
         </label>
 
         <label>
-          メモ ：
+          <span className="modal_label">
+            メモ ：
+          </span>
           <TaskForm
             type="textarea"
             name="task_memo"
