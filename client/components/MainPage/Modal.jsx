@@ -128,7 +128,9 @@ class Modal extends React.Component {
       <form className="modal hide" id="modal_area">
         <h2>タスクを登録</h2>
         <label>
-          タスク名 *：
+          <span className="modal_label">
+            タスク名 *：
+          </span>
           <TaskForm
             type="text"
             name="task_name"
