@@ -155,7 +155,7 @@ class Modal extends React.Component {
 
         <label>
           <span className="modal_label">
-            予想作業時間(分) *：
+            予想時間(分) *：
           </span>
           <TaskForm
             type="number"
