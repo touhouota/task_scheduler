@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import TaskDetails from './TaskDetails';
 import Base from '../../lib/base_object';
 
 class Task extends React.Component {
@@ -32,6 +33,7 @@ class Task extends React.Component {
     if (this.props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
+    console.log('Task props.TimerManager:', props.TimerManager);
   }
 
   updateStatus(task) {
@@ -204,6 +206,12 @@ class Task extends React.Component {
           {this.displayActualTime()}
         </p>
         {this.displayTaskFinishButton()}
+
+        <TaskDetails
+          task={this.props.taskData}
+          TimerManager={this.TimerManager}
+          taskStart={this.taskStart}
+        />
       </div>);
   }
 }
