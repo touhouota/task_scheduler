@@ -26,8 +26,10 @@ const TimerManager = {
     // すでにある時間に加算
     const progressTime = TimerManager.getProgressTime(taskDom);
     // 表示
-    const displayArea = taskDom.querySelector('.actual_sec');
-    displayArea.textContent = TimerManager.convert_hms_from_seconds(progressTime);
+    const displayAreas = taskDom.querySelectorAll('.actual_sec');
+    displayAreas.forEach((displayArea) => {
+      displayArea.textContent = TimerManager.convert_hms_from_seconds(progressTime);
+    });
   },
 
   convert_hms_from_seconds: (seconds) => {
@@ -63,7 +65,7 @@ const TimerManager = {
         console.log(TimerManager.taskId);
         TimerManager.displayTimer(document.getElementById(TimerManager.taskId));
       }
-    }, 1000);
+    }, 200);
   },
 };
 
