@@ -25,64 +25,13 @@ class Task extends React.Component {
     // 関数たちをthisで使えるようにバインド
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
+    this.displayActualTime = this.displayActualTime.bind(this);
     this.TimerManager = props.TimerManager;
 
     // このタスクが実行状態の場合、実行する
     if (this.props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
-  }
-
-
-  displayActualTime() {
-    return (
-      <span className="actual_sec">
-        {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
-      </span>
-    );
-  }
-
-  // メモがあれば表示する
-  displayMemo() {
-    if (this.props.taskData.memo) {
-      return (
-        <p className="memo">
-        メモ：{this.props.taskData.memo}
-        </p>
-      );
-    }
-    return null;
-  }
-
-  // タスク実行時に表示する
-  displayTaskFinishButton() {
-    if (this.props.taskData.status === 1) {
-      return (
-        <div className="finish_button">
-          <div
-            className="button"
-            onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
-              this.taskStart(task.id, this.Finish);
-            }}
-            value={this.props.taskData.id}
-          >
-            終了
-          </div>
-          <div
-            className="button"
-            onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
-              this.taskStart(task.id, this.Incomplete);
-            }}
-            value={this.props.taskData.id}
-          >
-            未完了
-          </div>
-        </div>
-      );
-    }
-    return null;
   }
 
   updateStatus(task) {
@@ -130,6 +79,57 @@ class Task extends React.Component {
     }
 
     return formData;
+  }
+
+  displayActualTime() {
+    return (
+      <span className="actual_sec">
+        {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+      </span>
+    );
+  }
+
+  // メモがあれば表示する
+  displayMemo() {
+    if (this.props.taskData.memo) {
+      return (
+        <p className="memo">
+        メモ：{this.props.taskData.memo}
+        </p>
+      );
+    }
+    return null;
+  }
+
+  // タスク実行時に表示する
+  displayTaskFinishButton() {
+    if (this.props.taskData.status === 1) {
+      return (
+        <div className="finish_button">
+          <button
+            className="button"
+            onClick={(event) => {
+              const task = Base.parents(event.target, 'task_element');
+              this.taskStart(task.id, this.Finish);
+            }}
+            value={this.props.taskData.id}
+          >
+            終了
+          </button>
+          <button
+            className="button"
+            onClick={(event) => {
+              const task = Base.parents(event.target, 'task_element');
+              this.taskStart(task.id, this.Incomplete);
+            }}
+            value={this.props.taskData.id}
+          >
+            未完了
+          </button>
+        </div>
+      );
+    }
+    return null;
   }
 
   clickButtonEvent(event) {
@@ -181,12 +181,12 @@ class Task extends React.Component {
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
           <div className="task_button">
-            <div
+            <button
               className="button"
               onClick={(event) => { this.clickButtonEvent(event); }}
             >
               {this.statusNo[this.props.taskData.status]}
-            </div>
+            </button>
             <p className="expect_minute">
               ({this.props.taskData.expect_minute}分)
             </p>
@@ -213,7 +213,7 @@ Task.propTypes = {
     // タスクID
     id: PropTypes.number,
     // タスク名
-    name: PropTypes.string,
+    t_name: PropTypes.string,
     // 作業時間(秒)
     actual_sec: PropTypes.number,
     // 作成日時
@@ -235,6 +235,23 @@ Task.propTypes = {
     // タスクのユーザ
     user_id: PropTypes.string,
   }).isRequired,
+  // TimerManagerのオブジェクトを定義
+  TimerManager: PropTypes.shape({
+    // タイマーの設定
+    set: PropTypes.func.isRequired,
+    // タイマーの削除
+    clear: PropTypes.func.isRequired,
+    // 秒数をhh:mm:ssに変換
+    convert_hms_from_seconds: PropTypes.func.isRequired,
+    // タスク実行しているかの判定
+    isDoing: PropTypes.func.isRequired,
+    // 実行しているタスクidを取得
+    getDoingTaskId: PropTypes.func.isRequired,
+    // 作業時間の計算
+    calcActualTime: PropTypes.func.isRequired,
+  }).isRequired,
+  // タスクリストの更新
+  updateTaskList: PropTypes.func.isRequired,
 };
 
 
