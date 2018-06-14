@@ -6,8 +6,6 @@ const ModalProcess = {
     background.addEventListener('click', ModalProcess.close);
     background.classList.add('modal_back');
     document.body.appendChild(background);
-    // modalを表示
-    document.getElementById('modal_area').classList.remove('hide');
   },
 
   close: () => {
@@ -16,6 +14,12 @@ const ModalProcess = {
     // modalを非表示
     document.getElementById('modal_area').classList.add('hide');
     document.querySelector('.modal').reset();
+  },
+
+  showModal: () => {
+    ModalProcess.init();
+    // modalを表示
+    document.getElementById('modal_area').classList.remove('hide');
   },
 
   getModalData: (formElement) => {
