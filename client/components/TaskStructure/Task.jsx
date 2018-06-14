@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TaskDetails from './TaskDetails';
+
 import Base from '../../lib/base_object';
+import ModalProcess from '../../lib/modal_process';
 
 class Task extends React.Component {
   constructor(props) {
@@ -23,10 +25,12 @@ class Task extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
+    this.detailsClass = ['hoge', 'fuga'];
     // 関数たちをthisで使えるようにバインド
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
     this.displayActualTime = this.displayActualTime.bind(this);
+    this.displayThisDetails = this.displayThisDetails.bind(this);
     this.TimerManager = props.TimerManager;
 
     // このタスクが実行状態の場合、実行する
@@ -134,6 +138,11 @@ class Task extends React.Component {
     return null;
   }
 
+  displayThisDetails(event) {
+    console.log('click task', event);
+    ModalProcess.init();
+  }
+
   clickButtonEvent(event) {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
@@ -179,6 +188,7 @@ class Task extends React.Component {
         data-status={this.props.taskData.status}
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
+        onClick={this.displayThisDetails}
       >
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
@@ -211,6 +221,7 @@ class Task extends React.Component {
           task={this.props.taskData}
           TimerManager={this.TimerManager}
           taskStart={this.taskStart}
+          className={this.detailsClass}
         />
       </div>);
   }
