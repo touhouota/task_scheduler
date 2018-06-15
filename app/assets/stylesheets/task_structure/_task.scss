@@ -7,57 +7,135 @@
   align-items: flex-start;
   font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', 'メイリオ', 'Osaka', 'MS PGothic', arial, helvetica, sans-serif;
 
-  .task_element {
-    box-sizing: border-box;
-    margin: 5px;
-    padding: 5px;
-    // background-color: rgb(170, 203, 242);
-    // min-width: 150px;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-    width: $flex_base_size;
+  .task_container {
+    .task_element {
+      box-sizing: border-box;
+      margin: 5px;
+      padding: 5px;
+      // background-color: rgb(170, 203, 242);
+      // min-width: 150px;
+      transition-duration: 0.5s;
+      transition-timing-function: ease;
+      width: $flex_base_size;
 
-    &[data-status='1'] {
-      background-color: rgb(252, 134, 130);
+      &[data-status='1'] {
+        background-color: rgb(252, 134, 130);
+      }
+
+      &[data-status='2'],
+      &[data-status='3'] {
+        // background-color: rgb(252, 134, 130);
+        opacity: 0.4;
+      }
+
+      .task_top {
+        $task_top_width: 80px;
+        display: flex;
+        flex-direction: row;
+
+        .task_button {
+          width: $task_top_width;
+          text-align: center;
+
+          .button {
+            @extend .ButtonBase;
+            width: 100%;
+          }
+
+          .expect_minute {
+            font-size: small;
+            margin: 2px;
+            width: 100%;
+          }
+        }
+
+        .title {
+          width: calc(100% - #{$task_top_width} - 10px);
+          margin-left: 10px;
+
+          .task_name {
+            font-size: large;
+          }
+        }
+      }
+
+      .finish_button {
+        .button {
+          @extend .ButtonBase;
+          width: 60px;
+          margin-right: 10px;
+          text-align: center;
+        }
+      }
     }
 
-    .task_top {
-      $task_top_width: 80px;
-      display: flex;
-      flex-direction: row;
+    .task_detail {
+      $task_detail_width: 500px;
+      // 要素の位置
+      position: absolute;
+      top: 25%;
+      left: calc(50% - #{$task_detail_width / 2});
+      z-index: 99;
+      // サイズ
+      width: 500px;
+      min-height: 200px;
+      padding: 10px;
+      // 見た目
+      background-color: #fff;
+      border: 5px solid #fff; // 基本は枠を見えなくしておく
 
-      .task_button {
-        width: $task_top_width;
-        text-align: center;
+      &[data-status='1'] {
+        border: 5px solid rgb(252, 134, 130); // 実行時は、枠を表示する
+      }
+      // アニメーション設定
+      transition-duration: 0.5s;
+      transition-timing-function: ease;
+
+      .task_top {
+        display: flex;
+        flex-direction: row;
+
+        .task_button {
+          width: 120px;
+          text-align: center;
+
+          .button {
+            @extend .ButtonBase;
+            width: 100%;
+          }
+        }
+
+        .title {
+          flex: 1;
+          margin-left: 10px;
+          font-size: x-large;
+          font-weight: bold;
+        }
+      }
+
+      .times {
+        font-size: large;
+        margin-top: 15px;
+      }
+
+      .memo {
+        margin-top: 20px;
+
+        .memo_text {
+          margin: 5px;
+          padding: 5px;
+          border: 1px solid #eee;
+          white-space: pre-wrap;
+        }
+      }
+
+      .finish_button {
+        margin-top: 30px;
 
         .button {
           @extend .ButtonBase;
-          width: 85%;
+          margin-right: 15px;
         }
-
-        .expect_minute {
-          font-size: small;
-          margin: 2px;
-          width: 100%;
-        }
-      }
-
-      .title {
-        width: calc(100% - #{$task_top_width} - 10px);
-        margin-left: 10px;
-
-        .task_name {
-          font-size: large;
-        }
-      }
-    }
-
-    .finish_button {
-      .button {
-        @extend .ButtonBase;
-        width: 50px;
-        margin-right: 10px;
-        text-align: center;
       }
     }
   }

@@ -59,11 +59,16 @@ const TimerManager = {
   // 時間管理を始める関数
   watch: () => {
     TimerManager.timer = setInterval(() => {
-      if (TimerManager.taskId) {
-        console.log(TimerManager.taskId);
-        TimerManager.displayTimer(document.getElementById(TimerManager.taskId));
+      if (TimerManager.isDoing()) {
+        // タスク本体の時間表示
+        const taskElement = document.getElementById(TimerManager.getDoingTaskId());
+        console.log(taskElement);
+        TimerManager.displayTimer(taskElement);
+        // タスクの詳細部分の時間表示
+        const taskDetailsElement = taskElement.parentElement.querySelector('.task_detail');
+        TimerManager.displayTimer(taskDetailsElement);
       }
-    }, 1000);
+    }, 400);
   },
 };
 

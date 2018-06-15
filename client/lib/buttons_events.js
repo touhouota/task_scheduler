@@ -8,7 +8,7 @@ const Buttons = {
   },
 
   append_task: () => {
-    ModalProcess.init();
+    ModalProcess.showModal();
   },
 
   logout: () => {

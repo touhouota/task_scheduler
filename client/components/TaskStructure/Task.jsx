@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import TaskDetails from './TaskDetails';
+
 import Base from '../../lib/base_object';
+import ModalProcess from '../../lib/modal_process';
 
 class Task extends React.Component {
   constructor(props) {
@@ -25,68 +28,36 @@ class Task extends React.Component {
     // 関数たちをthisで使えるようにバインド
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
+    this.displayActualTime = this.displayActualTime.bind(this);
+    this.displayThisDetails = this.displayThisDetails.bind(this);
+    this.displayTaskFinishButton = this.displayTaskFinishButton.bind(this);
+    this.clickButtonEvent = this.clickButtonEvent.bind(this);
     this.TimerManager = props.TimerManager;
 
     // このタスクが実行状態の場合、実行する
-    if (this.props.taskData.status === this.Doing) {
+    if (props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
+    console.log('Task props.TimerManager:', props.TimerManager);
   }
 
-
-  displayActualTime() {
-    return (
-      <span className="actual_sec">
-        {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
-      </span>
-    );
-  }
-
-  // メモがあれば表示する
-  displayMemo() {
-    if (this.props.taskData.memo) {
-      return (
-        <p className="memo">
-        メモ：{this.props.taskData.memo}
-        </p>
-      );
+  setTaskInformation(taskId, nextStatus) {
+    const task = this.props.taskData;
+    // const formData = new FormData();
+    const formData = Base.createFormData();
+    // formData.append('user_id', Base.get_cookie('user_id'));
+    formData.append('id', taskId);
+    formData.set('status', nextStatus);
+    if (nextStatus === this.Doing) {
+      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
+      formData.set('actual_sec', task.actual_sec);
+    } else {
+      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
+      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+      formData.set('actual_sec', parseInt(actualSec || 0, 10));
     }
-    return null;
-  }
 
-  // タスク実行時に表示する
-  displayTaskFinishButton() {
-    if (this.props.taskData.status === 1) {
-      return (
-        <div className="finish_button">
-          <div
-            className="button"
-            onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
-              this.taskStart(task.id, this.Finish);
-            }}
-            value={this.props.taskData.id}
-          >
-            終了
-          </div>
-          <div
-            className="button"
-            onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
-              this.taskStart(task.id, this.Incomplete);
-            }}
-            value={this.props.taskData.id}
-          >
-            未完了
-          </div>
-        </div>
-      );
-    }
-    return null;
-  }
-
-  updateStatus(task) {
-    this.props.updateTaskList(task);
+    return formData;
   }
 
   // 実行できるかを確認する
@@ -113,29 +84,15 @@ class Task extends React.Component {
     return null;
   }
 
-  setTaskInformation(taskId, nextStatus) {
-    const task = this.props.taskData;
-    // const formData = new FormData();
-    const formData = Base.createFormData();
-    // formData.append('user_id', Base.get_cookie('user_id'));
-    formData.append('id', taskId);
-    formData.set('status', nextStatus);
-    if (nextStatus === this.Doing) {
-      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
-      formData.set('actual_sec', task.actual_sec);
-    } else {
-      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
-      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
-      formData.set('actual_sec', parseInt(actualSec || 0, 10));
-    }
-
-    return formData;
+  updateStatus(task) {
+    this.props.updateTaskList(task);
   }
 
   clickButtonEvent(event) {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
-    const task = Base.parents(event.target, 'task_element');
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
     let nextStatus = null;
     if (this.props.taskData.status === this.Doing) {
       nextStatus = this.Suspend;
@@ -143,6 +100,83 @@ class Task extends React.Component {
       nextStatus = this.Doing;
     }
     this.taskStart(task.id, nextStatus);
+  }
+
+  clickFinishButtonEvent(event, nextStatus) {
+    // イベントの伝播を止める
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    // 終了時の処理
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
+    this.taskStart(task.id, nextStatus);
+    setTimeout(() => {
+      // もし、モーダルが開いていた場合、閉じる
+      if (ModalProcess.isModalOpen()) {
+        ModalProcess.getModalBack().click();
+      }
+    }, 200);
+  }
+
+  displayActualTime() {
+    return (
+      <span className="actual_sec">
+        {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+      </span>
+    );
+  }
+
+  // メモがあれば表示する
+  displayMemo() {
+    if (this.props.taskData.memo) {
+      return (
+        <p className="memo">
+        メモ：{this.props.taskData.memo}
+        </p>
+      );
+    }
+    return null;
+  }
+
+  // タスク実行時に表示する
+  displayTaskFinishButton() {
+    if (this.props.taskData.status === 1) {
+      return (
+        <div className="finish_button">
+          <button
+            className="button"
+            onClick={(event) => {
+              this.clickFinishButtonEvent(event, this.Finish);
+            }}
+            value={this.props.taskData.id}
+          >
+            終了
+          </button>
+          <button
+            className="button"
+            onClick={(event) => {
+              this.clickFinishButtonEvent(event, this.Incomplete);
+            }}
+            value={this.props.taskData.id}
+          >
+            未完了
+          </button>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  displayThisDetails(event) {
+    console.log('click task', event);
+    ModalProcess.init();
+    const taskParentDOM = Base.parents(event.currentTarget, 'task_container');
+    taskParentDOM.querySelector('.task_detail').classList.remove('hide');
+    // モーダルにイベントを追加
+    const closeDetailDOM = () => {
+      taskParentDOM.querySelector('.task_detail').classList.add('hide');
+    };
+    ModalProcess.getModalBack().addEventListener('click', closeDetailDOM);
   }
 
 
@@ -171,40 +205,52 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div
-        className="task_element"
-        id={this.props.taskData.id}
-        data-status={this.props.taskData.status}
-        data-start_date={this.props.taskData.updated_at}
-        data-progress={this.props.taskData.actual_sec}
-      >
-        <div className="task_top">
-          {/* タスク名, 実行ボタン, 予想時間 */}
-          <div className="task_button">
-            <div
-              className="button"
-              onClick={(event) => { this.clickButtonEvent(event); }}
-            >
-              {this.statusNo[this.props.taskData.status]}
+      <div className="task_container">
+        <div
+          className="task_element"
+          id={this.props.taskData.id}
+          data-status={this.props.taskData.status}
+          data-start_date={this.props.taskData.updated_at}
+          data-progress={this.props.taskData.actual_sec}
+          onClick={this.displayThisDetails}
+        >
+          <div className="task_top">
+            {/* タスク名, 実行ボタン, 予想時間 */}
+            <div className="task_button">
+              <button
+                className="button"
+                onClick={this.clickButtonEvent}
+              >
+                {this.statusNo[this.props.taskData.status]}
+              </button>
+              <div className="expect_minute">
+                ({this.props.taskData.expect_minute}分)
+              </div>
             </div>
-            <p className="expect_minute">
-              ({this.props.taskData.expect_minute}分)
-            </p>
+            <div className="title">
+              <span className="task_name">
+                {this.props.taskData.t_name}
+              </span>
+            </div>
           </div>
-          <div className="title">
-            <span className="task_name">
-              {this.props.taskData.t_name}
-            </span>
+
+          {/* 作業時間 */}
+          <div className="times">
+            作業時間：
+            {this.displayActualTime()}
           </div>
+          {this.displayTaskFinishButton(this.props)}
         </div>
 
-        {/* 作業時間 */}
-        <p className="times">
-          作業時間：
-          {this.displayActualTime()}
-        </p>
-        {this.displayTaskFinishButton()}
-      </div>);
+        {/* タスクの詳細置き場 */}
+        <TaskDetails
+          taskData={this.props.taskData}
+          TimerManager={this.TimerManager}
+          clickButtonEvent={this.clickButtonEvent}
+          displayTaskFinishButton={this.displayTaskFinishButton}
+        />
+      </div>
+    );
   }
 }
 
@@ -213,7 +259,7 @@ Task.propTypes = {
     // タスクID
     id: PropTypes.number,
     // タスク名
-    name: PropTypes.string,
+    t_name: PropTypes.string,
     // 作業時間(秒)
     actual_sec: PropTypes.number,
     // 作成日時
@@ -235,6 +281,23 @@ Task.propTypes = {
     // タスクのユーザ
     user_id: PropTypes.string,
   }).isRequired,
+  // TimerManagerのオブジェクトを定義
+  TimerManager: PropTypes.shape({
+    // タイマーの設定
+    set: PropTypes.func.isRequired,
+    // タイマーの削除
+    clear: PropTypes.func.isRequired,
+    // 秒数をhh:mm:ssに変換
+    convert_hms_from_seconds: PropTypes.func.isRequired,
+    // タスク実行しているかの判定
+    isDoing: PropTypes.func.isRequired,
+    // 実行しているタスクidを取得
+    getDoingTaskId: PropTypes.func.isRequired,
+    // 作業時間の計算
+    calcActualTime: PropTypes.func.isRequired,
+  }).isRequired,
+  // タスクリストの更新
+  updateTaskList: PropTypes.func.isRequired,
 };
 
 

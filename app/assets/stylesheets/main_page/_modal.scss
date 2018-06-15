@@ -10,14 +10,15 @@
   z-index: 9;
 }
 // modalの要素
+$modal_width: 400px;
 
 .modal {
-  width: 400px;
+  width: $modal_width;
   // height: 380px;
   padding: 10px 10px 20px;
   position: absolute;
-  top: calc(50% - 150px);
-  left: calc(50% - 200px);
+  top: calc(25%);
+  left: calc(50% - (#{$modal_width} / 2));
   background-color: #fff;
   z-index: 99;
 
