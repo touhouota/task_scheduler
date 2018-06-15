@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Base from '../../lib/base_object';
-
 class TaskDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +26,7 @@ class TaskDetails extends React.Component {
   render() {
     return (
       <div
-        className={`task_detail hide ${this.props.className.join(' ')}`}
+        className="task_detail hide"
         data-status={this.props.taskData.status}
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
@@ -121,8 +119,6 @@ TaskDetails.propTypes = {
   displayTaskFinishButton: PropTypes.func.isRequired,
   // ボタンがクリックされたときの関数
   clickButtonEvent: PropTypes.func.isRequired,
-  // この要素のクラス名を指定する
-  className: PropTypes.string.isRequired,
 };
 
 export default TaskDetails;
