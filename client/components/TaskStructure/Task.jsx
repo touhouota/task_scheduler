@@ -31,17 +31,15 @@ class Task extends React.Component {
     this.statusChange = this.statusChange.bind(this);
     this.displayActualTime = this.displayActualTime.bind(this);
     this.displayThisDetails = this.displayThisDetails.bind(this);
+    this.displayTaskFinishButton = this.displayTaskFinishButton.bind(this);
+    this.clickButtonEvent = this.clickButtonEvent.bind(this);
     this.TimerManager = props.TimerManager;
 
     // このタスクが実行状態の場合、実行する
-    if (this.props.taskData.status === this.Doing) {
+    if (props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
     console.log('Task props.TimerManager:', props.TimerManager);
-  }
-
-  updateStatus(task) {
-    this.props.updateTaskList(task);
   }
 
   // 実行できるかを確認する
@@ -87,6 +85,10 @@ class Task extends React.Component {
     return formData;
   }
 
+  updateStatus(task) {
+    this.props.updateTaskList(task);
+  }
+
   displayActualTime() {
     return (
       <span className="actual_sec">
@@ -115,7 +117,8 @@ class Task extends React.Component {
           <button
             className="button"
             onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
+              const taskContainer = Base.parents(event.target, 'task_container');
+              const task = taskContainer.querySelector('.task_element');
               this.taskStart(task.id, this.Finish);
             }}
             value={this.props.taskData.id}
@@ -125,7 +128,8 @@ class Task extends React.Component {
           <button
             className="button"
             onClick={(event) => {
-              const task = Base.parents(event.target, 'task_element');
+              const taskContainer = Base.parents(event.target, 'task_container');
+              const task = taskContainer.querySelector('.task_element');
               this.taskStart(task.id, this.Incomplete);
             }}
             value={this.props.taskData.id}
@@ -148,7 +152,8 @@ class Task extends React.Component {
   clickButtonEvent(event) {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
-    const task = Base.parents(event.target, 'task_element');
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
     let nextStatus = null;
     if (this.props.taskData.status === this.Doing) {
       nextStatus = this.Suspend;
@@ -198,13 +203,13 @@ class Task extends React.Component {
             <div className="task_button">
               <button
                 className="button"
-                onClick={(event) => { this.clickButtonEvent(event); }}
+                onClick={this.clickButtonEvent}
               >
                 {this.statusNo[this.props.taskData.status]}
               </button>
-              <p className="expect_minute">
+              <div className="expect_minute">
                 ({this.props.taskData.expect_minute}分)
-              </p>
+              </div>
             </div>
             <div className="title">
               <span className="task_name">
@@ -214,17 +219,20 @@ class Task extends React.Component {
           </div>
 
           {/* 作業時間 */}
-          <p className="times">
+          <div className="times">
             作業時間：
             {this.displayActualTime()}
-          </p>
-          {this.displayTaskFinishButton()}
+          </div>
+          {this.displayTaskFinishButton(this.props)}
         </div>
+
+        {/* タスクの詳細置き場 */}
         <TaskDetails
-          task={this.props.taskData}
+          taskData={this.props.taskData}
           TimerManager={this.TimerManager}
-          taskStart={this.taskStart}
+          clickButtonEvent={this.clickButtonEvent}
           className={this.detailsClass}
+          displayTaskFinishButton={this.displayTaskFinishButton}
         />
       </div>
     );

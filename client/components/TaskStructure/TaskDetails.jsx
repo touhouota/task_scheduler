@@ -23,72 +23,60 @@ class TaskDetails extends React.Component {
     // 一時停止
     this.Suspend = 4;
     console.log('TaskDetails props:', props);
-    this.clickButtonEvent = this.clickButtonEvent.bind(this);
-  }
-
-  clickButtonEvent(event) {
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-    const task = Base.parents(event.target, 'task_element');
-    let nextStatus = null;
-    if (this.props.task.status === this.Doing) {
-      nextStatus = this.Suspend;
-    } else {
-      nextStatus = this.Doing;
-    }
-    this.props.taskStart(task.id, nextStatus);
   }
 
   render() {
     return (
       <div
         className={`task_detail hide ${this.props.className.join(' ')}`}
-        data-status={this.props.task.status}
-        data-start_date={this.props.task.updated_at}
-        data-progress={this.props.task.actual_sec}
+        data-status={this.props.taskData.status}
+        data-start_date={this.props.taskData.updated_at}
+        data-progress={this.props.taskData.actual_sec}
       >
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
           <div className="task_button">
             <button
               className="button"
-              onClick={(event) => { this.clickButtonEvent(event); }}
+              onClick={this.props.clickButtonEvent}
             >
-              {this.statusNo[this.props.task.status]}
+              {this.statusNo[this.props.taskData.status]}
             </button>
             <p className="expect_minute">
-                ({this.props.task.expect_minute}分)
+                ({this.props.taskData.expect_minute}分)
             </p>
           </div>
           <div className="title">
             <span className="task_name">
-              {this.props.task.t_name}
+              {this.props.taskData.t_name}
             </span>
           </div>
         </div>
 
         {/* 作業時間 */}
-        <p className="times">
+        <div className="times">
             作業時間：
           <span className="actual_sec">
-            {this.props.TimerManager.convert_hms_from_seconds(this.props.task.actual_sec)}
+            {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
           </span>
-        </p>
+        </div>
 
         {/* タスクのメモ */}
-        <p className="memo">
+        <div className="memo">
           メモ：
-          <span>
-            {this.props.task.memo.replace(/\n/g, '<br>')}
-          </span>
-        </p>
+          <p className="memo_text">
+            {this.props.taskData.memo.replace(/\n/g, '<br>')}
+          </p>
+        </div>
+
+        {this.props.displayTaskFinishButton(this.props)}
       </div>
     );
   }
 }
 
 TaskDetails.propTypes = {
-  task: PropTypes.shape({
+  taskData: PropTypes.shape({
     // タスクID
     id: PropTypes.number,
     // タスク名
@@ -129,6 +117,12 @@ TaskDetails.propTypes = {
     // 作業時間の計算
     calcActualTime: PropTypes.func.isRequired,
   }).isRequired,
+  // 終了ボタンを表示する関数
+  displayTaskFinishButton: PropTypes.func.isRequired,
+  // ボタンがクリックされたときの関数
+  clickButtonEvent: PropTypes.func.isRequired,
+  // この要素のクラス名を指定する
+  className: PropTypes.string.isRequired,
 };
 
 export default TaskDetails;
