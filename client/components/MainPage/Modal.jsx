@@ -120,7 +120,7 @@ class Modal extends React.Component {
       .then((json) => {
         this.updateTaskList(json);
       });
-    ModalProcess.close();
+    ModalProcess.closeModal();
   }
 
   render() {
