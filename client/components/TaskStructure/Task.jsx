@@ -25,7 +25,6 @@ class Task extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
-    this.detailsClass = ['hoge', 'fuga'];
     // 関数たちをthisで使えるようにバインド
     this.taskStart = this.taskStart.bind(this);
     this.statusChange = this.statusChange.bind(this);
@@ -40,6 +39,25 @@ class Task extends React.Component {
       this.TimerManager.set(this.props.taskData.id);
     }
     console.log('Task props.TimerManager:', props.TimerManager);
+  }
+
+  setTaskInformation(taskId, nextStatus) {
+    const task = this.props.taskData;
+    // const formData = new FormData();
+    const formData = Base.createFormData();
+    // formData.append('user_id', Base.get_cookie('user_id'));
+    formData.append('id', taskId);
+    formData.set('status', nextStatus);
+    if (nextStatus === this.Doing) {
+      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
+      formData.set('actual_sec', task.actual_sec);
+    } else {
+      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
+      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+      formData.set('actual_sec', parseInt(actualSec || 0, 10));
+    }
+
+    return formData;
   }
 
   // 実行できるかを確認する
@@ -66,27 +84,38 @@ class Task extends React.Component {
     return null;
   }
 
-  setTaskInformation(taskId, nextStatus) {
-    const task = this.props.taskData;
-    // const formData = new FormData();
-    const formData = Base.createFormData();
-    // formData.append('user_id', Base.get_cookie('user_id'));
-    formData.append('id', taskId);
-    formData.set('status', nextStatus);
-    if (nextStatus === this.Doing) {
-      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
-      formData.set('actual_sec', task.actual_sec);
-    } else {
-      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
-      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
-      formData.set('actual_sec', parseInt(actualSec || 0, 10));
-    }
-
-    return formData;
-  }
-
   updateStatus(task) {
     this.props.updateTaskList(task);
+  }
+
+  clickButtonEvent(event) {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
+    let nextStatus = null;
+    if (this.props.taskData.status === this.Doing) {
+      nextStatus = this.Suspend;
+    } else {
+      nextStatus = this.Doing;
+    }
+    this.taskStart(task.id, nextStatus);
+  }
+
+  clickFinishButtonEvent(event, nextStatus) {
+    // イベントの伝播を止める
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    // 終了時の処理
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
+    this.taskStart(task.id, nextStatus);
+    setTimeout(() => {
+      // もし、モーダルが開いていた場合、閉じる
+      if (ModalProcess.isModalOpen()) {
+        ModalProcess.getModalBack().click();
+      }
+    }, 200);
   }
 
   displayActualTime() {
@@ -117,9 +146,7 @@ class Task extends React.Component {
           <button
             className="button"
             onClick={(event) => {
-              const taskContainer = Base.parents(event.target, 'task_container');
-              const task = taskContainer.querySelector('.task_element');
-              this.taskStart(task.id, this.Finish);
+              this.clickFinishButtonEvent(event, this.Finish);
             }}
             value={this.props.taskData.id}
           >
@@ -128,9 +155,7 @@ class Task extends React.Component {
           <button
             className="button"
             onClick={(event) => {
-              const taskContainer = Base.parents(event.target, 'task_container');
-              const task = taskContainer.querySelector('.task_element');
-              this.taskStart(task.id, this.Incomplete);
+              this.clickFinishButtonEvent(event, this.Incomplete);
             }}
             value={this.props.taskData.id}
           >
@@ -147,20 +172,11 @@ class Task extends React.Component {
     ModalProcess.init();
     const taskParentDOM = Base.parents(event.currentTarget, 'task_container');
     taskParentDOM.querySelector('.task_detail').classList.remove('hide');
-  }
-
-  clickButtonEvent(event) {
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
-    const taskContainer = Base.parents(event.currentTarget, 'task_container');
-    const task = taskContainer.querySelector('.task_element');
-    let nextStatus = null;
-    if (this.props.taskData.status === this.Doing) {
-      nextStatus = this.Suspend;
-    } else {
-      nextStatus = this.Doing;
-    }
-    this.taskStart(task.id, nextStatus);
+    // モーダルにイベントを追加
+    const closeDetailDOM = () => {
+      taskParentDOM.querySelector('.task_detail').classList.add('hide');
+    };
+    ModalProcess.getModalBack().addEventListener('click', closeDetailDOM);
   }
 
 
@@ -231,7 +247,6 @@ class Task extends React.Component {
           taskData={this.props.taskData}
           TimerManager={this.TimerManager}
           clickButtonEvent={this.clickButtonEvent}
-          className={this.detailsClass}
           displayTaskFinishButton={this.displayTaskFinishButton}
         />
       </div>
