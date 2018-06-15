@@ -120,6 +120,14 @@
           border: 1px solid #eee;
         }
       }
+
+      .finish_button {
+        margin-top: 30px;
+
+        .button {
+          @extend .ButtonBase;
+        }
+      }
     }
   }
 }
