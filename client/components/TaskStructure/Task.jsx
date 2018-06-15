@@ -141,6 +141,8 @@ class Task extends React.Component {
   displayThisDetails(event) {
     console.log('click task', event);
     ModalProcess.init();
+    const taskParentDOM = Base.parents(event.currentTarget, 'task_container');
+    taskParentDOM.querySelector('.task_detail').classList.remove('hide');
   }
 
   clickButtonEvent(event) {
@@ -182,48 +184,50 @@ class Task extends React.Component {
 
   render() {
     return (
-      <div
-        className="task_element"
-        id={this.props.taskData.id}
-        data-status={this.props.taskData.status}
-        data-start_date={this.props.taskData.updated_at}
-        data-progress={this.props.taskData.actual_sec}
-        onClick={this.displayThisDetails}
-      >
-        <div className="task_top">
-          {/* タスク名, 実行ボタン, 予想時間 */}
-          <div className="task_button">
-            <button
-              className="button"
-              onClick={(event) => { this.clickButtonEvent(event); }}
-            >
-              {this.statusNo[this.props.taskData.status]}
-            </button>
-            <p className="expect_minute">
-              ({this.props.taskData.expect_minute}分)
-            </p>
+      <div className="task_container">
+        <div
+          className="task_element"
+          id={this.props.taskData.id}
+          data-status={this.props.taskData.status}
+          data-start_date={this.props.taskData.updated_at}
+          data-progress={this.props.taskData.actual_sec}
+          onClick={this.displayThisDetails}
+        >
+          <div className="task_top">
+            {/* タスク名, 実行ボタン, 予想時間 */}
+            <div className="task_button">
+              <button
+                className="button"
+                onClick={(event) => { this.clickButtonEvent(event); }}
+              >
+                {this.statusNo[this.props.taskData.status]}
+              </button>
+              <p className="expect_minute">
+                ({this.props.taskData.expect_minute}分)
+              </p>
+            </div>
+            <div className="title">
+              <span className="task_name">
+                {this.props.taskData.t_name}
+              </span>
+            </div>
           </div>
-          <div className="title">
-            <span className="task_name">
-              {this.props.taskData.t_name}
-            </span>
-          </div>
+
+          {/* 作業時間 */}
+          <p className="times">
+            作業時間：
+            {this.displayActualTime()}
+          </p>
+          {this.displayTaskFinishButton()}
         </div>
-
-        {/* 作業時間 */}
-        <p className="times">
-          作業時間：
-          {this.displayActualTime()}
-        </p>
-        {this.displayTaskFinishButton()}
-
         <TaskDetails
           task={this.props.taskData}
           TimerManager={this.TimerManager}
           taskStart={this.taskStart}
           className={this.detailsClass}
         />
-      </div>);
+      </div>
+    );
   }
 }
 
