@@ -41,41 +41,47 @@ class TaskDetails extends React.Component {
 
   render() {
     return (
-      <div>
-        <div
-          className="task_detail"
-          data-status={this.props.task.status}
-          data-start_date={this.props.task.updated_at}
-          data-progress={this.props.task.actual_sec}
-        >
-          <div className="task_top">
-            {/* タスク名, 実行ボタン, 予想時間 */}
-            <div className="task_button">
-              <button
-                className="button"
-                onClick={(event) => { this.clickButtonEvent(event); }}
-              >
-                {this.statusNo[this.props.task.status]}
-              </button>
-              <p className="expect_minute">
+      <div
+        className={`task_detail hide ${this.props.className.join(' ')}`}
+        data-status={this.props.task.status}
+        data-start_date={this.props.task.updated_at}
+        data-progress={this.props.task.actual_sec}
+      >
+        <div className="task_top">
+          {/* タスク名, 実行ボタン, 予想時間 */}
+          <div className="task_button">
+            <button
+              className="button"
+              onClick={(event) => { this.clickButtonEvent(event); }}
+            >
+              {this.statusNo[this.props.task.status]}
+            </button>
+            <p className="expect_minute">
                 ({this.props.task.expect_minute}分)
-              </p>
-            </div>
-            <div className="title">
-              <span className="task_name">
-                {this.props.task.t_name}
-              </span>
-            </div>
+            </p>
           </div>
-
-          {/* 作業時間 */}
-          <p className="times">
-            作業時間：
-            <span className="actual_sec">
-              {this.props.TimerManager.convert_hms_from_seconds(this.props.task.actual_sec)}
+          <div className="title">
+            <span className="task_name">
+              {this.props.task.t_name}
             </span>
-          </p>
+          </div>
         </div>
+
+        {/* 作業時間 */}
+        <p className="times">
+            作業時間：
+          <span className="actual_sec">
+            {this.props.TimerManager.convert_hms_from_seconds(this.props.task.actual_sec)}
+          </span>
+        </p>
+
+        {/* タスクのメモ */}
+        <p className="memo">
+          メモ：
+          <span>
+            {this.props.task.memo.replace(/\n/g, '<br>')}
+          </span>
+        </p>
       </div>
     );
   }
