@@ -73,7 +73,13 @@
       width: 500px;
       min-height: 200px;
       padding: 10px;
-      background-color: #ffffff;
+      // 見た目
+      background-color: #fff;
+      border: 5px solid #fff; // 基本は枠を見えなくしておく
+
+      &[data-status='1'] {
+        border: 5px solid rgb(252, 134, 130); // 実行時は、枠を表示する
+      }
       // アニメーション設定
       transition-duration: 0.5s;
       transition-timing-function: ease;
