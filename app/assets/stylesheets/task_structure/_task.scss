@@ -22,6 +22,12 @@
         background-color: rgb(252, 134, 130);
       }
 
+      &[data-status='2'],
+      &[data-status='3'] {
+        // background-color: rgb(252, 134, 130);
+        opacity: 0.4;
+      }
+
       .task_top {
         $task_top_width: 80px;
         display: flex;
