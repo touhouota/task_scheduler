@@ -7,57 +7,112 @@
   align-items: flex-start;
   font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', 'メイリオ', 'Osaka', 'MS PGothic', arial, helvetica, sans-serif;
 
-  .task_element {
-    box-sizing: border-box;
-    margin: 5px;
-    padding: 5px;
-    // background-color: rgb(170, 203, 242);
-    // min-width: 150px;
-    transition-duration: 0.5s;
-    transition-timing-function: ease;
-    width: $flex_base_size;
+  .task_container {
+    .task_element {
+      box-sizing: border-box;
+      margin: 5px;
+      padding: 5px;
+      // background-color: rgb(170, 203, 242);
+      // min-width: 150px;
+      transition-duration: 0.5s;
+      transition-timing-function: ease;
+      width: $flex_base_size;
 
-    &[data-status='1'] {
-      background-color: rgb(252, 134, 130);
-    }
+      &[data-status='1'] {
+        background-color: rgb(252, 134, 130);
+      }
 
-    .task_top {
-      $task_top_width: 80px;
-      display: flex;
-      flex-direction: row;
+      .task_top {
+        $task_top_width: 80px;
+        display: flex;
+        flex-direction: row;
 
-      .task_button {
-        width: $task_top_width;
-        text-align: center;
+        .task_button {
+          width: $task_top_width;
+          text-align: center;
 
+          .button {
+            @extend .ButtonBase;
+            width: 100%;
+          }
+
+          .expect_minute {
+            font-size: small;
+            margin: 2px;
+            width: 100%;
+          }
+        }
+
+        .title {
+          width: calc(100% - #{$task_top_width} - 10px);
+          margin-left: 10px;
+
+          .task_name {
+            font-size: large;
+          }
+        }
+      }
+
+      .finish_button {
         .button {
           @extend .ButtonBase;
-          width: 100%;
-        }
-
-        .expect_minute {
-          font-size: small;
-          margin: 2px;
-          width: 100%;
-        }
-      }
-
-      .title {
-        width: calc(100% - #{$task_top_width} - 10px);
-        margin-left: 10px;
-
-        .task_name {
-          font-size: large;
+          width: 60px;
+          margin-right: 10px;
+          text-align: center;
         }
       }
     }
 
-    .finish_button {
-      .button {
-        @extend .ButtonBase;
-        width: 60px;
-        margin-right: 10px;
-        text-align: center;
+    .task_detail {
+      // 要素の位置
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      z-index: 9999;
+      // サイズ
+      width: 500px;
+      min-height: 200px;
+      padding: 10px;
+      background-color: #ffffff;
+      // アニメーション設定
+      transition-duration: 0.5s;
+      transition-timing-function: ease;
+
+      .task_top {
+        display: flex;
+        flex-direction: row;
+
+        .task_button {
+          width: 120px;
+          text-align: center;
+
+          .button {
+            @extend .ButtonBase;
+            width: 100%;
+          }
+        }
+
+        .title {
+          flex: 1;
+          margin-left: 10px;
+          font-size: x-large;
+          font-weight: bold;
+        }
+      }
+
+      .times {
+        font-size: large;
+        margin-top: 15px;
+      }
+
+      .memo {
+        margin-top: 20px;
+
+        .memo_text {
+          margin: 5px;
+          padding: 5px;
+          border: 1px solid #eee;
+        }
       }
     }
   }
