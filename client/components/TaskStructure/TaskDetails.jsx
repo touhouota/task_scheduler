@@ -63,7 +63,7 @@ class TaskDetails extends React.Component {
         <div className="memo">
           メモ：
           <p className="memo_text">
-            {this.props.taskData.memo.replace(/\n/g, '<br>')}
+            {this.props.taskData.memo}
           </p>
         </div>
 
