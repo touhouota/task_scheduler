@@ -26,6 +26,7 @@ const ModalProcess = {
     document.getElementById('modal_area').classList.remove('hide');
   },
 
+  getModalBack: () => document.querySelector('.modal_back'),
 
   getModalData: (formElement) => {
     // const form = document.querySelector('.modal');
@@ -34,6 +35,9 @@ const ModalProcess = {
     formdata.append('authenticity_token', Base.get_token());
     return formdata;
   },
+
+  isModalOpen: () => Boolean(ModalProcess.getModalBack()),
+
 };
 
 export default ModalProcess;
