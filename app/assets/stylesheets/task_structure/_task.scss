@@ -17,6 +17,7 @@
       transition-duration: 0.5s;
       transition-timing-function: ease;
       width: $flex_base_size;
+      cursor: alias;
 
       &[data-status='1'] {
         background-color: rgb(252, 134, 130);
