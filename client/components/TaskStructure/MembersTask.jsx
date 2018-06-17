@@ -83,9 +83,11 @@ class MembersTask extends React.Component {
       <div className="modal members_status hide">
         <h1 className="modal_title">作業達成率ランキング</h1>
         <p className="modal_subscribe">
-          登録した作業を完了している割合でランキングを作成。
+          登録した作業を完了した割合でランキングを作成。
           <br />
           1分ごとに更新しています。
+          <br />
+          表示は、[終了・未完了タスク数] / [登録したタスク総数]です。
         </p>
         <ul className="member_list">
           {this.createMembersTaskNumList()}
