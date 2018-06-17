@@ -34,7 +34,29 @@ class MembersTask extends React.Component {
   }
 
   createMembersTaskNumList() {
-    return this.state.members.map(member => (
+    const members = this.state.members.sort((item1, item2) => {
+      let rate1;
+      let rate2;
+      if (item1.task_num > 0) {
+        rate1 = item1.finish_num / item1.task_num;
+      } else {
+        rate1 = 0;
+      }
+
+      if (item2.task_num > 0) {
+        rate2 = item2.finish_num / item2.task_num;
+      } else {
+        rate2 = 0;
+      }
+
+      if (rate1 < rate2) {
+        return 1;
+      } else if (rate1 > rate2) {
+        return -1;
+      }
+      return 0;
+    });
+    return members.map(member => (
       <li key={member.user_id} className="member">
         <span className={member.user_id}>{member.u_name}</span>:
         <span className="task_num">{member.finish_num}/{member.task_num}</span>
