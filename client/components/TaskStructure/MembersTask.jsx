@@ -69,11 +69,12 @@ class MembersTask extends React.Component {
       }
       return 0;
     });
-    return members.map(member => (
-      <li key={member.user_id} className="member">
-        <span className={member.user_id}>{member.u_name}</span>:
-        <span className="task_num">{member.finish_num}/{member.task_num}</span>
-      </li>
+    return members.map((member, index) => (
+      <tr key={member.user_id} className="member">
+        <td className="index">{index + 1}</td>
+        <td className={`user_name ${member.user_id}`}>{member.u_name}</td>
+        <td className="task_num">{member.finish_num}/{member.task_num}</td>
+      </tr>
     ));
   }
 
@@ -83,13 +84,24 @@ class MembersTask extends React.Component {
       <div className="modal members_status hide">
         <h1 className="modal_title">作業達成率ランキング</h1>
         <p className="modal_subscribe">
-          登録した作業を完了している割合でランキングを作成。
+          登録した作業を完了した割合でランキングを作成。
           <br />
           1分ごとに更新しています。
+          <br />
+          表示は、[終了・未完了タスク数] / [登録したタスク総数]です。
         </p>
-        <ul className="member_list">
-          {this.createMembersTaskNumList()}
-        </ul>
+        <table className="member_list">
+          <thead>
+            <tr key="root">
+              <th className="index">\</th>
+              <th className="user_name">名前</th>
+              <th className="task_num">割合</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.createMembersTaskNumList()}
+          </tbody>
+        </table>
 
         <button
           type="button"
