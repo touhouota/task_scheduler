@@ -8,6 +8,17 @@
 
 .member_list {
   margin: 10px auto 0;
+  border: 1px solid black;
+
+  td,
+  th {
+    padding: 5px;
+    border: 1px solid #ccc;
+  }
+
+  td {
+    text-align: center;
+  }
 
   .member {
     list-style: decimal;
