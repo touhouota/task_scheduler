@@ -71,7 +71,7 @@ class MembersTask extends React.Component {
     });
     return members.map(member => (
       <li key={member.user_id} className="member">
-        <span className={member.user_id}>{member.u_name}</span>:
+        <span className={`user_name ${member.user_id}`}>{member.u_name}</span>:
         <span className="task_num">{member.finish_num}/{member.task_num}</span>
       </li>
     ));
