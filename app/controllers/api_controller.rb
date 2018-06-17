@@ -66,6 +66,25 @@ class ApiController < ApplicationController
     end
   end
 
+  def getMembersTask
+    result = []
+
+    members = Task.joins(:user).select(:u_name, :user_id).group(:user_id)
+    members.each do |member|
+      # 取得したモデルをhashに変換
+      user = member.attributes
+      # タスクの総数
+      sql = 'user_id = ? '
+      user[:task_num] = Task.where(sql, member.user_id).count
+      # 終了したものの数
+      sql += 'and status in (2, 3)'
+      user[:finish_num] = Task.where(sql, member.user_id).count
+      result.push(user)
+    end
+
+    render json: result
+  end
+
   private
 
   # 引数で受け取ったものをマージしてTLを作る
