@@ -19,9 +19,9 @@ window.onload = () => {
   } else {
     /*
      * IDがあるときは、普通にreactのあれこれを描画
-     *
      */
     document.getElementById('append_task').addEventListener('click', Buttons.append_task);
+    document.getElementById('member_status').addEventListener('click', Buttons.members);
     document.getElementById('github').addEventListener('click', Buttons.github);
     TimerManager.watch();
     document.getElementById('logout').addEventListener('click', Buttons.logout);
