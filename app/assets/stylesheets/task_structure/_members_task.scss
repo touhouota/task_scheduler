@@ -1,4 +1,16 @@
-.member {
-  list-style: decimal;
-  margin-bottom: 10px;
+.modal_title {
+  text-align: center;
+}
+
+.modal_subscribe {
+  font-size: small;
+}
+
+.member_list {
+  margin: 10px auto 0;
+
+  .member {
+    list-style: decimal;
+    margin-bottom: 10px;
+  }
 }
