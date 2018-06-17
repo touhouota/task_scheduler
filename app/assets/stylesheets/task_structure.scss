@@ -22,5 +22,15 @@
       // StructureElementに対するスタイル
       @import "./task_structure/structure_element";
     }
+
+    .members_task {
+      $members_task_width: 300px;
+      position: absolute;
+      top: 25%;
+      left: calc(50% - #{$members_task_width / 2});
+      width: $members_task_width;
+      background-color: #fff;
+      @import "./task_structure/members_task";
+    }
   }
 }
