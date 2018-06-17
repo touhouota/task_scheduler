@@ -12,7 +12,10 @@ class MembersTask extends React.Component {
 
     this.createMembersTaskNumList = this.createMembersTaskNumList.bind(this);
     this.getMembersTaskNumRequest = this.getMembersTaskNumRequest.bind(this);
+    this.setMembersStatusTimer = this.setMembersStatusTimer.bind(this);
+    this.resetMembersStatusTimer = this.resetMembersStatusTimer.bind(this);
     this.getMembersTaskNumRequest();
+    this.timer = this.setMembersStatusTimer();
   }
 
   getMembersTaskNumRequest() {
@@ -31,6 +34,16 @@ class MembersTask extends React.Component {
           members: json,
         });
       });
+  }
+
+  setMembersStatusTimer() {
+    return setInterval(this.getMembersTaskNumRequest, 1000 * 60);
+  }
+
+  resetMembersStatusTimer() {
+    clearInterval(this.timer);
+    this.getMembersTaskNumRequest();
+    this.timer = this.setMembersStatusTimer();
   }
 
   createMembersTaskNumList() {
@@ -67,10 +80,24 @@ class MembersTask extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <div className="members_task">
-        <ul>
+      <div className="modal members_status hide">
+        <h1 className="modal_title">作業達成率ランキング</h1>
+        <p className="modal_subscribe">
+          登録した作業を完了している割合でランキングを作成。
+          <br />
+          1分ごとに更新しています。
+        </p>
+        <ul className="member_list">
           {this.createMembersTaskNumList()}
         </ul>
+
+        <button
+          type="button"
+          className="button"
+          onClick={this.resetMembersStatusTimer}
+        >
+          ランキング更新
+        </button>
       </div>
     );
   }
