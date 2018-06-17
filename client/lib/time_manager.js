@@ -1,4 +1,5 @@
 const TimerManager = {
+  // タスクのタイマーを管理する
   timer: null,
   taskId: null,
 

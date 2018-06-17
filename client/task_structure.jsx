@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Structure from './components/TaskStructure/Structure';
+import MembersTask from './components/TaskStructure/MembersTask';
 
 import Buttons from './lib/buttons_events';
 import TimerManager from './lib/time_manager';
@@ -18,9 +19,9 @@ window.onload = () => {
   } else {
     /*
      * IDがあるときは、普通にreactのあれこれを描画
-     *
      */
     document.getElementById('append_task').addEventListener('click', Buttons.append_task);
+    document.getElementById('member_status').addEventListener('click', Buttons.members);
     document.getElementById('github').addEventListener('click', Buttons.github);
     TimerManager.watch();
     document.getElementById('logout').addEventListener('click', Buttons.logout);
@@ -30,6 +31,7 @@ window.onload = () => {
         <Structure
           TimerManager={TimerManager}
         />
+        <MembersTask />
       </div>,
       document.querySelector('.structure_container'),
     );

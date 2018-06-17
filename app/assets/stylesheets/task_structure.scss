@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import './variable/variables';
+@import './parts/button_parts.scss';
 
 .task_structure .container {
   width: 95%;
@@ -21,6 +22,22 @@
       height: 100%;
       // StructureElementに対するスタイル
       @import "./task_structure/structure_element";
+    }
+
+    .members_status {
+      $members_task_width: 400px;
+      position: absolute;
+      top: 25%;
+      left: calc(50% - #{$members_task_width / 2});
+      z-index: 999;
+      min-width: $members_task_width;
+      @import "./task_structure/members_task";
+
+      .button {
+        @extend .ButtonBase;
+        margin-top: 10px;
+        width: 120px;
+      }
     }
   }
 }
