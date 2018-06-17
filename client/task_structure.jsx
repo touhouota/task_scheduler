@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Structure from './components/TaskStructure/Structure';
+import MembersTask from './components/TaskStructure/MembersTask';
 
 import Buttons from './lib/buttons_events';
 import TimerManager from './lib/time_manager';
@@ -30,6 +31,7 @@ window.onload = () => {
         <Structure
           TimerManager={TimerManager}
         />
+        <MembersTask />
       </div>,
       document.querySelector('.structure_container'),
     );
