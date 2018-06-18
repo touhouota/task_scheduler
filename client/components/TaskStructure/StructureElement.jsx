@@ -10,12 +10,15 @@ class StructureElement extends React.Component {
   constructor(props) {
     super(props);
     console.log('structureElement', props);
+    this.sortOrderByTaskStatus = this.sortOrderByTaskStatus.bind(this);
+    this.createTaskElements = this.createTaskElements.bind(this);
   }
 
   /*
    * タスクの順番を指定する
    */
   sortOrderByTaskStatus(taskList) {
+    console.log('structureElement', this.props);
     return taskList.sort((item1, item2) => {
       /*
        * sortに関数を渡すと、その関数に従ってソートしてくれる
@@ -39,6 +42,7 @@ class StructureElement extends React.Component {
         taskData={task}
         updateTaskList={this.props.updateTaskList}
         TimerManager={this.props.TimerManager}
+        setTaskInformation={this.props.setTaskInformation}
       />
     ));
   }

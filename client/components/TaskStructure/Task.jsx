@@ -41,25 +41,6 @@ class Task extends React.Component {
     console.log('Task props.TimerManager:', props.TimerManager);
   }
 
-  setTaskInformation(taskId, nextStatus) {
-    const task = this.props.taskData;
-    // const formData = new FormData();
-    const formData = Base.createFormData();
-    // formData.append('user_id', Base.get_cookie('user_id'));
-    formData.append('id', taskId);
-    formData.set('status', nextStatus);
-    if (nextStatus === this.Doing) {
-      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
-      formData.set('actual_sec', task.actual_sec);
-    } else {
-      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
-      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
-      formData.set('actual_sec', parseInt(actualSec || 0, 10));
-    }
-
-    return formData;
-  }
-
   // 実行できるかを確認する
   taskStart(taskId, nextStatus) {
     // 次の状態が実行でないとき => タスクが動いているのを止めるだけで良い
@@ -182,7 +163,7 @@ class Task extends React.Component {
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
-    const formData = this.setTaskInformation(taskId, nextStatus);
+    const formData = this.props.setTaskInformation(taskId, nextStatus);
 
     const path = Base.get_path();
     fetch(`${path}/api/task/statusChange`, {
