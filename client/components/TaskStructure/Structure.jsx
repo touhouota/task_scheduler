@@ -10,12 +10,23 @@ class Structure extends React.Component {
     super(props);
     this.createStructureElements = this.createStructureElements.bind(this);
     this.updateTaskList = this.updateTaskList.bind(this);
+    this.setTaskInformation = this.setTaskInformation.bind(this);
 
-    this.getTask();
+    // タスク実行
+    this.Doing = 1;
+    // タスク完了
+    this.Finish = 2;
+    // タスクが途中だったり未完了だったり
+    this.Incomplete = 3;
+    // 一時停止
+    this.Suspend = 4;
 
     this.state = {
       tasks: [],
     };
+
+    this.getTask();
+
     // 論文執筆に関する手順Map
     const ReportProcess = new Map()
       .set('organization', new Map()
@@ -134,9 +145,33 @@ class Structure extends React.Component {
         tasks={taskList}
         TimerManager={this.props.TimerManager}
         updateTaskList={this.updateTaskList}
+        setTaskInformation={this.setTaskInformation}
       />);
     });
     return structureElements;
+  }
+
+  // TODO: 他のタスクを停止したときに、自分のタスクをもとに計算してしまう問題
+  setTaskInformation(taskId, nextStatus) {
+    console.log('setTaskInformation:', this.state.tasks, taskId, nextStatus);
+    // 指定されたタスクのjsonデータを取得
+    const task = this.state.tasks.find(taskElem => parseInt(taskElem.id, 10) === parseInt(taskId, 10));
+    console.log('setTaskInformation:', task);
+    // サーバへデータを送るためのFormDataを作成
+    const formData = Base.createFormData();
+    formData.append('id', taskId);
+    formData.set('status', nextStatus);
+    console.log('setTaskInformation:');
+    if (nextStatus === this.Doing) {
+      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
+      formData.set('actual_sec', task.actual_sec);
+    } else {
+      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
+      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+      formData.set('actual_sec', parseInt(actualSec || 0, 10));
+    }
+
+    return formData;
   }
 
   render() {
