@@ -8,9 +8,9 @@
   height: 100%;
   position: relative;
   // ヘッダー
-  @import "main_page/header";
+  @import "./main_page/header";
   // ボタン関連
-  @import "main_page/main_buttons";
+  @import "./main_page/main_buttons";
   // ページのコンテナを置く場所を
   .main_container {
     // タスクリストの場所

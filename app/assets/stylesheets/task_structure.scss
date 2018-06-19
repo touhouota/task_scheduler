@@ -12,6 +12,7 @@
 
   header {
     height: $header_height;
+    width: 100%;
     @import "./task_structure/buttons.scss";
   }
 

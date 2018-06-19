@@ -69,13 +69,19 @@ class MembersTask extends React.Component {
       }
       return 0;
     });
-    return members.map((member, index) => (
-      <tr key={member.user_id} className="member">
-        <td className="index">{index + 1}</td>
-        <td className={`user_name ${member.user_id}`}>{member.u_name}</td>
-        <td className="task_num">{member.finish_num}/{member.task_num}</td>
-      </tr>
-    ));
+    return members.map((member, index) => {
+      const rate = Base.round_at(member.finish_num / member.task_num, 1);
+      return (
+        <tr key={member.user_id} className="member">
+          <td className="index">{index + 1}</td>
+          <td className={`user_name ${member.user_id}`}>{member.u_name}</td>
+          <td className="finish_rate">
+            {rate * 100}%
+            <span className="task_num">({member.finish_num}/{member.task_num})</span>
+          </td>
+        </tr>
+      );
+    });
   }
 
   render() {
