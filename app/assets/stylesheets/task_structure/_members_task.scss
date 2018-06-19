@@ -23,5 +23,12 @@
   .member {
     list-style: decimal;
     margin-bottom: 10px;
+
+    .finish_rate {
+      .task_num {
+        font-size: small;
+        margin-left: 5px;
+      }
+    }
   }
 }
