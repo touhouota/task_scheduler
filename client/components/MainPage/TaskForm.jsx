@@ -3,7 +3,11 @@ import React from 'react';
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    this.state = {
+      value: props.value,
+    };
+
+    this.changeValue = this.changeValue.bind(this);
   }
 
   createMinuteList() {
@@ -41,14 +45,21 @@ class TaskForm extends React.Component {
     });
   }
 
+  changeValue(e) {
+    this.setState({
+      value: e.currentTarget.value,
+    });
+  }
+
   render() {
     if (this.props.type === 'textarea') {
       return (
         <textarea
           name={this.props.name}
           placeholder={this.props.placeholder}
+          onChange={this.changeValue}
         >
-          {this.props.value}
+          {this.state.value}
         </textarea>
       );
     } else if (this.props.type === 'time') {
@@ -74,9 +85,12 @@ class TaskForm extends React.Component {
             list="minuteList"
             min={0}
             step={5}
-            value={this.props.value}
+            value={this.state.value}
             required={this.props.required}
-            onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
+            onChange={(event) => {
+              this.changeValue(event);
+              this.props.checkValidation(this.props.name, event);
+            }}
             onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
           />
           <datalist id="minuteList">
@@ -91,7 +105,11 @@ class TaskForm extends React.Component {
         name={this.props.name}
         placeholder={this.props.placeholder}
         required={this.props.required}
-        onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
+        value={this.state.value}
+        onChange={(event) => {
+          this.changeValue(event);
+          this.props.checkValidation(this.props.name, event);
+        }}
         onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
       />
     );
