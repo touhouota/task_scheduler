@@ -20,7 +20,6 @@ class TaskDetails extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
-    console.log('TaskDetails props:', props);
   }
 
   render() {
@@ -31,6 +30,7 @@ class TaskDetails extends React.Component {
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
       >
+        <button className="button">タスク修正</button>
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
           <div className="task_button">
