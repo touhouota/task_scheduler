@@ -30,7 +30,6 @@ class TaskDetails extends React.Component {
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
       >
-        <button className="button">タスク修正</button>
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
           <div className="task_button">
