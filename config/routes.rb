@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post '/api/tasks/create', to: 'api#insert_task'
   get '/api/tasks/membersTask/:user_id', to: 'api#getMembersTask'
   post '/api/task/statusChange', to: 'api#statusChange'
+  post '/api/task/modify', to: 'api#taskModify'
   #   end
   # end
 end

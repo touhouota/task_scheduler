@@ -34,16 +34,23 @@ class ApiController < ApplicationController
   end
 
   def insert_task
-    task_info = {
-      t_name: params[:task_name],
-      memo: params[:task_memo],
-      label: params[:task_label],
-      expect_minute: params[:expect_minute]
-    }
+    task_info = task_params
     user = User.find_by(user_id: params[:user_id])
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
+      tl_insert(task_id: @task.id)
+      render json: @task
+    else
+      render json: @task.errors
+    end
+  end
+
+  def taskModify
+    @task = Task.find(params[:id])
+    task_info = task_params
+    @task.update_attributes(task_info)
+    if @task.save
       tl_insert(task_id: @task.id)
       render json: @task
     else
@@ -98,5 +105,26 @@ class ApiController < ApplicationController
       content: tl_content
     )
     insert_timeline(tl_item)
+  end
+
+  def task_params_permit
+    params.permit(:task_name, :task_label, :task_memo, :expect_minute)
+  end
+
+  def task_params
+    hash = {}
+    task_params_permit.each do |key, value|
+      case key
+      when 'task_name'
+        hash.store(:t_name, value)
+      when 'task_label'
+        hash.store(:label, value)
+      when 'task_memo'
+        hash.store(:memo, value)
+      when 'expect_minute'
+        hash.store(:expect_minute, value)
+      end
+    end
+    hash
   end
 end
