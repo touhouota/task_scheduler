@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import './variable/variables';
 @import './parts/button_parts.scss';
+@import './main_page/modal.scss';
 
 .task_structure .container {
   width: 95%;
@@ -26,7 +27,6 @@
     }
 
     .members_status {
-      $members_task_width: 400px;
       position: absolute;
       top: 25%;
       left: calc(50% - #{$members_task_width / 2});
@@ -40,5 +40,7 @@
         width: 120px;
       }
     }
+    // 修正用のモーダル
+    @import "./task_structure/modify_modal";
   }
 }

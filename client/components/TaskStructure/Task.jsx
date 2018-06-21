@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TaskDetails from './TaskDetails';
+import ModifyModal from './ModifyModal';
 
 import Base from '../../lib/base_object';
 import ModalProcess from '../../lib/modal_process';
@@ -32,6 +33,7 @@ class Task extends React.Component {
     this.displayThisDetails = this.displayThisDetails.bind(this);
     this.displayTaskFinishButton = this.displayTaskFinishButton.bind(this);
     this.clickButtonEvent = this.clickButtonEvent.bind(this);
+    this.modifyModalOpen = this.modifyModalOpen.bind(this);
     this.TimerManager = props.TimerManager;
 
     // このタスクが実行状態の場合、実行する
@@ -94,7 +96,7 @@ class Task extends React.Component {
     setTimeout(() => {
       // もし、モーダルが開いていた場合、閉じる
       if (ModalProcess.isModalOpen()) {
-        ModalProcess.getModalBack().click();
+        document.querySelector('.modal_back').click();
       }
     }, 200);
   }
@@ -160,6 +162,19 @@ class Task extends React.Component {
     ModalProcess.getModalBack().addEventListener('click', closeDetailDOM);
   }
 
+  // 修正用のモーダルを開く
+  modifyModalOpen(event) {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    const modifyModal = document.getElementById(`modify_${this.props.taskData.id}`);
+    ModalProcess.init();
+    ModalProcess.getModalBack().addEventListener('click', () => {
+      modifyModal.classList.add('hide');
+    });
+    console.log('modifyModalOpen', modifyModal);
+    modifyModal.classList.remove('hide');
+  }
+
 
   // 状態変更だけをする
   statusChange(taskId, nextStatus) {
@@ -221,6 +236,13 @@ class Task extends React.Component {
             {this.displayActualTime()}
           </div>
           {this.displayTaskFinishButton(this.props)}
+
+          <button
+            className="button"
+            onClick={this.modifyModalOpen}
+          >
+            タスク修正
+          </button>
         </div>
 
         {/* タスクの詳細置き場 */}
@@ -229,6 +251,10 @@ class Task extends React.Component {
           TimerManager={this.TimerManager}
           clickButtonEvent={this.clickButtonEvent}
           displayTaskFinishButton={this.displayTaskFinishButton}
+        />
+        <ModifyModal
+          updateTaskList={this.props.updateTaskList}
+          task={this.props.taskData}
         />
       </div>
     );

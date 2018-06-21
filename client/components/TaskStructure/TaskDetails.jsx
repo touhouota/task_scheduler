@@ -20,7 +20,6 @@ class TaskDetails extends React.Component {
     this.Incomplete = 3;
     // 一時停止
     this.Suspend = 4;
-    console.log('TaskDetails props:', props);
   }
 
   render() {
