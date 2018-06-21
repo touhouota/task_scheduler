@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TaskDetails from './TaskDetails';
+import ModifyModal from './ModifyModal';
 
 import Base from '../../lib/base_object';
 import ModalProcess from '../../lib/modal_process';
@@ -229,6 +230,10 @@ class Task extends React.Component {
           TimerManager={this.TimerManager}
           clickButtonEvent={this.clickButtonEvent}
           displayTaskFinishButton={this.displayTaskFinishButton}
+        />
+        <ModifyModal
+          updateTaskList={this.props.updateTaskList}
+          task={this.props.taskData}
         />
       </div>
     );
