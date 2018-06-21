@@ -1,0 +1,11 @@
+@import "../variable/variables";
+@import "../main_page/modal";
+
+.modify_modal {
+  @extend .modal;
+  width: $members_task_width;
+  position: absolute;
+  top: 25%;
+  left: calc(50% - #{$members_task_width / 2});
+  z-index: 9999;
+}
