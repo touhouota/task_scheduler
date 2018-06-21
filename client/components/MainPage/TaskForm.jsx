@@ -47,7 +47,9 @@ class TaskForm extends React.Component {
         <textarea
           name={this.props.name}
           placeholder={this.props.placeholder}
-        />
+        >
+          {this.props.value}
+        </textarea>
       );
     } else if (this.props.type === 'time') {
       return (
@@ -72,6 +74,7 @@ class TaskForm extends React.Component {
             list="minuteList"
             min={0}
             step={5}
+            value={this.props.value}
             required={this.props.required}
             onChange={(event) => { this.props.checkValidation(this.props.name, event); }}
             onBlur={(event) => { this.props.checkValidation(this.props.name, event); }}
