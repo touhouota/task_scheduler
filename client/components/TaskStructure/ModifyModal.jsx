@@ -31,10 +31,62 @@ class ModifyModal extends React.Component {
       label: 'その他',
     },
     ];
+    this.state = {
+      // 入力されているかどうか
+      task_name: Boolean(props.task.t_name),
+      expect_minute: Boolean(props.task.expect_minute),
+    };
+    this.taskModify = this.taskModify.bind(this);
+    this.chechValidate = this.chechValidate.bind(this);
+  }
+
+  chechValidate(formName, event) {
+    const nowState = this.state;
+    console.log('checkValidation:', formName, this.state);
+    switch (formName) {
+      case 'task_name':
+        if (event.target.validationMessage) {
+          nowState.task_name = false;
+        } else {
+          nowState.task_name = true;
+        }
+        break;
+      case 'expect_minute':
+        if (event.target.validationMessage) {
+          nowState.expect_minute = false;
+        } else {
+          nowState.expect_minute = true;
+        }
+        break;
+      default:
+    }
+
+    this.setState({
+      task_name: nowState.task_name,
+      expect_minute: nowState.expect_minute,
+    });
   }
 
   taskModify() {
-
+    const modal = document.querySelector(`.modify_${this.props.task.id}`);
+    const modalData = ModalProcess.getModalData(modal);
+    modalData.append('id', this.props.task.id);
+    // TODO: タスクの情報をサーバへ送る
+    const path = Base.get_path();
+    fetch(`${path}/api/task/modify`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'X-CSRF-Token': Base.get_token(),
+      },
+      credentials: 'same-origin',
+      body: modalData,
+    })
+      .then(response => response.json())
+      .then((json) => {
+        console.log('ModifyModal:', json);
+        this.props.updateTaskList(json);
+      });
   }
 
   render() {
@@ -77,6 +129,7 @@ class ModifyModal extends React.Component {
             name="expect_minute"
             placeholder="入力するか選んで▼"
             value={this.props.task.expect_minute}
+            checkValidation={this.chechValidate}
             required="true"
           />
         </label>
@@ -96,6 +149,7 @@ class ModifyModal extends React.Component {
         <button
           type="button"
           onClick={this.taskModify}
+          disabled={!this.state.task_name || !this.state.expect_minute}
         >
             タスクを修正
         </button>
