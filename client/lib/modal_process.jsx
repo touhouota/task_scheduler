@@ -29,7 +29,6 @@ const ModalProcess = {
   getModalBack: () => document.querySelector('.modal_back'),
 
   getModalData: (formElement) => {
-    // const form = document.querySelector('.modal');
     const formdata = new FormData(formElement);
     formdata.append('user_id', Base.get_cookie('user_id'));
     formdata.append('authenticity_token', Base.get_token());

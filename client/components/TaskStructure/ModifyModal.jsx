@@ -68,7 +68,8 @@ class ModifyModal extends React.Component {
   }
 
   taskModify() {
-    const modal = document.querySelector(`.modify_${this.props.task.id}`);
+    const modal = document.getElementById(`modify_${this.props.task.id}`);
+    console.log(modal);
     const modalData = ModalProcess.getModalData(modal);
     modalData.append('id', this.props.task.id);
     // TODO: タスクの情報をサーバへ送る
@@ -84,14 +85,18 @@ class ModifyModal extends React.Component {
     })
       .then(response => response.json())
       .then((json) => {
-        console.log('ModifyModal:', json);
+        // きちんと処理が終わったら、更新する
         this.props.updateTaskList(json);
+        // モーダルを閉じる
+        modal.classList.add('hide');
+        // TODO: モーダルを閉じる処理をあれこれ
+        ModalProcess.backgroundClose();
       });
   }
 
   render() {
     return (
-      <form className={`modify_modal modify_${this.props.task.id}`}>
+      <form className="modify_modal hide" id={`modify_${this.props.task.id}`}>
         <h2>タスクの修正</h2>
         <label>
           <span className="modal_label">
