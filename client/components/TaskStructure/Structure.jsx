@@ -114,11 +114,33 @@ class Structure extends React.Component {
     })
       .then(response => response.json())
       .then((json) => {
-        // this.updateTaskList(json);
         json.forEach((item) => {
           this.updateTaskList(item);
         });
       });
+  }
+
+  // タスクの情報をformDataに追加する
+  setTaskInformation(taskId, nextStatus) {
+    console.log('setTaskInformation:', this.state.tasks, taskId, nextStatus);
+    // 指定されたタスクのjsonデータを取得
+    const task = this.state.tasks.find(taskElem => parseInt(taskElem.id, 10) === parseInt(taskId, 10));
+    console.log('setTaskInformation:', task);
+    // サーバへデータを送るためのFormDataを作成
+    const formData = Base.createFormData();
+    formData.append('id', taskId);
+    formData.set('status', nextStatus);
+    console.log('setTaskInformation:');
+    if (nextStatus === this.Doing) {
+      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
+      formData.set('actual_sec', task.actual_sec);
+    } else {
+      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
+      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
+      formData.set('actual_sec', parseInt(actualSec || 0, 10));
+    }
+
+    return formData;
   }
 
   updateTaskList(taskData) {
@@ -149,29 +171,6 @@ class Structure extends React.Component {
       />);
     });
     return structureElements;
-  }
-
-  // TODO: 他のタスクを停止したときに、自分のタスクをもとに計算してしまう問題
-  setTaskInformation(taskId, nextStatus) {
-    console.log('setTaskInformation:', this.state.tasks, taskId, nextStatus);
-    // 指定されたタスクのjsonデータを取得
-    const task = this.state.tasks.find(taskElem => parseInt(taskElem.id, 10) === parseInt(taskId, 10));
-    console.log('setTaskInformation:', task);
-    // サーバへデータを送るためのFormDataを作成
-    const formData = Base.createFormData();
-    formData.append('id', taskId);
-    formData.set('status', nextStatus);
-    console.log('setTaskInformation:');
-    if (nextStatus === this.Doing) {
-      // 次が実行のとき(今が動いていないとき)、そのまま今の時間を送る
-      formData.set('actual_sec', task.actual_sec);
-    } else {
-      // 次が実行でないとき(今が動いているとき)、これまでの進捗と計測した時間を合わせて送る
-      const actualSec = this.props.TimerManager.calcActualTime(task.updated_at) + task.actual_sec;
-      formData.set('actual_sec', parseInt(actualSec || 0, 10));
-    }
-
-    return formData;
   }
 
   render() {

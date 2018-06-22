@@ -1,10 +1,6 @@
 import React from 'react';
 
 import Task from './Task';
-// import Modal from './Modal';
-
-// import Base from '../../lib/base_object';
-// import ModalProcess from '../../lib/modal_process';
 
 class StructureElement extends React.Component {
   constructor(props) {

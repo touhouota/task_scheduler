@@ -18,6 +18,7 @@ class MembersTask extends React.Component {
     this.timer = this.setMembersStatusTimer();
   }
 
+  // 仲間のタスク実行状況を取得する関数
   getMembersTaskNumRequest() {
     const path = Base.get_path();
     const userId = Base.get_cookie('user_id');
@@ -36,16 +37,25 @@ class MembersTask extends React.Component {
       });
   }
 
+  /**
+   * 仲間の様子を定期的に取得するタイマーをセットし、タイマーIDを返す
+   */
   setMembersStatusTimer() {
     return setInterval(this.getMembersTaskNumRequest, 1000 * 60);
   }
 
+  /**
+   * 手動で仲間の様子を取得する
+   */
   resetMembersStatusTimer() {
     clearInterval(this.timer);
     this.getMembersTaskNumRequest();
     this.timer = this.setMembersStatusTimer();
   }
 
+  /*
+   * 各ユーザのタスク達成状況を計算
+   */
   createMembersTaskNumList() {
     const members = this.state.members.sort((item1, item2) => {
       let rate1;
@@ -90,11 +100,9 @@ class MembersTask extends React.Component {
       <div className="modal members_status hide">
         <h1 className="modal_title">作業達成率ランキング</h1>
         <p className="modal_subscribe">
-          登録した作業を完了した割合でランキングを作成。
+          登録した作業をどのくらい終わらせているかランキング。
           <br />
           1分ごとに更新しています。
-          <br />
-          表示は、[終了・未完了タスク数] / [登録したタスク総数]です。
         </p>
         <table className="member_list">
           <thead>
