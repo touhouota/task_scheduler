@@ -6,7 +6,13 @@ class ApiController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(user_id: user_id)
     if @user
-      render json: @user
+      cookies.signed[:user_id] = {
+        value: @user.user_id,
+        path: '/b1013179/task_scheduler',
+        expires: 1.month.from_now
+      }
+      # render json: @user
+      redirect_to '/b1013179/task_scheduler/structure/main/' + @user.user_id
     else
       render json: {
         u_name: 'ないよ'
