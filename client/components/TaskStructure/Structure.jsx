@@ -4,6 +4,7 @@ import StructureElement from './StructureElement';
 import Modal from '../MainPage/Modal';
 
 import Base from '../../lib/base_object';
+import CustomError from '../../lib/custom_error';
 
 class Structure extends React.Component {
   constructor(props) {
@@ -114,9 +115,21 @@ class Structure extends React.Component {
     })
       .then(response => response.json())
       .then((json) => {
-        json.forEach((item) => {
-          this.updateTaskList(item);
-        });
+        if (json.data instanceof Array) {
+          json.data.forEach((item) => {
+            this.updateTaskList(item);
+          });
+        } else {
+          throw CustomError(json.message);
+        }
+      })
+      .catch((err) => {
+        console.error(err.name, err.message);
+        if (err instanceof CustomError) {
+          window.location = path;
+        } else {
+          alert(err.message);
+        }
       });
   }
 
