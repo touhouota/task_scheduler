@@ -18,4 +18,14 @@
       vertical-align: middle;
     }
   }
+
+  form {
+    display: inline;
+
+    .button {
+      @extend .ButtonBase;
+      width: 140px;
+      padding: 3px;
+    }
+  }
 }
