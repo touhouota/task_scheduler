@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/login', to: 'login#index'
   # ログイン処理
   get '/api/login', to: 'api#login'
+  get '/api/logout', to: 'api#logout'
 
   # メイン画面
   get '/main/:user_id', to: 'main_page#index'
