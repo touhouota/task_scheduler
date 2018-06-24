@@ -24,7 +24,6 @@ window.onload = () => {
     document.getElementById('member_status').addEventListener('click', Buttons.members);
     document.getElementById('github').addEventListener('click', Buttons.github);
     TimerManager.watch();
-    document.getElementById('logout').addEventListener('click', Buttons.logout);
 
     ReactDOM.render(
       <div className="Structure_Component">
