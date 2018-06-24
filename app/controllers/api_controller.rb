@@ -20,6 +20,11 @@ class ApiController < ApplicationController
     end
   end
 
+  def logout
+    cookies.delete(:user_id, path: '/b1013179/task_scheduler')
+    redirect_to controller: 'login', action: 'index', status: 301
+  end
+
   # タスクの一覧を取得する
   def tasks
     @tasks = Task.all
@@ -29,14 +34,19 @@ class ApiController < ApplicationController
 
   # 特定のユーザ
   def user_tasks
-    user_id = params[:user_id]
-    @tasks = Task.where(user_id: user_id, deleted: 0, status: [0, 1, 4])
+    # user_id = params[:user_id]
+    if cookies.signed[:user_id]
+      user_id = cookies.signed[:user_id]
+      @tasks = Task.where(user_id: user_id, deleted: 0, status: [0, 1, 4])
 
-    # タイムラインを追加
-    tl_insert
+      # タイムラインを追加
+      tl_insert
 
-    # クライアント側にデータを返す
-    render json: @tasks
+      # クライアント側にデータを返す
+      render json: @tasks
+    else
+      redirect_to '/b1013179/task_scheduler/'
+    end
   end
 
   def insert_task
