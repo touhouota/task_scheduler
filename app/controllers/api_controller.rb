@@ -11,7 +11,6 @@ class ApiController < ApplicationController
         path: '/b1013179/task_scheduler',
         expires: 1.month.from_now
       }
-      # render json: @user
       redirect_to '/b1013179/task_scheduler/structure/main/' + @user.user_id
     else
       render json: {
@@ -43,15 +42,17 @@ class ApiController < ApplicationController
       tl_insert
 
       # クライアント側にデータを返す
-      render json: @tasks
+      render json: { data: @tasks, message: '正常終了' }
     else
-      redirect_to '/b1013179/task_scheduler/'
+      # redirect_to '/b1013179/task_scheduler/'
+      render json: { data: nil, message: 'user_idがありません' }
     end
   end
 
   def insert_task
     task_info = task_params
-    user = User.find_by(user_id: params[:user_id])
+    # user = User.find_by(user_id: params[:user_id])
+    user = User.find_by(user_id: cookies.signed[:user_id])
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
