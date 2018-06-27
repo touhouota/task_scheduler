@@ -1,6 +1,8 @@
 class ApiController < ApplicationController
   protect_from_forgery with: :null_session
 
+  before_action :print_params
+
   # ログイン処理
   def login
     user_id = params[:user_id]
@@ -143,5 +145,12 @@ class ApiController < ApplicationController
       end
     end
     hash
+  end
+
+  def print_params
+    puts "params: #{params[:user_id]}"
+    puts "cookies: #{cookies.signed[:user_id]}"
+    cookies[:hoge] = params[:user_id]
+    puts "signed test: #{cookies.signed[:hoge]}"
   end
 end

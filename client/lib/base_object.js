@@ -22,7 +22,7 @@ const Base = {
       formData = new FormData();
     }
 
-    formData.append('user_id', Base.get_cookie('user_id'));
+    // formData.append('user_id', Base.get_cookie('user_id'));
     return formData;
   },
 
