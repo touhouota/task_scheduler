@@ -109,6 +109,15 @@ class Task extends React.Component {
     );
   }
 
+  displayExpectMinute() {
+    const expectMinute = this.props.taskData.expect_minute;
+    return (
+      <span className="expect_minute">
+        ({this.props.TimerManager.convert_hms_from_seconds(expectMinute * 60)})
+      </span>
+    );
+  }
+
   // メモがあれば表示する
   displayMemo() {
     if (this.props.taskData.memo) {
@@ -200,6 +209,7 @@ class Task extends React.Component {
   }
 
   render() {
+    const path = Base.get_path();
     return (
       <div className="task_container">
         <div
@@ -212,17 +222,6 @@ class Task extends React.Component {
         >
           <div className="task_top">
             {/* タスク名, 実行ボタン, 予想時間 */}
-            <div className="task_button">
-              <button
-                className="button"
-                onClick={this.clickButtonEvent}
-              >
-                {this.statusNo[this.props.taskData.status]}
-              </button>
-              <div className="expect_minute">
-                ({this.props.taskData.expect_minute}分)
-              </div>
-            </div>
             <div className="title">
               <span className="task_name">
                 {this.props.taskData.t_name}
@@ -232,8 +231,9 @@ class Task extends React.Component {
 
           {/* 作業時間 */}
           <div className="times">
-            作業時間：
+            <img className="time_icon" src={`${path}/assets/time.png`} />
             {this.displayActualTime()}
+            {this.displayExpectMinute()}
           </div>
           {this.displayTaskFinishButton(this.props)}
 
