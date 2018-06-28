@@ -85,7 +85,17 @@
 
         .icon {
           @extend .BaseIcon;
-          cursor: pointer;
+          margin: 0 5px;
+          opacity: 0.2;
+
+          &.modify {
+            @extend .Clickable;
+            margin-right: 15px;
+          }
+
+          &.clickable {
+            @extend .Clickable;
+          }
         }
       }
     }
