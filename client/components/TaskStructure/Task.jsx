@@ -42,14 +42,17 @@ class Task extends React.Component {
     }
   }
 
+  // renderされたときの処理
   componentDidMount() {
     console.log('componentDitUpdate');
     this.clickableIconChange();
   }
 
-  shouldComponentUpdate() {
+  // コンポーネントの更新が起こったときに行われる処理
+  componentDidUpdate() {
     console.log('shouldComponentUpdate');
     this.clickableIconChange();
+    return true;
   }
 
   // 実行できるかを確認する
@@ -90,19 +93,20 @@ class Task extends React.Component {
     icons.forEach((icon) => {
       icon.classList.remove('clickable');
     });
-    // 場合分け
+
+    console.log('now_status:', this.props.taskData.status);
+
+    // 現在のタスクの状態により、場合分けする
     if (this.props.taskData.status === this.Doing) {
-      // 1 => それ以外のアイコンを押せるようにする
+      // 今が実行中のとき、それ以外のアイコンを押せるようにする
       icons.forEach((icon) => {
-        console.log('実行中', icon.classList);
-        if (icon.classList.contains('start')) {
+        if (!icon.classList.contains('start')) {
           icon.classList.add('clickable');
         }
       });
     } else {
       icons.forEach((icon) => {
-        console.log('実行中でない', icon.classList);
-        if (!icon.classList.contains('start')) {
+        if (icon.classList.contains('start')) {
           icon.classList.add('clickable');
         }
       });
@@ -256,16 +260,11 @@ class Task extends React.Component {
           {/* 作業時間 */}
           <div className="times">
             <img className="icon timer_icon" src={`${path}/assets/time.png`} />
-            {this.displayActualTime()}
+            {this.displayActualTime()}経過
             {this.displayExpectMinute()}
           </div>
 
           <div className="icon_area">
-            <img
-              className="icon modify"
-              src={`${path}/assets/modify.png`}
-              onClick={this.modifyModalOpen}
-            />
             <img
               className="icon start"
               src={`${path}/assets/start.png`}
