@@ -113,13 +113,14 @@ class Task extends React.Component {
   }
 
   clickButtonEvent(event) {
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
     if (!event.currentTarget.classList.contains('clickable')) {
       // クリックできないならば、詳細モーダルを表示する
-      this.displayThisDetails(event);
       return null;
     }
+
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+
     // クリックできる状態ならタスクの状態を変更する
     const taskContainer = Base.parents(event.currentTarget, 'task_container');
     const task = taskContainer.querySelector('.task_element');

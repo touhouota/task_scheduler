@@ -39,7 +39,7 @@ class TaskDetails extends React.Component {
 
 
   clickFinishButtonEvent(event, nextStatus) {
-    console.log(event, nextStatus);
+    console.log(event.currentTarget.classList.contains('clickable'));
     if (!event.currentTarget.classList.contains('clickable')) {
       // クリックできないならば、無視
       return null;
