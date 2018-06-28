@@ -2,18 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Base from '../../lib/base_object';
+import ModalProcess from '../../lib/modal_process';
 
 class TaskDetails extends React.Component {
   constructor(props) {
     super(props);
-    // タスクの状態とindexを合わせる
-    this.statusNo = [
-      'タスク実行',
-      '実行中',
-      '完了',
-      '未完了',
-      '一時停止',
-    ];
     // タスク実行
     this.Doing = 1;
     // タスク完了
@@ -23,6 +16,78 @@ class TaskDetails extends React.Component {
     // 一時停止
     this.Suspend = 4;
   }
+
+  /*
+   * ライフサイクルメソッド
+   */
+
+  // renderされたときの処理
+  componentDidMount() {
+    console.log('componentDitUpdate');
+    this.clickableIconChange();
+  }
+
+  // コンポーネントの更新が起こったときに行われる処理
+  componentDidUpdate() {
+    console.log('shouldComponentUpdate');
+    this.clickableIconChange();
+  }
+
+  /*
+   * 独自定義
+   */
+
+
+  clickFinishButtonEvent(event, nextStatus) {
+    console.log(event, nextStatus);
+    if (!event.currentTarget.classList.contains('clickable')) {
+      // クリックできないならば、無視
+      return null;
+    }
+
+    // イベントの伝播を止める
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+
+    // 終了時の処理
+    const taskContainer = Base.parents(event.currentTarget, 'task_container');
+    const task = taskContainer.querySelector('.task_element');
+    this.props.taskStart(task.id, nextStatus);
+    setTimeout(() => {
+      // もし、モーダルが開いていた場合、閉じる
+      if (ModalProcess.isModalOpen()) {
+        document.querySelector('.modal_back').click();
+      }
+    }, 200);
+    return null;
+  }
+
+  clickableIconChange() {
+    const task = document.getElementById(this.props.taskData.id);
+    const taskContainer = Base.parents(task, 'task_container');
+    const detail = taskContainer.querySelector('.task_detail');
+    const icons = Array.from(detail.querySelectorAll('.icon'));
+    icons.forEach((icon) => {
+      icon.classList.remove('clickable');
+    });
+
+    // 現在のタスクの状態により、場合分けする
+    if (this.props.taskData.status === this.Doing) {
+      // 今が実行中のとき、それ以外のアイコンを押せるようにする
+      icons.forEach((icon) => {
+        if (!icon.classList.contains('start')) {
+          icon.classList.add('clickable');
+        }
+      });
+    } else {
+      icons.forEach((icon) => {
+        if (icon.classList.contains('start')) {
+          icon.classList.add('clickable');
+        }
+      });
+    }
+  }
+
 
   render() {
     const path = Base.get_path();
@@ -65,36 +130,28 @@ class TaskDetails extends React.Component {
 
         <div className="icon_area">
           <img
-            className="icon modify"
-            src={`${path}/assets/modify.png`}
-            onClick={this.modifyModalOpen}
-          />
-          <img
             className="icon start"
             src={`${path}/assets/start.png`}
-            onClick={this.clickButtonEvent}
+            onClick={this.props.clickButtonEvent}
           />
           <img
             className="icon pause"
             src={`${path}/assets/pause.png`}
-            onClick={this.clickButtonEvent}
-            value={this.props.taskData.id}
+            onClick={this.props.clickButtonEvent}
           />
           <img
             className="icon succ"
             src={`${path}/assets/succ.png`}
             onClick={(event) => {
-              this.clickFinishButtonEvent(event, this.Finish);
+              this.props.clickFinishButtonEvent(event, this.Finish);
             }}
-            value={this.props.taskData.id}
           />
           <img
             className="icon stop"
             src={`${path}/assets/stop.png`}
             onClick={(event) => {
-              this.clickFinishButtonEvent(event, this.Incomplete);
+              this.props.clickFinishButtonEvent(event, this.Incomplete);
             }}
-            value={this.props.taskData.id}
           />
         </div>
       </div>
@@ -146,6 +203,7 @@ TaskDetails.propTypes = {
   }).isRequired,
   // ボタンがクリックされたときの関数
   clickButtonEvent: PropTypes.func.isRequired,
+  taskStart: PropTypes.func.isRequired,
 };
 
 export default TaskDetails;

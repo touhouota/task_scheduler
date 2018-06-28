@@ -52,7 +52,6 @@ class Task extends React.Component {
   componentDidUpdate() {
     console.log('shouldComponentUpdate');
     this.clickableIconChange();
-    return true;
   }
 
   // 実行できるかを確認する
@@ -116,7 +115,6 @@ class Task extends React.Component {
   clickButtonEvent(event) {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
-    console.log('clickButtonEvent', event.currentTarget);
     if (!event.currentTarget.classList.contains('clickable')) {
       // クリックできないならば、詳細モーダルを表示する
       this.displayThisDetails(event);
@@ -136,14 +134,15 @@ class Task extends React.Component {
   }
 
   clickFinishButtonEvent(event, nextStatus) {
+    console.log(event, nextStatus);
+    if (!event.currentTarget.classList.contains('clickable')) {
+      // クリックできないならば、無視
+      return null;
+    }
+
     // イベントの伝播を止める
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
-    if (!event.currentTarget.classList.contains('clickable')) {
-      // クリックできないならば、詳細モーダルを表示する
-      this.displayThisDetails(event);
-      return null;
-    }
 
     // 終了時の処理
     const taskContainer = Base.parents(event.currentTarget, 'task_container');
@@ -266,6 +265,11 @@ class Task extends React.Component {
 
           <div className="icon_area">
             <img
+              className="icon modify"
+              src={`${path}/assets/modify.png`}
+              onClick={this.modifyModalOpen}
+            />
+            <img
               className="icon start"
               src={`${path}/assets/start.png`}
               onClick={this.clickButtonEvent}
@@ -300,6 +304,8 @@ class Task extends React.Component {
           taskData={this.props.taskData}
           TimerManager={this.TimerManager}
           clickButtonEvent={this.clickButtonEvent}
+          clickFinishButtonEvent={this.clickFinishButtonEvent}
+          taskStart={this.taskStart}
         />
         <ModifyModal
           updateTaskList={this.props.updateTaskList}
