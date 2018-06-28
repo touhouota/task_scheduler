@@ -248,12 +248,9 @@ class Task extends React.Component {
           onClick={this.displayThisDetails}
         >
           <div className="task_top">
-            {/* タスク名, 実行ボタン, 予想時間 */}
-            <div className="title">
-              <span className="task_name">
-                {this.props.taskData.t_name}
-              </span>
-            </div>
+            <span className="task_name">
+              {this.props.taskData.t_name}
+            </span>
           </div>
 
           {/* 作業時間 */}

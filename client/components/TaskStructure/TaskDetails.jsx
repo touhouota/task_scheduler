@@ -99,30 +99,25 @@ class TaskDetails extends React.Component {
         data-progress={this.props.taskData.actual_sec}
       >
         <div className="task_top">
-          {/* タスク名, 実行ボタン, 予想時間 */}
-          <div className="task_button">
-            <p className="expect_minute">
-                ({this.props.taskData.expect_minute}分)
-            </p>
-          </div>
-          <div className="title">
-            <span className="task_name">
-              {this.props.taskData.t_name}
-            </span>
-          </div>
+          <span className="task_name">
+            {this.props.taskData.t_name}
+          </span>
         </div>
 
         {/* 作業時間 */}
         <div className="times">
-            作業時間：
+          作業時間
           <span className="actual_sec">
             {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+          </span>
+          <span className="expect_minute">
+            ({this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.expect_minute * 60)})
           </span>
         </div>
 
         {/* タスクのメモ */}
         <div className="memo">
-          メモ：
+          内容・メモ
           <p className="memo_text">
             {this.props.taskData.memo}
           </p>
