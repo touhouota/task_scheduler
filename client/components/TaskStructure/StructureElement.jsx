@@ -5,7 +5,7 @@ import Task from './Task';
 class StructureElement extends React.Component {
   constructor(props) {
     super(props);
-    console.log('structureElement', props);
+    // console.log('structureElement', props);
     this.sortOrderByTaskStatus = this.sortOrderByTaskStatus.bind(this);
     this.createTaskElements = this.createTaskElements.bind(this);
   }
@@ -14,7 +14,7 @@ class StructureElement extends React.Component {
    * タスクの順番を指定する
    */
   sortOrderByTaskStatus(taskList) {
-    console.log('structureElement', this.props);
+    // console.log('structureElement', this.props);
     return taskList.sort((item1, item2) => {
       /*
        * sortに関数を渡すと、その関数に従ってソートしてくれる

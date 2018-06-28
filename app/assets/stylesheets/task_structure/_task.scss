@@ -1,20 +1,29 @@
 @import '../variable/variables.scss';
 @import '../parts/button_parts.scss';
+@import '../parts/icon.scss';
 
 .tasks {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
   font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', 'メイリオ', 'Osaka', 'MS PGothic', arial, helvetica, sans-serif;
 
   .task_container {
     .task_element {
+      -webkit-box-sizing: border-box;
       box-sizing: border-box;
       margin: 5px;
       padding: 5px;
       // background-color: rgb(170, 203, 242);
       // min-width: 150px;
+      -webkit-transition-duration: 0.5s;
       transition-duration: 0.5s;
+      -webkit-transition-timing-function: ease;
       transition-timing-function: ease;
       width: $flex_base_size;
       cursor: alias;
@@ -30,42 +39,58 @@
       }
 
       .task_top {
-        $task_top_width: 80px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
+        margin-left: 10px;
 
-        .task_button {
-          width: $task_top_width;
-          text-align: center;
-
-          .button {
-            @extend .ButtonBase;
-            width: 100%;
-          }
-
-          .expect_minute {
-            font-size: small;
-            margin: 2px;
-            width: 100%;
-          }
-        }
-
-        .title {
-          width: calc(100% - #{$task_top_width} - 10px);
-          margin-left: 10px;
-
-          .task_name {
-            font-size: large;
-          }
+        .task_name {
+          font-weight: bolder;
         }
       }
 
-      .finish_button {
-        .button {
-          @extend .ButtonBase;
-          width: 60px;
-          margin-right: 10px;
-          text-align: center;
+      .times {
+        margin: 5px 0;
+
+        .timer_icon {
+          @extend .BaseIcon;
+          // 画像を縦方向に中央揃え
+          vertical-align: middle;
+        }
+
+        .actual_sec {
+          vertical-align: middle;
+        }
+
+        .expect_minute {
+          font-size: small;
+          margin: 2px;
+          width: 100%;
+          vertical-align: bottom;
+        }
+      }
+
+      .icon_area {
+        margin-top: 10px;
+        text-align: right;
+
+        .icon {
+          @extend .BaseIcon;
+          margin: 0 5px;
+          opacity: 0.2;
+
+          &.modify {
+            @extend .Clickable;
+            margin-right: 15px;
+          }
+
+          &.clickable {
+            @extend .Clickable;
+          }
         }
       }
     }
@@ -89,23 +114,21 @@
       }
       // アニメーション設定
       transition-duration: 0.5s;
+      -webkit-transition-timing-function: ease;
       transition-timing-function: ease;
 
       .task_top {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
 
-        .task_button {
-          width: 120px;
-          text-align: center;
-
-          .button {
-            @extend .ButtonBase;
-            width: 100%;
-          }
-        }
-
-        .title {
+        .task_name {
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
           flex: 1;
           margin-left: 10px;
           font-size: x-large;
@@ -116,6 +139,11 @@
       .times {
         font-size: large;
         margin-top: 15px;
+
+        .icon {
+          @extend .BaseIcon;
+          width: 30px;
+        }
       }
 
       .memo {
@@ -129,12 +157,24 @@
         }
       }
 
-      .finish_button {
-        margin-top: 30px;
+      .icon_area {
+        margin-top: 10px;
+        text-align: right;
 
-        .button {
-          @extend .ButtonBase;
-          margin-right: 15px;
+        .icon {
+          @extend .BaseIcon;
+          margin: 0 5px;
+          opacity: 0.2;
+          width: 30px;
+
+          &.modify {
+            @extend .Clickable;
+            margin-right: 15px;
+          }
+
+          &.clickable {
+            @extend .Clickable;
+          }
         }
       }
     }

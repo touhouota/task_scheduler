@@ -31,7 +31,7 @@ class Task extends React.Component {
     this.statusChange = this.statusChange.bind(this);
     this.displayActualTime = this.displayActualTime.bind(this);
     this.displayThisDetails = this.displayThisDetails.bind(this);
-    this.displayTaskFinishButton = this.displayTaskFinishButton.bind(this);
+    this.clickableIconChange = this.clickableIconChange.bind(this);
     this.clickButtonEvent = this.clickButtonEvent.bind(this);
     this.modifyModalOpen = this.modifyModalOpen.bind(this);
     this.TimerManager = props.TimerManager;
@@ -40,7 +40,18 @@ class Task extends React.Component {
     if (props.taskData.status === this.Doing) {
       this.TimerManager.set(this.props.taskData.id);
     }
-    console.log('Task props.TimerManager:', props.TimerManager);
+  }
+
+  // renderされたときの処理
+  componentDidMount() {
+    console.log('componentDitUpdate');
+    this.clickableIconChange();
+  }
+
+  // コンポーネントの更新が起こったときに行われる処理
+  componentDidUpdate() {
+    console.log('shouldComponentUpdate');
+    this.clickableIconChange();
   }
 
   // 実行できるかを確認する
@@ -71,9 +82,45 @@ class Task extends React.Component {
     this.props.updateTaskList(task);
   }
 
+  clickableIconChange() {
+    // いったんすべてのアイコンからClickableクラスを取る
+    const task = document.getElementById(this.props.taskData.id);
+    const iconArea = task.querySelector('.icon_area');
+    const icons = Array.from(iconArea.children);
+    // modifyを無視する
+    icons.shift();
+    icons.forEach((icon) => {
+      icon.classList.remove('clickable');
+    });
+
+    console.log('now_status:', this.props.taskData.status);
+
+    // 現在のタスクの状態により、場合分けする
+    if (this.props.taskData.status === this.Doing) {
+      // 今が実行中のとき、それ以外のアイコンを押せるようにする
+      icons.forEach((icon) => {
+        if (!icon.classList.contains('start')) {
+          icon.classList.add('clickable');
+        }
+      });
+    } else {
+      icons.forEach((icon) => {
+        if (icon.classList.contains('start')) {
+          icon.classList.add('clickable');
+        }
+      });
+    }
+  }
+
   clickButtonEvent(event) {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
+    if (!event.currentTarget.classList.contains('clickable')) {
+      // クリックできないならば、詳細モーダルを表示する
+      this.displayThisDetails(event);
+      return null;
+    }
+    // クリックできる状態ならタスクの状態を変更する
     const taskContainer = Base.parents(event.currentTarget, 'task_container');
     const task = taskContainer.querySelector('.task_element');
     let nextStatus = null;
@@ -83,12 +130,20 @@ class Task extends React.Component {
       nextStatus = this.Doing;
     }
     this.taskStart(task.id, nextStatus);
+    return null;
   }
 
   clickFinishButtonEvent(event, nextStatus) {
+    console.log(event, nextStatus);
+    if (!event.currentTarget.classList.contains('clickable')) {
+      // クリックできないならば、無視
+      return null;
+    }
+
     // イベントの伝播を止める
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
+
     // 終了時の処理
     const taskContainer = Base.parents(event.currentTarget, 'task_container');
     const task = taskContainer.querySelector('.task_element');
@@ -99,12 +154,22 @@ class Task extends React.Component {
         document.querySelector('.modal_back').click();
       }
     }, 200);
+    return null;
   }
 
   displayActualTime() {
     return (
       <span className="actual_sec">
         {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+      </span>
+    );
+  }
+
+  displayExpectMinute() {
+    const expectMinute = this.props.taskData.expect_minute;
+    return (
+      <span className="expect_minute">
+        ({this.props.TimerManager.convert_hms_from_seconds(expectMinute * 60)})
       </span>
     );
   }
@@ -116,35 +181,6 @@ class Task extends React.Component {
         <p className="memo">
         メモ：{this.props.taskData.memo}
         </p>
-      );
-    }
-    return null;
-  }
-
-  // タスク実行時に表示する
-  displayTaskFinishButton() {
-    if (this.props.taskData.status === 1) {
-      return (
-        <div className="finish_button">
-          <button
-            className="button"
-            onClick={(event) => {
-              this.clickFinishButtonEvent(event, this.Finish);
-            }}
-            value={this.props.taskData.id}
-          >
-            終了
-          </button>
-          <button
-            className="button"
-            onClick={(event) => {
-              this.clickFinishButtonEvent(event, this.Incomplete);
-            }}
-            value={this.props.taskData.id}
-          >
-            未完了
-          </button>
-        </div>
       );
     }
     return null;
@@ -200,6 +236,7 @@ class Task extends React.Component {
   }
 
   render() {
+    const path = Base.get_path();
     return (
       <div className="task_container">
         <div
@@ -211,38 +248,52 @@ class Task extends React.Component {
           onClick={this.displayThisDetails}
         >
           <div className="task_top">
-            {/* タスク名, 実行ボタン, 予想時間 */}
-            <div className="task_button">
-              <button
-                className="button"
-                onClick={this.clickButtonEvent}
-              >
-                {this.statusNo[this.props.taskData.status]}
-              </button>
-              <div className="expect_minute">
-                ({this.props.taskData.expect_minute}分)
-              </div>
-            </div>
-            <div className="title">
-              <span className="task_name">
-                {this.props.taskData.t_name}
-              </span>
-            </div>
+            <span className="task_name">
+              {this.props.taskData.t_name}
+            </span>
           </div>
 
           {/* 作業時間 */}
           <div className="times">
-            作業時間：
-            {this.displayActualTime()}
+            <img className="icon timer_icon" src={`${path}/assets/time.png`} />
+            {this.displayActualTime()}経過
+            {this.displayExpectMinute()}
           </div>
-          {this.displayTaskFinishButton(this.props)}
 
-          <button
-            className="button"
-            onClick={this.modifyModalOpen}
-          >
-            タスク修正
-          </button>
+          <div className="icon_area">
+            <img
+              className="icon modify"
+              src={`${path}/assets/modify.png`}
+              onClick={this.modifyModalOpen}
+            />
+            <img
+              className="icon start"
+              src={`${path}/assets/start.png`}
+              onClick={this.clickButtonEvent}
+            />
+            <img
+              className="icon pause"
+              src={`${path}/assets/pause.png`}
+              onClick={this.clickButtonEvent}
+              value={this.props.taskData.id}
+            />
+            <img
+              className="icon succ"
+              src={`${path}/assets/succ.png`}
+              onClick={(event) => {
+                this.clickFinishButtonEvent(event, this.Finish);
+              }}
+              value={this.props.taskData.id}
+            />
+            <img
+              className="icon stop"
+              src={`${path}/assets/stop.png`}
+              onClick={(event) => {
+                this.clickFinishButtonEvent(event, this.Incomplete);
+              }}
+              value={this.props.taskData.id}
+            />
+          </div>
         </div>
 
         {/* タスクの詳細置き場 */}
@@ -250,7 +301,8 @@ class Task extends React.Component {
           taskData={this.props.taskData}
           TimerManager={this.TimerManager}
           clickButtonEvent={this.clickButtonEvent}
-          displayTaskFinishButton={this.displayTaskFinishButton}
+          clickFinishButtonEvent={this.clickFinishButtonEvent}
+          taskStart={this.taskStart}
         />
         <ModifyModal
           updateTaskList={this.props.updateTaskList}
