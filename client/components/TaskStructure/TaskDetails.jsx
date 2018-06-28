@@ -126,24 +126,24 @@ class TaskDetails extends React.Component {
         <div className="icon_area">
           <img
             className="icon start"
-            src={`${path}/assets/start.png`}
+            src={`${path}/image/start.png`}
             onClick={this.props.clickButtonEvent}
           />
           <img
             className="icon pause"
-            src={`${path}/assets/pause.png`}
+            src={`${path}/image/pause.png`}
             onClick={this.props.clickButtonEvent}
           />
           <img
             className="icon succ"
-            src={`${path}/assets/succ.png`}
+            src={`${path}/image/succ.png`}
             onClick={(event) => {
               this.props.clickFinishButtonEvent(event, this.Finish);
             }}
           />
           <img
             className="icon stop"
-            src={`${path}/assets/stop.png`}
+            src={`${path}/image/stop.png`}
             onClick={(event) => {
               this.props.clickFinishButtonEvent(event, this.Incomplete);
             }}
