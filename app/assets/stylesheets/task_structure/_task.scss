@@ -167,12 +167,23 @@
         }
       }
 
-      .finish_button {
-        margin-top: 30px;
+      .icon_area {
+        margin-top: 10px;
+        text-align: right;
 
-        .button {
-          @extend .ButtonBase;
-          margin-right: 15px;
+        .icon {
+          @extend .BaseIcon;
+          margin: 0 5px;
+          opacity: 0.2;
+
+          &.modify {
+            @extend .Clickable;
+            margin-right: 15px;
+          }
+
+          &.clickable {
+            @extend .Clickable;
+          }
         }
       }
     }
