@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Base from '../../lib/base_object';
+
 class TaskDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,7 @@ class TaskDetails extends React.Component {
   }
 
   render() {
+    const path = Base.get_path();
     return (
       <div
         className="task_detail hide"
@@ -33,12 +36,6 @@ class TaskDetails extends React.Component {
         <div className="task_top">
           {/* タスク名, 実行ボタン, 予想時間 */}
           <div className="task_button">
-            <button
-              className="button"
-              onClick={this.props.clickButtonEvent}
-            >
-              {this.statusNo[this.props.taskData.status]}
-            </button>
             <p className="expect_minute">
                 ({this.props.taskData.expect_minute}分)
             </p>
@@ -66,7 +63,40 @@ class TaskDetails extends React.Component {
           </p>
         </div>
 
-        {this.props.displayTaskFinishButton(this.props)}
+        <div className="icon_area">
+          <img
+            className="icon modify"
+            src={`${path}/assets/modify.png`}
+            onClick={this.modifyModalOpen}
+          />
+          <img
+            className="icon start"
+            src={`${path}/assets/start.png`}
+            onClick={this.clickButtonEvent}
+          />
+          <img
+            className="icon pause"
+            src={`${path}/assets/pause.png`}
+            onClick={this.clickButtonEvent}
+            value={this.props.taskData.id}
+          />
+          <img
+            className="icon succ"
+            src={`${path}/assets/succ.png`}
+            onClick={(event) => {
+              this.clickFinishButtonEvent(event, this.Finish);
+            }}
+            value={this.props.taskData.id}
+          />
+          <img
+            className="icon stop"
+            src={`${path}/assets/stop.png`}
+            onClick={(event) => {
+              this.clickFinishButtonEvent(event, this.Incomplete);
+            }}
+            value={this.props.taskData.id}
+          />
+        </div>
       </div>
     );
   }
@@ -114,8 +144,6 @@ TaskDetails.propTypes = {
     // 作業時間の計算
     calcActualTime: PropTypes.func.isRequired,
   }).isRequired,
-  // 終了ボタンを表示する関数
-  displayTaskFinishButton: PropTypes.func.isRequired,
   // ボタンがクリックされたときの関数
   clickButtonEvent: PropTypes.func.isRequired,
 };
