@@ -257,7 +257,7 @@ class Task extends React.Component {
           <div className="times">
             <img
               className="icon timer_icon"
-              src={`${path}/assets/time.png`}
+              src={`${path}/image/time.png`}
               alt="作業時間"
             />
             {this.displayActualTime()}経過
@@ -267,26 +267,26 @@ class Task extends React.Component {
           <div className="icon_area">
             <img
               className="icon modify"
-              src={`${path}/assets/modify.png`}
+              src={`${path}/image/modify.png`}
               alt="タスク修正"
               onClick={this.modifyModalOpen}
             />
             <img
               className="icon start"
-              src={`${path}/assets/start.png`}
+              src={`${path}/image/start.png`}
               alt="実行"
               onClick={this.clickButtonEvent}
             />
             <img
               className="icon pause"
-              src={`${path}/assets/pause.png`}
+              src={`${path}/image/pause.png`}
               alt="一時停止"
               onClick={this.clickButtonEvent}
               value={this.props.taskData.id}
             />
             <img
               className="icon succ"
-              src={`${path}/assets/succ.png`}
+              src={`${path}/image/succ.png`}
               alt="タスク完了"
               onClick={(event) => {
                 this.clickFinishButtonEvent(event, this.Finish);
@@ -295,7 +295,7 @@ class Task extends React.Component {
             />
             <img
               className="icon stop"
-              src={`${path}/assets/stop.png`}
+              src={`${path}/image/stop.png`}
               alt="保留・取りやめ"
               onClick={(event) => {
                 this.clickFinishButtonEvent(event, this.Incomplete);
