@@ -106,12 +106,14 @@ class TaskDetails extends React.Component {
 
         {/* 作業時間 */}
         <div className="times">
-          作業時間
+          作業時間：
           <span className="actual_sec">
             {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.actual_sec)}
+            経過
           </span>
           <span className="expect_minute">
-            ({this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.expect_minute * 60)})
+            (
+            {this.props.TimerManager.convert_hms_from_seconds(this.props.taskData.expect_minute * 60)})
           </span>
         </div>
 
