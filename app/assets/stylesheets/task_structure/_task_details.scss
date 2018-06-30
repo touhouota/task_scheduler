@@ -1,0 +1,86 @@
+@import '../variable/variables.scss';
+@import '../parts/button_parts.scss';
+@import '../parts/icon.scss';
+
+.task_detail {
+  // 要素の位置
+  position: absolute;
+  top: 25%;
+  left: calc(50% - #{$task_detail_width / 2});
+  z-index: 99;
+  // サイズ
+  width: 500px;
+  min-height: 200px;
+  padding: 10px;
+  // 見た目
+  background-color: #fff;
+  border: 5px solid #fff; // 基本は枠を見えなくしておく
+
+  &[data-status='1'] {
+    border: 5px solid rgb(252, 134, 130); // 実行時は、枠を表示する
+  }
+  // アニメーション設定
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+
+  .task_top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+
+    .task_name {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      font-size: x-large;
+      font-weight: bold;
+    }
+  }
+
+  .times {
+    font-size: large;
+    margin-top: 15px;
+
+    .icon {
+      @extend .BaseIcon;
+      width: 30px;
+    }
+  }
+
+  .memo {
+    margin-top: 20px;
+
+    .memo_text {
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #eee;
+      white-space: pre-wrap;
+    }
+  }
+
+  .icon_area {
+    margin-top: 10px;
+    text-align: right;
+
+    .icon {
+      @extend .BaseIcon;
+      margin: 0 5px;
+      opacity: 0.2;
+      width: 30px;
+
+      &.modify {
+        @extend .Clickable;
+        margin-right: 15px;
+      }
+
+      &.clickable {
+        @extend .Clickable;
+      }
+    }
+  }
+}
