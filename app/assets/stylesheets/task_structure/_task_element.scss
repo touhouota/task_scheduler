@@ -31,7 +31,6 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
-    margin-left: 5px;
 
     .task_name {
       font-weight: bolder;
@@ -43,7 +42,7 @@
       @extend .BaseIcon;
       // 画像を縦方向に中央揃え
       vertical-align: middle;
-      margin-left: 0;
+      margin: 0;
     }
 
     .actual_sec {
