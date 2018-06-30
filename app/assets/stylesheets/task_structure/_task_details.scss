@@ -50,6 +50,12 @@
       @extend .BaseIcon;
       width: 30px;
     }
+
+    .expect_minute {
+      font-size: medium;
+      margin-left: 5px;
+      vertical-align: bottom;
+    }
   }
 
   .memo {
