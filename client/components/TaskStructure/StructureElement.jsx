@@ -23,8 +23,6 @@ class StructureElement extends React.Component {
        */
       if (item1.status === 2 || item1.status === 3) {
         return 1;
-      } else if (item1.status === 0 || item1.status === 4) {
-        return -1;
       }
       return 0;
     });
