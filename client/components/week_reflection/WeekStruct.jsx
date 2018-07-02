@@ -60,7 +60,7 @@ class WeekStruct extends Structure {
 
   render() {
     return (
-      <div className="Structure">
+      <div className="WeekStructure">
         {this.createStructureElements(this.state.tasks)}
       </div>
     );
