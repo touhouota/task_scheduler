@@ -33,6 +33,7 @@ class ApiController < ApplicationController
     render json: @tasks
   end
 
+  # 週を指定してタスクを取得(振りかえり利用)
   def week_reflection
     @user = User.find_by(user_id: params[:user_id])
     to = DateTime.parse(params[:date])
