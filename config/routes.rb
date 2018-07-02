@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   # タスクの構造を可視化するページ
   get '/structure/main/:user_id', to: 'task_structure#index'
 
+  # 週間の確認
+  get '/reflection/week/:user_id', to: 'week_reflection#index'
+
   # API用のルート
   get '/api/tasks', to: 'api#tasks'
   get '/api/tasks/:user_id', to: 'api#user_tasks'
