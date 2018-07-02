@@ -5,6 +5,8 @@ import Structure from '../TaskStructure/Structure';
 // 複製する曜日コンポーネント
 import WeekStructElement from './WeekStructElement';
 
+import Base from '../../lib/base_object';
+
 class WeekStruct extends Structure {
   constructor(props) {
     super(props);
@@ -35,7 +37,14 @@ class WeekStruct extends Structure {
       name: '土曜日',
     }];
 
+    this.state = {
+      tasks: [],
+    };
+
     this.createStructureElements = this.createStructureElements.bind(this);
+    // this.getTask = this.getTask.bind(this);
+
+    this.getTask();
   }
 
   createStructureElements(tasks) {
@@ -60,10 +69,30 @@ class WeekStruct extends Structure {
     return structureElements;
   }
 
+  getTask() {
+    console.log('WeekStructure');
+    const path = Base.get_path();
+    const userId = Base.get_cookie('user_id');
+    const date = new Date();
+    fetch(`${path}/api/week/${Base.format_ymd(date)}/${userId}`, {
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'X-CSRF-Token': Base.get_token(),
+      },
+    })
+      .then(response => response.json())
+      .then((json) => {
+        json.forEach((item) => {
+          super.updateTaskList(item);
+        });
+      });
+  }
+
   render() {
     return (
       <div className="WeekStructure">
-        {this.createStructureElements(this.state.tasks)}
+        hoge
       </div>
     );
   }

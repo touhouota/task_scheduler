@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   get '/api/tasks/membersTask/:user_id', to: 'api#getMembersTask'
   post '/api/task/statusChange', to: 'api#statusChange'
   post '/api/task/modify', to: 'api#taskModify'
-  get '/api/week/:date/:user_id', to: 'api#'
+  get '/api/week/:date/:user_id', to: 'api#week_reflection'
   #   end
   # end
 end

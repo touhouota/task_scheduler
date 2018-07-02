@@ -1,10 +1,11 @@
 import React from 'react';
 
-
-// import Base from '../lib/base_object';
+import WeekStruct from './week_reflection/WeekStruct';
 
 const WeekReflection = props => (
-  <Structure />
+  <div>
+    hoge
+  </div>
 );
 
 export default WeekReflection;

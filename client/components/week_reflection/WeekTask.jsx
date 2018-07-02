@@ -44,9 +44,9 @@ class WeekTask extends Task {
           taskData={this.props.taskData}
           TimerManager={this.TimerManager}
         />
-        <ModifyModal
-          task={this.props.taskData}
-        />
       </div>
     );
   }
+}
+
+export default WeekTask;
