@@ -57,13 +57,22 @@ class WeekStructure extends Structure {
   createStructureElements(tasks) {
     const structureElements = [];
 
-    this.weeks.forEach((wdayObject, wdayNum) => {
+    // this.weeks.forEach((wdayObject, wdayNum) => {});
+
+    const date = new Date(this.props.targetDate);
+    let i = date.getDay() + 1; // 曜日 + 1でその要素が配列の最後に入る
+    const fin = i + 7;
+    let wdayNum;
+    let wdayObject;
+    for (i; i < fin; i += 1) {
+      wdayNum = i % 7;
+      console.log(wdayNum);
       // 合っている曜日をリスト化する
       const taskList = tasks.filter((task) => {
         const updatedAt = new Date(task.updated_at);
-        return updatedAt.getDay() === wdayNum;
+        return updatedAt.getDay() === (wdayNum % 7);
       });
-
+      wdayObject = this.weeks[wdayNum];
       structureElements.push(<WeekStructElement
         key={wdayObject.label}
         name={wdayObject.name}
@@ -73,7 +82,7 @@ class WeekStructure extends Structure {
         updateTaskList={super.updateTaskList}
         setTaskInformation={super.setTaskInformation}
       />);
-    });
+    }
 
     return structureElements;
   }
