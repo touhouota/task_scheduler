@@ -7,7 +7,7 @@ import WeekStructElement from './WeekStructElement';
 
 import Base from '../../lib/base_object';
 
-class WeekStruct extends Structure {
+class WeekStructure extends Structure {
   constructor(props) {
     super(props);
 
@@ -47,6 +47,13 @@ class WeekStruct extends Structure {
     this.getTask();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps');
+    if (this.props.targetDate !== nextProps.targetDate) {
+      this.getTask();
+    }
+  }
+
   createStructureElements(tasks) {
     const structureElements = [];
 
@@ -75,8 +82,8 @@ class WeekStruct extends Structure {
     console.log('WeekStructure');
     const path = Base.get_path();
     const userId = Base.get_cookie('user_id');
-    const date = new Date();
-    fetch(`${path}/api/week/${Base.format_ymd(date)}/${userId}`, {
+    // const date = new Date();
+    fetch(`${path}/api/week/${this.props.targetDate}/${userId}`, {
       credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
@@ -100,4 +107,4 @@ class WeekStruct extends Structure {
   }
 }
 
-export default WeekStruct;
+export default WeekStructure;
