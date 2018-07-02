@@ -1,7 +1,9 @@
 import React from 'react';
 
+// 継承するコンポーネント
 import Structure from '../TaskStructure/Structure';
-
+// 複製する曜日コンポーネント
+import WeekStructElement from './WeekStructElement';
 
 class WeekStruct extends Structure {
   constructor(props) {
@@ -46,7 +48,7 @@ class WeekStruct extends Structure {
         return updatedAt.getDay() === wdayNum;
       });
 
-      structureElements.push(<StructureElement
+      structureElements.push(<WeekStructElement
         key={wdayObject.label}
         name={wdayObject.name}
         label={wdayObject.label}
