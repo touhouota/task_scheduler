@@ -33,6 +33,14 @@ class ApiController < ApplicationController
     render json: @tasks
   end
 
+  def week_reflection
+    @user = User.find_by(user_id: params[:user_id])
+    to = DateTime.parse(params[:date])
+    from = to.ago(1.week)
+    # 1週間分のタスクを返す
+    render json: Task.where(updated_at: (from..to), user_id: @user.user_id)
+  end
+
   def insert_task
     task_info = task_params
     user = User.find_by(user_id: params[:user_id])
