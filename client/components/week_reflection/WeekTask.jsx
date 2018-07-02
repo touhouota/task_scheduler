@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Task from '../TaskStructure/Task';
+import WeekTaskDetails from './WeekTaskDetail';
 
 import Base from '../../lib/base_object';
 
@@ -37,12 +38,19 @@ class WeekTask extends Task {
             {super.displayActualTime()}経過
             {super.displayExpectMinute()}
           </div>
+
+          <div className="icon_area">
+            <div className="icon" />
+          </div>
         </div>
 
         {/* タスクの詳細置き場 */}
-        <TaskDetails
+        <WeekTaskDetails
           taskData={this.props.taskData}
-          TimerManager={this.TimerManager}
+          TimerManager={this.props.TimerManager}
+          clickButtonEvent={this.clickButtonEvent}
+          clickFinishButtonEvent={this.clickFinishButtonEvent}
+          taskStart={this.taskStart}
         />
       </div>
     );

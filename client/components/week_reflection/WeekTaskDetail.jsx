@@ -9,8 +9,11 @@ class WeekTaskDetails extends TaskDetails {
 
   render() {
     return (
-      <div>
+      <div className="task_detail hide" >
         WeekTaskDetails
+        <div className="icon_area">
+          <div className="icon" />
+        </div>
       </div>
     );
   }

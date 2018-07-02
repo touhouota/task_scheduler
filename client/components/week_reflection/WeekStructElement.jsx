@@ -35,7 +35,9 @@ class WeekStructElement extends StructureElement {
       <WeekTask
         key={task.id}
         taskData={task}
+        updateTaskList={this.props.updateTaskList}
         TimerManager={this.props.TimerManager}
+        setTaskInformation={this.props.setTaskInformation}
       />
     ));
   }

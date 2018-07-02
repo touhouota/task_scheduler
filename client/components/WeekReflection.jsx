@@ -1,11 +1,11 @@
 import React from 'react';
 
-import WeekStruct from './week_reflection/WeekStruct';
+import WeekStructure from './week_reflection/WeekStructure';
 
 const WeekReflection = props => (
-  <div>
-    hoge
-  </div>
+  <WeekStructure
+    TimerManager={props.TimerManager}
+  />
 );
 
 export default WeekReflection;
