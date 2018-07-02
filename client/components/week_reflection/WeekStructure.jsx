@@ -42,7 +42,7 @@ class WeekStructure extends Structure {
     };
 
     this.createStructureElements = this.createStructureElements.bind(this);
-    // this.getTask = this.getTask.bind(this);
+    this.updateTaskList = this.updateTaskList.bind(this);
 
     this.getTask();
   }
@@ -78,6 +78,12 @@ class WeekStructure extends Structure {
     return structureElements;
   }
 
+  updateTaskList(taskList) {
+    this.setState({
+      tasks: taskList,
+    });
+  }
+
   getTask() {
     console.log('WeekStructure');
     const path = Base.get_path();
@@ -92,9 +98,7 @@ class WeekStructure extends Structure {
     })
       .then(response => response.json())
       .then((json) => {
-        json.forEach((item) => {
-          super.updateTaskList(item);
-        });
+        this.updateTaskList(json);
       });
   }
 

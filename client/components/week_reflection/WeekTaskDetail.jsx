@@ -13,7 +13,7 @@ class WeekTaskDetails extends TaskDetails {
     const path = Base.get_path();
     return (
       <div
-        className="task_detail hide"
+        className="week_task_detail  hide"
         data-status={this.props.taskData.status}
         data-start_date={this.props.taskData.updated_at}
         data-progress={this.props.taskData.actual_sec}
