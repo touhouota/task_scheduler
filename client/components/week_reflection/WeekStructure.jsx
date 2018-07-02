@@ -63,6 +63,8 @@ class WeekStruct extends Structure {
         label={wdayObject.label}
         tasks={taskList}
         TimerManager={this.props.TimerManager}
+        updateTaskList={super.updateTaskList}
+        setTaskInformation={super.setTaskInformation}
       />);
     });
 
@@ -92,7 +94,7 @@ class WeekStruct extends Structure {
   render() {
     return (
       <div className="WeekStructure">
-        hoge
+        {this.createStructureElements(this.state.tasks)}
       </div>
     );
   }
