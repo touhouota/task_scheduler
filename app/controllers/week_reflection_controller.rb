@@ -1,0 +1,2 @@
+class WeekReflectionController < ApplicationController
+end
