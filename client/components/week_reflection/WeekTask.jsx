@@ -10,6 +10,15 @@ class WeekTask extends Task {
     super(props);
   }
 
+  displayExpectMinute() {
+    const expectMinute = this.props.taskData.expect_minute;
+    return (
+      <span className="expect_minute">
+        (予定：{this.props.TimerManager.convert_hms_from_seconds(expectMinute * 60)})
+      </span>
+    );
+  }
+
   render() {
     const path = Base.get_path();
     return (
@@ -35,8 +44,8 @@ class WeekTask extends Task {
               src={`${path}/image/time.png`}
               alt="作業時間"
             />
-            {super.displayActualTime()}経過
-            {super.displayExpectMinute()}
+            {super.displayActualTime()}
+            {this.displayExpectMinute()}
           </div>
 
           <div className="icon_area">
