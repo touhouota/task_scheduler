@@ -29,7 +29,7 @@ class WeekReflection extends React.Component {
           type="date"
           value={this.state.date}
           onChange={this.reGetDate}
-        />
+        />までの1週間の様子
         <WeekStructure
           TimerManager={this.props.TimerManager}
           targetDate={this.state.date}
