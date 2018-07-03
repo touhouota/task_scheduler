@@ -39,7 +39,12 @@ class ApiController < ApplicationController
     to = DateTime.parse(params[:date])
     from = to.ago(1.week)
     # 1週間分のタスクを返す
-    render json: Task.where(updated_at: (from..to), user_id: @user.user_id)
+    conditions = {
+      user_id: @user.user_id,
+      updated_at: (from..to),
+      status: [2, 3]
+    }
+    render json: Task.where(conditions)
   end
 
   def insert_task
