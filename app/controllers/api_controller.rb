@@ -36,7 +36,8 @@ class ApiController < ApplicationController
   # 週を指定してタスクを取得(振りかえり利用)
   def week_reflection
     @user = User.find_by(user_id: params[:user_id])
-    to = DateTime.parse(params[:date])
+    # 日付の範囲、今日までにすると今日の00:00までとなり、実質昨日までとなるので1日ずらす
+    to = Date.parse(params[:date]) + 1
     from = to.ago(1.week)
     # 1週間分のタスクを返す
     conditions = {
