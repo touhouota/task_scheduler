@@ -43,12 +43,11 @@ class WeekStructure extends Structure {
 
     this.createStructureElements = this.createStructureElements.bind(this);
     this.updateTaskList = this.updateTaskList.bind(this);
-
+    console.log('WeekStructure', props.targetData);
     this.getTask();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps');
     if (this.props.targetDate !== nextProps.targetDate) {
       this.getTask();
     }
@@ -66,11 +65,10 @@ class WeekStructure extends Structure {
     let wdayObject;
     for (i; i < fin; i += 1) {
       wdayNum = i % 7;
-      console.log(wdayNum);
       // 合っている曜日をリスト化する
       const taskList = tasks.filter((task) => {
         const updatedAt = new Date(task.updated_at);
-        return updatedAt.getDay() === (wdayNum % 7);
+        return updatedAt.getDay() === wdayNum;
       });
       wdayObject = this.weeks[wdayNum];
       structureElements.push(<WeekStructElement
@@ -94,7 +92,6 @@ class WeekStructure extends Structure {
   }
 
   getTask() {
-    console.log('WeekStructure');
     const path = Base.get_path();
     const userId = Base.get_cookie('user_id');
     // const date = new Date();
