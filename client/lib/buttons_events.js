@@ -16,6 +16,12 @@ const Buttons = {
     });
   },
 
+  reflection: () => {
+    const path = Base.get_path();
+    const userId = Base.get_cookie('user_id');
+    window.location.href = `${path}/reflection/week/${userId}`;
+  },
+
   github: () => {
     const URL = 'https://github.com/touhouota/task_scheduler/issues';
     window.open(URL, '_blank');
