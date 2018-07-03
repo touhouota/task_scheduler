@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import WeekReflection from './components/WeekReflection';
+import WeekReflectionContainer from './components/WeekReflectionContainer';
 
 import TimerManager from './lib/time_manager';
 
@@ -10,9 +10,9 @@ import TimerManager from './lib/time_manager';
 window.onload = () => {
   console.log('week_reflection');
   ReactDOM.render(
-    <WeekReflection
+    <WeekReflectionContainer
       TimerManager={TimerManager}
     />,
-    document.querySelector('.week_area'),
+    document.body,
   );
 };

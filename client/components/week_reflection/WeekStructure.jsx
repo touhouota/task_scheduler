@@ -37,10 +37,6 @@ class WeekStructure extends Structure {
       name: '土曜日',
     }];
 
-    this.state = {
-      tasks: [],
-    };
-
     this.createStructureElements = this.createStructureElements.bind(this);
     this.updateTaskList = this.updateTaskList.bind(this);
     console.log('WeekStructure', props.targetData);
@@ -55,8 +51,6 @@ class WeekStructure extends Structure {
 
   createStructureElements(tasks) {
     const structureElements = [];
-
-    // this.weeks.forEach((wdayObject, wdayNum) => {});
 
     const date = new Date(this.props.targetDate);
     let i = date.getDay() + 1; // 曜日 + 1でその要素が配列の最後に入る
@@ -85,12 +79,6 @@ class WeekStructure extends Structure {
     return structureElements;
   }
 
-  updateTaskList(taskList) {
-    this.setState({
-      tasks: taskList,
-    });
-  }
-
   getTask() {
     const path = Base.get_path();
     const userId = Base.get_cookie('user_id');
@@ -104,14 +92,14 @@ class WeekStructure extends Structure {
     })
       .then(response => response.json())
       .then((json) => {
-        this.updateTaskList(json);
+        this.props.updateTaskList(json);
       });
   }
 
   render() {
     return (
       <div className="WeekStructure">
-        {this.createStructureElements(this.state.tasks)}
+        {this.createStructureElements(this.props.tasks)}
       </div>
     );
   }
