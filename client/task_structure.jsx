@@ -22,6 +22,7 @@ window.onload = () => {
      */
     document.getElementById('append_task').addEventListener('click', Buttons.append_task);
     document.getElementById('member_status').addEventListener('click', Buttons.members);
+    document.getElementById('week_reflection').addEventListener('click', Buttons.reflection);
     document.getElementById('github').addEventListener('click', Buttons.github);
     TimerManager.watch();
     document.getElementById('logout').addEventListener('click', Buttons.logout);
