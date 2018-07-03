@@ -1,3 +1,16 @@
 // Place all the styles related to the week_reflection controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.week_reflection .container {
+  height: 100%;
+
+  .title_area {
+    height: 50px;
+  }
+
+  .week_area {
+    height: calc(100% - 50px);
+    @import './week_reflection/week_reflection.scss';
+  }
+}

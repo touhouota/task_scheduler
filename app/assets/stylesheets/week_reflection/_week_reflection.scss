@@ -1,0 +1,24 @@
+.WeekReflection {
+  height: 100%;
+
+  .WeekStructure {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .WeekStructureElement .tasks {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      .task_container .task_element {
+        opacity: 1;
+
+        &[data-status='2'] {
+          border: 1px solid #eee;
+        }
+      }
+    }
+  }
+}
