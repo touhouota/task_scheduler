@@ -13,6 +13,6 @@ window.onload = () => {
     <WeekReflectionContainer
       TimerManager={TimerManager}
     />,
-    document.body,
+    document.querySelector('.container'),
   );
 };
