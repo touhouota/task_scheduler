@@ -100,7 +100,7 @@ class MembersTask extends React.Component {
       <div className="modal members_status hide">
         <h1 className="modal_title">作業達成率ランキング</h1>
         <p className="modal_subscribe">
-          登録した作業をどのくらい終わらせているかランキング。
+          今日までの1週間、登録した作業をどのくらい終わらせているかランキング。
           <br />
           1分ごとに更新しています。
         </p>
