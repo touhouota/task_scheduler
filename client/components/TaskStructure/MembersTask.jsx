@@ -71,13 +71,8 @@ class MembersTask extends React.Component {
       } else {
         rate2 = 0;
       }
-
-      if (rate1 < rate2) {
-        return 1;
-      } else if (rate1 > rate2) {
-        return -1;
-      }
-      return 0;
+      // 割合が高い人 or タスク数が多い人順
+      return rate2 - rate1 || item2.task_num - item1.task_num;
     });
     return members.map((member, index) => {
       const rate = Base.round_at(member.finish_num / member.task_num, 1) || 0;
