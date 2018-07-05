@@ -100,12 +100,10 @@ class ApiController < ApplicationController
         user_id: member.user_id,
         updated_at: (today.ago(7.day)..today)
       }
-      # sql = 'user_id = ? '
       # タスクの総数
       user[:task_num] = Task.where(request).count
       request.store(:status, [2, 3])
       # 終了したものの数
-      # sql += 'and status in (2, 3)'
       user[:finish_num] = Task.where(request).count
       result.push(user)
     end
