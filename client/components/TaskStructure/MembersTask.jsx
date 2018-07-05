@@ -80,7 +80,7 @@ class MembersTask extends React.Component {
       return 0;
     });
     return members.map((member, index) => {
-      const rate = Base.round_at(member.finish_num / member.task_num, 1);
+      const rate = Base.round_at(member.finish_num / member.task_num, 1) || 0;
       return (
         <tr key={member.user_id} className="member">
           <td className="index">{index + 1}</td>
