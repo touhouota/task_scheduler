@@ -90,17 +90,21 @@ class ApiController < ApplicationController
 
   def getMembersTask
     result = []
-
     members = Task.joins(:user).select(:u_name, :user_id).group(:user_id)
     members.each do |member|
       # 取得したモデルをhashに変換
       user = member.attributes
+      # 日付を指定して取得するとき、その日より以前しか取得してくれないので1日後を末端とする
+      today = Date.current.tomorrow
+      request = {
+        user_id: member.user_id,
+        updated_at: (today.ago(7.day)..today)
+      }
       # タスクの総数
-      sql = 'user_id = ? '
-      user[:task_num] = Task.where(sql, member.user_id).count
+      user[:task_num] = Task.where(request).count
+      request.store(:status, [2, 3])
       # 終了したものの数
-      sql += 'and status in (2, 3)'
-      user[:finish_num] = Task.where(sql, member.user_id).count
+      user[:finish_num] = Task.where(request).count
       result.push(user)
     end
 
