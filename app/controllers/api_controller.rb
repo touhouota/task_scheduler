@@ -1,19 +1,6 @@
 class ApiController < ApplicationController
   protect_from_forgery with: :null_session
 
-  # ログイン処理
-  def login
-    user_id = params[:user_id]
-    @user = User.find_by(user_id: user_id)
-    if @user
-      render json: @user
-    else
-      render json: {
-        u_name: 'ないよ'
-      }
-    end
-  end
-
   # タスクの一覧を取得する
   def tasks
     @tasks = Task.all
