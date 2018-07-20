@@ -93,3 +93,9 @@ gem 'slim-rails'
 group :production do
   gem 'mysql2'
 end
+
+# Slack botのためのGEMを追加
+gem 'http'
+gem 'json'
+gem 'faye-websocket'
+gem 'eventmachine'
