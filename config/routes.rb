@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # ログイン画面
   get '/login', to: 'login#index'
   # ログイン処理
-  post '/api/login', to: 'api#login'
+  post '/api/login', to: 'login#login'
 
   # メイン画面
   get '/main/:user_id', to: 'main_page#index'
@@ -28,13 +28,13 @@ Rails.application.routes.draw do
   get '/reflection/week/:user_id', to: 'week_reflection#index'
 
   # API用のルート
-  get '/api/tasks', to: 'api#tasks'
-  get '/api/tasks/:user_id', to: 'api#user_tasks'
+  get '/api/tasks', to: 'task_structure#tasks'
+  get '/api/tasks/:user_id', to: 'task_structure#user_tasks'
   post '/api/tasks/create', to: 'api#insert_task'
-  get '/api/tasks/membersTask/:user_id', to: 'api#getMembersTask'
-  post '/api/task/statusChange', to: 'api#statusChange'
-  post '/api/task/modify', to: 'api#taskModify'
-  get '/api/week/:date/:user_id', to: 'api#week_reflection'
+  get '/api/tasks/membersTask/:user_id', to: 'task_structure#getMembersTask'
+  post '/api/task/statusChange', to: 'task_structure#statusChange'
+  post '/api/task/modify', to: 'task_structure#taskModify'
+  get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
   #   end
   # end
 end
