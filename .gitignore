@@ -40,3 +40,6 @@ bundle/
 
 # 初期データは無視する
 /db/initialize_data.rb
+
+# Tokenのデータは追加しない
+config/slack_token.yml
