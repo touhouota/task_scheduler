@@ -143,6 +143,7 @@ begin
       EM.stop
     end
   end
-rescue
+rescue => e
   puts "error: なんかのエラーが起きた"
+  puts "#{e.class} : #{e.message}"
 end
