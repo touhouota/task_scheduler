@@ -1,14 +1,12 @@
 require 'http'
 require 'json'
-require 'yaml'
 require 'eventmachine'
 require 'faye/websocket'
 
 class SlackBot
   attr_accessor :task, :status
   def initialize
-    config_path = Rails.root.join('config', 'slack_token.yml')
-    @TOKEN = YAML.load_file(config_path)
+    @TOKEN = ENV['SLACK_API_TOKEN']
     @task = {}
     @status = 0
     # connect_RTM
