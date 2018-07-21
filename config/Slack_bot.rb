@@ -14,7 +14,7 @@ class SlackBot
 
   def get_RTM_url
     response = HTTP.post('https://slack.com/api/rtm.start', params: {
-                           token: @TOKEN[:SLACK_API_TOKEN]
+                           token: @TOKEN
                          })
     rc = JSON.parse(response.body)
     rc['url']
