@@ -3,9 +3,7 @@ namespace :slack do
   task :connect do
     # load Rails.root.join('config', 'Slack_bot.rb')
     on roles(:web) do
-      execute <<-EOC
-      cd #{deploy_to}/current; bundle exec ruby -e 'puts Dir.pwd'}
-      EOC
+      execute cd "#{deploy_to}/current; bundle exec ruby -e 'puts(Dir.pwd)'}"
     end
   end
 end
