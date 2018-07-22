@@ -9,7 +9,9 @@ namespace :slack do
   desc '接続を切る'
   task :disconnect do
     on roles(:web) do
-      # execute :kill, '-9 '
+      pid = capture "cat #{fetch[:slack_pid]}"
+      p pid
+      execute :kill, "-9 #{pid}"
     end
   end
 end
