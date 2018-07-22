@@ -24,6 +24,11 @@ class SlackBot
     @task[key] = data
   end
 
+  def reset_information
+    @task = {}
+    status = 0
+  end
+
   # タスクを修正するため
   def modify(old_value, new_value)
     @task.each do |key, value|
@@ -126,7 +131,7 @@ begin
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
 
-          p "追加", slack.task
+          # p "追加", slack.task
           ws.send({
             channel: data['channel'],
             type: 'message',
@@ -140,8 +145,7 @@ begin
             ---------------
             EOS
           }.to_json)
-          slack.status = 0
-          slack.task = {}
+          slack.reset_information
         end
       end
     end
