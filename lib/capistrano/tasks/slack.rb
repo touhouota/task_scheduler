@@ -1,19 +1,27 @@
 namespace :slack do
+  desc 'Slackを止めて、つけ直す'
+  task :start do
+    on roles(:web) do
+      invoke 'slack:disconnect'
+      invoke 'slack:connect'
+    end
+  end
+
   desc 'Slackへの接続をする'
   task :connect do
     on roles(:web) do
-      execute "cd #{deploy_to}/current; nohup bundle exec rails slack_bot:connect &; echo !$ > #{slack_pid}"
+      execute "cd #{fetch :deploy_to}/current; (nohup bundle exec rails slack_bot:connect & echo $! > #{fetch :slack_pid});"
     end
   end
 
   desc '接続を切る'
   task :disconnect do
     on roles(:web) do
-      pid = capture "cat #{slack_pid}"
+      pid = capture "cat #{fetch :slack_pid}"
       p pid
       execute :kill, "-9 #{pid}"
     end
   end
 end
 
-after 'puma:restart', 'slack:connect'
+after 'puma:restart', 'slack:start'
