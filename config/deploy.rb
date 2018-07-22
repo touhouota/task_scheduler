@@ -15,6 +15,9 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 
 append :linked_files, 'config/database.yml', 'config/master.key'
 
+# slack_botを処理するプロセスIDを置く場所を決めておく
+set :slack_pid, "#{shared_path}/tmp/pids/slack.pid"
+
 set :puma_threads, [4, 16]
 set :puma_workers, 0
 # pumaが口を明けていてほしいところを指定する
