@@ -98,17 +98,29 @@ begin
         end
       when 2 then
         if data['text'].nil?.! && data['user']
-          # 前のコメントが時間のはず
-          slack.set_information(:exp_minute, data)
-          ws.send({
-            channel: data['channel'],
-            type: 'message',
-            text: <<~EOS
-            <@#{data['user']}>さん
-            タスクに関して、なにかメモしておく？
-            EOS
-          }.to_json)
-          slack.status = 3
+          minute = data['text'].to_i
+          if minute.zero?
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              時間は、1以上の数字で入力してくだし。
+              EOS
+            }.to_json)
+          else
+            # 前のコメントが時間のはず
+            slack.set_information(:exp_minute, data)
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              タスクに関して、なにかメモしておく？
+              EOS
+            }.to_json)
+            slack.status = 3
+          end
         end
       when 3 then
         if data['text'].nil?.! && data['user']
