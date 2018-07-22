@@ -26,7 +26,7 @@ class SlackBot
 
   def reset_information
     @task = {}
-    status = 0
+    @status = 0
   end
 
   # タスクを修正するため
@@ -115,7 +115,7 @@ begin
             }.to_json)
           else
             # 前のコメントが時間のはず
-            slack.set_information(:exp_minute, data)
+            slack.set_information(:exp_minute, minute)
             ws.send({
               channel: data['channel'],
               type: 'message',
