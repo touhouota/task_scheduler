@@ -1,0 +1,2 @@
+class SlackController < ApplicationController
+end
