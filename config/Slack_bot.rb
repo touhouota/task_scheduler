@@ -63,7 +63,7 @@ begin
 
     # RTM APIから情報を受け取った時の処理
     ws.on :message do |event|
-      puts "status:#{slack.status}, task: #{slack.task}\n\n"
+      # puts "status:#{slack.status}, task: #{slack.task}\n\n"
       data = JSON.parse(event.data)
       # p data
 
@@ -115,7 +115,7 @@ begin
             }.to_json)
           else
             # 前のコメントが時間のはず
-            slack.set_information(:exp_minute, minute)
+            slack.set_information(:exp_minute, data)
             ws.send({
               channel: data['channel'],
               type: 'message',
