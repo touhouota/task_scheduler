@@ -29,6 +29,16 @@ class SlackBot
     @status = 0
   end
 
+  def check_label(text)
+    [
+      {name: '文献調査', label: 'survay'},
+      {name: '提案実装', label: 'develop'},
+      {name: '評価実験', label: 'experiment'},
+      {name: '論文執筆', label: 'write'},
+      {name: '普段のあれこれ', label: 'everyday'}
+    ].find{|hash| hash[:name] == text}
+  end
+
   # タスクを修正するため
   def modify(old_value, new_value)
     @task.each do |key, value|
@@ -68,53 +78,8 @@ begin
       # p data
 
       # Slackにてコメントを修正されたときに、実行される
-      if [1,2,3].include?(slack.status) && data['message']
+      if [1,2,3,4].include?(slack.status) && data['message']
         slack.modify(data['previous_message'], data['message'])
-      end
-
-      if data['text'].include?('ボタン') then
-        ws.send({
-          channel: data['channel'],
-          type: 'message',
-          attachments: [{
-            text: "Choose a game to play",
-            fallback: "You are unable to choose a game",
-            callback_id: "wopr_game",
-            color: "#3AA3E3",
-            attachment_type: "default",
-            actions: [
-                {
-                    name: "game",
-                    text: "Chess",
-                    type: "button",
-                    value: "chess"
-                },
-                {
-                    name: "game",
-                    text: "Falken's Maze",
-                    type: "button",
-                    value: "maze"
-                },
-                {
-                    name: "game",
-                    text: "Thermonuclear War",
-                    style: "danger",
-                    type: "button",
-                    value: "war",
-                    confirm: {
-                        title: "Are you sure?",
-                        text: "Wouldn't you prefer a good game of chess?",
-                        ok_text: "Yes",
-                        dismiss_text: "No"
-                    }
-                }
-            ]
-        }],
-          text: <<~EOS
-          <@#{data['user']}>さん
-          hoge
-          EOS
-        }.to_json)
       end
 
       # タスク追加時のフェーズ
@@ -133,20 +98,60 @@ begin
         end
       when 1 then
         if data['text'].nil?.! && data['user'] then
-          # 前のコメントがタスクのはず
+          # タスク名を設定
           slack.set_information(:t_name, data)
+
           ws.send({
             channel: data['channel'],
             type: 'message',
             text: <<~EOS
             <@#{data['user']}>さん
-            何分位かかりそう？
-            (数字のみを入力してね)
+            タスクのラベルは？
+            1: 文献調査
+            2: 提案実装
+            3: 評価実験
+            4: 論文執筆
+            5: 普段のあれこれ
             EOS
           }.to_json)
           slack.status = 2
         end
       when 2 then
+        if data['text'].nil?.! && data['user'] then
+          if slack.exist_label?(data['text']) then
+            # labelが正確ならば、セットして次の情報を通知
+            slack.set_information(:label, data)
+
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              何分位かかりそう？
+              (数字のみを入力してね)
+              EOS
+            }.to_json)
+            slack.status = 3
+          else
+            # labelが違うとき
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              ラベルは、以下のものから選んで入力してください。
+              1: 文献調査
+              2: 提案実装
+              3: 評価実験
+              4: 論文執筆
+              5: 普段のあれこれ
+
+              // できればボタンで入力したいよね・・・・
+              EOS
+            }.to_json)
+          end
+        end
+      when 3 then
         if data['text'].nil?.! && data['user']
           minute = data['text'].to_i
           if minute.zero?
@@ -169,10 +174,10 @@ begin
               タスクに関して、なにかメモしておく？
               EOS
             }.to_json)
-            slack.status = 3
+            slack.status = 4
           end
         end
-      when 3 then
+      when 4 then
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
 
@@ -185,8 +190,9 @@ begin
             タスクを追加しました。
             ---------------
             タスク名：#{slack.task[:t_name]['text']}
-            予想時間：#{slack.task[:exp_minute]['text']}分
-            メモ：   #{slack.task[:memo]['text']}
+            ラベル　：#{slack.get_label(slack.task[:exp_minute]['text'])}
+            予想時間：#{slack.task[:label]['text']}分
+            メモ　　：#{slack.task[:memo]['text']}
             ---------------
             EOS
           }.to_json)
