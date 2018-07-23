@@ -72,6 +72,51 @@ begin
         slack.modify(data['previous_message'], data['message'])
       end
 
+      if data['text'].include?('ボタン') then
+        ws.send({
+          channel: data['channel'],
+          type: 'message',
+          attachments: [{
+            text: "Choose a game to play",
+            fallback: "You are unable to choose a game",
+            callback_id: "wopr_game",
+            color: "#3AA3E3",
+            attachment_type: "default",
+            actions: [
+                {
+                    name: "game",
+                    text: "Chess",
+                    type: "button",
+                    value: "chess"
+                },
+                {
+                    name: "game",
+                    text: "Falken's Maze",
+                    type: "button",
+                    value: "maze"
+                },
+                {
+                    name: "game",
+                    text: "Thermonuclear War",
+                    style: "danger",
+                    type: "button",
+                    value: "war",
+                    confirm: {
+                        title: "Are you sure?",
+                        text: "Wouldn't you prefer a good game of chess?",
+                        ok_text: "Yes",
+                        dismiss_text: "No"
+                    }
+                }
+            ]
+        }],
+          text: <<~EOS
+          <@#{data['user']}>さん
+          hoge
+          EOS
+        }.to_json)
+      end
+
       # タスク追加時のフェーズ
       case slack.status
       when 0 then
