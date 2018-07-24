@@ -189,7 +189,7 @@ begin
             task_memo: slack.task[:memo]['text'],
             slack_id: data['user']
             }
-          response = HTTP.post(url, form: query)
+          response = HTTP.post(url, json: query)
 
           if response.status.to_i == 200
             response = JSON.parse(response, symbolize_names: true)
