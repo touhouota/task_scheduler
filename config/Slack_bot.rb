@@ -216,7 +216,15 @@ begin
             }.to_json)
           else
             puts "error"
-            puts response.body.to_s
+
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              #{response.body.to_s.join("\n")}
+              EOS
+            }.to_json)
           end
           slack.reset_information
         end
