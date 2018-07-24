@@ -183,10 +183,10 @@ begin
           slack.set_information(:memo, data)
           url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
           response = HTTP.post(url, params: {
-            task_name: slack.task[:task_name],
-            task_label: slack.task[:label],
-            expect_minute: slack.task[:exp_minute],
-            task_memo: slack.task[:memo],
+            task_name: slack.task[:task_name]['text'],
+            task_label: slack.get_label(slack.task[:exp_minute]['text']),
+            expect_minute: slack.task[:exp_minute]['text'],
+            task_memo: slack.task[:memo]['text'],
             slack_id: data['id']
             }
           )
@@ -228,4 +228,5 @@ begin
 rescue => e
   puts "error: なんかのエラーが起きた"
   puts "#{e.class} : #{e.message}"
+  puts e.backtrace.join("\n")
 end
