@@ -221,7 +221,7 @@ begin
               channel: data['channel'],
               type: 'message',
               text: <<~EOS
-              <@UBQ8B7XGF>さん
+              <@U8XNQCDLH>さん
               #{query}
               #{response.body.to_s}
               EOS
