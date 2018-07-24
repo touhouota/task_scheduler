@@ -191,29 +191,34 @@ begin
             }
           )
 
-          response = JSON.parse(response, symbolize_names: true)
+          if response.status.to_i == 200
+            response = JSON.parse(response, symbolize_names: true)
 
-          # p "追加", slack.task
-          ws.send({
-            channel: data['channel'],
-            type: 'message',
-            text: <<~EOS
-            <@#{data['user']}>さん
-            タスクを追加しました。
-            ---------------
-            タスク名：#{slack.task[:task_name]['text']}
-            ラベル　：#{slack.get_label(slack.task[:label]['text'])}
-            予想時間：#{slack.task[:exp_minute]['text']}分
-            メモ　　：#{slack.task[:memo]['text']}
-            ---------------
-            #{response[:t_name]}
-            #{response[:label]}
-            #{response[:expect_minute]}
-            #{response[:memo]}
-            ---------------
-            EOS
-          }.to_json)
-          slack.reset_information
+            # p "追加", slack.task
+            ws.send({
+              channel: data['channel'],
+              type: 'message',
+              text: <<~EOS
+              <@#{data['user']}>さん
+              タスクを追加しました。
+              ---------------
+              タスク名：#{slack.task[:task_name]['text']}
+              ラベル　：#{slack.get_label(slack.task[:label]['text'])}
+              予想時間：#{slack.task[:exp_minute]['text']}分
+              メモ　　：#{slack.task[:memo]['text']}
+              ---------------
+              #{response[:t_name]}
+              #{response[:label]}
+              #{response[:expect_minute]}
+              #{response[:memo]}
+              ---------------
+              EOS
+            }.to_json)
+            slack.reset_information
+          else
+            puts "error"
+            puts response.body.to_s
+          end
         end
       end
     end
