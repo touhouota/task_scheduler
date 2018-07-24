@@ -182,14 +182,14 @@ begin
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
           url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
-          response = HTTP.post(url, form: {
+          query = {
             task_name: slack.task[:task_name]['text'],
             task_label: slack.get_label(slack.task[:label]['text']),
             expect_minute: slack.task[:exp_minute]['text'],
             task_memo: slack.task[:memo]['text'],
             slack_id: data['user']
             }
-          )
+          response = HTTP.post(url, form: query)
 
           if response.status.to_i == 200
             response = JSON.parse(response, symbolize_names: true)
@@ -221,7 +221,8 @@ begin
               channel: data['channel'],
               type: 'message',
               text: <<~EOS
-              <@#{data['user']}>さん
+              <@UBQ8B7XGF>さん
+              #{query}
               #{response.body.to_s}
               EOS
             }.to_json)
