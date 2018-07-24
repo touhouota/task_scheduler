@@ -184,8 +184,8 @@ begin
           url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
           response = HTTP.post(url, params: {
             task_name: slack.task[:task_name]['text'],
-            task_label: slack.get_label(slack.task[:exp_minute]['text']),
-            ts: slack.task[:exp_minute]['text'],
+            task_label: slack.get_label(slack.task[:label]['text']),
+            expect_minute: slack.task[:exp_minute]['text'],
             task_memo: slack.task[:memo]['text'],
             slack_id: data['id']
             }
@@ -202,8 +202,8 @@ begin
             タスクを追加しました。
             ---------------
             タスク名：#{slack.task[:task_name]['text']}
-            ラベル　：#{slack.get_label(slack.task[:exp_minute]['text'])}
-            予想時間：#{slack.task[:label]['text']}分
+            ラベル　：#{slack.get_label(slack.task[:label]['text'])}
+            予想時間：#{slack.task[:exp_minute]['text']}分
             メモ　　：#{slack.task[:memo]['text']}
             ---------------
             #{response[:t_name]}
