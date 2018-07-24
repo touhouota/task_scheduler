@@ -13,8 +13,8 @@ namespace :init_db do
 
   desc 'slackのidを付加, init_db:slack_user_list[token_string]'
   task :slack_user_list, 'token'
-  task slack_id: :environment do |_t, _args|
-    url = "https://slack.com/api/users.list?token=#{token}"
+  task slack_user_list: :environment do |_t, args|
+    url = "https://slack.com/api/users.list?token=#{args['token']}"
     response = JSON.parse(HTTP.get(url), symbolize_names: true)
 
     puts response[:members].map { |hash| { slack_id: hash[:id], real_name: hash[:real_name] } }
