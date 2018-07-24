@@ -25,7 +25,11 @@ class TaskStructureController < ApplicationController
 
   def insert_task
     task_info = task_params
-    user = User.find_by(user_id: params[:user_id])
+    user = if params[:slack_id]
+             User.find_by(user_id: params[:slack_id])
+           else
+             User.find_by(user_id: params[:user_id])
+           end
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
