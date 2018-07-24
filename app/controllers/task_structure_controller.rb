@@ -30,6 +30,7 @@ class TaskStructureController < ApplicationController
            else
              User.find_by(user_id: params[:user_id])
            end
+    p user
     @task = user.tasks.build(task_info)
     if @task.save
       # TLを追加
