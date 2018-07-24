@@ -214,11 +214,11 @@ begin
               ---------------
               EOS
             }.to_json)
-            slack.reset_information
           else
             puts "error"
             puts response.body.to_s
           end
+          slack.reset_information
         end
       end
     end
