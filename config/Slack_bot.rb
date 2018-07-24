@@ -182,16 +182,16 @@ begin
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
           url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
-          # response = HTTP.post(url, params: {
-          #   task_name: slack.task[:task_name]['text'],
-          #   task_label: slack.get_label(slack.task[:exp_minute]['text']),
-          #   ts: slack.task[:exp_minute]['text'],
-          #   task_memo: slack.task[:memo]['text'],
-          #   slack_id: data['id']
-          #   }
-          # )
+          response = HTTP.post(url, params: {
+            task_name: slack.task[:task_name]['text'],
+            task_label: slack.get_label(slack.task[:exp_minute]['text']),
+            ts: slack.task[:exp_minute]['text'],
+            task_memo: slack.task[:memo]['text'],
+            slack_id: data['id']
+            }
+          )
 
-          # response = JSON.parse(response, symbolize_names: true)
+          response = JSON.parse(response, symbolize_names: true)
 
           # p "追加", slack.task
           ws.send({
@@ -206,7 +206,10 @@ begin
             予想時間：#{slack.task[:label]['text']}分
             メモ　　：#{slack.task[:memo]['text']}
             ---------------
-
+            #{response[:t_name]}
+            #{response[:label]}
+            #{response[:expect_minute]}
+            #{response[:memo]}
             ---------------
             EOS
           }.to_json)
