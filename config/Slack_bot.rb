@@ -74,7 +74,7 @@ begin
     ws.on :message do |event|
       # puts "status:#{slack.status}, task: #{slack.task}\n\n"
       data = JSON.parse(event.data)
-      # p data
+      p data
 
       # Slackにてコメントを修正されたときに、実行される
       if [1,2,3,4].include?(slack.status) && data['message']
