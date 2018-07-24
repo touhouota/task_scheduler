@@ -228,5 +228,5 @@ begin
 rescue => e
   puts "error: なんかのエラーが起きた"
   puts "#{e.class} : #{e.message}"
-  puts e.backtrace.join("\n")
+  puts e.backtrace
 end
