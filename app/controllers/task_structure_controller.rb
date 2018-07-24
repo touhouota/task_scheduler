@@ -26,7 +26,7 @@ class TaskStructureController < ApplicationController
   def insert_task
     task_info = task_params
     user = if params[:slack_id]
-             User.find_by(user_id: params[:slack_id])
+             User.find_by(slack_id: params[:slack_id])
            else
              User.find_by(user_id: params[:user_id])
            end
