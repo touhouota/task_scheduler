@@ -187,7 +187,7 @@ begin
             task_label: slack.get_label(slack.task[:label]['text']),
             expect_minute: slack.task[:exp_minute]['text'],
             task_memo: slack.task[:memo]['text'],
-            slack_id: data['id']
+            slack_id: data['user']
             }
           )
 
