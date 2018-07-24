@@ -222,7 +222,7 @@ begin
               type: 'message',
               text: <<~EOS
               <@#{data['user']}>さん
-              #{response.body.to_s.join("\n")}
+              hoge
               EOS
             }.to_json)
           end
