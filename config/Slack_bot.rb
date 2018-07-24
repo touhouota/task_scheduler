@@ -98,7 +98,7 @@ begin
       when 1 then
         if data['text'].nil?.! && data['user'] then
           # タスク名を設定
-          slack.set_information(:t_name, data)
+          slack.set_information(:task_name, data)
 
           ws.send({
             channel: data['channel'],
@@ -181,6 +181,17 @@ begin
       when 4 then
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
+          url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
+          response = HTTP.post(url, params: {
+            task_name: slack.task[:task_name],
+            task_label: slack.task[:label],
+            expect_minute: slack.task[:exp_minute],
+            task_memo: slack.task[:memo],
+            slack_id: data['id']
+            }
+          )
+
+          response = JSON.parse(response, symbolize_names: true)
 
           # p "追加", slack.task
           ws.send({
@@ -190,10 +201,15 @@ begin
             <@#{data['user']}>さん
             タスクを追加しました。
             ---------------
-            タスク名：#{slack.task[:t_name]['text']}
+            タスク名：#{slack.task[:task_name]['text']}
             ラベル　：#{slack.get_label(slack.task[:exp_minute]['text'])}
             予想時間：#{slack.task[:label]['text']}分
             メモ　　：#{slack.task[:memo]['text']}
+            ---------------
+            #{response[:t_name]}
+            #{response[:label]}
+            #{response[:expect_minute]}
+            #{response[:memo]}
             ---------------
             EOS
           }.to_json)
