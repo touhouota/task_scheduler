@@ -26,7 +26,10 @@ namespace :init_db do
     yml = YAML.load_file(args['filepath'])
     yml.each do |user_id, hash|
       user = User.find_by(user_id: user_id)
-      user.slack_id = hash[:slack_id] if user
+      if user
+        user.slack_id = hash[:slack_id]
+        user.save!
+      end
       p user
     end
   end
