@@ -182,14 +182,14 @@ begin
         if data['text'].nil?.! && data['user']
           slack.set_information(:memo, data)
           url = 'https://mimalab.c.fun.ac.jp/b1013179/task_scheduler/api/tasks/create'
-          response = HTTP.post(url, params: {
-            task_name: slack.task[:task_name]['text'],
-            task_label: slack.get_label(slack.task[:exp_minute]['text']),
-            ts: slack.task[:exp_minute]['text'],
-            task_memo: slack.task[:memo]['text'],
-            slack_id: data['id']
-            }
-          )
+          # response = HTTP.post(url, params: {
+          #   task_name: slack.task[:task_name]['text'],
+          #   task_label: slack.get_label(slack.task[:exp_minute]['text']),
+          #   ts: slack.task[:exp_minute]['text'],
+          #   task_memo: slack.task[:memo]['text'],
+          #   slack_id: data['id']
+          #   }
+          # )
 
           # response = JSON.parse(response, symbolize_names: true)
 
