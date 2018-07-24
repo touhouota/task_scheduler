@@ -29,14 +29,13 @@ class SlackBot
     @status = 0
   end
 
-  def check_label(text)
-    [
-      {name: '文献調査', label: 'survay'},
-      {name: '提案実装', label: 'develop'},
-      {name: '評価実験', label: 'experiment'},
-      {name: '論文執筆', label: 'write'},
-      {name: '普段のあれこれ', label: 'everyday'}
-    ].find{|hash| hash[:name] == text}
+  def get_label(index)
+    [nil, 'survay', 'develop', 'experiment' ,'write','everyday'].at(index.to_i)
+  end
+
+  def exist_label?(text)
+
+    get_label(text.to_i).!.!
   end
 
   # タスクを修正するため
