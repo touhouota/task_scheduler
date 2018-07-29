@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_161520) do
+ActiveRecord::Schema.define(version: 2018_07_23_163502) do
 
   create_table "schedules", force: :cascade do |t|
     t.integer "task_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_161520) do
     t.string "u_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slack_id"
     t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
 
