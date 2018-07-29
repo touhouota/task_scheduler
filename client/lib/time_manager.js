@@ -31,6 +31,7 @@ const TimerManager = {
     displayArea.textContent = TimerManager.convert_hms_from_seconds(progressTime);
   },
 
+  // secondsをhh:mm:ssに変換する
   convert_hms_from_seconds: (seconds) => {
     let argvSec = seconds;
     let hour = Math.floor(argvSec / (60 * 60));
