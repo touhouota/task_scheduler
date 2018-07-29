@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TaskForm from '../MainPage/TaskForm';
+import TimerManager from '../../lib/time_manager';
 
 import Base from '../../lib/base_object';
 import ModalProcess from '../../lib/modal_process';
@@ -38,6 +39,7 @@ class ModifyModal extends React.Component {
     };
     this.taskModify = this.taskModify.bind(this);
     this.chechValidate = this.chechValidate.bind(this);
+    this.setModifyTime = this.setModifyTime.bind(this);
   }
 
   chechValidate(formName, event) {
@@ -72,6 +74,7 @@ class ModifyModal extends React.Component {
     console.log(modal);
     const modalData = ModalProcess.getModalData(modal);
     modalData.append('id', this.props.task.id);
+    this.setModifyTime(modal, modalData);
     // TODO: タスクの情報をサーバへ送る
     const path = Base.get_path();
     fetch(`${path}/api/task/modify`, {
@@ -94,7 +97,18 @@ class ModifyModal extends React.Component {
       });
   }
 
+  setModifyTime(modal, formData) {
+    const hour = Number(modal.hour.value);
+    const min = Number(modal.min.value);
+    const sec = Number(modal.sec.value);
+    const actual_sec = (hour * 3600) + (min * 60) + sec;
+    formData.append('actual_sec', actual_sec);
+  }
+
   render() {
+    const actual_sec = this.props.task.actual_sec;
+    const hmsArray = TimerManager.convert_hms_from_seconds(actual_sec).split(':');
+
     return (
       <form className="modify_modal hide" id={`modify_${this.props.task.id}`}>
         <h2>タスクの修正</h2>
@@ -132,11 +146,47 @@ class ModifyModal extends React.Component {
           <TaskForm
             type="number"
             name="expect_minute"
+            list="true"
+            min={0}
+            step={5}
             placeholder="入力するか選んで▼"
             value={this.props.task.expect_minute}
             checkValidation={this.chechValidate}
             required="true"
           />
+        </label>
+
+        <label>
+          <span className="modal_label">
+              作業時間      ：
+          </span>
+          <TaskForm
+            type="number"
+            name="hour"
+            placeholder="時間"
+            min="0"
+            step="1"
+            value={hmsArray[0]}
+            checkValidation={this.chechValidate}
+          />時間
+          <TaskForm
+            type="number"
+            name="min"
+            placeholder="分"
+            min="0"
+            step="1"
+            value={hmsArray[1]}
+            checkValidation={this.chechValidate}
+          />分
+          <TaskForm
+            type="number"
+            name="sec"
+            placeholder="秒"
+            min="0"
+            step="1"
+            value={hmsArray[2]}
+            checkValidation={this.chechValidate}
+          />秒
         </label>
 
         <label>

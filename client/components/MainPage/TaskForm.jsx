@@ -82,9 +82,9 @@ class TaskForm extends React.Component {
             type={this.props.type}
             name={this.props.name}
             placeholder={this.props.placeholder}
-            list="minuteList"
-            min={0}
-            step={5}
+            list={this.props.list && 'minuteList'}
+            min={this.props.min}
+            step={this.props.step}
             value={this.state.value}
             required={this.props.required}
             onChange={(event) => {

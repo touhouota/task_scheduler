@@ -45,6 +45,7 @@ class TaskStructureController < ApplicationController
     @task = Task.find(params[:id])
     task_info = task_params
     @task.update_attributes(task_info)
+    @task.update(actual_sec: params[:actual_sec]) if params[:actual_sec]
     if @task.save
       tl_insert(task_id: @task.id)
       render json: @task
