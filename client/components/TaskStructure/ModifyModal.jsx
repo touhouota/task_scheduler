@@ -163,21 +163,21 @@ class ModifyModal extends React.Component {
             placeholder="時間"
             value={hmsArray[0]}
             checkValidation={this.chechValidate}
-          />
+          />時間
           <TaskForm
             type="number"
             name="min"
             placeholder="分"
             value={hmsArray[1]}
             checkValidation={this.chechValidate}
-          />
+          />分
           <TaskForm
             type="number"
             name="sec"
             placeholder="秒"
             value={hmsArray[2]}
             checkValidation={this.chechValidate}
-          />
+          />秒
         </label>
 
         <label>
