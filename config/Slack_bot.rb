@@ -48,11 +48,6 @@ class SlackBot
     end
   end
 
-  # キャンセルされたかを確認
-  def check_cancel
-    # TODO: キャンセル、と書かれたときに処理をリセットする
-  end
-
   def connect_RTM
     url = get_RTM_url
   end
@@ -74,7 +69,21 @@ begin
     ws.on :message do |event|
       # puts "status:#{slack.status}, task: #{slack.task}\n\n"
       data = JSON.parse(event.data)
-      p data
+      # p data
+
+      if data['text'] == 'キャンセル'
+        slack.reset_information
+        ws.send({
+          channel: data['channel'],
+          type: 'message',
+          text: <<~EOS
+          <@#{data['user']}>さん
+          入力を停止。
+          何かあれば、「タスク追加」とだけつぶやいてください。
+          #{slack}
+          EOS
+        }.to_json)
+      end
 
       # Slackにてコメントを修正されたときに、実行される
       if [1,2,3,4].include?(slack.status) && data['message']
