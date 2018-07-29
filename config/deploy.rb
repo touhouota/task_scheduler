@@ -1,10 +1,11 @@
 # config valid for current version and patch releases of Capistrano
-lock '~> 3.10.2'
+lock '~> 3.11.0'
 
 set :application, 'task_scheduler'
 set :repo_url, 'https://github.com/touhouota/task_scheduler.git'
 
-set :branch, 'master'
+# set :branch, 'master'
+set :branch, 'slack_bot'
 set :user, 'b1013179'
 set :deploy_to, '/home/b1013179/task_scheduler'
 set :stage, 'production'
@@ -13,6 +14,9 @@ set :keep_releases, 5
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/upload', 'vendor/bundle'
 
 append :linked_files, 'config/database.yml', 'config/master.key'
+
+# slack_botを処理するプロセスIDを置く場所を決めておく
+set :slack_pid, "#{shared_path}/tmp/pids/slack.pid"
 
 set :puma_threads, [4, 16]
 set :puma_workers, 0
