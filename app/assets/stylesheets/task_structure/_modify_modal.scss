@@ -8,4 +8,12 @@
   top: 25%;
   left: calc(50% - #{$members_task_width / 2});
   z-index: 9999;
+  // 作業時間を修正するinput要素の見た目
+  input {
+    &[name='hour'],
+    &[name='min'],
+    &[name='sec'] {
+      width: 50px;
+    }
+  }
 }
