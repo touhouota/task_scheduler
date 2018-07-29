@@ -80,7 +80,6 @@ begin
           <@#{data['user']}>さん
           入力を停止。
           何かあれば、「タスク追加」とだけつぶやいてください。
-          #{slack}
           EOS
         }.to_json)
       end
@@ -231,8 +230,8 @@ begin
               type: 'message',
               text: <<~EOS
               <@U8XNQCDLH>さん
-              #{query}
-              #{response.body.to_s}
+              送信したデータ：#{query}
+              エラー内容：#{response.body.to_s}
               EOS
             }.to_json)
           end
