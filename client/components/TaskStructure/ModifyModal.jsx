@@ -146,6 +146,9 @@ class ModifyModal extends React.Component {
           <TaskForm
             type="number"
             name="expect_minute"
+            list="true"
+            min={0}
+            step={5}
             placeholder="入力するか選んで▼"
             value={this.props.task.expect_minute}
             checkValidation={this.chechValidate}
@@ -161,6 +164,8 @@ class ModifyModal extends React.Component {
             type="number"
             name="hour"
             placeholder="時間"
+            min="0"
+            step="1"
             value={hmsArray[0]}
             checkValidation={this.chechValidate}
           />時間
@@ -168,6 +173,8 @@ class ModifyModal extends React.Component {
             type="number"
             name="min"
             placeholder="分"
+            min="0"
+            step="1"
             value={hmsArray[1]}
             checkValidation={this.chechValidate}
           />分
@@ -175,6 +182,8 @@ class ModifyModal extends React.Component {
             type="number"
             name="sec"
             placeholder="秒"
+            min="0"
+            step="1"
             value={hmsArray[2]}
             checkValidation={this.chechValidate}
           />秒
