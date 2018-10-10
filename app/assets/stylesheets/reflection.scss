@@ -8,6 +8,11 @@
   position: relative;
 
   #graph_area{
+    #canvas_area{
+      #graph {
+        border: 1px solid #123231
+      }
+    }
     #graph_description {
       display: flex;
       justify-content: space-around;
