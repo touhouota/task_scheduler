@@ -1,0 +1,31 @@
+div.container
+  div#graph_area
+    div#canvas_area
+      canvas#graph
+    div#graph_description
+      p#survay.label
+        | 調査：
+        span.value
+        | %
+      p#develop.label
+        | 実装：
+        span.value
+        | %
+      p#experiment.label
+        | 実験：
+        span.value
+        | %
+      p#write.label
+        | 論文：
+        span.value
+        | %
+  div#information_area
+    p#achieve
+      | 達成率：
+      span.value
+      | %
+    p#work_time
+      | 総作業時間：
+      span.value
+
+= javascript_include_tag 'reflection'

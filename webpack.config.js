@@ -9,6 +9,7 @@ module.exports = [{
     login: path.resolve(crntDir, 'client/login.jsx'),
     task_structure: path.resolve(crntDir, 'client/task_structure.jsx'),
     week_reflection: path.resolve(crntDir, 'client/week_reflection.jsx'),
+    reflection: path.resolve(crntDir, 'client/reflection.jsx'),
   },
 
   output: {

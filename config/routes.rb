@@ -24,8 +24,10 @@ Rails.application.routes.draw do
   # タスクの構造を可視化するページ
   get '/structure/main/:user_id', to: 'task_structure#index'
 
-  # 週間の確認
+  # 個人の週間振り返り
   get '/reflection/week/:user_id', to: 'week_reflection#index'
+  # 個人のこれまでの振り返り
+  get '/reflection/individual/:user_id', to: 'reflection#index'
 
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
   post '/api/task/statusChange', to: 'task_structure#statusChange'
   post '/api/task/modify', to: 'task_structure#taskModify'
   get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
+  get '/api/individual/:user_id', to: 'reflection#graph_data'
   #   end
   # end
 end
