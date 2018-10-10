@@ -49,8 +49,11 @@ const ReflectionPage = {
     });
     const labelList = ['survay', 'develop', 'experiment', 'write'];
     labelList.forEach((label) => {
-      const rate = Base.round_at(labels[label] / maxNum, 2) * 100;
+      let rate = Base.round_at((labels[label] / maxNum) * 100, 1);
       console.log(rate);
+      if (Number.isNaN(rate)) {
+        rate = 0;
+      }
       const target = document.getElementById(label);
       target.querySelector('.value').textContent = rate;
     });
@@ -60,7 +63,7 @@ const ReflectionPage = {
     Object.values(achieve).forEach((num) => {
       maxNum += num;
     });
-    const rate = Base.round_at(achieve[2] / maxNum, 1) * 100;
+    const rate = Base.round_at((achieve[2] / maxNum) * 100, 1);
     const target = document.getElementById('achieve');
     target.querySelector('.value').textContent = rate;
   },
