@@ -25,6 +25,7 @@ const ReflectionPage = {
         ReflectionPage.__setLabelValue(json.task_info);
         // タスクの達成率を計算・表示
         ReflectionPage.__setAchiveRate(json.achieve);
+        ReflectionPage.__setTotalActualTime(json.actual_secs);
       });
   },
   __drawGraph: (tasks) => {
@@ -51,6 +52,24 @@ const ReflectionPage = {
     const rate = Base.round_at(achieve[2] / maxNum, 1) * 100;
     const target = document.getElementById('achieve');
     target.querySelector('.value').textContent = rate;
+  },
+  __setTotalActualTime: (sec) => {
+    let min = Math.round(sec / 60);
+    let hour = Math.round(min / 60);
+    min -= hour * 60;
+    const day = Math.round(hour / 24);
+    hour -= day * 24;
+
+    let displayString = `${min}分`;
+    if (hour > 0) {
+      displayString = `${hour}時間 ${displayString}`;
+    }
+    if (day > 0) {
+      displayString = `${day}日 ${displayString}`;
+    }
+
+    const target = document.getElementById('work_time');
+    target.querySelector('.value').textContent = displayString;
   },
 };
 
