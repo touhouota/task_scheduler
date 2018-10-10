@@ -1,3 +1,5 @@
+import Base from './base_object';
+
 const Graph = {
   // canvasのdomを保持
   canvas: null,
@@ -31,28 +33,45 @@ const Graph = {
     // canvasの大きさ
     const width = canvas.width;
     const height = canvas.height;
+
     // 要素1つあたりの横幅スケールを指定
-    const widthScale = Graph._getScale();
+    const widthScale = Graph.__getScale();
     // グラフの高さのスケール
     const heigthScale = 0.9;
+
     // 描画する要素を取得
     const values = Graph.values;
     // 要素数を保持
     const valuesNum = Object.values(values).length;
+    const keys = Object.keys(values);
+
     // グラフの色幅
-    const colorRange = 360 / valueNum;
+    const colorRange = 360 / valuesNum;
+
     // グラフの縦幅を指定
     const barHeight = height * heigthScale;
-    // グラフ描画の初期の高さ
-    const barStartHeight = height * (1 - heigthScale);
+    // グラフ描画の初期の高さ(グラフの高さの残りを上下に分けるため2で割る)
+    const barStartHeight = (height * Base.round_at(1 - heigthScale, 1)) / 2;
     // グラフの横幅を保持(描画の一時変数)
+
     let barWidth = 0;
 
-    for (let i = 0; i < valuesNum; i += 1) {
-      ctx.fillStyle = `hsl(${(360 / colorRange) * i}, 100%, 50%)`;
-      ctx.fillRect(barWidth, barStartHeight, values[i], barHeight);
-      barWidth += values[i];
-    }
+    keys.forEach((key, index) => {
+      ctx.fillStyle = `hsl(${colorRange * index}, 100%, 60%)`;
+      ctx.fillRect(barWidth, barStartHeight, values[key] * widthScale, barHeight);
+      barWidth += values[key] * widthScale;
+    });
+    console.table({
+      width,
+      height,
+      widthScale,
+      heigthScale,
+      values,
+      valuesNum,
+      colorRange,
+      barHeight,
+      barStartHeight,
+    });
   },
   test: () => {
     console.log('Hello Graph');
@@ -66,6 +85,7 @@ const Graph = {
       b: 20,
     });
     console.log(Graph.__getScale());
+    Graph.draw();
   },
   // 以下、内部だけで使う関数たち
   __getScale: () => {
