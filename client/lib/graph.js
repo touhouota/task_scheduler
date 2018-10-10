@@ -11,14 +11,13 @@ const Graph = {
     Graph.canvas = document.getElementById(canvasId);
     Graph.context = Graph.canvas.getContext('2d');
     Graph.setInitialCanvasSize();
-    Graph.test();
+    // Graph.test();
   },
   // 画面剤ずに合わせて、Canvasの大きさを初期化する
   setInitialCanvasSize: () => {
     const canvas = Graph.canvas;
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
-    console.log(width, height);
     canvas.setAttribute('width', width.toString());
     canvas.setAttribute('height', height.toString());
   },
