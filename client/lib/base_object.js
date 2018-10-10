@@ -92,9 +92,9 @@ const Base = {
 
   // 特定のあたい(num)を少数第at位で四捨五入する
   round_at: (num, at) => {
-    const pow_num = Math.pow(10, Number(at));
-    const input_num = Number(num);
-    return Math.round(input_num * pow_num) / pow_num;
+    const powNum = 10 ** Number(at);
+    const inputNum = Number(num);
+    return Math.round(inputNum * powNum) / powNum;
   },
 
   format_ymd: (date) => {
