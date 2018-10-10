@@ -2,7 +2,8 @@ class ReflectionController < ApplicationController
   def index; end
 
   # 振り返りページからのリクエストを処理
-  def graph_data(user_id)
+  def graph_data
+    user_id = params[:user_id]
     render json: {
       task_info: tasks_per_label(user_id),
       achieve: get_achieve(user_id),
