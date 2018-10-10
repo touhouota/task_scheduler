@@ -8,6 +8,14 @@ const ReflectionPage = {
     ReflectionPage.__init(canvasId);
     ReflectionPage.__getGraphData();
   },
+  // ページの再描画
+  redraw: () => {
+    console.log('redraw');
+    if (!Graph.values) {
+      ReflectionPage.__getGraphData();
+    }
+    ReflectionPage.__drawGraph();
+  }
   // Canvasの初期化
   __init: (canvasId) => {
     Graph.init(canvasId);
