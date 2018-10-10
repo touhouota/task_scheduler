@@ -25,6 +25,7 @@ const ReflectionPage = {
         ReflectionPage.__setLabelValue(json.task_info);
         // タスクの達成率を計算・表示
         ReflectionPage.__setAchiveRate(json.achieve);
+        // 総作業時間を計算・表示
         ReflectionPage.__setTotalActualTime(json.actual_secs);
       });
   },
