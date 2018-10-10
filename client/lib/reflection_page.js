@@ -15,7 +15,7 @@ const ReflectionPage = {
       ReflectionPage.__getGraphData();
     }
     ReflectionPage.__drawGraph();
-  }
+  },
   // Canvasの初期化
   __init: (canvasId) => {
     Graph.init(canvasId);
