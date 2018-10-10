@@ -42,7 +42,6 @@ const Graph = {
     const values = Graph.values;
     // 要素数を保持
     const valuesNum = Object.values(values).length;
-    const keys = Object.keys(values);
 
     // グラフの色幅
     const colorRange = 360 / valuesNum;
