@@ -1,6 +1,17 @@
-import Graph from './lib/graph';
+import ReflectionPage from './lib/reflection_page';
+
+let resizeTimer;
 
 window.onload = () => {
-  console.log('reflection');
-  Graph.init('graph');
+  ReflectionPage.drawPage('graph');
+  resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    if (resizeTimer > 0) {
+      clearTimeout(resizeTimer);
+    }
+
+    resizeTimer = setTimeout(() => {
+      ReflectionPage.redraw();
+    });
+  });
 };
