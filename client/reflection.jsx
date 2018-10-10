@@ -1,6 +1,6 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+import Graph from './lib/graph';
 
 window.onload = () => {
   console.log('reflection');
+  Graph.hello();
 };

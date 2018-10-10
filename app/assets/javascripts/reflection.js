@@ -71,6 +71,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/lib/graph.js":
+/*!*****************************!*\
+  !*** ./client/lib/graph.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar Graph = {\n  hello: function hello() {\n    console.log(\"Hello Graph\");\n  }\n};\n\nexports.default = Graph;\n\n//# sourceURL=webpack:///./client/lib/graph.js?");
+
+/***/ }),
+
 /***/ "./client/reflection.jsx":
 /*!*******************************!*\
   !*** ./client/reflection.jsx ***!
@@ -79,7 +91,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\n// import React from 'react';\n// import ReactDOM from 'react-dom';\n\nwindow.onload = function () {\n  console.log('reflection');\n};\n\n//# sourceURL=webpack:///./client/reflection.jsx?");
+eval("\n\nvar _graph = __webpack_require__(/*! ./lib/graph */ \"./client/lib/graph.js\");\n\nvar _graph2 = _interopRequireDefault(_graph);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nwindow.onload = function () {\n  console.log('reflection');\n  _graph2.default.hello();\n};\n\n//# sourceURL=webpack:///./client/reflection.jsx?");
 
 /***/ })
 
