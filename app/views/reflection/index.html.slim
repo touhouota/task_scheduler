@@ -4,17 +4,29 @@ div.container
       canvas#graph
     div#graph_description
       p#survay.label
-        | 調査
+        | 調査：
+        span.value
+        | %
       p#develop.label
-        | 実装
+        | 実装：
+        span.value
+        | %
       p#experiment.label
-        | 実験
+        | 実験：
+        span.value
+        | %
       p#write.label
-        | 論文
+        | 論文：
+        span.value
+        | %
   div#information_area
     p#achieve
-      | 達成率：OO%
+      | 達成率：
+      span.value
+      | %
     p#work_time
-      | 総作業時間：XXX時間
+      | 総作業時間：
+      span.value
+      | 時間
 
 = javascript_include_tag 'reflection'
