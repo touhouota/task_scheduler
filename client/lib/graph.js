@@ -60,17 +60,17 @@ const Graph = {
       ctx.fillRect(barWidth, barStartHeight, values[key] * widthScale, barHeight);
       barWidth += values[key] * widthScale;
     });
-    console.table({
-      width,
-      height,
-      widthScale,
-      heigthScale,
-      values,
-      valuesNum,
-      colorRange,
-      barHeight,
-      barStartHeight,
-    });
+    // console.table({
+    //   width,
+    //   height,
+    //   widthScale,
+    //   heigthScale,
+    //   values,
+    //   valuesNum,
+    //   colorRange,
+    //   barHeight,
+    //   barStartHeight,
+    // });
   },
   test: () => {
     console.log('Hello Graph');
