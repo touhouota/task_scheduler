@@ -22,33 +22,28 @@ const ReflectionPage = {
         // グラフ表示
         ReflectionPage.__drawGraph(json.task_info);
         // グラフのラベルごとの割合を計算・表示
-        ReflectionPage.__calcRate(json.task_info);
+        ReflectionPage.__setLabelValue(json.task_info);
         // タスクの達成率を計算・表示
-        ReflectionPage.__setArchiveRate(json.achieve);
+        ReflectionPage.__setAchiveRate(json.achieve);
       });
   },
   __drawGraph: (tasks) => {
     Graph.setValue(tasks);
     Graph.draw();
   },
-  __calcRate: (labels) => {
-    const labelList = ['survay', 'develop', 'experiment', 'write'];
+  __setLabelValue: (labels) => {
     let maxNum = 0;
     Object.values(labels).forEach((item) => {
       maxNum += item;
     });
+    const labelList = ['survay', 'develop', 'experiment', 'write'];
     labelList.forEach((label) => {
       const rate = Base.round_at(labels[label] / maxNum, 1) * 100;
-      console.log(rate);
-      ReflectionPage.__setLabelValue(label, rate);
+      const target = document.getElementById(label);
+      target.querySelector('.value').textContent = rate;
     });
   },
-  __setLabelValue: (label, rate) => {
-    console.log(label, rate);
-    const target = document.getElementById(label);
-    target.querySelector('.value').textContent = rate;
-  },
-  __setArchiveRate: (achieve) => {
+  __setAchiveRate: (achieve) => {
     let maxNum = 0;
     Object.values(achieve).forEach((num) => {
       maxNum += num;
