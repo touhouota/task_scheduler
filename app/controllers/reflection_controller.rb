@@ -14,8 +14,8 @@ class ReflectionController < ApplicationController
   # タスク数をラベルごとに取得
   def tasks_per_label(user_id)
     list = %w[survay develop experiment write]
-    Task.where(user_id: user_id).group(:label).count.select do |row|
-      list.include?(row[:label])
+    Task.where(user_id: user_id).group(:label).count.select do |label|
+      list.include?(label)
     end
   end
 
