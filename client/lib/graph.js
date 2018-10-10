@@ -26,7 +26,7 @@ const Graph = {
     Graph.values = hash;
   },
   // グラフを描画
-  draw: () => {
+  draw: (labelList) => {
     const canvas = Graph.canvas;
     const ctx = Graph.context;
     // canvasの大きさ
@@ -55,10 +55,10 @@ const Graph = {
 
     let barWidth = 0;
 
-    keys.forEach((key, index) => {
+    labelList.forEach((label, index) => {
       ctx.fillStyle = `hsl(${colorRange * index}, 100%, 60%)`;
-      ctx.fillRect(barWidth, barStartHeight, values[key] * widthScale, barHeight);
-      barWidth += values[key] * widthScale;
+      ctx.fillRect(barWidth, barStartHeight, values[label] * widthScale, barHeight);
+      barWidth += values[label] * widthScale;
     });
     // console.table({
     //   width,

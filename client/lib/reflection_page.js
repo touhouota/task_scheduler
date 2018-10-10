@@ -39,7 +39,8 @@ const ReflectionPage = {
   },
   __drawGraph: (tasks) => {
     Graph.setValue(tasks);
-    Graph.draw();
+    const labelList = ['survay', 'develop', 'experiment', 'write'];
+    Graph.draw(labelList);
   },
   __setLabelValue: (labels) => {
     let maxNum = 0;
@@ -48,7 +49,8 @@ const ReflectionPage = {
     });
     const labelList = ['survay', 'develop', 'experiment', 'write'];
     labelList.forEach((label) => {
-      const rate = Base.round_at(labels[label] / maxNum, 1) * 100;
+      const rate = Base.round_at(labels[label] / maxNum, 2) * 100;
+      console.log(rate);
       const target = document.getElementById(label);
       target.querySelector('.value').textContent = rate;
     });
