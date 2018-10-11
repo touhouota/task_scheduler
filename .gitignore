@@ -44,3 +44,6 @@ bundle/
 # Tokenのデータは追加しない
 config/slack_token.yml
 config/slack_id_list.yml
+
+# 生データは無視する
+/db/graduation_ations/

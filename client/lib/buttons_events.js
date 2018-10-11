@@ -19,7 +19,7 @@ const Buttons = {
   reflection: () => {
     const path = Base.get_path();
     const userId = Base.get_cookie('user_id');
-    window.location.href = `${path}/reflection/week/${userId}`;
+    window.location.href = `${path}/reflection/individual/${userId}`;
   },
 
   github: () => {
