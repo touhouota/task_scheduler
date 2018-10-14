@@ -50,7 +50,6 @@ const ReflectionPage = {
     const labelList = ['survay', 'develop', 'experiment', 'write'];
     labelList.forEach((label) => {
       let rate = Base.round_at((labels[label] / maxNum) * 100, 1);
-      console.log(rate);
       if (Number.isNaN(rate)) {
         rate = 0;
       }

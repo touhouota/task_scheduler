@@ -2,7 +2,7 @@ import ModalProcess from './modal_process';
 import Base from './base_object';
 
 const Buttons = {
-  append_task: () => {
+  appendTask: () => {
     ModalProcess.showModal();
   },
 
@@ -40,6 +40,12 @@ const Buttons = {
     document.cookie = cookieString.join(';');
     const path = Base.get_path();
     window.location.href = `${path}`;
+  },
+
+  taskList: () => {
+    const path = Base.get_path();
+    const userId = Base.get_cookie('user_id');
+    window.location.href = `${path}/structure/main/${userId}`;
   },
 };
 
