@@ -1,11 +1,19 @@
 // Place all the styles related to the reflection controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import './variable/variables';
+
 .reflection .container {
   margin: 0 auto;
   width: 90%;
   height: 100%;
   position: relative;
+
+  header {
+    height: $header_height;
+    width: 100%;
+    @import "./task_structure/buttons.scss";
+  }
 
   #graph_area{
     margin-top: 10px;
