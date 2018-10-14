@@ -1,4 +1,21 @@
 div.container
+  header
+    div.buttons
+      button type="button" id="task_list" class="button"
+        = image_tag '/b1013179/task_scheduler/image/list.png'
+        span class="button_text"
+          | タスク一覧
+
+      button type="button" class="button" id="github"
+        = image_tag "/b1013179/task_scheduler/image/github.png"
+        span class="button_text"
+          | ご要望はこちら
+
+      button type="button" class="button" id="logout"
+        = image_tag '/b1013179/task_scheduler/image/logout.png'
+        span class="button_text"
+          | ログアウト
+
   div#graph_area
     div#canvas_area
       canvas#graph
