@@ -16,9 +16,11 @@ class ReflectionController < ApplicationController
     res = []
     users.each do |user|
       res.push(
-        task_info: tasks_per_label(user[:user_id]),
-        achieve: get_achieve(user[:user_id]),
-        actual_secs: total_actual_sec(user[:user_id])
+        user[:user_id] => {
+          task_info: tasks_per_label(user[:user_id]),
+          achieve: get_achieve(user[:user_id]),
+          actual_secs: total_actual_sec(user[:user_id])
+        }
       )
     end
     render json: res
@@ -26,7 +28,7 @@ class ReflectionController < ApplicationController
 
   # 全ユーザid
   def get_all_user
-    Task.all
+    User.all
   end
 
   # タスク数をラベルごとに取得
