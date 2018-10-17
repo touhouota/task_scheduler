@@ -24,8 +24,8 @@ class User extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.props.user_id}</p>
+      <div className="user">
+        <p className="name">{this.props.user_id}</p>
         <canvas id={this.props.user_id} className="graph" />
       </div>
     );
