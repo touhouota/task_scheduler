@@ -1,34 +1,33 @@
 #reflection {
-  .table {
+
+  width: 100%;
+  .user{
+    margin: 5px;
+    border: 1px solid #eee;
     width: 100%;
-    .user{
-      margin: 5px;
-      border: 1px solid #eee;
-      width: 100%;
 
-      display: flex;
-      justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 
-      &:first-child {
-        margin-bottom: 20px;
-      }
+    &:first-child {
+      margin-bottom: 20px;
+    }
 
-      .name, .graph {
-        align-self: center;
-      }
+    .name, .graph {
+      align-self: center;
+    }
 
-      .name {
-        // flex: 1;
-        flex-basis: 90px;
-        text-align: center;
-      }
+    .name {
+      // flex: 1;
+      flex-basis: 90px;
+      text-align: center;
+    }
 
-      .graph {
-        // flex-grow: 1;
-        width: calc(100% - 90px);
-        height: 50px;
-        border: 1px solid #8a0dec;
-      }
+    .graph {
+      // flex-grow: 1;
+      width: calc(100% - 90px);
+      height: 50px;
+      border: 1px solid #8a0dec;
     }
   }
 }
