@@ -39,7 +39,7 @@ class ReflectionMain extends React.Component {
     const userList = this.reshapeList();
     userList.forEach((userInfo) => {
       console.log(userInfo);
-      userGraph.push(<User data={userInfo} />);
+      userGraph.push(<User {...userInfo} />);
     });
     return userGraph;
   }
