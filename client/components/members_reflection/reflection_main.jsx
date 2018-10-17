@@ -37,6 +37,7 @@ class ReflectionMain extends React.Component {
   createUserGraph() {
     const userGraph = [];
     const userList = this.reshapeList();
+    console.log(userList);
     userList.forEach((userInfo) => {
       console.log(userInfo);
       userGraph.push(<User {...userInfo} />);
@@ -49,9 +50,10 @@ class ReflectionMain extends React.Component {
     // 自分のデータindexを取得
     const selfIndex = userList.findIndex((user) => {
       const userID = Base.get_cookie('user_id');
-      return user[userID];
+      console.log(userID, user.user_id);
+      return userID === user.user_id;
     });
-    const selfData = userList.splice(userList, 1);
+    const selfData = userList.splice(selfIndex, 1);
     return selfData.concat(userList);
   }
 
