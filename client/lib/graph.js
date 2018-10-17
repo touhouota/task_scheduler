@@ -37,7 +37,7 @@ const Graph = {
     });
   },
   // グラフを描画
-  draw: (labelList) => {
+  draw: () => {
     if (Graph.values && Graph.labels) {
       // valuesとlabelsを指定していれば実行
       Graph.normalizeLabelValue();
@@ -68,7 +68,7 @@ const Graph = {
 
       let barWidth = 0;
 
-      labelList.forEach((label, index) => {
+      Graph.labels.forEach((label, index) => {
         ctx.fillStyle = `hsl(${colorRange * index}, 100%, 60%)`;
         ctx.fillRect(barWidth, barStartHeight, values[label] * widthScale, barHeight);
         console.log(`barWidth: ${barWidth}, values[label]: ${values[label]}`);
