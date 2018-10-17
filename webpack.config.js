@@ -10,6 +10,7 @@ module.exports = [{
     task_structure: path.resolve(crntDir, 'client/task_structure.jsx'),
     week_reflection: path.resolve(crntDir, 'client/week_reflection.jsx'),
     reflection: path.resolve(crntDir, 'client/reflection.jsx'),
+    members_reflection: path.resolve(crntDir, 'client/members_reflection.jsx'),
   },
 
   output: {

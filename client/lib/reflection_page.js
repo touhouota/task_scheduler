@@ -39,8 +39,8 @@ const ReflectionPage = {
   },
   __drawGraph: (tasks) => {
     Graph.setValue(tasks);
-    const labelList = ['survay', 'develop', 'experiment', 'write'];
-    Graph.draw(labelList);
+    Graph.setLabel(['survay', 'develop', 'experiment', 'write']);
+    Graph.draw();
   },
   __setLabelValue: (labels) => {
     let maxNum = 0;
