@@ -83,7 +83,7 @@ const Graph = {
       b: 20,
     });
     console.log(Graph.__getScale());
-    Graph.draw();
+    Graph.draw([]);
   },
   // 以下、内部だけで使う関数たち
   __getScale: () => {
