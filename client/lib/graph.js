@@ -25,51 +25,58 @@ const Graph = {
   setValue: (hash) => {
     Graph.values = hash;
   },
+
+  setLabel: (labels) => {
+    Graph.labels = labels;
+  },
+  normalizeLabelValue: () => {
+    Graph.labels.forEach((label) => {
+      if (typeof Graph.values[label] === 'undefined') {
+        Graph.values[label] = 0;
+      }
+    });
+  },
   // グラフを描画
   draw: (labelList) => {
-    const canvas = Graph.canvas;
-    const ctx = Graph.context;
-    // canvasの大きさ
-    const width = canvas.width;
-    const height = canvas.height;
+    if (Graph.values && Graph.labels) {
+      // valuesとlabelsを指定していれば実行
+      Graph.normalizeLabelValue();
+      const canvas = Graph.canvas;
+      const ctx = Graph.context;
+      // canvasの大きさ
+      const width = canvas.width;
+      const height = canvas.height;
 
-    // 要素1つあたりの横幅スケールを指定
-    const widthScale = Graph.__getScale();
-    // グラフの高さのスケール
-    const heigthScale = 0.9;
+      // 要素1つあたりの横幅スケールを指定
+      const widthScale = Graph.__getScale();
+      // グラフの高さのスケール
+      const heigthScale = 0.9;
 
-    // 描画する要素を取得
-    const values = Graph.values;
-    // 要素数を保持
-    const valuesNum = Object.values(values).length;
+      // 描画する要素を取得
+      const values = Graph.values;
+      // 要素数を保持
+      const valuesNum = Object.values(values).length;
 
-    // グラフの色幅
-    const colorRange = 360 / valuesNum;
+      // グラフの色幅
+      const colorRange = 360 / valuesNum;
 
-    // グラフの縦幅を指定
-    const barHeight = height * heigthScale;
-    // グラフ描画の初期の高さ(グラフの高さの残りを上下に分けるため2で割る)
-    const barStartHeight = (height * Base.round_at(1 - heigthScale, 1)) / 2;
-    // グラフの横幅を保持(描画の一時変数)
+      // グラフの縦幅を指定
+      const barHeight = height * heigthScale;
+      // グラフ描画の初期の高さ(グラフの高さの残りを上下に分けるため2で割る)
+      const barStartHeight = (height * Base.round_at(1 - heigthScale, 1)) / 2;
+      // グラフの横幅を保持(描画の一時変数)
 
-    let barWidth = 0;
+      let barWidth = 0;
 
-    labelList.forEach((label, index) => {
-      ctx.fillStyle = `hsl(${colorRange * index}, 100%, 60%)`;
-      ctx.fillRect(barWidth, barStartHeight, values[label] * widthScale, barHeight);
-      barWidth += values[label] * widthScale;
-    });
-    // console.table({
-    //   width,
-    //   height,
-    //   widthScale,
-    //   heigthScale,
-    //   values,
-    //   valuesNum,
-    //   colorRange,
-    //   barHeight,
-    //   barStartHeight,
-    // });
+      labelList.forEach((label, index) => {
+        ctx.fillStyle = `hsl(${colorRange * index}, 100%, 60%)`;
+        ctx.fillRect(barWidth, barStartHeight, values[label] * widthScale, barHeight);
+        console.log(`barWidth: ${barWidth}, values[label]: ${values[label]}`);
+        barWidth += values[label] * widthScale;
+      });
+    } else {
+      console.error('Graphに対して、valuesかlabelsを指定していません');
+    }
   },
   test: () => {
     console.log('Hello Graph');
