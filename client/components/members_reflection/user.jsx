@@ -6,14 +6,21 @@ import Graph from '../../lib/graph';
 class User extends React.Component {
   constructor(props) {
     super(props);
-
     console.log(props);
+
+    this.state = {
+      task_info: props.task_info,
+    };
   }
 
   componentDidMount() {
     console.log('DidMount');
     Graph.init(this.props.user_id);
+    Graph.setValue(this.props.task_info);
+    Graph.setLabel(['survay', 'develop', 'experiment', 'write']);
+    Graph.draw();
   }
+
 
   render() {
     return (
