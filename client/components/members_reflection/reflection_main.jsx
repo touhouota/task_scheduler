@@ -6,8 +6,13 @@ import Base from '../../lib/base_object';
 class ReflectionMain extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userList: [],
+    };
 
+    this.createUserGraph = this.createUserGraph.bind(this);
     this.getMembersInfo = this.getMembersInfo.bind(this);
+    this.reshapeList = this.reshapeList.bind(this);
 
     this.getMembersInfo();
   }
@@ -25,14 +30,36 @@ class ReflectionMain extends React.Component {
       .then(res => res.json())
       .then((json) => {
         console.log(json);
+        this.setState({ userList: json });
       });
+  }
+
+  createUserGraph() {
+    const userGraph = [];
+    const userList = this.reshapeList();
+    userList.forEach((userInfo) => {
+      console.log(userInfo);
+      userGraph.push(<User data={userInfo} />);
+    });
+    return userGraph;
+  }
+
+  reshapeList() {
+    const userList = this.state.userList;
+    // 自分のデータindexを取得
+    const selfIndex = userList.findIndex((user) => {
+      const userID = Base.get_cookie('user_id');
+      return user[userID];
+    });
+    const selfData = userList.splice(userList, 1);
+    return selfData.concat(userList);
   }
 
 
   render() {
     return (
       <div>
-        <User />
+        {this.createUserGraph()}
       </div>
     );
   }
