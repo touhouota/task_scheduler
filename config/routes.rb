@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get '/reflection/week/:user_id', to: 'week_reflection#index'
   # 個人のこれまでの振り返り
   get '/reflection/individual/:user_id', to: 'reflection#index'
+  # 仲間との比較ページ
+  get '/reflection/members/:user_id', to: 'reflection#members'
 
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
   post '/api/task/modify', to: 'task_structure#taskModify'
   get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
   get '/api/individual/:user_id', to: 'reflection#graph_data'
+  get '/api/members/:user_id', to: 'reflection#all_user_information'
   #   end
   # end
 end
