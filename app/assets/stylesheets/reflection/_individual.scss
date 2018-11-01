@@ -1,0 +1,18 @@
+#graph_area{
+  margin-top: 10px;
+  #canvas_area{
+    #graph {
+      border: 1px solid #123231;
+      width: 100%;
+      height: 100px;
+    }
+  }
+  #graph_description {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+#information_area{
+  margin-top: 30px;
+}
