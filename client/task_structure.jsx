@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Structure from './components/TaskStructure/Structure';
 import MembersTask from './components/TaskStructure/MembersTask';
+import GraphArea from './components/TaskStructure/GraphArea';
 
 import Buttons from './lib/buttons_events';
 import TimerManager from './lib/time_manager';
@@ -27,14 +28,23 @@ window.onload = () => {
     TimerManager.watch();
     document.getElementById('logout').addEventListener('click', Buttons.logout);
 
+    // メインのタスク一覧部分
     ReactDOM.render(
       <div className="Structure_Component">
+        {/* タスクのリストコンポーネント */}
         <Structure
           TimerManager={TimerManager}
         />
+        {/* 仲間のランキングコンポーネント */}
         <MembersTask />
       </div>,
       document.querySelector('.structure_container'),
+    );
+
+    // グラフ描画部分
+    ReactDOM.render(
+      <GraphArea />,
+      document.querySelector('.graph_area'),
     );
   }
 };
