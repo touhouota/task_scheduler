@@ -45,6 +45,7 @@ class ReflectionMain extends React.Component {
     return userGraph;
   }
 
+  // ユーザリストを、自分が先頭になるように調整
   reshapeList() {
     const userList = this.state.userList;
     // 自分のデータindexを取得

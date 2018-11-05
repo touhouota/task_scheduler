@@ -47,4 +47,19 @@ class ReflectionController < ApplicationController
   def total_actual_sec(user_id)
     Task.where(user_id: user_id).sum(:actual_sec)
   end
+
+  # メイン画面でのグラフ情報を取得する処理
+  def get_my_info
+    user_id = params[:user_id]
+    render json: {
+      task_info: tasks_per_label(user_id),
+      total_actual_sec: total_actual_sec(user_id)
+    }
+  end
+
+  # 自分に似たユーザ情報を取得する
+  def get_like_user_info
+    user_id = params[:user_id]
+    # TODO：具体的な処理内容
+  end
 end
