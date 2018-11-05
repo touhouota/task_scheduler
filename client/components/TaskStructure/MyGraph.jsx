@@ -8,6 +8,10 @@ class MyGraph extends React.Component {
     console.log('MyGraph');
   }
 
+  getMyData() {
+    // TODO: 自分のデータを取得する
+  }
+
   render() {
     return (
       <div className="myarea">
