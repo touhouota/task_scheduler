@@ -60,6 +60,23 @@ class ReflectionController < ApplicationController
   # 自分に似たユーザ情報を取得する
   def get_like_user_info
     user_id = params[:user_id]
-    # TODO：具体的な処理内容
+    # 全てのユーザの順位を取得(desc順)
+    # [{user_id => 秒数}, {user_id => 秒数}, ...]という形で返ってくる
+    list = Task.group(:user_id).sum(:actual_sec).sort_by do |_, v|
+             # [user_id => 秒数]という形なので、-秒数でソートするとdesc順になる
+             -v
+           end.map do |array|
+      # [user_id, 秒数]の形式で返ってくるので、hashに変換する
+      Hash[*array.flatten]
+    end
+    # TODO: 同順の人を弾く処理
+
+    # 自分のIDの順位を取得
+    index = list.index { |hash| hash.key?(user_id) }
+    # 最低限、末尾を見ないように調整
+    # TODO: 自分が上位2位以上の場合の表示
+    index = 2 if index - 2 < 0
+    # 自分より上位の2人を表示
+    render json: list.slice((index - 2), 2)
   end
 end
