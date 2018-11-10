@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
   get '/api/individual/:user_id', to: 'reflection#graph_data'
   get '/api/members/:user_id', to: 'reflection#all_user_information'
+  # 自分と近い人を取得するやつ
+  get '/api/reflection/like_user/:user_id', to: 'reflection#get_like_user_info'
   #   end
   # end
 end
