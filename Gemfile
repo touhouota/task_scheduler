@@ -99,6 +99,3 @@ gem 'eventmachine'
 gem 'faye-websocket'
 gem 'http'
 gem 'json'
-
-# markdownの導入
-gem 'redcarpet'
