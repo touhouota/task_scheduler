@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
   get '/api/individual/:user_id', to: 'reflection#graph_data'
   get '/api/members/:user_id', to: 'reflection#all_user_information'
+  get '/api/checklist/confirm/:user_id', to: 'checklist#get_check_list'
   #   end
   # end
 end
