@@ -1,0 +1,414 @@
+ul
+  // タイトル(日・英)
+  li
+    p
+      | タイトル(日・英)
+    ul
+      li
+        label
+          input type="checkbox" name="title_1"
+          | 研究を過不足なく表現できているか
+        ul
+          li
+            | 「XXX: hogehogeを支援するシステムの提案」 など、制作物の名前を入れるのも有り
+      li
+        label
+          input type="checkbox" name="title_2"
+          | 日本語・英語でニュアンスが違わないか
+        ul
+          li
+            | 翻訳サイトにて、翻訳してみて変な日本語にならないか
+  // アブストラクト(j)
+  li
+    p
+      | アブストラクト
+    ul
+      li
+        label
+          input type="checkbox" name="abstj_1"
+          | 論文全体の要約として書く
+      li
+        label
+          input type="checkbox" name="abstj_2"
+          | 各章のいちばん大事な部分を文章としてわかりやすくつなげて作る
+  // アブストラクト(e)
+  li
+    p
+      | アブストラクト(英語)
+    ul
+      li
+        label
+          input type="checkbox" name="abste_1"
+          | 日本語ができてから書くべし
+      li
+        label
+          input type="checkbox" name="abste_2"
+          | 最低1日は、英語に時間をかける
+      li
+        label
+          input type="checkbox" name="abste_3"
+          | 翻訳サイトなどで、英語 -> 日本語と翻訳して違和感が無くなる程度まで直す
+      li
+        label
+          input type="checkbox" name="abste_4"
+          | 難しい表現ではなく、単純で簡単な表現で書く
+
+  // 導入
+  li
+    p
+      | はじめに・導入・イントロダクション
+    ul
+      li
+        label
+          input type="checkbox" name="intro_1"
+          | 「背景となる情報」が書かれている
+        ul
+          li
+            | 例：こんな現象がある、こんな事実がある、〇〇が求められている、など
+      li
+        label
+          input type="checkbox" name="intro_2"
+          | 「問題提起」がなされている
+        ul
+          li
+            | 背景情報をもとに、どのような問題があるか、それに対してどう取り組むかを書く
+      li
+        label
+          input type="checkbox" name="intro_3"
+          | 「取り組む理由」を記述している
+        ul
+          li
+            | 問題に取り組む価値はなにか
+            ul
+              li
+                | よくあるのは「上位の問題を解決できる」or「その問題を解くこと自体に価値がある」の２つ
+      li
+        label
+          input type="checkbox" name="intro_4"
+          | 「着眼点、その理由」を記述している
+        ul
+          li
+            | 問題に取り組むに当たり、どういうアプローチで取り組むのか
+          li
+            | そのアプローチを取る理由もあると良い
+          li
+            | 仮説等もこの辺に入ると思う
+      li
+        label
+          input type="checkbox" name="intro_5"
+          | 「何をやるのか」を記述している
+        ul
+          li
+            | 問題を解決するために、研究で取り組んだこと
+          li
+            | 目標となる部分？
+
+  // 関連研究
+  li
+    p
+      | 関連研究
+    ul
+      li
+        label
+          input type="checkbox" name="scholar_1"
+          | 研究分野の区分け
+        ul
+          li
+            | 既存研究を大まかにグループ化
+          li
+            | 自分の研究の立ち位置をわかりやすくする役割もある
+      li
+        label
+          input type="checkbox" name="scholar_2"
+          | 研究内容のまとめ
+        ul
+          li
+            | 既存研究の簡単な内容
+          li
+            | その研究の良い部分
+          li
+            | 自分の研究との比較
+
+  // システムの紹介
+  li
+    p
+      | 制作物・システムの紹介
+    ul
+      li
+        label
+          input type="checkbox" name="product_1"
+          | ある場合は、章を分けて解説すべし
+      li
+        label
+          input type="checkbox" name="product_2"
+          | 制作物・システムの概要
+        ul
+          li
+            | どんなものなのか、半ページ程度で解説
+          li
+            | 大まかな流れと狙いを記す
+      li
+        label
+          input type="checkbox" name="product_3"
+          | 作成に必要なもの・開発環境
+        ul
+          li
+            | 作成時に利用したものを書く
+          li
+            | プログラム言語・ライブラリ名
+          li
+            | 利用したバージョン
+          li
+            | 利用した明確な意図・利点があれば書く
+      li
+        label
+          input type="checkbox" name="product_4"
+          | 制作物・システムの内部構成
+        ul
+          li
+            | システムとしての仕掛けを述べる
+          li
+            | アルゴリズムやデータ構造を説明する
+            ul
+              li
+                | よくあるシステムであれば、なくても良い
+          li
+            | 狙い・予測を記す
+      li
+        label
+          input type="checkbox" name="product_5"
+          | 利用の流れ (外部構成)
+        ul
+          li
+            | スクリーンショットや利用の様子を画像で説明する
+          li
+            | 公開している場合は、URLや場所の情報を書く
+
+  // 実験
+  li
+    p
+      | 方法・実験
+    ul
+      li
+        label
+          input type="checkbox" name="exp_1"
+          | 実験・調査対象となる人の情報
+        ul
+          li
+            | 日時
+          li
+            | 対象者の年齢・性別など
+          li
+            | 環境(部屋の様子や設備など)
+      li
+        label
+          input type="checkbox" name="exp_2"
+          | 実験の狙い
+        ul
+          li
+            | 〇〇を行うために〜、〇〇を得るために〜、程度で良い
+          li
+            | この実験で明らかにしたいことを明確に書く
+      li
+        label
+          input type="checkbox" name="exp_3"
+          | 「導入」で書いた方法を具体的に記す
+        ul
+          li
+            | 実験の内容
+          li
+            | 手順
+          li
+            | 被験者へ提示した情報
+      li
+        label
+          input type="checkbox" name="exp_4"
+          | 実際の活動の中で、問題を解決するために必要なもののみを書く
+
+  // 結果
+  li
+    p
+      | 結果
+    ul
+      li
+        label
+          input type="checkbox" name="exp_5"
+          | 基本的に、過去形で書く
+        ul
+          li
+            | すでに行われたことなので、過去形で記述する
+          li
+            | できなかったことや、これからすることは展望として
+      li
+        label
+          input type="checkbox" name="exp_6"
+          | データの提示
+        ul
+          li
+            | データを提示し、それが何を表しているのかをわかりやすく書こうするのが大事
+      li
+        label
+          input type="checkbox" name="exp_7"
+          | 結果の説明
+        ul
+          li
+            | データから言えることを書く
+          li
+            | データの解釈ではなく、データを言葉で説明する
+      li
+        label
+          input type="checkbox" name="exp_8"
+          | データの解釈は「考察」で行う
+        ul
+          li
+            | 「〇〇はX%上がった」は解釈
+          li
+            | 「〇〇はY%からX%に上昇した」はデータの説明
+
+  // 考察
+  li
+    p
+      | 考察
+    ul
+      li
+        label
+          input type="checkbox" name="consider_1"
+          | 適切に節を分け、記述
+      li
+        label
+          input type="checkbox" name="consider_2"
+          | 結果の解釈を書く
+      li
+        label
+          input type="checkbox" name="consider_3"
+          | 他の知見との整合性も記す
+      li
+        label
+          input type="checkbox" name="consider_4"
+          | 他の仮説や結果との比較
+
+  // 結論
+  li
+    p
+      | まとめ・結論
+    ul
+      li
+        label
+          input type="checkbox" name="concl_1"
+          | 研究を一言でまとめる
+          ul
+            li
+              | 研究の目的
+            li
+              | 取り組んだこと
+            li
+              | 結果として、何がわかったか
+            li
+              | 仮説の検証結果
+      li
+        label
+          input type="checkbox" name="concl_2"
+          | 展望を記述する
+          ul
+            li
+              | この研究で取り組めなかったこと、こうするとより良くなるかも、などはここに書く
+
+  // 謝辞
+  li
+    p
+      | 謝辞
+    ul
+      li
+        label
+          input type="checkbox" name="thanks_1"
+          | 指導教員、ゼミ仲間、先輩など、お世話になった人への感謝を述べる
+
+  // 参考文献
+  li
+    p
+      | 参考文献
+    ul
+      li
+        label
+          input type="checkbox" name="ref_1"
+          | 基本フォーマット： 人名,人名. タイトル. 出版社/学会名, volume, No, pp始-終,month, year
+      li
+        label
+          input type="checkbox" name="ref_2"
+          | 順番は、参照した順
+      li
+        label
+          input type="checkbox" name="ref_3"
+          | 関連するWebサイト等は参考文献に載せない
+      li
+        label
+          input type="checkbox" name="ref_4"
+          | bibtexで文献管理をする
+          ul
+            li
+              | 書籍であれば、Amazon等のURLからBibtex整形してくれるサービスも有る
+            li
+              a href="http://wiki.c.fun.ac.jp/wiki/2016/index.php?tex%E3%81%AE%E6%96%87%E7%8C%AE%E3%83%AA%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90%E6%96%B9%E6%B3%95" target='_blank'
+                | 2016年のWiki
+              | に解説があるので、要参照。
+
+  li
+    p
+      | 付録
+    ul
+      li
+        label
+          input type="checkbox" name="appendix_1"
+          | 図・表の番号、ページ数のリスト
+      li
+        label
+          input type="checkbox" name="appendix_2"
+          | アンケート用紙、実験手順書などもここに入れる
+      li
+        label
+          input type="checkbox" name="appendix_3"
+          | 文字起こしなどをした場合もここ
+
+h2
+  | その他・全体的なこと
+ul
+  li
+    | 言葉の定義
+    ul
+      li
+        label
+          input type="checkbox" name="define_1"
+          | 何度も使う言葉は、くどくならないよう + 読みやすさを考慮して定義する
+      li
+        label
+          input type="checkbox" name="define_2"
+          | 定義は、その言葉が初めて出てきたときにすべし
+      li
+        label
+          input type="checkbox" name="define_3"
+          | 研究の要点となるような言葉の場合はどこかで節1つくらいとって詳しく記述しても○
+  li
+    | 文の接続
+    ul
+      li
+        label
+          input type="checkbox" name="connect_1"
+          | アウトラインから文章に落とすときの、文同士のつながりを意識
+      li
+        label
+          input type="checkbox" name="connect_2"
+          | 間を補完するために、関連する情報を持っておくと強い
+  li
+    | 各章のはじめ
+    ul
+      li
+        label
+          input type="checkbox" name="connect_3"
+          | その章の構成を書くと、読みたい箇所を探す手間が軽減されるので書いておくと親切
+      li
+        label
+          input type="checkbox" name="connect_4"
+          | その章で書くべきことの宣言にもなる
+
+
+= javascript_include_tag 'checklist'

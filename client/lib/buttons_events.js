@@ -22,6 +22,12 @@ const Buttons = {
     window.location.href = `${path}/reflection/individual/${userId}`;
   },
 
+  checklist: () => {
+    const path = Base.get_path();
+    const userId = Base.get_cookie('user_id');
+    window.location.href = `${path}/report/list/${userId}`;
+  },
+
   github: () => {
     const URL = 'https://github.com/touhouota/task_scheduler/issues';
     window.open(URL, '_blank');
