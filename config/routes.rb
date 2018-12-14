@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   # 仲間との比較ページ
   get '/reflection/members/:user_id', to: 'reflection#members'
 
+  # 論文チェックリスト
+  get '/report/list/:user_id', to: 'checklist#index'
+
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
   get '/api/tasks/:user_id', to: 'task_structure#user_tasks'
