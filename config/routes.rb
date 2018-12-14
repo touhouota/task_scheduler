@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   # 仲間との比較ページ
   get '/reflection/members/:user_id', to: 'reflection#members'
 
+  # 論文チェックリスト
+  get '/report/list/:user_id', to: 'checklist#index'
+
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
   get '/api/tasks/:user_id', to: 'task_structure#user_tasks'
@@ -41,6 +44,8 @@ Rails.application.routes.draw do
   get '/api/week/:date/:user_id', to: 'week_reflection#week_reflection'
   get '/api/individual/:user_id', to: 'reflection#graph_data'
   get '/api/members/:user_id', to: 'reflection#all_user_information'
+  get '/api/checklist/confirm/:user_id', to: 'checklist#get_check_list'
+  post '/api/checklist/update', to: 'checklist#set_check_list'
   #   end
   # end
 end
