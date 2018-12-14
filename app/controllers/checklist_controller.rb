@@ -1,5 +1,3 @@
 class ChecklistController < ApplicationController
-  def index
-    render text: Dir.pwd
-  end
+  def index; end
 end
