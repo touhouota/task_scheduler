@@ -1,9 +1,11 @@
+h2
+  | 論文に関するチェック項目
 ul
   // タイトル(日・英)
   li
     p
       | タイトル(日・英)
-    ul
+    ul.rap.title
       li
         label
           input type="checkbox" name="title_1"
@@ -22,7 +24,7 @@ ul
   li
     p
       | アブストラクト
-    ul
+    ul.rap.abst_j
       li
         label
           input type="checkbox" name="abstj_1"
@@ -35,7 +37,7 @@ ul
   li
     p
       | アブストラクト(英語)
-    ul
+    ul.rap.abst_e
       li
         label
           input type="checkbox" name="abste_1"
@@ -57,7 +59,7 @@ ul
   li
     p
       | はじめに・導入・イントロダクション
-    ul
+    ul.rap.intro
       li
         label
           input type="checkbox" name="intro_1"
@@ -107,7 +109,7 @@ ul
   li
     p
       | 関連研究
-    ul
+    ul.rap.scholar
       li
         label
           input type="checkbox" name="scholar_1"
@@ -133,7 +135,7 @@ ul
   li
     p
       | 制作物・システムの紹介
-    ul
+    ul.rap.product
       li
         label
           input type="checkbox" name="product_1"
@@ -188,7 +190,7 @@ ul
   li
     p
       | 方法・実験
-    ul
+    ul.rap.exp
       li
         label
           input type="checkbox" name="exp_1"
@@ -229,10 +231,10 @@ ul
   li
     p
       | 結果
-    ul
+    ul.rap.result
       li
         label
-          input type="checkbox" name="exp_5"
+          input type="checkbox" name="result_1"
           | 基本的に、過去形で書く
         ul
           li
@@ -241,14 +243,14 @@ ul
             | できなかったことや、これからすることは展望として
       li
         label
-          input type="checkbox" name="exp_6"
+          input type="checkbox" name="result_2"
           | データの提示
         ul
           li
             | データを提示し、それが何を表しているのかをわかりやすく書こうするのが大事
       li
         label
-          input type="checkbox" name="exp_7"
+          input type="checkbox" name="result_3"
           | 結果の説明
         ul
           li
@@ -257,7 +259,7 @@ ul
             | データの解釈ではなく、データを言葉で説明する
       li
         label
-          input type="checkbox" name="exp_8"
+          input type="checkbox" name="result_4"
           | データの解釈は「考察」で行う
         ul
           li
@@ -269,7 +271,7 @@ ul
   li
     p
       | 考察
-    ul
+    ul.rap.consider
       li
         label
           input type="checkbox" name="consider_1"
@@ -291,7 +293,7 @@ ul
   li
     p
       | まとめ・結論
-    ul
+    ul.rap.concl
       li
         label
           input type="checkbox" name="concl_1"
@@ -317,7 +319,7 @@ ul
   li
     p
       | 謝辞
-    ul
+    ul.rap.thanks
       li
         label
           input type="checkbox" name="thanks_1"
@@ -327,7 +329,7 @@ ul
   li
     p
       | 参考文献
-    ul
+    ul.rap.ref
       li
         label
           input type="checkbox" name="ref_1"
@@ -355,7 +357,7 @@ ul
   li
     p
       | 付録
-    ul
+    ul.rap.appendix
       li
         label
           input type="checkbox" name="appendix_1"
@@ -373,8 +375,9 @@ h2
   | その他・全体的なこと
 ul
   li
-    | 言葉の定義
-    ul
+    p
+      | 言葉の定義
+    ul.rap.define
       li
         label
           input type="checkbox" name="define_1"
@@ -388,8 +391,9 @@ ul
           input type="checkbox" name="define_3"
           | 研究の要点となるような言葉の場合はどこかで節1つくらいとって詳しく記述しても○
   li
-    | 文の接続
-    ul
+    p
+      | 文の接続
+    ul.rap.connect
       li
         label
           input type="checkbox" name="connect_1"
@@ -400,14 +404,14 @@ ul
           | 間を補完するために、関連する情報を持っておくと強い
   li
     | 各章のはじめ
-    ul
+    ul.rap.struct
       li
         label
-          input type="checkbox" name="connect_3"
+          input type="checkbox" name="struct_1"
           | その章の構成を書くと、読みたい箇所を探す手間が軽減されるので書いておくと親切
       li
         label
-          input type="checkbox" name="connect_4"
+          input type="checkbox" name="struct_2"
           | その章で書くべきことの宣言にもなる
 
 
