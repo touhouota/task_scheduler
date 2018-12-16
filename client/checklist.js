@@ -1,6 +1,7 @@
 import Base from './lib/base_object';
+import Buttons from './lib/buttons_events';
 
-const getList = () => {
+const getCheckList = () => {
   const userId = Base.get_cookie('user_id');
   const path = `${Base.get_path()}/api/checklist/confirm/${userId}`;
   console.log(path);
@@ -36,8 +37,13 @@ const clickEvent = (e) => {
 };
 
 window.onload = () => {
-  getList();
+  document.getElementById('task_list').addEventListener('click', Buttons.taskList);
+  document.getElementById('member_status').addEventListener('click', Buttons.members);
+  document.getElementById('week_reflection').addEventListener('click', Buttons.reflection);
+  document.getElementById('github').addEventListener('click', Buttons.github);
+  document.getElementById('logout').addEventListener('click', Buttons.logout);
 
+  getCheckList();
   const boxes = document.querySelectorAll('input[type=checkbox]');
   let index = 0;
   const boxSize = boxes.length;
