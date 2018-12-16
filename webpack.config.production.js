@@ -12,6 +12,7 @@ module.exports = {
     week_reflection: path.resolve(crntDir, 'client/week_reflection.jsx'),
     reflection: path.resolve(crntDir, 'client/reflection.jsx'),
     members_reflection: path.resolve(crntDir, 'client/members_reflection.jsx'),
+    checklist: path.resolve(crntDir, 'client/checklist.js'),
   },
 
   output: {
@@ -25,7 +26,11 @@ module.exports = {
       exclude: /node_module/,
       loader: 'babel-loader',
       query: {
-        presets: ['react', 'es2015'],
+        // babelの設定部分
+        presets: [
+          '@babel/preset-react',
+          '@babel/preset-env',
+        ],
       },
     }],
   },

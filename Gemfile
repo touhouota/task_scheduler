@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
 gem 'listen', '>= 3.0.5', '< 3.2'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -59,9 +59,9 @@ group :development do
   gem 'hirb-unicode'
 
   # consoleを便利に
-  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
-  gem 'pry-doc'    # methodを表示
   gem 'pry-byebug' # デバッグを実施
+  gem 'pry-doc'    # methodを表示
+  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
 
   # デプロイ関連のものを追加
   gem 'capistrano'
@@ -71,8 +71,8 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
   # gem 'factory_girl_rails'
 end
 
@@ -95,7 +95,7 @@ group :production do
 end
 
 # Slack botのためのGEMを追加
+gem 'eventmachine'
+gem 'faye-websocket'
 gem 'http'
 gem 'json'
-gem 'faye-websocket'
-gem 'eventmachine'
