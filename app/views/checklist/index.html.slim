@@ -1,9 +1,31 @@
-h2
-  | 論文に関するチェック項目
-ul
-  // タイトル(日・英)
-  li
-    p
+div.container
+  header
+    div.buttons
+      button type="button" id="task_list" class="button"
+        = image_tag '/b1013179/task_scheduler/image/list.png'
+        span class="button_text"
+          | タスク一覧
+
+      button type="button" id="week_reflection" class="button"
+        = image_tag '/b1013179/task_scheduler/image/graph.png'
+        span class="button_text"
+          | 振り返り
+
+      button type="button" class="button" id="github"
+        = image_tag "/b1013179/task_scheduler/image/github.png"
+        span class="button_text"
+          | ご要望はこちら
+
+      button type="button" class="button" id="logout"
+        = image_tag '/b1013179/task_scheduler/image/logout.png'
+        span class="button_text"
+          | ログアウト
+
+  h2
+    | 論文に関するチェック項目
+    // タイトル(日・英)
+  details open='true'
+    summary
       | タイトル(日・英)
     ul.rap.title
       li
@@ -20,9 +42,9 @@ ul
         ul
           li
             | 翻訳サイトにて、翻訳してみて変な日本語にならないか
-  // アブストラクト(j)
-  li
-    p
+    // アブストラクト(j)
+  details open='true'
+    summary
       | アブストラクト
     ul.rap.abst_j
       li
@@ -34,8 +56,8 @@ ul
           input type="checkbox" name="abstj_2"
           | 各章のいちばん大事な部分を文章としてわかりやすくつなげて作る
   // アブストラクト(e)
-  li
-    p
+  details open='true'
+    summary
       | アブストラクト(英語)
     ul.rap.abst_e
       li
@@ -56,8 +78,8 @@ ul
           | 難しい表現ではなく、単純で簡単な表現で書く
 
   // 導入
-  li
-    p
+  details open='true'
+    summary
       | はじめに・導入・イントロダクション
     ul.rap.intro
       li
@@ -106,8 +128,8 @@ ul
             | 目標となる部分？
 
   // 関連研究
-  li
-    p
+  details open='true'
+    summary
       | 関連研究
     ul.rap.scholar
       li
@@ -132,8 +154,8 @@ ul
             | 自分の研究との比較
 
   // システムの紹介
-  li
-    p
+  details open='true'
+    summary
       | 制作物・システムの紹介
     ul.rap.product
       li
@@ -187,8 +209,8 @@ ul
             | 公開している場合は、URLや場所の情報を書く
 
   // 実験
-  li
-    p
+  details open='true'
+    summary
       | 方法・実験
     ul.rap.exp
       li
@@ -228,8 +250,8 @@ ul
           | 実際の活動の中で、問題を解決するために必要なもののみを書く
 
   // 結果
-  li
-    p
+  details open='true'
+    summary
       | 結果
     ul.rap.result
       li
@@ -268,8 +290,8 @@ ul
             | 「〇〇はY%からX%に上昇した」はデータの説明
 
   // 考察
-  li
-    p
+  details open='true'
+    summary
       | 考察
     ul.rap.consider
       li
@@ -290,8 +312,8 @@ ul
           | 他の仮説や結果との比較
 
   // 結論
-  li
-    p
+  details open='true'
+    summary
       | まとめ・結論
     ul.rap.concl
       li
@@ -316,8 +338,8 @@ ul
               | この研究で取り組めなかったこと、こうするとより良くなるかも、などはここに書く
 
   // 謝辞
-  li
-    p
+  details open='true'
+    summary
       | 謝辞
     ul.rap.thanks
       li
@@ -326,8 +348,8 @@ ul
           | 指導教員、ゼミ仲間、先輩など、お世話になった人への感謝を述べる
 
   // 参考文献
-  li
-    p
+  details open='true'
+    summary
       | 参考文献
     ul.rap.ref
       li
@@ -354,8 +376,8 @@ ul
                 | 2016年のWiki
               | に解説があるので、要参照。
 
-  li
-    p
+  details open='true'
+    summary
       | 付録
     ul.rap.appendix
       li
@@ -371,11 +393,10 @@ ul
           input type="checkbox" name="appendix_3"
           | 文字起こしなどをした場合もここ
 
-h2
-  | その他・全体的なこと
-ul
-  li
-    p
+  h2
+    | その他・全体的なこと
+  details open='true'
+    summary
       | 言葉の定義
     ul.rap.define
       li
@@ -390,8 +411,8 @@ ul
         label
           input type="checkbox" name="define_3"
           | 研究の要点となるような言葉の場合はどこかで節1つくらいとって詳しく記述しても○
-  li
-    p
+  details open='true'
+    summary
       | 文の接続
     ul.rap.connect
       li
@@ -402,8 +423,9 @@ ul
         label
           input type="checkbox" name="connect_2"
           | 間を補完するために、関連する情報を持っておくと強い
-  li
-    | 各章のはじめ
+  details open="true"
+    summary
+      | 各章のはじめ
     ul.rap.struct
       li
         label

@@ -48,7 +48,7 @@ class Login extends React.Component {
         ];
         document.cookie = cookieString.join(';');
         const path = Base.get_path();
-        window.location.href = `${path}/structure/main/${json.user_id}`;
+        window.location.href = `${path}/report/list/${json.user_id}`;
         return null;
       });
   }
