@@ -26,7 +26,11 @@ module.exports = {
       exclude: /node_module/,
       loader: 'babel-loader',
       query: {
-        presets: ['react', 'es2015'],
+        // babelの設定部分
+        presets: [
+          '@babel/preset-react',
+          '@babel/preset-env',
+        ],
       },
     }],
   },
