@@ -1,0 +1,15 @@
+// Place all the styles related to the checklist controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  ul.rap {
+    margin-bottom: 15px;
+
+    li {
+      margin-top: 5px;
+    }
+  }
+}

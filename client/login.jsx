@@ -10,7 +10,7 @@ window.onload = () => {
   if (userId) {
     // すでにIDがある場合は、ログインページを飛ばす
     const path = Base.get_path();
-    window.location.href = `${path}/structure/main/${userId}`;
+    window.location.href = `${path}/report/list/${userId}`;
   } else {
     ReactDOM.render(
       <Login />,
