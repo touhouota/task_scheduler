@@ -66,7 +66,7 @@ class ChecklistController < ApplicationController
     target = 'https://slack.com/api/chat.postMessage'
     body = {
       token: ENV['SLACK_API_TOKEN'],
-      channel: '#times_nakahara2',
+      channel: '#gt-progress',
       text: create_message(text, user_id),
       as_user: true
     }
