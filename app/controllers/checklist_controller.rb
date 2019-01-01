@@ -1,8 +1,8 @@
 require 'http'
 
 class ChecklistController < ApplicationController
-  # indexメソッドのみ、CSRF対策
-  protect_from_forgery only: ['index']
+  # index, shareメソッドのみ、CSRF対策
+  protect_from_forgery only: ['index share']
 
   def index
     # ログを記録する
