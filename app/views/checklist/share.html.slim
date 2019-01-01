@@ -22,56 +22,57 @@ div.container
           | ログアウト
 
   div.share_area
-    div.row.table_head
-      div.column.title
+    table.row.table_head
+      thead
+        tr.column.title
         | 名前\項目
-      div.column.title
+        tr.column.title
         | タイトル
 
-      div.column.title
+        tr.column.title
         | アブストラクト(日本語)
       
-      div.column.title
+        tr.column.title
         | アブストラクト(英語)
       
-      div.column.title
+        tr.column.title
         | 導入
       
-      div.column.title
+        tr.column.title
         | 関連研究
       
-      div.column.title
+        tr.column.title
         | システムの紹介
       
-      div.column.title
+        tr.column.title
         | 実験
       
-      div.column.title
+        tr.column.title
         | 結果
         
-      div.column.title
+        tr.column.title
         | 考察
       
-      div.column.title
+        tr.column.title
         | 結論
       
-      div.column.title
+        tr.column.title
         | 謝辞
         
-      div.column.title
+        tr.column.title
         | 参考文献
       
-      div.column.title
+        tr.column.title
         | 付録
         
-      div.column.title
+        tr.column.title
         | 
 
-    div.row.table_body
-      = 8.times
-        div.column.user
-          = 15.times
-            div.column
-              | hoge
+      tbody
+        = 8.times
+          tr.column.user
+            = 15.times
+              td.column
+                | hoge
         
         
