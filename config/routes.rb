@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   # 論文チェックリスト
   get '/report/list/:user_id', to: 'checklist#index'
+  # 論文チェックリスト進捗共有ページ
+  get '/report/share/:user_id', to: 'checklist#share'
 
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
