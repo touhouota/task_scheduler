@@ -9,6 +9,10 @@ class ChecklistController < ApplicationController
     tl_insert
   end
 
+  def share
+    tl_insert
+  end
+
   def get_check_list
     user_id = checklist_permit[:user_id]
     list = Checklist.where(user_id: user_id).select(:user_id, :box_name)
