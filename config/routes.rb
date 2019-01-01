@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   get '/api/members/:user_id', to: 'reflection#all_user_information'
   get '/api/checklist/confirm/:user_id', to: 'checklist#get_check_list'
   post '/api/checklist/update', to: 'checklist#set_check_list'
-  get '/api/checklist/check_num', to: 'checklist#get_check_num'
+  get '/api/checklist/check_num/:user_id', to: 'checklist#get_check_num'
   #   end
   # end
 end
