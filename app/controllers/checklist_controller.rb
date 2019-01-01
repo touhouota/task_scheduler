@@ -53,6 +53,8 @@ class ChecklistController < ApplicationController
   end
 
   def get_check_num
+    tl_insert
+
     list = Checklist.where(user_id: checklist_permit[:user_id])
     render json: list.each_with_object({}) do |item, hash|
       p hash, item
