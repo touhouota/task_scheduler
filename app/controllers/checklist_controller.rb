@@ -11,6 +11,8 @@ class ChecklistController < ApplicationController
 
   def share
     tl_insert
+    @share_total = total_checkitem
+    @checkitem = report_checklist
   end
 
   def get_check_list
@@ -77,20 +79,41 @@ class ChecklistController < ApplicationController
     HTTP.post(target, params: body)
   end
 
-  def create_message(box_name = 'hoge_fuga', user_id)
-    user = User.find_by(user_id: user_id)
-    label = box_name.split('_').first
-    report_checklist = {
+  # 各項目の総数を返す
+  def total_checkitem
+    {
+      title: 2,
+      abstj: 2,
+      abste: 4,
+      intro: 5,
+      scholar: 2,
+      product: 5,
+      exp: 4,
+      result: 4,
+      consider: 4,
+      concl: 2,
+      thanks: 1,
+      ref: 4,
+      appendix: 3,
+      define: 3,
+      connect: 2,
+      struct: 2
+    }
+  end
+
+  # 各項目の名前を返す
+  def report_checklist
+    {
       title: 'タイトル(日・英)',
-      abstj: 'アブストラクト(日本語)',
-      abste: 'アブストラクト(英語)',
-      intro: '導入・はじめに',
+      abstj: '概要(日本語)',
+      abste: '概要(英語)',
+      intro: '導入',
       scholar: '関連研究',
-      product: '制作物・システム',
+      product: 'システム',
       exp: '方法・実験',
       result: '結果',
       consider: '考察',
-      concl: 'まとめ・結論',
+      concl: '結論',
       thanks: '謝辞',
       ref: '参考文献',
       appendix: '付録',
@@ -98,9 +121,11 @@ class ChecklistController < ApplicationController
       connect: '文の接続',
       struct: '各章のはじめ'
     }
+  end
 
-    puts user[:u_name], label, report_checklist
-
+  def create_message(box_name = 'hoge_fuga', user_id)
+    user = User.find_by(user_id: user_id)
+    label = box_name.split('_').first
     "#{user[:u_name]}さんは「#{report_checklist[label.to_sym]}」の項目にチェックを付けました"
   end
 end

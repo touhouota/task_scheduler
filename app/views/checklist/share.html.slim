@@ -26,54 +26,18 @@ div.container
       thead
         th.column.title
           | 名前\項目
-
-        th.column.title
-          | タイトル
-
-        th.column.title
-          | 概要(日本語)
-      
-        th.column.title
-          | 概要(英語)
-      
-        th.column.title
-          | 導入
-      
-        th.column.title
-          | 関連研究
-      
-        th.column.title
-          | システムの紹介
-      
-        th.column.title
-          | 実験
-      
-        th.column.title
-          | 結果
-        
-        th.column.title
-          | 考察
-      
-        th.column.title
-          | 結論
-      
-        th.column.title
-          | 謝辞
-        
-        th.column.title
-          | 参考文献
-      
-        th.column.title
-          | 付録
-        
-        tr.column.title
-        | 
+        - @checkitem.each do |_, check_name|
+          th.column.title
+            = "#{check_name}"
 
       tbody
-        - 8.times
-          tr.column.user
-            - 14.times
+        - (User.all).each do |user|
+          tr.column.user class=user[:user_id]
+            td
+              = user[:u_name]
+            - @checkitem.each do |check_key, _|
               td.column
-                | hoge
-        
-        
+                span.num
+                  | 
+                span.total
+                  = "/ #{@share_total[check_key]}"
