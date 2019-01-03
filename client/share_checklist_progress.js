@@ -12,7 +12,6 @@ const checkFullChecked = (record) => {
 
 const changeWatcher = new MutationObserver(checkFullChecked);
 
-
 const setCheckNum = () => {
   const userId = Base.get_cookie('user_id');
   const path = `${Base.get_path()}/api/checklist/check_num/${userId}`;
@@ -40,4 +39,5 @@ window.onload = () => {
   document.getElementById('logout').addEventListener('click', Buttons.logout);
 
   setCheckNum();
+  setInterval(setCheckNum, 5000);
 };
