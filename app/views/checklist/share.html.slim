@@ -27,7 +27,7 @@ div.container
         th.column.title
           | 名前\項目
         - @checkitem.each do |_, check_name|
-          th.column.title
+          th.column
             = "#{check_name}"
 
       tbody
@@ -36,8 +36,10 @@ div.container
             td
               = user[:u_name]
             - @checkitem.each do |check_key, _|
-              td.column class=check_key
+              td.column class=check_key.to_s
                 span.num
-                  | 
+                  | 0
                 span.total
                   = "/ #{@share_total[check_key]}"
+
+= javascript_include_tag "share_checklist_progress"
