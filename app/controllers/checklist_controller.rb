@@ -56,8 +56,7 @@ class ChecklistController < ApplicationController
     tl_insert
 
     list = Checklist.where(user_id: checklist_permit[:user_id])
-    render json: list.each_with_object({}) do |item, hash|
-      p hash, item
+    result = list.each_with_object({}) do |item, hash|
       query_key = item[:box_name].split('_').first
       if hash.key? query_key
         hash[query_key] += 1
@@ -65,6 +64,8 @@ class ChecklistController < ApplicationController
         hash[query_key] = 1
       end
     end
+
+    render json: result
   end
 
   private
