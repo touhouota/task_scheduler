@@ -7,7 +7,11 @@ const checkFullChecked = (record) => {
   const checked = target.querySelector('.num').textContent;
   const total = target.querySelector('.total').textContent;
   console.log(checked, total);
-  if (checked === total) target.classList.add('fulled');
+  if (checked === total) {
+    target.classList.add('fulled');
+  } else {
+    target.classList.remove('fulled');
+  };
 };
 
 const changeWatcher = new MutationObserver(checkFullChecked);
