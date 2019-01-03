@@ -39,7 +39,9 @@ div.container
               td.column class=check_key.to_s
                 span.num
                   | 0
+                span.slash
+                  | /
                 span.total
-                  = "/ #{@share_total[check_key]}"
+                  = "#{@share_total[check_key]}"
 
 = javascript_include_tag "share_checklist_progress"
