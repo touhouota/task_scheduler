@@ -5,7 +5,7 @@ set :application, 'task_scheduler'
 set :repo_url, 'https://github.com/touhouota/task_scheduler.git'
 
 set :branch, 'development'
-# set :branch, 'slack_bot'
+# set :branch, 'checklist_share' # 実装確認用のブランチはこちら
 set :user, 'b1013179'
 set :deploy_to, '/home/b1013179/task_scheduler'
 set :stage, 'production'

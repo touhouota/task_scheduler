@@ -12,6 +12,7 @@ module.exports = [{
     reflection: path.resolve(crntDir, 'client/reflection.jsx'),
     members_reflection: path.resolve(crntDir, 'client/members_reflection.jsx'),
     checklist: path.resolve(crntDir, 'client/checklist.js'),
+    share_checklist_progress: path.resolve(crntDir, 'client/share_checklist_progress.js'),
   },
 
   output: {

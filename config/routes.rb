@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   # 論文チェックリスト
   get '/report/list/:user_id', to: 'checklist#index'
+  # 論文チェックリスト進捗共有ページ
+  get '/report/share/:user_id', to: 'checklist#share'
 
   # API用のルート
   get '/api/tasks', to: 'task_structure#tasks'
@@ -46,6 +48,7 @@ Rails.application.routes.draw do
   get '/api/members/:user_id', to: 'reflection#all_user_information'
   get '/api/checklist/confirm/:user_id', to: 'checklist#get_check_list'
   post '/api/checklist/update', to: 'checklist#set_check_list'
+  get '/api/checklist/check_num/:user_id', to: 'checklist#get_check_num'
   #   end
   # end
 end

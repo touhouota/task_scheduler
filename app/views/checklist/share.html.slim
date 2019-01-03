@@ -1,0 +1,52 @@
+div.container
+  header
+    div.buttons
+      button type='button' id='task_list' class='button'
+        = image_tag '/b1013179/task_scheduler/image/list.png'
+        span class='button_text'
+          | タスク一覧
+
+      button type='button' id='week_reflection' class='button'
+        = image_tag '/b1013179/task_scheduler/image/graph.png'
+        span class='button_text'
+          | 振り返り
+
+      button type="button" id="checklist" class="button"
+        = image_tag '/b1013179/task_scheduler/image/checklist.png'
+        span class="button_text"
+          | チェックリスト
+
+      button type='button' class='button' id='github'
+        = image_tag '/b1013179/task_scheduler/image/github.png'
+        span class='button_text'
+          | ご要望はこちら
+
+      button type='button' class='button' id='logout'
+        = image_tag '/b1013179/task_scheduler/image/logout.png'
+        span class='button_text'
+          | ログアウト
+
+  div.share_area
+    table border=1
+      thead
+        th.column.title
+          | 名前\項目
+        - @checkitem.each do |_, check_name|
+          th.column
+            = "#{check_name}"
+
+      tbody
+        - (User.all).each do |user|
+          tr.column.user class=user[:user_id]
+            td
+              = user[:u_name]
+            - @checkitem.each do |check_key, _|
+              td.column class=check_key.to_s
+                span.num
+                  | 0
+                span.slash
+                  | /
+                span.total
+                  = "#{@share_total[check_key]}"
+
+= javascript_include_tag "share_checklist_progress"

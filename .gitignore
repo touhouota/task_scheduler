@@ -47,3 +47,6 @@ config/slack_id_list.yml
 
 # 生データは無視する
 /db/graduation_ations/
+
+# バックアップのための場所を無視
+/backup/

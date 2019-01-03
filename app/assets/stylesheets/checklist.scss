@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.container {
+.checklist .container {
   width: 95%;
   margin: 0 auto;
   ul.rap {
@@ -10,6 +10,16 @@
 
     li {
       margin-top: 5px;
+    }
+  }
+
+  .share_area {
+    .column {
+      padding: 5px;
+      text-align: center;
+    }
+    tbody  tr > .fulled {
+      background-color: #4ae742;
     }
   }
 }
