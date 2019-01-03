@@ -120,13 +120,13 @@ class ChecklistController < ApplicationController
   # 各項目の名前を返す
   def report_checklist
     {
-      title: 'タイトル(日・英)',
+      title: 'タイトル',
       abstj: '概要(日本語)',
       abste: '概要(英語)',
       intro: '導入',
       scholar: '関連研究',
       product: 'システム',
-      exp: '方法・実験',
+      exp: '実験',
       result: '結果',
       consider: '考察',
       concl: '結論',
