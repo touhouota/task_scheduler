@@ -35,6 +35,7 @@ const setCheckNum = () => {
 window.onload = () => {
   document.getElementById('task_list').addEventListener('click', Buttons.taskList);
   document.getElementById('week_reflection').addEventListener('click', Buttons.reflection);
+  document.getElementById('checklist').addEventListener('click', Buttons.checklist);
   document.getElementById('github').addEventListener('click', Buttons.github);
   document.getElementById('logout').addEventListener('click', Buttons.logout);
 

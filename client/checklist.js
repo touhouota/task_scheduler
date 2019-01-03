@@ -39,6 +39,7 @@ const clickEvent = (e) => {
 window.onload = () => {
   document.getElementById('task_list').addEventListener('click', Buttons.taskList);
   document.getElementById('week_reflection').addEventListener('click', Buttons.reflection);
+  document.getElementById('share_checklist_progress').addEventListener('click', Buttons.shareChecklistProgress);
   document.getElementById('github').addEventListener('click', Buttons.github);
   document.getElementById('logout').addEventListener('click', Buttons.logout);
 

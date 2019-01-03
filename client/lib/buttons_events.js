@@ -28,6 +28,12 @@ const Buttons = {
     window.location.href = `${path}/report/list/${userId}`;
   },
 
+  shareChecklistProgress: () => {
+    const path = Base.get_path();
+    const userId = Base.get_cookie('user_id');
+    window.location.href = `${path}/report/share/${userId}`;
+  },
+
   github: () => {
     const URL = 'https://github.com/touhouota/task_scheduler/issues';
     window.open(URL, '_blank');
