@@ -4,7 +4,10 @@ import Buttons from './lib/buttons_events';
 const checkFullChecked = (record) => {
   const target = Base.parents(record.pop().target, 'column');
   console.log('target', target);
-  target.classList.add('fulled');
+  const checked = target.querySelector('.num').textContent;
+  const total = target.querySelector('.total').textContent;
+  console.log(checked, total);
+  if (checked === total) target.classList.add('fulled');
 };
 
 const changeWatcher = new MutationObserver(checkFullChecked);
